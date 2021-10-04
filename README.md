@@ -56,7 +56,7 @@ pin=您的账号;wskey=XXXXXX
 
 ```sh
 
-# > 您也可以使用 JD_COOKIE
+# > 您也可以使用 JD_COOKIE，WSKEY和JD_COOKIE二选一即可
 
 名称
 JD_COOKIE

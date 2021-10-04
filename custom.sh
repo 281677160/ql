@@ -101,7 +101,7 @@ fi
 
 
 # 将 bot 添加到定时任务
-if [ "$(grep -c bot /opt/ql/config/crontab.list)" = 0 ]; then
+if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo "开始添加 task ql bot"
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)

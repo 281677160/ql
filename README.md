@@ -22,10 +22,13 @@ docker run -dit \
 
 ```sh
 docker run -dit \
-  -v $PWD/ql/config:/ql/config \
-  -v $PWD/ql/db:/ql/db \
-  -v $PWD/ql/log:/ql/log \
-  -v $PWD/ql/jbot:/ql/jbot \
+  -v /opt/ql/config:/ql/config \
+  -v /opt/ql/log:/ql/log \
+  -v /opt/ql/db:/ql/db \
+  -v /opt/ql/scripts:/ql/scripts \
+  -v /opt/ql/jbot:/ql/jbot \
+  -v /opt/ql/raw:/ql/raw \
+  -v /opt/ql/repo:/ql/repo \
   --net host \
   --name qinglong \
   --hostname qinglong \
@@ -38,14 +41,9 @@ docker run -dit \
 #### 🚩 Login
 
 > 确保你的设备放行了`5700`端口
-> 用自己的`ip:5700`登录面板
+> 上面的安装完毕，隔2分钟左右，用自己的`ip:5700`登录面板
 >
-> 首次登录账号用`admin` 密码用`adminadmin`，提示已初始化密码
-> 去自己映射目录 config 下找 auth.json，查看里面的 password
-
-```sh
-docker exec -it qinglong cat /ql/config/auth.json
-```
+> 点击安装青龙面板，然后按提示设置好账号、密码就可以了
 
 #### 🎉 One-key configuration
 

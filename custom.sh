@@ -125,14 +125,6 @@ if [[ `grep -c "JD_WSCK" ql/config/env.sh` -eq '1' ]]; then
     task /ql/scripts/wskey.py
 fi
 
-if [[ "$(grep -c extra.sh /ql/config/extra.sh)" = 1 ]]; then
-    ql extra
-fi
-
-
-
-
-
-
+ql extra
 
 echo "所有任务安装完毕"

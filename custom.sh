@@ -112,9 +112,9 @@ if [ "$(grep -c wskey.py /opt/ql/scripts/wskey.py)" = 1 ]; then
     docker exec -it qinglong bash -c "task /ql/scripts/wskey.py"
 fi
 
-if [ "$(grep -c wskey.py /opt/ql/scripts/wskey.py)" = 1 ]; then
-    docker exec -it qinglong bash -c "task /ql/scripts/wskey.py"
+if [ "$(grep -c extra.sh /opt/ql/config/extra.sh)" = 1 ]; then
+    docker exec -it qinglong bash -c "ql extra"
 fi
 
-ql extra
+
 echo "所有任务安装完毕"

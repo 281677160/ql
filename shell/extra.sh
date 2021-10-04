@@ -31,9 +31,7 @@ EOF
 # 🌱拉取仓库
 ## Collected Repositories
 CR1(){
-    ql repo https://ghproxy.com/https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|enen|update|test" "^jd[^_]|USER|^TS|utils|notify|env|package|ken.js"
     ql repo https://ghproxy.com/https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp" "^jd[^_]|USER|function|utils|ZooFaker_Necklace.js|JDJRValidator_Pure|sign_graphics_validate|ql|sendNotify"
-    task /ql/scripts/disableDuplicateTasksImplement.py
 }
 for i in ${CollectedRepo[@]}; do
     CR$i

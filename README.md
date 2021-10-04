@@ -1,4 +1,4 @@
-## Deploy
+## 第一步
 
 #### 💻 Server
 
@@ -36,17 +36,16 @@ docker run -dit \
   whyour/qinglong:latest
 ```
 
-## Usage
+## 第二步
 
 #### 🚩 Login
-
+```sh
 > 
 > 上面的安装完毕后，确保你的设备放行了`5700`端口，隔2分钟左右，用自己的`ip:5700`进入页面
 >
 > 进入页面后，点击安装青龙面板，然后按提示设置好账号、密码就可以了
 >
 
-```sh
 # > 面板安装成功后，登录面板，然后在环境变量项把 WSKEY 设置好
 
 名称
@@ -56,6 +55,7 @@ JD_WSCK
 pin=您的账号;wskey=AAXXXXXX
 ```
 
+## 第三步
 
 #### 🎉 WSKEY设置好后，执行以下命令，二选一即可
 
@@ -68,6 +68,11 @@ docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.g
 
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
 ```
+
+## 第四步
+
+> 因为要安装依赖，所以要花点时间，请耐心等待，命令运行完毕后，你的脚本就正常运行了
+
 
 ## Thanks
 

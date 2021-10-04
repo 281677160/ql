@@ -45,7 +45,14 @@ docker run -dit \
 >
 > 进入页面后，点击安装青龙面板，然后按提示设置好账号、密码就可以了
 >
-> 面板安装成功后，登录面板，然后执行下面命令
+> 面板安装成功后，登录面板，然后在环境变量项把 WSKEY 设置好
+
+名称
+JD_WSCK
+
+值
+pin=您的账号;wskey=AAXXXXXX
+
 
 #### 🎉 One-key configuration
 

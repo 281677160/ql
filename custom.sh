@@ -133,6 +133,8 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
 
+echo "安装依赖，所需时间比较长，请耐心等待..."
+
 pip3 install requests
 apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
 cd /ql

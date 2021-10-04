@@ -11,8 +11,6 @@
 	exit 1
 }
 
-docker exec -it qinglong  /bin/bash
-
 dir_shell=/ql/config
 dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh

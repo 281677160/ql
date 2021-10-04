@@ -51,7 +51,7 @@ docker exec -it qinglong cat /ql/config/auth.json
 ```sh
 # > 宿主机
 
-docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/custom.sh)"
+docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/dragon/custom.sh)"
 
 # > 容器内
 

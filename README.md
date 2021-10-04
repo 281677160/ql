@@ -4,15 +4,18 @@
 
 ```sh
 docker run -dit \
-  -v $PWD/ql/config:/ql/config \
-  -v $PWD/ql/db:/ql/db \
-  -v $PWD/ql/log:/ql/log \
-  -v $PWD/ql/jbot:/ql/jbot \
-  -p 5700:5700 \
-  --name qinglong \
-  --hostname qinglong \
-  --restart always \
-  whyour/qinglong:latest
+   -v /opt/ql/config:/ql/config \
+   -v /opt/ql/log:/ql/log \
+   -v /opt/ql/db:/ql/db \
+   -v /opt/ql/scripts:/ql/scripts \
+   -v /opt/ql/jbot:/ql/jbot \
+   -v /opt/ql/raw:/ql/raw \
+   -v /opt/ql/repo:/ql/repo \
+   -p 57100:5700 \
+   --name qinglong \
+   --hostname qinglong \
+   --restart always \
+   whyour/qinglong:latest
 ```
 
 #### 🚀 OpenWrt

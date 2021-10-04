@@ -16,7 +16,7 @@ sample_shell_path=/ql/sample/config.sample.sh
 if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
-curl -s --connect-timeout 3 https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/shell/config.sample.sh > $sample_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
 
 # 判断是否下载成功
@@ -31,7 +31,7 @@ fi
 if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
-curl -s --connect-timeout 3 https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/shell/extra.sh > $extra_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/extra.sh > $extra_shell_path
 cp $extra_shell_path $dir_shell/extra.sh
 
 # 判断是否下载成功
@@ -64,7 +64,7 @@ fi
 if [ ! -a "$code_shell_path" ]; then
     touch $code_shell_path
 fi
-curl -s --connect-timeout 3 https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/shell/code.sh > $code_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/shell/code.sh > $code_shell_path
 cp $code_shell_path $dir_shell/code.sh
 
 # 判断是否下载成功
@@ -94,7 +94,7 @@ fi
 
 
 # 下载 task_before.sh
-curl -s --connect-timeout 3 https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/shell/task_before.sh > $task_before_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/task_before.sh > $task_before_shell_path
 
 # 判断是否下载成功
 task_before_size=$(ls -l $task_before_shell_path | awk '{print $5}')
@@ -111,3 +111,5 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
+
+echo "所有任务安装完毕"

@@ -3,19 +3,25 @@
 ## 本脚本搬运并模仿 liuqitoday
 # 
 
+[[ ! "$USER" == "root" ]] && {
+	clear
+	echo
+	TIME g "警告：请使用root用户安装应用"
+	echo
+	exit 1
+}
+
+docker exec -it qinglong  /bin/bash
+
 dir_shell=/ql/config
 dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh
 extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
-
 disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
-
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
-
-docker exec -it qinglong  /bin/bash
 
 # 下载 config.sh
 if [ ! -a "$config_shell_path" ]; then

@@ -112,9 +112,9 @@ if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
     task /ql/scripts/wskey.py
 fi
 
-if [ "$(grep -c extra.sh /ql/config/extra.sh)" = 1 ]; then
-    task ql/config/extra.sh
-fi
+
+task ql/config/extra.sh
+
 
 
 echo "所有任务安装完毕"

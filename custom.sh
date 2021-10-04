@@ -120,8 +120,15 @@ npm install tslib -S
 npm install @types/node -S
 cd scripts && pnpm install jsdom
 cd /ql
-task /ql/scripts/wskey.py
-ql extra
+
+if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
+    task /ql/scripts/wskey.py
+fi
+
+if [ "$(grep -c extra.sh /ql/config/extra.sh)" = 1 ]; then
+    ql extra
+fi
+
 
 
 

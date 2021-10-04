@@ -44,31 +44,21 @@ docker run -dit \
 > 上面的安装完毕，隔2分钟左右，用自己的`ip:5700`登录面板
 >
 > 点击安装青龙面板，然后按提示设置好账号、密码就可以了
+>
+> 面板安装成功后，登录面板，然后执行下面命令
 
 #### 🎉 One-key configuration
 
-> 科学网络环境
+> 执行命令方法，二选一即可
 
 ```sh
-# > 宿主机
+# > 如果在宿主机执行命令，如下
 
 docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
 
-# > 容器内
+# > 如果在容器内执行命令，如下
 
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xtoys/Scripts/main/dragon/custom.sh)"
-```
-
-> 国内网络环境
-
-```sh
-# > 宿主机
-
-docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/xtoys/Scripts@main/dragon/custom-cdn.sh)"
-
-# > 容器内
-
-bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/xtoys/Scripts@main/dragon/custom-cdn.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
 ```
 
 ## Thanks

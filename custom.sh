@@ -19,9 +19,6 @@ fi
 curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
 
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/disableDuplicateTasksImplement.py > /ql/scripts/disableDuplicateTasksImplement.py
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/wskey.py > /ql/scripts/wskey.py
-
 # 判断是否下载成功
 config_size=$(ls -l $config_shell_path | awk '{print $5}')
 if (( $(echo "${config_size} < 100" | bc -l) )); then
@@ -29,6 +26,8 @@ if (( $(echo "${config_size} < 100" | bc -l) )); then
     exit 0
 fi
 
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/disableDuplicateTasksImplement.py > /ql/scripts/disableDuplicateTasksImplement.py
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/wskey.py > /ql/scripts/wskey.py
 
 # 下载 extra.sh
 if [ ! -a "$extra_shell_path" ]; then

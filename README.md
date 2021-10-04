@@ -11,7 +11,7 @@ docker run -dit \
    -v /opt/ql/jbot:/ql/jbot \
    -v /opt/ql/raw:/ql/raw \
    -v /opt/ql/repo:/ql/repo \
-   -p 57100:5700 \
+   -p 5700:5700 \
    --name qinglong \
    --hostname qinglong \
    --restart always \

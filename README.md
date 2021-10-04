@@ -52,7 +52,7 @@ JD_WSCK
 
 值
 pin=您的账号;wskey=AAXXXXXX
-```sh
+```
 
 #### 🎉 One-key configuration
 

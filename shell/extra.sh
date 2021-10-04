@@ -26,7 +26,7 @@ EOF
 
 #------ 代码区 ------#
 # 📝更新示例
-curl -s --connect-timeout 3 https://cdn.jsdelivr.net/gh/xtoys/Scripts@main/dragon/shell/config.sample.sh > /ql/sample/config.sample.sh
+## curl -s --connect-timeout 3 https://cdn.jsdelivr.net/gh/xtoys/Scripts@main/dragon/shell/config.sample.sh > /ql/sample/config.sample.sh
 
 # 🌱拉取仓库
 ## Collected Repositories

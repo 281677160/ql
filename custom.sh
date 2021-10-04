@@ -54,7 +54,7 @@ sed -i "s/CollectedRepo=(1)/CollectedRepo=($defaultNum)/g" $extra_shell_path
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo "开始添加 task ql extra"
     # 获取token
-    token=$(cat /opt/ql/config/auth.json | jq --raw-output .token)
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"初始化任务","command":"ql extra","schedule":"15 0-23/8 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
 
@@ -84,7 +84,7 @@ sed -i "s/\$repo1/\$repo$repoNum/g" $code_shell_path
 if [ "$(grep -c code.sh /ql/config/crontab.list)" = 0 ]; then
     echo "开始添加 task code.sh"
     # 获取token
-    token=$(cat /opt/ql/config/auth.json | jq --raw-output .token)
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"格式化更新助力码","command":"task /ql/config/code.sh &","schedule":"20 * * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247939659'
 fi
 
@@ -104,16 +104,16 @@ fi
 if [ "$(grep -c bot /opt/ql/config/crontab.list)" = 0 ]; then
     echo "开始添加 task ql bot"
     # 获取token
-    token=$(cat /opt/ql/config/auth.json | jq --raw-output .token)
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
 
 if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
-    docker exec -it qinglong bash -c "task /ql/scripts/wskey.py"
+    task /ql/scripts/wskey.py
 fi
 
 if [ "$(grep -c extra.sh /ql/config/extra.sh)" = 1 ]; then
-    docker exec -it qinglong bash -c "ql extra"
+    ql extra
 fi
 
 

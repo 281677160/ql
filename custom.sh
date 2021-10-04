@@ -11,7 +11,7 @@
 	exit 1
 }
 
-docker exec -it qinglong
+docker exec -it qinglong  /bin/bash
 
 dir_shell=/ql/config
 dir_script=/ql/scripts

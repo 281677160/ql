@@ -99,6 +99,16 @@ if (( $(echo "${task_before_size} < 100" | bc -l) )); then
     exit 0
 fi
 
+docker exec -it qinglong bash -c "pip3 install requests"
+docker exec -it qinglong bash -c "apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source"
+docker exec -it qinglong bash -c "npm install png-js -S"
+docker exec -it qinglong bash -c "npm install date-fns -S"
+docker exec -it qinglong bash -c "npm install axios -S"
+docker exec -it qinglong bash -c "npm install crypto-js -S"
+docker exec -it qinglong bash -c "npm install ts-md5 -S"
+docker exec -it qinglong bash -c "npm install tslib -S"
+docker exec -it qinglong bash -c "npm install @types/node -S"
+docker exec -it qinglong bash -c "cd scripts && pnpm install jsdom"
 
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
@@ -109,11 +119,11 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
 fi
 
 if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
-    task /ql/scripts/wskey.py
+    docker exec -it qinglong bash -c "task /ql/scripts/wskey.py"
 fi
 
-docker exec -it qinglong  /bin/bash
-ql extra
+docker exec -it qinglong bash -c "ql extra"
+
 
 
 

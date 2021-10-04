@@ -58,13 +58,14 @@ pin=您的账号;wskey=XXXXXX
 
 #### 🎉 WSKEY设置好后，执行以下命令，二选一即可
 
-```sh
-# > 如果在宿主机执行命令，如下
 
+# > 如果在宿主机执行命令，如下
+```sh
 docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
+```
 
 # > 如果在容器内执行命令，如下
-
+```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
 ```
 

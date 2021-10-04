@@ -106,9 +106,10 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
-
+docker exec -it qinglong  /bin/bash
 pip3 install requests
 apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+cd /ql
 npm install png-js -S
 npm install date-fns -S
 npm install axios -S
@@ -117,11 +118,9 @@ npm install ts-md5 -S
 npm install tslib -S
 npm install @types/node -S
 cd scripts && pnpm install jsdom
-
-if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
-    task /ql/scripts/wskey.py
-    ql extra
-fi
+cd /ql
+task /ql/scripts/wskey.py
+ql extra
 
 
 

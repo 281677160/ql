@@ -54,6 +54,17 @@ JD_WSCK
 pin=您的账号;wskey=XXXXXX
 ```
 
+```sh
+
+# > 您也可以使用 JD_COOKIE
+
+名称
+JD_COOKIE
+
+值
+pt_key=XXXXXX;pt_pin=您的账号;
+```
+
 ## 第三步
 
 #### 🎉 WSKEY设置好后，执行以下命令，二选一即可

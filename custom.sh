@@ -99,17 +99,6 @@ if (( $(echo "${task_before_size} < 100" | bc -l) )); then
     exit 0
 fi
 
-docker exec -it qinglong bash -c "pip3 install requests"
-docker exec -it qinglong bash -c "apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source"
-docker exec -it qinglong bash -c "npm install png-js -S"
-docker exec -it qinglong bash -c "npm install date-fns -S"
-docker exec -it qinglong bash -c "npm install axios -S"
-docker exec -it qinglong bash -c "npm install crypto-js -S"
-docker exec -it qinglong bash -c "npm install ts-md5 -S"
-docker exec -it qinglong bash -c "npm install tslib -S"
-docker exec -it qinglong bash -c "npm install @types/node -S"
-docker exec -it qinglong bash -c "cd scripts && pnpm install jsdom"
-
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo "开始添加 task ql bot"
@@ -118,11 +107,23 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
 
+pip3 install requests
+apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+npm install png-js -S
+npm install date-fns -S
+npm install axios -S
+npm install crypto-js -S
+npm install ts-md5 -S
+npm install tslib -S
+npm install @types/node -S
+cd scripts && pnpm install jsdom
+
 if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
-    docker exec -it qinglong bash -c "task /ql/scripts/wskey.py"
+    task /ql/scripts/wskey.py
+    ql extra
 fi
 
-docker exec -it qinglong bash -c "ql extra"
+
 
 
 

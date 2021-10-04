@@ -113,7 +113,7 @@ if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
 fi
 
 
-task ql/config/extra.sh
+ql extra
 
 
 

@@ -112,7 +112,7 @@ if [ "$(grep -c wskey.py /ql/scripts/wskey.py)" = 1 ]; then
     task /ql/scripts/wskey.py
 fi
 
-
+docker exec -it qinglong  /bin/bash
 ql extra
 
 

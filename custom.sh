@@ -5,9 +5,7 @@
 
 [[ ! "$USER" == "root" ]] && {
 	clear
-	echo
 	TIME g "警告：请使用root用户安装应用"
-	echo
 	exit 1
 }
 

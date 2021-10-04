@@ -3,12 +3,6 @@
 ## 本脚本搬运并模仿 liuqitoday
 # 
 
-[[ ! "$USER" == "root" ]] && {
-	clear
-	TIME g "警告：请使用root用户安装应用"
-	exit 1
-}
-
 dir_shell=/ql/config
 dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh

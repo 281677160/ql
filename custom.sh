@@ -121,8 +121,10 @@ npm install @types/node -S
 cd scripts && pnpm install jsdom
 cd /ql
 
-if [[ `grep -c "JD_WSCK" ql/config/env.sh` -eq '1' ]]; then
+if [ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]; then
     task /ql/scripts/wskey.py
+else
+    echo "没发现JD_WSCK,可能格式不对或者你用的是JD_COOKIE"
 fi
 
 ql extra

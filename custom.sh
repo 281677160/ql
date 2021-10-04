@@ -8,6 +8,10 @@ dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh
 extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
+
+disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
+wskey_shell_path=$dir_script/wskey.py
+
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 
@@ -27,8 +31,33 @@ if (( $(echo "${config_size} < 100" | bc -l) )); then
     exit 0
 fi
 
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/disableDuplicateTasksImplement.py > /ql/scripts/disableDuplicateTasksImplement.py
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/wskey.py > /ql/scripts/wskey.py
+# 下载 disableDuplicateTasksImplement.py
+if [ ! -a "$disable_shell_path" ]; then
+    touch $disable_shell_path
+fi
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/disableDuplicateTasksImplement.py > $disable_shell_path
+cp $disable_shell_path $dir_script/disableDuplicateTasksImplement.py
+
+# 判断是否下载成功
+disable_size=$(ls -l $disable_shell_path | awk '{print $5}')
+if (( $(echo "${disable_size} < 100" | bc -l) )); then
+    echo "disableDuplicateTasksImplement.py 下载失败"
+    exit 0
+fi
+
+# 下载 wskey.py
+if [ ! -a "$wskey_shell_path" ]; then
+    touch $wskey_shell_path
+fi
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/wskey.py > $wskey_shell_path
+cp $wskey_shell_path $dir_script/wskey.py
+
+# 判断是否下载成功
+wskey_size=$(ls -l $wskey_shell_path | awk '{print $5}')
+if (( $(echo "${wskey_size} < 100" | bc -l) )); then
+    echo "wskey.py 下载失败"
+    exit 0
+fi
 
 # 下载 extra.sh
 if [ ! -a "$extra_shell_path" ]; then

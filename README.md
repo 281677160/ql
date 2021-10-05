@@ -74,13 +74,7 @@ pt_key=XXXXXX;pt_pin=您的账号;
 #### 🎉 KEY设置好后，执行以下命令安装脚本，二选一即可
 
 ```sh
--
-
-
 wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
-
-
--
 ```
 
 ## 第四步

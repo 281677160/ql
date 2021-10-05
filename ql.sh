@@ -26,6 +26,15 @@ TIME() {
 	exit 1
 }
 
+if [[ `docker version | grep -c "version"` -ge '1' ]]; then
+	TIME y "发现docker，继续安装步骤"
+else
+	echo
+	TIME y "没检测到安装有docker，请先安装docker"
+	echo
+	exit 1
+fi
+
 docker ps -a > dkql
 
 if [[ `grep -c "whyour" dkql` -eq '1' ]]; then

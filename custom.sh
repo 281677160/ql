@@ -3,6 +3,8 @@
 ## 本脚本搬运并模仿 liuqitoday
 # 
 
+echo "开始运行安装脚本程序"
+
 dir_shell=/ql/config
 dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh

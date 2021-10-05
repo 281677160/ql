@@ -1,46 +1,21 @@
+
 ## 第一步
 
-> 将青龙安装docker里，复制下面所有代码在宿主机使用root用户运行
-
-#### 💻 Server
+#### 执行以下命令
 
 ```sh
-docker run -dit \
-   -v /opt/ql/config:/ql/config \
-   -v /opt/ql/log:/ql/log \
-   -v /opt/ql/db:/ql/db \
-   -v /opt/ql/scripts:/ql/scripts \
-   -v /opt/ql/jbot:/ql/jbot \
-   -v /opt/ql/raw:/ql/raw \
-   -v /opt/ql/repo:/ql/repo \
-   -p 5700:5700 \
-   --name qinglong \
-   --hostname qinglong \
-   --restart always \
-   whyour/qinglong:latest
-```
+-
 
-#### 🚀 OpenWrt
 
-```sh
-docker run -dit \
-  -v $PWD/ql/config:/ql/config \
-  -v $PWD/ql/log:/ql/log \
-  -v $PWD/ql/db:/ql/db \
-  -v $PWD/ql/scripts:/ql/scripts \
-  -v $PWD/ql/jbot:/ql/jbot \
-  -v $PWD/ql/raw:/ql/raw \
-  -v $PWD/ql/repo:/ql/repo \
-  --net host \
-  --name qinglong \
-  --hostname qinglong \
-  --restart always \
-  whyour/qinglong:latest
+wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
+
+
+-
 ```
 
 ## 第二步
 
-#### 🚩 设置好KEY
+#### 🚩 如果上面的命令运行成功会有提示，登录页面，设置好KEY
 ```sh
 
 # > 上面的安装完毕后，确保你的设备放行了`5700`端口，隔2分钟左右，用自己的`ip:5700`进入页面
@@ -69,19 +44,8 @@ JD_COOKIE
 pt_key=XXXXXX;pt_pin=您的账号;
 ```
 
-## 第三步
+## 第三步，设置好KEY后，回到命令窗，输入Y或者y回车继续安装脚本
 
-#### 🎉 KEY设置好后，执行以下命令安装脚本，二选一即可
-
-```sh
--
-
-
-wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
-
-
--
-```
 
 ## 第四步
 

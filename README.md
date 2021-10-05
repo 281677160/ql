@@ -70,10 +70,11 @@ pt_key=XXXXXX;pt_pin=您的账号;
 #### 🎉 KEY设置好后，执行以下命令安装脚本和依赖，二选一即可
 
 
+
 - #### 如果在宿主机执行命令，如下
-```sh
-docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/custom.sh)"
-```
+
+     docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/custom.sh)"
+
 
 - #### 如果在容器内执行命令，如下
 ```sh

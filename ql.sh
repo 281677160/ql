@@ -53,6 +53,7 @@ if [ -z "$(ls -A "dkql" 2>/dev/null)" ]; then
 	case $QLNU in
 		[Yy])
 			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+			TIME y "开始安装脚本，请耐心等待..."
 		;;
 		[Nn])
 			sleep 2
@@ -75,4 +76,5 @@ else
 	esac
 	esac
 fi
+rm -fr ql.sh
 exit 0

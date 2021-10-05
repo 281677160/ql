@@ -57,12 +57,14 @@ if [[ "${QINGLONG}" == "YES" ]]; then
 	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续]： " QLNU
 	case $QLNU in
 		[Yy])
-			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 			TIME y "开始安装脚本，请耐心等待..."
+			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+			exit 0
 		;;
 		[Nn])
-			sleep 2
 			TIME r "退出安装程序!"
+			sleep 2
+			exit 1
 		;;
 	esac
 else
@@ -71,12 +73,14 @@ else
 	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续]： " MENU
 	case $MENU in
 		[Yy])
-			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 			TIME y "开始安装脚本，请耐心等待..."
+			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+			exit 0
 		;;
 		[Nn])
-			sleep 2
 			TIME r "退出安装程序!"
+			sleep 2
+			exit 1
 		;;
 	esac
 fi

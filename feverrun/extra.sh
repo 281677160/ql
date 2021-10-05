@@ -4,10 +4,6 @@
 ## 安装node依赖使用 pnpm install -g xxx xxx
 ## 安装python依赖使用 pip3 install xxx
 
-if [ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]; then
-    task wskey.py
-fi
-
 ql repo https://github.com/feverrun/my_scripts.git "jd_|jx_|gua|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
 
 # 📦安装依赖

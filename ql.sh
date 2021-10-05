@@ -83,7 +83,7 @@ docker run -dit \
 fi
 
 sleep 3
-if [[ -n "$(ls -A "/root/ql/config/auth.json" 2>/dev/null)" ]] | [[ -n "$(ls -A "/opt/ql/config/auth.json" 2>/dev/null)" ]]; then
+if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME g "青龙面板安装完成，请等1分钟左右使用 IP:5700 登录面板设置好KEY，重要，一定要登录页面过！！！"
 	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续安装脚本]： " MENU

@@ -115,3 +115,62 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
 fi
 echo
 TIME g "所有任务安装完毕!"
+echo
+echo
+TIME l "是否安装依赖?"
+echo
+TIME y "主要是安装依赖需要出国环境比较好，用国内的网络，安装一次依赖有可能需要几个小时。"
+echo
+TIME g "如果你现在的是出国网络，就不用考虑了，直接搞起！"
+echo
+TIME y "青龙面板和脚本都安装完成了,要不要安装依赖你们自己考虑，也可以在网络比较好的时候用我的一键安装依赖脚本安装。"
+echo
+TIME z "安装依赖时候或许看到显示ERR!错误提示的，那些都不用管，只要依赖能从头到尾的下载运行完毕就好了。"
+echo
+read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " YLAZ
+case $YLAZ in
+	[Yy])
+		npm install -g typescript
+		cd /ql
+		npm install axios date-fns
+		cd /ql
+		npm install crypto -g
+		cd /ql
+		npm install jsdom
+		cd /ql
+		npm install png-js
+		cd /ql
+		npm install -g npm
+		cd /ql
+		pnpm i png-js
+		cd /ql
+		pip3 install requests
+		cd /ql
+		apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+		cd /ql
+		apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
+		cd /ql
+		cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
+		cd /ql
+		package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
+		for i in $package_name; do
+    		case $i in
+        		canvas)
+            		cd /ql/scripts
+            		npm ls $i
+            		;;
+        		*)
+            		npm ls $i -g
+            		;;
+    		esac
+		done
+		TIME g "所有依赖安装完毕"
+	;;
+	[Nn])
+		TIME r "退出安装程序!"
+		sleep 2
+		exit 1
+	;;
+esac
+
+exit 0

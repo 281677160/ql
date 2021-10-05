@@ -56,6 +56,7 @@ if [ -z "$(ls -A "dkql" 2>/dev/null)" ]; then
 		;;
 	esac
 else
+	rm -fr dkql
 	TIME g "青龙面板安装完成，请过1分钟左右试用您宿主机 IP:5700 登录面板设置好KEY，重要！！！"
 	read -p " [设置好KEY后，输入[ Y/y ]回车继续]： " MENU
 	case $MENU in
@@ -64,5 +65,4 @@ else
 		;;
 	esac
 fi
-rm -fr dkql
 exit 0

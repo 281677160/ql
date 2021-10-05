@@ -143,6 +143,7 @@ fi
 
 ql extra
 
+
 echo "安装依赖，所需时间比较长，请耐心等待..."
 apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
 cd /ql

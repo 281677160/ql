@@ -18,7 +18,7 @@ requirement_name="cryptography~=3.2.1 json5 requests rsa"
 #------ 编号区 ------#
 :<<\EOF
 一、集成仓库（Collected Repositories)
-1-shufflewzc
+1-feverrun
 2-JDHelloWorld
 二、其他仓库（Other Repositories）
 1-wskey
@@ -31,7 +31,7 @@ EOF
 # 🌱拉取仓库
 ## Collected Repositories
 CR1(){
-    ql repo https://ghproxy.com/https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp" "^jd[^_]|USER|function|utils|ZooFaker_Necklace.js|JDJRValidator_Pure|sign_graphics_validate|ql|sendNotify"
+    ql repo https://ghproxy.com/https://github.com/feverrun/my_scripts.git "jd_|jx_|gua|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
 }
 for i in ${CollectedRepo[@]}; do
     CR$i

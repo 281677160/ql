@@ -77,14 +77,7 @@ pt_key=XXXXXX;pt_pin=您的账号;
 -
 
 
-- #### 如果在宿主机,复制以下命令执行
-
-docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-
-
-- #### 如果在容器内,复制以下命令执行
-
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
 
 
 -

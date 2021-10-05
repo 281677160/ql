@@ -86,6 +86,9 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 #### 🚩 脚本好后，执行以下命令安装依赖，二选一即可
 
 ```sh
+
+
+
 - #### 如果在宿主机,复制以下命令执行
 
 docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
@@ -94,6 +97,9 @@ docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.g
 - #### 如果在容器内,复制以下命令执行
 
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
+
+
+
 ```
 
 ## 感谢！

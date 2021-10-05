@@ -21,7 +21,7 @@ rm -rf feverrun.sh
 if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/config.sample.sh > $sample_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
 
 # 判断是否下载成功
@@ -36,7 +36,7 @@ fi
 if [ ! -a "$wskey_shell_path" ]; then
     touch $wskey_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/wskey.py > $wskey_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
 cp $wskey_shell_path $dir_script/wskey.py
 
 # 判断是否下载成功
@@ -50,7 +50,7 @@ fi
 if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/shell/extra.sh > $extra_shell_path
+curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
 cp $extra_shell_path $dir_shell/extra.sh
 
 # 判断是否下载成功
@@ -68,7 +68,7 @@ if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo "开始添加 task ql extra"
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"初始化任务","command":"ql extra","schedule":"15 0-23/8 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每天检测任务更新","command":"ql extra","schedule":"15 11 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
 
 pip3 install requests

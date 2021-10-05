@@ -72,9 +72,9 @@ pt_key=XXXXXX;pt_pin=您的账号;
 
 
 - #### 如果在宿主机执行命令，如下
-
-     docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/custom.sh)"
-
+```yml
+docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/custom.sh)"
+```
 
 - #### 如果在容器内执行命令，如下
 ```sh

@@ -104,9 +104,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "重要提示：重要，不设置WSKEY或者PT_KEY都行，但是一定要登录管理面板之后再执行下一步操作！！！"
 	echo
-	TIME g "输入N回车退出安装脚本，或者进入过管理页面后输入Y回车继续安装脚本"
+	TIME g "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
 	echo
-	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续安装脚本]： " MENU
+	read -p " [输入[ N/n ]退出程序，登录管理面板之后，输入[ Y/y ]回车继续安装脚本]： " MENU
 	case $MENU in
 		[Yy])
 			echo

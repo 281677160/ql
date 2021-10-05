@@ -78,12 +78,15 @@ fi
 
 pip3 install requests
 
-if [ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]; then
+if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     task wskey.py
 fi
 
 ql extra
 
 echo
+if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
+    echo "没发现任何KEY，请注意设置好KEY，要不然脚本不会运行!"
+fi
 echo
 echo "所有任务安装完毕"

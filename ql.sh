@@ -54,3 +54,4 @@ case $MENU in
 		docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 	;;
 esac
+exit 0

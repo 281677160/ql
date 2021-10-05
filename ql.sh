@@ -26,18 +26,14 @@ TIME() {
 	exit 1
 }
 
-if [[ `docker version | grep -c "version"` -ge '1' ]]; then
-	TIME y "发现docker，继续安装步骤"
-else
+if [[ `docker version | grep -c "version"` = '0' ]]; then
 	echo
-	TIME y "没检测到安装有docker，请先安装docker"
+	TIME y "没检测到docker，请先安装docker"
 	echo
 	exit 1
 fi
 
-docker ps -a > dkql
-
-if [[ `grep -c "whyour" dkql` -eq '1' ]]; then
+if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	TIME g "检测到已有青龙面板，正在删除中，请稍后..."
 	echo
 	docker=$(docker ps|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -49,10 +45,10 @@ fi
 
 rm -rf /opt/ql
 find . -name 'ql' | xargs -i rm -rf {}
-rm -rf dkql
 
+
+if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 TIME g "正在安装青龙面板，请稍后..."
-echo
 docker run -dit \
   -v $PWD/ql/config:/ql/config \
   -v $PWD/ql/log:/ql/log \
@@ -61,12 +57,26 @@ docker run -dit \
   -v $PWD/ql/jbot:/ql/jbot \
   -v $PWD/ql/raw:/ql/raw \
   -v $PWD/ql/repo:/ql/repo \
-  -p 5700:5700 \
+  --net host \
   --name qinglong \
   --hostname qinglong \
   --restart always \
   whyour/qinglong:latest
-
+else
+docker run -dit \
+   -v /opt/ql/config:/ql/config \
+   -v /opt/ql/log:/ql/log \
+   -v /opt/ql/db:/ql/db \
+   -v /opt/ql/scripts:/ql/scripts \
+   -v /opt/ql/jbot:/ql/jbot \
+   -v /opt/ql/raw:/ql/raw \
+   -v /opt/ql/repo:/ql/repo \
+   -p 5700:5700 \
+   --name qinglong \
+   --hostname qinglong \
+   --restart always \
+   whyour/qinglong:latest
+fi
 
 sleep 3
 if [[ -n "$(ls -A "/root/ql/config/auth.json" 2>/dev/null)" ]]; then

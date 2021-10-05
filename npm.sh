@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-echo "456安装依赖，所需时间比较长，请耐心等待..."
+echo "安装依赖，所需时间比较长，请耐心等待..."
 rm -rf npm.sh
 npm install -g typescript
 cd /ql

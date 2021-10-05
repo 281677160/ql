@@ -6,8 +6,6 @@
 
 if [ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]; then
     task wskey.py
-else
-    echo "没发现JD_WSCK,可能格式不对或者你用的是JD_COOKIE"
 fi
 
 ql repo https://github.com/feverrun/my_scripts.git "jd_|jx_|gua|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"

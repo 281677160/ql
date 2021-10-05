@@ -44,7 +44,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 fi
 
 rm -rf /opt/ql
-find . -name 'ql' | xargs -i rm -rf {}
+rm -rf /root/ql
 sleep 3
 echo
 

@@ -44,11 +44,11 @@ if [[ `grep -c "whyour" dkql` -eq '0' ]]; then
     --restart always \
     whyour/qinglong:latest
 else
-	rm -fr dkql
+	QINGLONG="YES"
 fi
 
 sleep 3
-if [ -z "$(ls -A "dkql" 2>/dev/null)" ]; then
+if [[ "${QINGLONG}" == "YES" ]]; then
 	echo
 	TIME g "已经有青龙面板，请登录面板设置好KEY，建议删除现有青龙面板，重新安装，本脚本不支持混装!"
 	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续]： " QLNU

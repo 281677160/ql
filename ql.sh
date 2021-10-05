@@ -48,22 +48,31 @@ fi
 
 sleep 3
 if [ -z "$(ls -A "dkql" 2>/dev/null)" ]; then
-	TIME g "已经有青龙面板，请登录面板设置好KEY，重要！！！"
-	read -p " [设置好KEY后，输入[ Y/y ]回车继续]： " MENU
-	case $MENU in
+	TIME g "已经有青龙面板，请登录面板设置好KEY，建议删除现有青龙面板，重新安装，本脚本不支持混装!"
+	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " QLNU
+	case $QLNU in
 		[Yy])
 			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+		;;
+		[Nn])
+			sleep 2
+			TIME r "退出安装程序!"
 		;;
 	esac
 else
 	rm -fr dkql
 	TIME g "青龙面板安装完成，请过1分钟左右试用您宿主机 IP:5700 登录面板设置好KEY，重要！！！"
-	read -p " [设置好KEY后，输入[ Y/y ]回车继续]： " MENU
+	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " MENU
 	case $MENU in
 		[Yy])
 			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 			TIME y "开始安装脚本，请耐心等待..."
 		;;
+		[Nn])
+			sleep 2
+			TIME r "退出安装程序!"
+		;;
+	esac
 	esac
 fi
 exit 0

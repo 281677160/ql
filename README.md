@@ -4,13 +4,13 @@
 #### 执行以下命令
 
 ```sh
--
+
 
 
 wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
 
 
--
+
 ```
 
 ## 第二步
@@ -44,8 +44,9 @@ JD_COOKIE
 pt_key=XXXXXX;pt_pin=您的账号;
 ```
 
+#
 ## 第三步，设置好KEY后，回到命令窗，输入Y或者y回车继续安装脚本
-
+#
 
 ## 第四步
 

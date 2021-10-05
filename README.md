@@ -43,7 +43,7 @@ docker run -dit \
 
 # > 上面的安装完毕后，确保你的设备放行了`5700`端口，隔2分钟左右，用自己的`ip:5700`进入页面
 
-# > 进入页面后，点击安装青龙面板，然后按提示设置好账号、密码就可以了
+# > 进入页面后，点击安装青龙面板，然后按提示设置好账号、密码就可以了，消息推送不需要填写，任务运行后在配置文件添加就可以
 
 # > 面板安装成功后，登录面板，然后在环境变量项添加 WSKEY
 
@@ -75,12 +75,12 @@ pt_key=XXXXXX;pt_pin=您的账号;
 
 - #### 如果在宿主机,复制以下命令执行
 
-docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
+docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 
 
 - #### 如果在容器内,复制以下命令执行
 
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 
 
 -
@@ -88,7 +88,9 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 
 ## 第四步
 
-#### 🚩 脚本好后，执行以下命令安装依赖，二选一即可
+#### 🚩 脚本好后，执行以下命令安装依赖，二选一即可（最好在翻墙网络状态下进行）
+
+# > 依赖还是有必要安装的，个别任务要又依赖才可以进行，当然不安装也影响不大吧，自己考虑
 
 ```sh
 -

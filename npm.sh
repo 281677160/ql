@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-echo "安装依赖，所需时间比较长，请耐心等待..."
+echo "123安装依赖，所需时间比较长，请耐心等待..."
 
 npm install -g typescript
 npm install axios date-fns

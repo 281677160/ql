@@ -62,6 +62,7 @@ else
 	case $MENU in
 		[Yy])
 			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+			TIME y "开始安装脚本，请耐心等待..."
 		;;
 	esac
 fi

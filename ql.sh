@@ -34,13 +34,26 @@ if [[ `docker version | grep -c "version"` = '0' ]]; then
 fi
 
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
-	TIME g "检测到已有青龙面板，正在删除中，请稍后..."
 	echo
-	docker=$(docker ps|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
-	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
-	docker stop -t=5 $dockerid
-	docker rm $dockerid
-	docker rmi $imagesid
+	TIME g "检测到已有青龙面板，需要删除面板才能继续..."
+	echo
+	TIME y "如果要继续的话，请注意备份你的配置文件!"
+	echo
+	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " SCQL
+	case $SCQL in
+		[Yy])
+			docker=$(docker ps|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
+			images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
+			docker stop -t=5 $dockerid
+			docker rm $dockerid
+			docker rmi $imagesid
+		;;
+		[Nn])
+			TIME r "退出安装程序!"
+			sleep 2
+			exit 1
+		;;
+	esac
 fi
 
 rm -rf /opt/ql

@@ -73,12 +73,12 @@ pt_key=XXXXXX;pt_pin=您的账号;
 ```yml
 - #### 如果在宿主机,复制以下命令执行
 
-docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/custom.sh)"
+docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
 
 
 - #### 如果在容器内,复制以下命令执行
 
-bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/custom.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
 ```
 
 ## 第四步

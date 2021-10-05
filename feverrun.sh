@@ -84,4 +84,6 @@ fi
 
 ql extra
 
+echo
+echo
 echo "所有任务安装完毕"

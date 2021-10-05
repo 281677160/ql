@@ -80,6 +80,10 @@ fi
 
 pip3 install requests
 
+if [ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]; then
+    task wskey.py
+fi
+
 ql extra
 
 echo "所有任务安装完毕"

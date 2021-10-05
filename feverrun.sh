@@ -114,4 +114,4 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
     TIME y "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
 echo
-TIME g "所有任务安装完毕"
+TIME g "所有任务安装完毕!"

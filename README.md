@@ -117,4 +117,4 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 
 ## 感谢！
 
-> [`互助研究院`](https://t.me/update_help)
+> [`feverrun`](https://github.com/feverrun/my_scripts)

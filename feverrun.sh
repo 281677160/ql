@@ -61,7 +61,7 @@ if (( $(echo "${extra_size} < 100" | bc -l) )); then
 fi
 
 # 授权
-chmod 755 $extra_shell_path
+chmod -R +x $dir_shell
 
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then

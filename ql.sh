@@ -74,7 +74,6 @@ else
 			TIME r "退出安装程序!"
 		;;
 	esac
-	esac
 fi
 rm -fr ql.sh
 exit 0

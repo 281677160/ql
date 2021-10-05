@@ -47,7 +47,9 @@ else
 	QINGLONG="YES"
 fi
 
+rm -fr dkql
 sleep 3
+
 if [[ "${QINGLONG}" == "YES" ]]; then
 	echo
 	TIME g "已经有青龙面板，请登录面板设置好KEY，建议删除现有青龙面板，重新安装，本脚本不支持混装!"
@@ -63,7 +65,6 @@ if [[ "${QINGLONG}" == "YES" ]]; then
 		;;
 	esac
 else
-	rm -fr dkql
 	echo
 	TIME g "青龙面板安装完成，请过1分钟左右试用您宿主机 IP:5700 登录面板设置好KEY，重要，一定要登录过！！！"
 	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续]： " MENU

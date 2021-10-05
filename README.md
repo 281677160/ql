@@ -94,6 +94,8 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 
 > 依赖还是有必要安装的，个别任务要有依赖才可以进行，当然不安装也影响不大吧，自己考虑
 
+> 安装依赖时候或许看到显示ERR!错误提示的，那些都不用管，只要依赖能从头到尾的下载运行完毕就好了
+
 ```sh
 -
 

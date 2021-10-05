@@ -24,13 +24,13 @@ docker run -dit \
 
 ```sh
 docker run -dit \
-  -v /opt/ql/config:/ql/config \
-  -v /opt/ql/log:/ql/log \
-  -v /opt/ql/db:/ql/db \
-  -v /opt/ql/scripts:/ql/scripts \
-  -v /opt/ql/jbot:/ql/jbot \
-  -v /opt/ql/raw:/ql/raw \
-  -v /opt/ql/repo:/ql/repo \
+  -v $PWD/ql/config:/ql/config \
+  -v $PWD/ql/log:/ql/log \
+  -v $PWD/ql/db:/ql/db \
+  -v $PWD/ql/scripts:/ql/scripts \
+  -v $PWD/ql/jbot:/ql/jbot \
+  -v $PWD/ql/raw:/ql/raw \
+  -v $PWD/ql/repo:/ql/repo \
   --net host \
   --name qinglong \
   --hostname qinglong \

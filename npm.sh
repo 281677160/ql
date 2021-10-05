@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-echo "123安装依赖，所需时间比较长，请耐心等待..."
-
+echo "456安装依赖，所需时间比较长，请耐心等待..."
+rm -rf npm.sh
 npm install -g typescript
 npm install axios date-fns
 npm install crypto -g

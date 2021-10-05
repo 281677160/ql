@@ -48,7 +48,7 @@ fi
 
 sleep 3
 if [ -z "$(ls -A "dkql" 2>/dev/null)" ]; then
-	TIME g "已经有青龙面板，请登录面板设置好KEY"
+	TIME g "已经有青龙面板，请登录面板设置好KEY，重要！！！"
 	read -p " [设置好KEY后，输入[ Y/y ]回车继续]： " MENU
 	case $MENU in
 		[Yy])
@@ -56,7 +56,7 @@ if [ -z "$(ls -A "dkql" 2>/dev/null)" ]; then
 		;;
 	esac
 else
-	TIME g "青龙面板安装完成，请过1分钟左右试用您宿主机 IP:5700 登录面板设置好KEY"
+	TIME g "青龙面板安装完成，请过1分钟左右试用您宿主机 IP:5700 登录面板设置好KEY，重要！！！"
 	read -p " [设置好KEY后，输入[ Y/y ]回车继续]： " MENU
 	case $MENU in
 		[Yy])

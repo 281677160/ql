@@ -45,7 +45,8 @@ fi
 
 rm -rf /opt/ql
 find . -name 'ql' | xargs -i rm -rf {}
-
+sleep 3
+echo
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 TIME g "正在安装青龙面板，请稍后..."

@@ -21,12 +21,13 @@ TIME() {
 [[ ! "$USER" == "root" ]] && {
 	clear
 	echo
-	TIME y "警告：请勿root用户~~"
+	TIME y "警告：请使用root用户操作!~~"
 	echo
 	exit 1
 }
 
 docker ps -a > dkql
+
 if [[ `grep -c "whyour" dkql` -eq '0' ]]; then
   TIME g "正在安装青龙面板，请稍后..."
   echo

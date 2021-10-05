@@ -28,52 +28,42 @@ TIME() {
 
 docker ps -a > dkql
 
-if [[ `grep -c "whyour" dkql` -eq '0' ]]; then
-  TIME g "正在安装青龙面板，请稍后..."
-  echo
-  docker run -dit \
-    -v $PWD/ql/config:/ql/config \
-    -v $PWD/ql/log:/ql/log \
-    -v $PWD/ql/db:/ql/db \
-    -v $PWD/ql/scripts:/ql/scripts \
-    -v $PWD/ql/jbot:/ql/jbot \
-    -v $PWD/ql/raw:/ql/raw \
-    -v $PWD/ql/repo:/ql/repo \
-    -p 5700:5700 \
-    --name qinglong \
-    --hostname qinglong \
-    --restart always \
-    whyour/qinglong:latest
-else
-	QINGLONG="YES"
+if [[ `grep -c "whyour" dkql` -eq '1' ]]; then
+	TIME g "检测到已有青龙面板，正在删除中，请稍后..."
+	echo
+	docker=$(docker ps|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
+	docker stop -t=5 $dockerid
+	docker rm $dockerid
+	docker rmi $imagesid
 fi
 
-rm -fr dkql
-sleep 3
+rm -rf /opt/ql
+find . -name 'ql' | xargs -i rm -rf {}
+rm -rf dkql
 
-if [[ "${QINGLONG}" == "YES" ]]; then
+TIME g "正在安装青龙面板，请稍后..."
+echo
+docker run -dit \
+  -v $PWD/ql/config:/ql/config \
+  -v $PWD/ql/log:/ql/log \
+  -v $PWD/ql/db:/ql/db \
+  -v $PWD/ql/scripts:/ql/scripts \
+  -v $PWD/ql/jbot:/ql/jbot \
+  -v $PWD/ql/raw:/ql/raw \
+  -v $PWD/ql/repo:/ql/repo \
+  -p 5700:5700 \
+  --name qinglong \
+  --hostname qinglong \
+  --restart always \
+  whyour/qinglong:latest
+
+
+sleep 3
+if [[ -n "$(ls -A "/root/ql/config/auth.json" 2>/dev/null)" ]]; then
 	echo
-	TIME g "已经有青龙面板，请登录面板设置好KEY，建议删除现有青龙面板，重新安装，本脚本不支持混装!"
-	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续]： " QLNU
-	case $QLNU in
-		[Yy])
-			echo
-			TIME y "开始安装脚本，请耐心等待..."
-			echo
-			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-			rm -fr ql.sh
-			exit 0
-		;;
-		[Nn])
-			TIME r "退出安装程序!"
-			sleep 2
-			exit 1
-		;;
-	esac
-else
-	echo
-	TIME g "青龙面板安装完成，请过1分钟左右使用 IP:5700 登录面板设置好KEY，重要，一定要登录过！！！"
-	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续]： " MENU
+	TIME g "青龙面板安装完成，请等1分钟左右使用 IP:5700 登录面板设置好KEY，重要，一定要登录页面过！！！"
+	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续安装脚本]： " MENU
 	case $MENU in
 		[Yy])
 			echo
@@ -89,5 +79,9 @@ else
 			exit 1
 		;;
 	esac
+else
+	TIME y "青龙面板安装失败，请检测网络再来尝试！"
+	sleep 2
+	exit 1
 fi
 exit 0

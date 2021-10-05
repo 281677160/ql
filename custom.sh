@@ -15,6 +15,8 @@ wskey_shell_path=$dir_script/wskey.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 
+rm -rf custom.sh
+
 # 下载 config.sh
 if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path

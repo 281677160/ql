@@ -135,10 +135,6 @@ fi
 
 
 pip3 install requests
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i $i --prefix /ql/scripts --build-from-source
-cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i $i --prefix /ql/scripts --build-from-source --force
-cd /ql
 
 if [ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]; then
     task /ql/scripts/wskey.py

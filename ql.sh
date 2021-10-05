@@ -85,7 +85,14 @@ fi
 sleep 3
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
-	TIME g "青龙面板安装完成，请等1分钟左右使用 IP:5700 登录面板设置好KEY，重要，一定要登录页面过！！！"
+	TIME z "青龙面板安装完成"
+	echo
+	TIME g "请等1-2分钟左右,然后使用 IP:5700 登录面板，然后在环境变量里添加好WSKEY或者PT_KEY"
+	echo
+	TIME y "重要提示：重要，不设置WSKEY或者PT_KEY都行，但是一定要登录管理面板之后再执行下一步操作！！！"
+	echo
+	TIME g "输入N回车退出安装脚本，或者进入过管理页面后输入Y回车继续安装脚本"
+	echo
 	read -p " [输入[ N/n ]退出安装，设置好KEY，输入[ Y/y ]回车继续安装脚本]： " MENU
 	case $MENU in
 		[Yy])

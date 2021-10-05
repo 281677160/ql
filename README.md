@@ -67,10 +67,10 @@ pt_key=XXXXXX;pt_pin=您的账号;
 
 ## 第三步
 
-#### 🎉 KEY设置好后，执行以下命令安装脚本和依赖，二选一即可
+#### 🎉 KEY设置好后，执行以下命令安装脚本，二选一即可
 
 
-```yml
+```sh
 - #### 如果在宿主机,复制以下命令执行
 
 docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/custom.sh)"
@@ -83,9 +83,19 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 
 ## 第四步
 
-> 因为要安装依赖，所以要花点时间，请耐心等待，命令运行完毕后，你的脚本就正常运行了
+#### 🚩 脚本好后，执行以下命令安装依赖，二选一即可
+
+```sh
+- #### 如果在宿主机,复制以下命令执行
+
+docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
 
 
-## Thanks
+- #### 如果在容器内,复制以下命令执行
+
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
+```
+
+## 感谢！
 
 > [`互助研究院`](https://t.me/update_help)

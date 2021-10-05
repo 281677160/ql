@@ -103,7 +103,7 @@ pip3 install requests
 
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
-    TIME g "用WSKEY转换PT_KEY"
+    TIME g "执行WSKEY转换PT_KEY"
     task wskey.py
 fi
 
@@ -130,6 +130,7 @@ echo
 read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " YLAZ
 case $YLAZ in
 	[Yy])
+		echo
 		npm install -g typescript
 		cd /ql
 		npm install axios date-fns

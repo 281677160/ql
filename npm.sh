@@ -24,16 +24,4 @@ apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
-package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
-for i in $package_name; do
-    case $i in
-        canvas)
-            cd /ql/scripts
-            npm ls $i
-            ;;
-        *)
-            npm ls $i -g
-            ;;
-    esac
-done
 echo "所有依赖安装完毕"

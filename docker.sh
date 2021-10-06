@@ -127,7 +127,9 @@ if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 	echo
 else
 	echo
-	TIME y "docker拉取镜像失败，或许是docker安装有问题，请重服务器试试"
+	TIME y "docker安装成功虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的"
+	echo
+	TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
 	echo
 fi
 exit 0

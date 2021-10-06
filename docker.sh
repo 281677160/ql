@@ -94,7 +94,7 @@ sudo systemctl restart docker
 rm -fr build.log
 rm -fr docker.sh
 sleep 10
-if [[ `dpkg -l | grep -c "docker"` -ge '0' ]]; then
+if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
 	TIME y "测试docker安装失败"
 	sleep 2
 	exit 1

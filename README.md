@@ -4,7 +4,8 @@
 #### 执行以下命令
 
 ```sh
----
+一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
+自动检测docker，有则跳过安装，无则执行安装
 
 
 wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh

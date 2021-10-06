@@ -61,7 +61,6 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			sudo rm /var/lib/dpkg/info/$nomdupaquet* -f
 
 			sudo -E apt-get -qq update
-			sudo -E apt -qq install -y dpkg
 			sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 			if [[ "${Ubuntu}" == "ubuntu" ]]; then
 				curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -

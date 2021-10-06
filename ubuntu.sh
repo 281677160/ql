@@ -24,11 +24,10 @@ TIME() {
 	echo
 	exit 1
 }
-lsb_release -a |tee release1
-if [[ `grep -c "ubuntu" release1` -ge '1' ]]; then
+if [[ `lsb_release -a | grep -c "buntu"` -ge '1' ]]; then
 	export Ubuntu="ubuntu"
 fi
-if [[ `grep -c "debian" release1` -ge '1' ]]; then
+if [[ `lsb_release -a | grep -c "ebian"` -ge '1' ]]; then
 	export Debian="debian"
 fi
 if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then

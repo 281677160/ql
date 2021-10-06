@@ -123,15 +123,18 @@ fi
 TIME g "检测docker拉取镜像是否成功"
 sudo docker run hello-world
 if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
+	echo
+	TIME g "测试镜像拉取成功，正在删除测试镜像..."
+	echo
 	docker stop $(docker ps -a -q)
 	docker rm $(docker ps -a -q)
 	docker rmi $(docker images -q)
 	echo
-	TIME g "docker拉取镜像成功"
+	TIME g "测试镜像删除完毕!"
 	echo
 else
 	echo
-	TIME y "docker拉取镜像失败，或许是docker安装有问题，请重新安装试试"
+	TIME y "docker拉取镜像失败，或许是docker安装有问题，请重服务器试试"
 	echo
 fi
 exit 0

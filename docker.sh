@@ -100,6 +100,7 @@ else
 	sudo -E apt-get -qq remove -y docker-scan-plugin
 	sudo -E apt-get -qq purge -y docker-ce
 	sudo rm -rf /var/lib/docker
+	rm /var/lib/dpkg/info/$nomdupaquet* -f
 	echo
 	TIME y "docker安装失败，请再次尝试!"
 	echo

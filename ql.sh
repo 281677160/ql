@@ -28,8 +28,7 @@ TIME() {
 }
 
 if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
-	sudo -E apt -qq install -y sudo
-	sudo -E apt -qq install -y dpkg
+	apt install -y sudo curl dpkg wget
 fi
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then

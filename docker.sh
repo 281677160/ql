@@ -60,7 +60,7 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			sudo -E apt-get -qq purge -y docker-ce
 			sudo rm -rf /var/lib/docker
 			sudo rm /var/lib/dpkg/info/$nomdupaquet* -f
-			sudo apt-get -f install -y
+			sudo rm /etc/docker/daemon.json
 			sudo apt-get clean
 
 			sudo -E apt-get -qq update

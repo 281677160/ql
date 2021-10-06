@@ -74,7 +74,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME g "检测到已有青龙面板，需要删除面板才能继续..."
 	echo
-	TIME y "如果要继续的话，请注意备份你的配置文件!"
+	TIME y "如果要继续的话，请注意备份你原来的配置文件!"
 	echo
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " SCQL
 	case $SCQL in

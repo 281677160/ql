@@ -46,6 +46,15 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	case $ANDK in
 		[Yy])
 			apt -qq install -y sudo
+			cd /var/lib/dpkg/
+			sudo mv info/ info_bak
+			sudo mkdir info
+			sudo apt-get update
+			sudo apt-get -f install
+			sudo mv info/* info_bak/
+			sudo rm -rf info
+			sudo mv info_bak info
+			cd ../../../
 			docker stop $(docker ps -a -q)
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)

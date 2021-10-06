@@ -40,7 +40,7 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"
 	echo
-	TIME g "重新安装会把您现有的所以容器全部删除"
+	TIME g "重新安装会把您现有的所以容器及镜像全部删除"
 	echo
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " ANDK
 	case $ANDK in

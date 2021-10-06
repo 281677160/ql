@@ -83,6 +83,7 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 		;;
 	esac
 fi
+rm -fr docker.sh
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	sudo service docker start

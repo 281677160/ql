@@ -61,6 +61,10 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			sudo rm -rf /var/lib/docker
 			sudo rm -rf /var/lib/dpkg/info/$nomdupaquet* -f
 			sudo rm -rf /etc/docker
+			cd /var/lib/dpkg
+			sudo mv info info.baksudo
+			sudo mkdir info
+			cd ../../../
 			sudo apt-get clean
 
 			sudo -E apt-get -qq update

@@ -84,6 +84,7 @@ fi
 sudo -E apt-get -qq update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
 if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
+	sudo rm -fr /etc/systemd/system/docker.service.d
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
 fi

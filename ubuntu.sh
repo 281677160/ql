@@ -35,6 +35,8 @@ sudo -E apt-get -qq remove -y docker-ce
 sudo -E apt-get -qq remove -y docker-ce-cli
 sudo -E apt-get -qq remove -y docker-ce-rootless-extras
 sudo -E apt-get -qq remove -y docker-scan-plugin
+sudo -E apt-get -qq purge -y docker-ce
+sudo rm -rf /var/lib/docker
 
 sudo -E apt-get -qq update
 sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -58,6 +60,8 @@ else
 	sudo -E apt-get -qq remove -y docker-ce-cli
 	sudo -E apt-get -qq remove -y docker-ce-rootless-extras
 	sudo -E apt-get -qq remove -y docker-scan-plugin
+	sudo -E apt-get -qq purge -y docker-ce
+	sudo rm -rf /var/lib/docker
 	echo
 	TIME y "docker安装失败，请再次尝试!"
 	echo

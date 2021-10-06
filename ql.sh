@@ -38,7 +38,7 @@ else
 fi
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
-	if [[ `opkg list | grep -c "docker"` = '0' ]]; then
+	if [[ `docker version | grep -c "version"` = '0' ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo
@@ -54,7 +54,7 @@ else
 	fi
 fi
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
-	if [[ `opkg list | grep -c "docker"` = '0' ]]; then
+	if [[ `docker version | grep -c "version"` = '0' ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo

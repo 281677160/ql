@@ -24,19 +24,21 @@ TIME() {
 	echo
 	exit 1
 }
-if [[ `lsb_release -a | grep -c "ubuntu"` -ge '1' ]]; then
+lsb_release -a > release1
+if [[ `grep -c "ubuntu" release1` -ge '1' ]]; then
 	export Ubuntu="ubuntu"
 fi
-if [[ `lsb_release -a | grep -c "debian"` -ge '1' ]]; then
+if [[ `grep -c "debian" release1` -ge '1' ]]; then
 	export Debian="debian"
 fi
+rm -fr release1
 if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	echo
 	TIME r "本脚本只适用于Ubuntu和Debian安装docker"
 	echo
 	exit 1
 fi
-if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
+if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"
 	echo

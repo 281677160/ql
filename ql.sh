@@ -45,7 +45,7 @@ else
 		echo
 		TIME y "没检测到docker，正在安装docker，请稍后..."
 		echo
-		wget -O ubuntu.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ubuntu.sh && bash ubuntu.sh
+		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 	fi
 fi
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then

@@ -82,7 +82,7 @@ else
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 fi
 sudo -E apt-get -qq update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
 rm -fr docker.sh
 
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then

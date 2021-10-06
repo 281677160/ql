@@ -58,9 +58,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 		[Yy])
 			docker=$(docker ps|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
 			images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
-			docker stop -t=5 $dockerid
-			docker rm $dockerid
-			docker rmi $imagesid
+			docker stop -t=5 "$dockerid"
+			docker rm "$dockerid"
+			docker rmi "$imagesid"
 		;;
 		[Nn])
 			TIME r "退出安装程序!"

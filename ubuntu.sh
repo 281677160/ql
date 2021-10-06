@@ -1,7 +1,7 @@
 #!/bin/bash
 
+apt -qq install sudo
 sudo -E apt-get -qq update
-sudo -E apt -qq install sudo
 sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88

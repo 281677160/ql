@@ -85,11 +85,6 @@ sudo -E apt-get -qq update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 rm -fr docker.sh
 
-if [[ `grep -c "dockerd -H fd://" /lib/systemd/system/docker.service` -eq '1' ]]; then
-	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
-	sudo systemctl daemon-reload
-fi
-
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	sudo service docker start

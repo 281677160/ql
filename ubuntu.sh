@@ -45,7 +45,7 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " ANDK
 	case $ANDK in
 		[Yy])
-			apt -qq install sudo
+			apt -qq install -y sudo
 			docker stop $(docker ps -a -q)
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)
@@ -68,9 +68,9 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			fi
 			sudo apt-key fingerprint 0EBFCD88
 			if [[ "${Ubuntu}" == "ubuntu" ]]; then
-				sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+				sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 			else
-				sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
+				sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 			fi
 			sudo -E apt-get -qq update
 			sudo -E apt-get -qq install -y docker-ce docker-ce-cli containerd.io
@@ -101,5 +101,17 @@ else
 	echo
 	TIME y "docker安装失败，请再次尝试!"
 	echo
+	sleep 2
+	exit 1
+fi
+TIME g "检测docker拉取镜像是否成功"
+sudo docker run hello-world
+if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+	docker rmi $(docker images -q)
+	TIME g "docker拉取镜像成功"
+else
+	TIME y "docker拉取镜像失败，或许是docker安装有问题，请重新安装试试"
 fi
 exit 0

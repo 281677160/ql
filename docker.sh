@@ -91,8 +91,8 @@ if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
 	sudo systemctl daemon-reload
 fi
 sudo systemctl restart docker
-rm -fr build.log
-rm -fr docker.sh
+sudo rm -fr build.log
+sudo rm -fr docker.sh
 sleep 10
 if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
 	TIME y "docker安装失败"

@@ -95,11 +95,13 @@ rm -fr build.log
 rm -fr docker.sh
 sleep 10
 if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
-	TIME y "测试docker安装失败"
+	TIME y "docker安装失败"
 	sleep 2
 	exit 1
 else
+	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"
+	TIME y ""
 	sudo docker run hello-world
 	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 		echo

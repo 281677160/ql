@@ -84,7 +84,17 @@ fi
 sudo -E apt-get -qq update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
 rm -fr docker.sh
-
+if [[ `grep -c "dockerd -H fd://" tee build.log` -eq '1' ]]; then
+	sudo mkdir /etc/systemd/system/docker.service.d/
+	sudo touch /etc/systemd/system/docker.service.d/docker.conf
+	cat >/etc/systemd/system/docker.service.d/docker.conf <<-EOF
+	[Service]
+	ExecStart=
+	ExecStart=/usr/bin/dockerd -H fd:// --dns 114.114.114.114
+	EOF
+	sudo sudo systemctl daemon-reload
+fi
+rm -fr build.log
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	sudo systemctl restart docker

@@ -129,6 +129,8 @@ fi
 
 sleep 3
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+	docker restart qinglong
+	sleep 10
 	echo
 	TIME z "青龙面板安装完成"
 	echo

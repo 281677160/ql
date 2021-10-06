@@ -35,6 +35,7 @@ if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	echo
 	exit 1
 fi
+apt -qq install -y sudo
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"
@@ -44,7 +45,23 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " ANDK
 	case $ANDK in
 		[Yy])
-			TIME g ""
+			TIME g "正在御载老版本docker"
+			docker stop $(docker ps -a -q)
+			docker rm $(docker ps -a -q)
+			docker rmi $(docker images -q)
+			sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
+			sudo -E apt-get -qq autoremove
+			sudo -E apt-get -qq remove -y docker  
+			sudo -E apt-get -qq remove -y --auto-remove docker
+			sudo -E apt-get -qq remove -y docker-ce
+			sudo -E apt-get -qq remove -y docker-ce-cli
+			sudo -E apt-get -qq remove -y docker-ce-rootless-extras
+			sudo -E apt-get -qq remove -y docker-scan-plugin
+			sudo -E apt-get -qq purge -y docker-ce
+			sudo rm -rf /var/lib/docker
+			sudo rm -rf /etc/docker
+			sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+			rm /var/lib/dpkg/info/$nomdupaquet* -f
 		;;
 		[Nn])
 			TIME r "退出安装程序!"
@@ -53,24 +70,6 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 		;;
 	esac
 fi
-apt -qq install -y sudo
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-docker rmi $(docker images -q)
-sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
-sudo -E apt-get -qq autoremove
-sudo -E apt-get -qq remove -y docker  
-sudo -E apt-get -qq remove -y --auto-remove docker
-sudo -E apt-get -qq remove -y docker-ce
-sudo -E apt-get -qq remove -y docker-ce-cli
-sudo -E apt-get -qq remove -y docker-ce-rootless-extras
-sudo -E apt-get -qq remove -y docker-scan-plugin
-sudo -E apt-get -qq purge -y docker-ce
-sudo rm -rf /var/lib/docker
-sudo rm -rf /etc/docker
-sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
-rm /var/lib/dpkg/info/$nomdupaquet* -f
-
 sudo -E apt-get -qq update
 sudo -E apt-get -qq upgrade
 sudo -E apt-get -qq full-upfrade

@@ -26,7 +26,7 @@ TIME() {
 	exit 1
 }
 
-if [[ `docker version | grep -c "version"` = '0' ]]; then
+if [[ `dpkg -l | grep -c "docker"` = '0' ]]; then
 	echo
 	TIME y "没检测到docker，请先安装docker"
 	echo

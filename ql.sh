@@ -126,20 +126,21 @@ docker run -dit \
    whyour/qinglong:latest
 fi
 
-sleep 3
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	docker restart qinglong
-	sleep 10
+	sleep 13
 	echo
 	TIME z "青龙面板安装完成"
 	echo
-	TIME g "请使用 IP:5700 登录面板，然后在环境变量里添加好WSKEY或者PT_KEY"
+	TIME g "请使用 IP:5700 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY"
 	echo
-	TIME y "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
+	TIME y "然后在环境变量里添加好WSKEY或者PT_KEY，您也可以不设置，设置比较好，脚本安装好就运行了"
 	echo
-	TIME g "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
+	TIME g "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
 	echo
-	read -p " [输入[ N/n ]退出程序，登录管理面板之后，输入[ Y/y ]回车继续安装脚本]： " MENU
+	TIME y "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
+	echo
+	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
 	case $MENU in
 		[Yy])
 			echo

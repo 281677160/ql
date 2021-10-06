@@ -83,17 +83,11 @@ else
 fi
 sudo -E apt-get -qq update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
-rm -fr docker.sh
 if [[ `grep -c "dockerd -H fd://" tee build.log` -eq '1' ]]; then
-	sudo mkdir /etc/systemd/system/docker.service.d/
-	sudo touch /etc/systemd/system/docker.service.d/docker.conf
-	cat >/etc/systemd/system/docker.service.d/docker.conf <<-EOF
-	[Service]
-	ExecStart=
-	ExecStart=/usr/bin/dockerd -H fd:// --dns 114.114.114.114
-	EOF
+	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo sudo systemctl daemon-reload
 fi
+rm -fr docker.sh
 rm -fr build.log
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
@@ -103,14 +97,15 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 else
 	sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
-	sudo -E apt-get -qq remove -y docker  
-	sudo -E apt-get -qq remove -y --auto-remove docker
+	sudo -E apt-get -qq remove -y docker
 	sudo -E apt-get -qq remove -y docker-ce
 	sudo -E apt-get -qq remove -y docker-ce-cli
 	sudo -E apt-get -qq remove -y docker-ce-rootless-extras
 	sudo -E apt-get -qq remove -y docker-scan-plugin
-	sudo -E apt-get -qq purge -y docker-ce
+	sudo -E apt-get -qq remove -y --auto-remove docker
 	sudo rm -rf /var/lib/docker
+	sudo rm -rf /etc/docker
+	sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
 	rm /var/lib/dpkg/info/$nomdupaquet* -f
 	echo
 	TIME y "docker安装失败，请再次尝试!"

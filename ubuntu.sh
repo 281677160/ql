@@ -24,7 +24,7 @@ TIME() {
 	echo
 	exit 1
 }
-lsb_release -a > release1
+lsb_release -a |tee release1
 if [[ `grep -c "ubuntu" release1` -ge '1' ]]; then
 	export Ubuntu="ubuntu"
 fi

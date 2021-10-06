@@ -39,6 +39,9 @@ fi
 
 apt -qq install sudo
 
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
 sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
 sudo -E apt-get -qq remove -y docker  
 sudo -E apt-get -qq remove -y --auto-remove docker

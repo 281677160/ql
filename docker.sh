@@ -50,6 +50,7 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)
 			sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
+			sudo -E apt-get -qq autoremove
 			sudo -E apt-get -qq remove -y docker  
 			sudo -E apt-get -qq remove -y --auto-remove docker
 			sudo -E apt-get -qq remove -y docker-ce
@@ -63,6 +64,8 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			sudo apt-get clean
 
 			sudo -E apt-get -qq update
+			sudo -E apt-get -qq upgrade
+			sudo -E apt-get -qq full-upfrade
 			sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 			if [[ "${Ubuntu}" == "ubuntu" ]]; then
 				curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -

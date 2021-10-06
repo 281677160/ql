@@ -4,7 +4,7 @@
 #### 执行以下命令
 
 ```sh
-脚本适用于（ubuntu、debian、openwrt）
+脚本适用于（ubuntu的docker、debian的docker、openwrt的docker）
 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
 自动检测docker，有则跳过安装，无则执行安装，如果是openwrt则不会自动安装docker
 如果你以前安装有青龙的话，则自动删除您的青龙，全部推倒重新安装

@@ -26,11 +26,25 @@ TIME() {
 	exit 1
 }
 
-if [[ `dpkg -l | grep -c "docker"` = '0' ]]; then
-	echo
-	TIME y "没检测到docker，请先安装docker"
-	echo
-	exit 1
+if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+	sudo -E apt -qq install -y sudo
+	sudo -E apt -qq install -y dpkg
+fi
+
+if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+	if [[ `opkg list | grep -c "docker"` -eq '0' ]]; then
+		echon
+		TIME y "没检测到docker，请先安装docker"
+		echo
+		exit 1
+	fi
+else
+	if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
+		echon
+		TIME y "没检测到docker，正在安装docker，请稍后..."
+		echo
+		curl -sSL https://get.docker.com/ | sh
+	fi
 fi
 
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then

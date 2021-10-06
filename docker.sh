@@ -71,8 +71,6 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	esac
 fi
 sudo -E apt-get -qq update
-sudo -E apt-get -qq upgrade
-sudo -E apt-get -qq full-upfrade
 sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 if [[ "${Ubuntu}" == "ubuntu" ]]; then
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
@@ -86,9 +84,7 @@ else
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 fi
 sudo -E apt-get -qq update
-sudo -E apt-get -qq install -y docker-ce
-sudo -E apt-get -qq install -y docker-ce-cli
-sudo -E apt-get -qq install -y containerd.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 rm -fr docker.sh
 
 if [[ `grep -c "dockerd -H fd://" /lib/systemd/system/docker.service` -eq '1' ]]; then

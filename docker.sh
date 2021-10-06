@@ -79,7 +79,9 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 				sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 			fi
 			sudo -E apt-get -qq update
-			sudo -E apt-get -qq install -y docker-ce docker-ce-cli containerd.io
+			sudo -E apt-get -qq install -y docker-ce
+			sudo -E apt-get -qq install -y docker-ce-cli
+			sudo -E apt-get -qq install -y containerd.io
 		;;
 		[Nn])
 			TIME r "退出安装程序!"

@@ -105,6 +105,10 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
     TIME g "执行WSKEY转换PT_KEY"
     task wskey.py
+    echo
+    if [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 1 ]]; then
+    	TIME g "WSKEY转换成功"
+    fi
 fi
 
 ql extra

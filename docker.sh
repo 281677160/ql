@@ -88,7 +88,6 @@ if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
 	sudo systemctl daemon-reload
 fi
 rm -fr docker.sh
-rm -fr build.log
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	sudo systemctl restart docker

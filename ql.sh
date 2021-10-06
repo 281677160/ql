@@ -140,7 +140,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME g "请使用 IP:5700 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY"
 	echo
-	TIME y "然后在环境变量里添加好WSKEY或者PT_KEY，您也可以不设置，设置比较好，脚本安装好就运行了"
+	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录管理面"
 	echo
 	TIME g "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
 	echo

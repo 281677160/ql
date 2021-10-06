@@ -84,37 +84,21 @@ fi
 sudo -E apt-get -qq update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
 if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
+	TIME g "检测到文件有错误，尝试修复"
 	sudo rm -fr /etc/systemd/system/docker.service.d
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
+else
+	if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
+		echo
+		sudo systemctl restart docker
+		sleep 10
+		TIME g "docker安装成功"
+	fi
 fi
 rm -fr build.log
 rm -fr docker.sh
-if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
-	echo
-	sudo systemctl restart docker
-	sleep 10
-	TIME g "docker安装成功"
-	echo
-else
-	sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
-	sudo -E apt-get -qq remove -y docker
-	sudo -E apt-get -qq remove -y docker-ce
-	sudo -E apt-get -qq remove -y docker-ce-cli
-	sudo -E apt-get -qq remove -y docker-ce-rootless-extras
-	sudo -E apt-get -qq remove -y docker-scan-plugin
-	sudo -E apt-get -qq remove -y --auto-remove docker
-	sudo rm -rf /var/lib/docker
-	sudo rm -rf /etc/docker
-	sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
-	rm /var/lib/dpkg/info/$nomdupaquet* -f
-	echo
-	TIME y "docker安装失败，请再次尝试!"
-	echo
-	sleep 2
-	exit 1
-fi
-TIME g "检测docker拉取镜像是否成功"
+TIME g "测试docker拉取镜像是否成功"
 sudo docker run hello-world
 if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 	echo
@@ -124,7 +108,7 @@ if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 	docker rm $(docker ps -a -q)
 	docker rmi $(docker images -q)
 	echo
-	TIME y "测试镜像删除完毕!"
+	TIME y "测试镜像删除完毕，docker安装成功!"
 	echo
 else
 	echo

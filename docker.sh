@@ -88,6 +88,7 @@ if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
 fi
+rm -fr build.log
 rm -fr docker.sh
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo

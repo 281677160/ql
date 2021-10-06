@@ -19,12 +19,23 @@ TIME() {
 }
 
 [[ ! "$USER" == "root" ]] && {
-	clear
 	echo
 	TIME y "警告：请使用root用户操作!~~"
 	echo
 	exit 1
 }
+if [[ `lsb_release -a | grep -c "ubuntu"` -ge '1' ]]; then
+	export Ubuntu="ubuntu"
+fi
+if [[ `lsb_release -a | grep -c "debian"` -ge '1' ]]; then
+	export Debian="debian"
+fi
+if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
+	echo
+	TIME r "本脚本只适用于Ubuntu和Debian安装docker"
+	echo
+	exit 1
+fi
 
 apt -qq install sudo
 
@@ -40,16 +51,25 @@ sudo rm -rf /var/lib/docker
 
 sudo -E apt-get -qq update
 sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
+if [[ "${Ubuntu}" == "ubuntu" ]]; then
+	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+else
+	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
+fi
 sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
+if [[ "${Ubuntu}" == "ubuntu" ]]; then
+	sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+else
+	sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
+fi
 sudo -E apt-get -qq update
 sudo -E apt-get -qq install -y docker-ce docker-ce-cli containerd.io
 
 
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
-	
+	sudo service docker start
+	sleep 10
 	TIME g "docker安装成功"
 	echo
 else

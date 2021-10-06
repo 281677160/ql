@@ -43,7 +43,7 @@ else
 		echo
 		TIME y "没检测到docker，正在安装docker，请稍后..."
 		echo
-		curl -sSL https://get.docker.com/ | sh
+		wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ubuntu.sh && bash ubuntu.sh
 	fi
 fi
 

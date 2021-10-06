@@ -58,8 +58,9 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			sudo -E apt-get -qq remove -y docker-scan-plugin
 			sudo -E apt-get -qq purge -y docker-ce
 			sudo rm -rf /var/lib/docker
-			rm -rf /var/lib/docker
-			rm /var/lib/dpkg/info/$nomdupaquet* -f
+			sudo rm /var/lib/dpkg/info/$nomdupaquet* -f
+			sudo apt-get -f install -y
+			sudo apt-get clean
 
 			sudo -E apt-get -qq update
 			sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common

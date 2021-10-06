@@ -23,6 +23,7 @@ TIME() {
 	echo
 	TIME y "警告：请使用root用户操作!~~"
 	echo
+	sleep 2
 	exit 1
 }
 
@@ -36,6 +37,7 @@ if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo
+		sleep 2
 		exit 1
 	fi
 else
@@ -46,7 +48,23 @@ else
 		wget -O ubuntu.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ubuntu.sh && bash ubuntu.sh
 	fi
 fi
-
+if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+	if [[ `opkg list | grep -c "docker"` -eq '0' ]]; then
+		echo
+		TIME y "没检测到docker，请先安装docker"
+		echo
+		sleep 2
+		exit 1
+	fi
+else
+	if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
+		echo
+		TIME y "没检测到docker，请先安装docker"
+		echo
+		sleep 2
+		exit 1
+	fi
+fi
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME g "检测到已有青龙面板，需要删除面板才能继续..."

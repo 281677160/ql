@@ -134,9 +134,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME z "青龙面板安装完成"
 	echo
-	TIME g "请等1-2分钟左右,然后使用 IP:5700 登录面板，然后在环境变量里添加好WSKEY或者PT_KEY"
+	TIME g "请使用 IP:5700 登录面板，然后在环境变量里添加好WSKEY或者PT_KEY"
 	echo
-	TIME y "重要提示：重要，不设置WSKEY或者PT_KEY都行，但是一定要登录管理面板之后再执行下一步操作！！！"
+	TIME y "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
 	echo
 	TIME g "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
 	echo

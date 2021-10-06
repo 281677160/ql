@@ -50,14 +50,12 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)
 			sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
-			sudo -E apt-get -qq autoremove
-			sudo -E apt-get -qq remove -y docker  
-			sudo -E apt-get -qq remove -y --auto-remove docker
+			sudo -E apt-get -qq remove -y docker
 			sudo -E apt-get -qq remove -y docker-ce
 			sudo -E apt-get -qq remove -y docker-ce-cli
 			sudo -E apt-get -qq remove -y docker-ce-rootless-extras
 			sudo -E apt-get -qq remove -y docker-scan-plugin
-			sudo -E apt-get -qq purge -y docker-ce
+			sudo -E apt-get -qq remove -y --auto-remove docker
 			sudo rm -rf /var/lib/docker
 			sudo rm -rf /etc/docker
 			sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
@@ -84,7 +82,7 @@ else
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 fi
 sudo -E apt-get -qq update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 rm -fr docker.sh
 
 if [[ `grep -c "dockerd -H fd://" /lib/systemd/system/docker.service` -eq '1' ]]; then

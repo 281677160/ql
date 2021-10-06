@@ -93,23 +93,29 @@ sudo systemctl restart docker
 rm -fr build.log
 rm -fr docker.sh
 sleep 10
-TIME g "测试docker拉取镜像是否成功"
-sudo docker run hello-world
-if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
-	echo
-	TIME g "测试镜像拉取成功，正在删除测试镜像..."
-	echo
-	docker stop $(docker ps -a -q)
-	docker rm $(docker ps -a -q)
-	docker rmi $(docker images -q)
-	echo
-	TIME y "测试镜像删除完毕，docker安装成功!"
-	echo
+if [[ `dpkg -l | grep -c "docker"` -ge '0' ]]; then
+	TIME y "测试docker安装失败"
+	sleep 2
+	exit 1
 else
-	echo
-	TIME y "docker安装成功虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的"
-	echo
-	TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
-	echo
+	TIME g "测试docker拉取镜像是否成功"
+	sudo docker run hello-world
+	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
+		echo
+		TIME g "测试镜像拉取成功，正在删除测试镜像..."
+		echo
+		docker stop $(docker ps -a -q)
+		docker rm $(docker ps -a -q)
+		docker rmi $(docker images -q)
+		echo
+		TIME y "测试镜像删除完毕，docker安装成功!"
+		echo
+	else
+		echo
+		TIME y "docker安装成功虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的"
+		echo
+		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
+		echo
+	fi
 fi
 exit 0

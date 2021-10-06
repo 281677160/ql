@@ -83,9 +83,9 @@ else
 fi
 sudo -E apt-get -qq update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
-if [[ `grep -c "dockerd -H fd://" tee build.log` -eq '1' ]]; then
+if [[ `grep -c "dockerd -H fd://" tee build.log` -ge '1' ]]; then
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
-	sudo sudo systemctl daemon-reload
+	sudo systemctl daemon-reload
 fi
 rm -fr docker.sh
 rm -fr build.log
@@ -123,7 +123,7 @@ if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 	docker rm $(docker ps -a -q)
 	docker rmi $(docker images -q)
 	echo
-	TIME g "测试镜像删除完毕!"
+	TIME y "测试镜像删除完毕!"
 	echo
 else
 	echo

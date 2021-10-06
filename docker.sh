@@ -100,7 +100,9 @@ rm -fr docker.sh
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	sudo service docker start
-	sleep 10
+	sleep 30
+	sudo service docker start
+	sleep 30
 	TIME g "docker安装成功"
 	echo
 else

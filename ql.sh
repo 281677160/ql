@@ -33,14 +33,14 @@ fi
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 	if [[ `opkg list | grep -c "docker"` -eq '0' ]]; then
-		echon
+		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo
 		exit 1
 	fi
 else
 	if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
-		echon
+		echo
 		TIME y "没检测到docker，正在安装docker，请稍后..."
 		echo
 		curl -sSL https://get.docker.com/ | sh

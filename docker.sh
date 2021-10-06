@@ -35,7 +35,8 @@ if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	echo
 	exit 1
 fi
-apt -qq install -y sudo
+apt install -y sudo
+apt install -y dpkg
 if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"

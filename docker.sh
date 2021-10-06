@@ -26,8 +26,7 @@ TIME() {
 }
 if [[ `lsb_release -a | grep -c "buntu"` -ge '1' ]]; then
 	export Ubuntu="ubuntu"
-fi
-if [[ `lsb_release -a | grep -c "ebian"` -ge '1' ]]; then
+elif [[ `lsb_release -a | grep -c "ebian"` -ge '1' ]]; then
 	export Debian="debian"
 fi
 if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then

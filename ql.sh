@@ -42,7 +42,7 @@ if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo
-		sleep 2
+		sleep 3
 		exit 1
 	fi
 else
@@ -58,7 +58,7 @@ if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo
-		sleep 2
+		sleep 3
 		exit 1
 	fi
 else
@@ -66,7 +66,7 @@ else
 		echo
 		TIME y "没检测到docker，请先安装docker"
 		echo
-		sleep 2
+		sleep 3
 		exit 1
 	fi
 fi

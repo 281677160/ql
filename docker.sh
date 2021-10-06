@@ -58,8 +58,11 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 			sudo -E apt-get -qq remove -y docker-ce-rootless-extras
 			sudo -E apt-get -qq remove -y docker-scan-plugin
 			sudo -E apt-get -qq purge -y docker-ce
+			sudo rm -rf /var/lib/docker
+			sudo rm -rf /etc/docker
 			cd /var/lib/dpkg
 			sudo mv info info.baksudo
+			sudo rm -fr info
 			sudo mkdir info
 			cd ../../../
 			sudo apt-get clean

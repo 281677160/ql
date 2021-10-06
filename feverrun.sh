@@ -37,7 +37,7 @@ rm -rf feverrun.sh
 if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
 
 # 判断是否下载成功
@@ -53,7 +53,7 @@ fi
 if [ ! -a "$wskey_shell_path" ]; then
     touch $wskey_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
 cp $wskey_shell_path $dir_script/wskey.py
 
 # 判断是否下载成功
@@ -68,7 +68,7 @@ fi
 if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
 cp $extra_shell_path $dir_shell/extra.sh
 
 # 判断是否下载成功

@@ -31,7 +31,6 @@ fi
 if [[ `grep -c "debian" release1` -ge '1' ]]; then
 	export Debian="debian"
 fi
-rm -fr release1
 if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	echo
 	TIME r "本脚本只适用于Ubuntu和Debian安装docker"

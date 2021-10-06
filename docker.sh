@@ -88,16 +88,11 @@ if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
 	sudo rm -fr /etc/systemd/system/docker.service.d
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
-else
-	if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
-		echo
-		sudo systemctl restart docker
-		sleep 10
-		TIME g "docker安装成功"
-	fi
 fi
+sudo systemctl restart docker
 rm -fr build.log
 rm -fr docker.sh
+sleep 10
 TIME g "测试docker拉取镜像是否成功"
 sudo docker run hello-world
 if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then

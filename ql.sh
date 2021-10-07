@@ -163,7 +163,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 		;;
 	esac
 else
-	TIME y "青龙面板安装失败，请检测网络再来尝试！"
+	TIME y "青龙面板安装失败！"
 	sleep 2
 	exit 1
 fi

@@ -88,7 +88,10 @@ chmod -R +x $dir_shell
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
+    echo
     TIME g "开始添加任务 ql extra"
+    echo
+    echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每8小时更新任务","command":"ql extra","schedule":"15 0-23/8 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
@@ -96,7 +99,10 @@ fi
 
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
+    echo
     TIME g "开始添加任务 task wskey.py"
+    echo
+    echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每天检测WSKEY","command":"task wskey.py","schedule":"15 1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
@@ -106,13 +112,17 @@ pip3 install requests
 
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
-    TIME g "执行WSKEY转换PT_KEY"
+    TIME g "执行WSKEY转换PT_KEY操作"
     task wskey.py
     echo
     if [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 1 ]]; then
+    	echo
     	TIME g "WSKEY转换PT_KEY成功"
+	echo
     else
-    	TIME g "WSKEY转换PT_KEY失败，检查KEY有没有失效，然后在任务里手动转换"
+    	echo
+    	TIME g "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，然后在任务里手动转换"
+	echo
     fi
 fi
 

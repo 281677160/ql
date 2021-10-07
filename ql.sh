@@ -153,7 +153,6 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
 			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-			docker restart qinglong
 			rm -fr ql.sh
 		;;
 		[Nn])

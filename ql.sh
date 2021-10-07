@@ -54,11 +54,11 @@ if [[ "$USER" == "root" ]]; then
 	case $SCQL in
 		1)
 			QL_PORT="5700"
-			NETWORK="p $QL_PORT:5700"
+			NETWORK="-p $QL_PORT:5700"
 		break
 		;;
 		2)
-			NETWORK="-net host"
+			NETWORK="--net host"
 		break
 		;;
 		3)
@@ -153,7 +153,7 @@ docker run -dit \
   -v $PWD/ql/jbot:/ql/jbot \
   -v $PWD/ql/raw:/ql/raw \
   -v $PWD/ql/repo:/ql/repo \
-  -${NETWORK} \
+  ${NETWORK} \
   --name qinglong \
   --hostname qinglong \
   --restart always \

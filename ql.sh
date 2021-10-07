@@ -78,6 +78,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " SCQL
 	case $SCQL in
 		[Yy])
+			echo
+			TIME y "正在停止您以前的青龙然后删除，请稍后...!"
+			echo
 			docker=$(docker ps|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
 			images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
 			docker stop -t=5 "${dockerid}"
@@ -98,6 +101,7 @@ sleep 3
 echo
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+echo
 TIME g "正在安装青龙面板，请稍后..."
 echo
 docker run -dit \

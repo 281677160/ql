@@ -174,7 +174,7 @@ else
 fi
 echo
 echo
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 	TIME l "安装依赖，依赖必须安装，要不然脚本不运行"
 	echo
 	TIME y "但是用国内的网络安装比较慢，请尽量使用翻墙网络"

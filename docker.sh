@@ -107,7 +107,7 @@ else
 		lxc.cap.drop:
 		EOF
 		for X in $(ls -1 /etc/pve/lxc | grep ".conf"); do 
-		if [[ `grep -c "lxc.cap.drop:" /etc/pve/lxc/${X}` -eq '0' ]]; then
+		if [[ `grep -c "lxc.cap.drop:" /etc/pve/lxc/${X}` -eq '0' ]] && [[ `grep -c "cgroup:rw" /etc/pve/lxc/${X}` -eq '0' ]]; then
 			echo -e "\n$(cat lxcconf)" >> /etc/pve/lxc/${X};
 		fi
 		done

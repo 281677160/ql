@@ -36,7 +36,7 @@ if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	exit 1
 fi
 apt install -y sudo curl wget
-if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
+if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"
 	echo
@@ -68,6 +68,9 @@ if [[ `dpkg -l | grep -c "docker"` -ge '1' ]]; then
 		;;
 	esac
 fi
+echo
+TIME y "正在安装docker，请耐心等候..."
+echo
 sudo -E apt-get -qq update
 sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 if [[ "${Ubuntu}" == "ubuntu" ]]; then

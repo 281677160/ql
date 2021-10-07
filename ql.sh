@@ -27,7 +27,7 @@ TIME() {
 	exit 1
 }
 
-if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
+if [[ "$USER" == "root" ]]; then
 	echo
 	echo
 	echo

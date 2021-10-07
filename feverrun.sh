@@ -37,7 +37,7 @@ rm -rf feverrun.sh
 if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > config.sample.sh > $sample_shell_path
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > $sample_shell_path
 curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
 

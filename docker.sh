@@ -102,6 +102,16 @@ else
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"
 	TIME y ""
+	if [ -n "$(ls -A "/etc/pve/lxc" 2>/dev/null)" ]; then
+		cat >lxcconf <<-EOF
+		lxc.mount.auto: cgroup:rw
+		lxc.mount.auto: proc:rw
+		lxc.mount.auto: sys:rw
+		lxc.cap.drop:
+		EOF
+		for X in $(ls -1 /etc/pve/lxc | grep ".conf"); do echo -e "\n$(cat lxcconf)" >> /etc/pve/lxc/${X}; done
+		rm -fr lxcconf
+	fi
 	sudo docker run hello-world
 	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 		echo

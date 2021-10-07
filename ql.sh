@@ -153,9 +153,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
-			docker exec -it qinglong  /bin/bash
 			wget -O feverrun.sh https://pd.zwc365.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh && bash feverrun.sh
-			exit
 			rm -fr ql.sh
 		;;
 		[Nn])

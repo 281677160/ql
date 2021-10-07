@@ -45,17 +45,17 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	TIME l " 1. bridge [默认类型] "
 	echo
-	TIME l " 2. host [一般为openwrt旁路由器才选择的]"
+	TIME l " 2. host [一般为openwrt旁路由才选择的]"
 	echo
 	TIME l " 3. 退出安装程序!"
 	echo
 	while :; do
-	read -p " [输入您的选择编码]： " SCQL
+	read -p " [输入您选择的编码]： " SCQL
 	case $SCQL in
 		1)
 			QL_PORT="5700"
 			QING_PORT="YES"
-			NETWORK="-p $QL_PORT:5700"
+			NETWORK="-p ${QL_PORT}:5700"
 		break
 		;;
 		2)
@@ -65,7 +65,8 @@ if [[ "$USER" == "root" ]]; then
 		;;
 		3)
 			TIME r "您选择了退出编译程序"
-			exit 0
+			sleep 3
+			exit 1
 		break
     		;;
     		*)
@@ -80,8 +81,8 @@ echo
 	TIME g "请设置端口，默认为5700，不设置的话直接回车"
 	read -p " 请输入端口：" QL_PORT
 	QL_PORT=${QL_PORT:-"5700"}
-	TIME y "您端口为：$QL_PORT"
-	NETWORK="-p $QL_PORT:5700"
+	TIME y "您端口为：${QL_PORT}"
+	NETWORK="-p ${QL_PORT}:5700"
 }
 echo
 echo
@@ -95,7 +96,7 @@ fi
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
-		TIME y "没检测到docker，请先安装docker"
+		TIME y "没检测到docker，openwrt请自行安装docker和挂载好硬盘"
 		echo
 		sleep 3
 		exit 1
@@ -103,7 +104,7 @@ if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
-		TIME y "没检测到docker，正在安装docker，请稍后..."
+		TIME y "没发现有docker，正在安装docker，请稍后..."
 		echo
 		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 		if [[ $? -ne 0 ]];then
@@ -115,7 +116,7 @@ fi
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
-		TIME y "没检测到docker，请先安装docker"
+		TIME y "没检测到docker，openwrt请自行安装docker和挂载好硬盘"
 		echo
 		sleep 3
 		exit 1
@@ -167,13 +168,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME z "青龙面板安装完成"
 	echo
-	TIME g "请使用 IP:$QL_PORT 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY"
+	TIME g "请使用 IP:${QL_PORT} 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY"
 	echo
-	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录管理面"
-	echo
-	TIME r "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
-	echo
-	TIME y "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
+	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
 	echo
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
@@ -193,13 +190,17 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 		break
 		;;
 		[Nn])
+			echo
 			TIME r "退出安装程序!"
+			echo
 			sleep 2
 			exit 1
 		break
     		;;
     		*)
-			TIME r "重要提示：一定要登录管理面板之后再执行下一步操作,或者您按[N/n]退出!"
+			echo
+			TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
+			echo
 		;;
 	esac
 	done

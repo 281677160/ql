@@ -75,6 +75,7 @@ if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "如果要继续的话，请注意备份你原来的配置文件!"
 	echo
+	while :; do
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " SCQL
 	case $SCQL in
 		[Yy])
@@ -86,13 +87,19 @@ if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 			docker stop -t=5 "${dockerid}"
 			docker rm "${dockerid}"
 			docker rmi "${imagesid}"
+		break
 		;;
 		[Nn])
 			TIME r "退出安装程序!"
 			sleep 2
 			exit 1
+		break
+    		;;
+    		*)
+			TIME r "提示：请输入正确的选择!"
 		;;
 	esac
+	done
 fi
 
 rm -rf /opt/ql

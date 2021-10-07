@@ -106,7 +106,11 @@ else
 		lxc.mount.auto: sys:rw
 		lxc.cap.drop:
 		EOF
-		for X in $(ls -1 /etc/pve/lxc | grep ".conf"); do echo -e "\n$(cat lxcconf)" >> /etc/pve/lxc/${X}; done
+		for X in $(ls -1 /etc/pve/lxc | grep ".conf"); do 
+		if [[ `grep -c "lxc.cap.drop:" /etc/pve/lxc/${X}` -eq '0' ]]; then
+			echo -e "\n$(cat lxcconf)" >> /etc/pve/lxc/${X};
+		fi
+		done
 		rm -fr lxcconf
 	fi
 	sudo systemctl restart docker

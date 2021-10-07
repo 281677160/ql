@@ -70,7 +70,7 @@ wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/28167716
 
 
 一键安装单独青龙的依赖
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
+docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
 
 
 ```

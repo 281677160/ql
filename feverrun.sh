@@ -103,7 +103,6 @@ if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
 fi
 
 pip3 install requests
-cd scripts && npm install canvas --build-from-source
 
 
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then

@@ -47,9 +47,7 @@ else
 		echo
 		TIME y "没检测到docker，正在安装docker，请稍后..."
 		echo
-		docker exec -it qinglong  /bin/bash
 		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
-		
 		if [[ $? -ne 0 ]];then
 			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh && bash docker.sh
 		fi
@@ -155,11 +153,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
-			
+			docker exec -it qinglong  /bin/bash
 			wget -O feverrun.sh https://pd.zwc365.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh && bash feverrun.sh
-			if [[ $? -ne 0 ]];then
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-			fi
+			exit
 			rm -fr ql.sh
 		;;
 		[Nn])

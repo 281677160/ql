@@ -67,7 +67,7 @@ if [[ "$USER" == "root" ]]; then
 		break
     		;;
     		*)
-			TIME r "提示：请输入正确的选择!"
+			TIME b "提示：请输入正确的选择!"
 		;;
 	esac
 	done

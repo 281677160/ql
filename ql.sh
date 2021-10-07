@@ -93,8 +93,11 @@ echo
 TIME g "正在安装宿主机所需要的依赖，请稍后..."
 echo
 if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+	QL_PATH="/opt"
 	apt update
 	apt install -y sudo curl dpkg wget
+else
+	QL_PATH="$PWD"
 fi
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
@@ -153,13 +156,13 @@ echo
 TIME g "正在安装青龙面板，请稍后..."
 echo
 docker run -dit \
-  -v $PWD/ql/config:/ql/config \
-  -v $PWD/ql/log:/ql/log \
-  -v $PWD/ql/db:/ql/db \
-  -v $PWD/ql/scripts:/ql/scripts \
-  -v $PWD/ql/jbot:/ql/jbot \
-  -v $PWD/ql/raw:/ql/raw \
-  -v $PWD/ql/repo:/ql/repo \
+  -v $QL_PATH/ql/config:/ql/config \
+  -v $QL_PATH/ql/log:/ql/log \
+  -v $QL_PATH/ql/db:/ql/db \
+  -v $QL_PATH/ql/scripts:/ql/scripts \
+  -v $QL_PATH/ql/jbot:/ql/jbot \
+  -v $QL_PATH/ql/raw:/ql/raw \
+  -v $QL_PATH/ql/repo:/ql/repo \
   ${NETWORK} \
   --name qinglong \
   --hostname qinglong \

@@ -182,6 +182,8 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
 	echo
+	TIME g "登录控制面板时，设置好帐号跟密码就可以了，信息推送设置直接跳过，以后再设置，然后点登录"
+	echo
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then

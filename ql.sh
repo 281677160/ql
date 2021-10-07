@@ -33,17 +33,17 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	echo
 	TIME z "脚本适用于（ubuntu、debian、openwrt）"
-	TIME z "自动检测docker，有则跳过，无则执行安装，如果是openwrt则请自行安装 docker"
+	TIME z "自动检测docker，有则跳过，无则执行安装，如果是openwrt则请自行安装docker和挂载好硬盘"
 	TIME z "如果您以前安装有青龙的话，则自动删除您的青龙，全部推倒重新安装"
-	TIME z "如果您有要备份的青龙文件，请先备份再来安装，免得损失"
+	TIME z "如果您有需要备份的青龙文件，请先备份好文件再来安装，免得损失"
 	TIME z "如果有条件的话，最好使用翻墙网络来安装，要不然安装依赖的时候你会急死的"
 	TIME g "如要不能接受的话，请选择 3 回车退出程序!"
 	echo
 	echo
 	echo
-	TIME y "如要继续的话，请选择容器的网络类型!"
+	TIME y " 如要继续的话，请选择容器的网络类型!"
 	echo
-	TIME l " 1. bridge [默认类型] "
+	TIME l " 1. bridge [默认类型]"
 	echo
 	TIME l " 2. host [一般为openwrt旁路由才选择的]"
 	echo

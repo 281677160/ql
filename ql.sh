@@ -28,9 +28,7 @@ TIME() {
 }
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
-	opkg update > /dev/null 2>&1
-	opkg install wget > /dev/null 2>&1
-	opkg install curl > /dev/null 2>&1
+	TIME y ""
 else
 	sudo -E apt-get -qq update
 	apt install -y sudo curl dpkg wget

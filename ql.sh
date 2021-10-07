@@ -145,7 +145,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录管理面"
 	echo
-	TIME g "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
+	TIME r "重要提示：重要，一定要登录管理面板之后再执行下一步操作！！！"
 	echo
 	TIME y "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
 	echo

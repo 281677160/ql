@@ -155,7 +155,6 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 			docker restart qinglong
 			rm -fr ql.sh
-			exit 0
 		;;
 		[Nn])
 			TIME r "退出安装程序!"
@@ -168,4 +167,30 @@ else
 	sleep 2
 	exit 1
 fi
+sleep 2
+echo
+echo
+TIME l "是否安装依赖?"
+echo
+TIME y "主要是安装依赖需要出国环境比较好，用国内的网络安装比较慢"
+echo
+TIME g "如果你现在的是出国网络，就不用考虑了，直接搞起!"
+echo
+TIME y "依赖不安装也影响不大，个别任务才用到，也可以以后用我的一键安装依赖脚本安装"
+echo
+TIME g "依赖安装时看到显示ERR!错误提示的，不用管，只要依赖能从头到尾的下载运行完毕就好了"
+echo
+TIME y "如果你在安装途中感觉太慢而不想安装的话，按键盘的 Ctrl+C 退出就行了"
+echo
+read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " YLAZ
+case $YLAZ in
+	[Yy])
+		docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
+	;;
+	[Nn])
+		TIME r "退出安装程序!"
+		sleep 2
+		exit 1
+	;;
+esac
 exit 0

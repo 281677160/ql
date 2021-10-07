@@ -64,13 +64,17 @@ if [[ "$USER" == "root" ]]; then
 		break
 		;;
 		3)
+			echo
 			TIME r "您选择了退出编译程序"
+			echo
 			sleep 3
 			exit 1
 		break
     		;;
     		*)
+			echo
 			TIME b "提示：请输入正确的选择!"
+			echo
 		;;
 	esac
 	done
@@ -78,7 +82,7 @@ fi
 echo
 echo
 [[ "${QING_PORT}" == "YES" ]] && {
-	TIME g "请设置端口，默认为5700，不设置的话直接回车"
+	TIME g "请设置端口，默认为端口[5700]，不设置的话直接回车跳过"
 	read -p " 请输入端口：" QL_PORT
 	QL_PORT=${QL_PORT:-"5700"}
 	TIME y "您端口为：${QL_PORT}"

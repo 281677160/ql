@@ -103,7 +103,8 @@ if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
 fi
 
 pip3 install requests
-
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
+cd /ql
 
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo

@@ -149,9 +149,13 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "输入 N 回车退出程序，或者进入过管理页面后输入 Y 回车继续安装脚本"
 	echo
+	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+		S="Yy"
+	fi
 	case $MENU in
-		[Yy])
+		[${S}])
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
@@ -160,13 +164,19 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			fi
 			rm -fr ql.sh
+		break
 		;;
 		[Nn])
 			TIME r "退出安装程序!"
 			sleep 2
 			exit 1
+		break
+    		;;
+    		*)
+			TIME r "重要提示：一定要登录管理面板之后再执行下一步操作,或者您按[N/n]退出!"
 		;;
 	esac
+	done
 else
 	TIME y "青龙面板安装失败！"
 	sleep 2

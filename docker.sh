@@ -89,18 +89,13 @@ if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
 fi
-sudo systemctl restart docker
 sudo rm -fr build.log
 sudo rm -fr docker.sh
-sleep 10
-if [[ `dpkg -l | grep -c "docker"` -eq '0' ]]; then
+if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2
 	exit 1
 else
-	TIME y ""
-	TIME g "测试docker拉取镜像是否成功"
-	TIME y ""
 	if [ -n "$(ls -A "/etc/pve/lxc" 2>/dev/null)" ]; then
 		cat >lxcconf <<-EOF
 		lxc.mount.auto: cgroup:rw
@@ -111,6 +106,11 @@ else
 		for X in $(ls -1 /etc/pve/lxc | grep ".conf"); do echo -e "\n$(cat lxcconf)" >> /etc/pve/lxc/${X}; done
 		rm -fr lxcconf
 	fi
+	sudo systemctl restart docker
+	sleep 12
+	TIME y ""
+	TIME g "测试docker拉取镜像是否成功"
+	TIME y ""
 	sudo docker run hello-world
 	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
 		echo
@@ -124,7 +124,7 @@ else
 		echo
 	else
 		echo
-		TIME y "docker安装成功虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的"
+		TIME y "docker安装成功虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
 		echo
 		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
 		echo

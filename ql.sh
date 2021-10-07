@@ -69,7 +69,7 @@ else
 		exit 1
 	fi
 fi
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME g "检测到已有青龙面板，需要删除面板才能继续..."
 	echo

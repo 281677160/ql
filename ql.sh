@@ -54,11 +54,13 @@ if [[ "$USER" == "root" ]]; then
 	case $SCQL in
 		1)
 			QL_PORT="5700"
+			QING_PORT="YES"
 			NETWORK="-p $QL_PORT:5700"
 		break
 		;;
 		2)
 			NETWORK="--net host"
+			QL_PORT="5700"
 		break
 		;;
 		3)
@@ -74,7 +76,7 @@ if [[ "$USER" == "root" ]]; then
 fi
 echo
 echo
-[[ "${QL_PORT}" == "5700" ]] && {
+[[ "${QING_PORT}" == "YES" ]] && {
 	TIME g "请设置端口，默认为5700，不设置的话直接回车"
 	read -p " 请输入端口：" QL_PORT
 	QL_PORT=${QL_PORT:-"5700"}

@@ -28,10 +28,20 @@ TIME() {
 }
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
-	opkg update > /dev/null 2>&1
-	opkg install wget > /dev/null 2>&1
-	opkg install curl > /dev/null 2>&1
-
+	TIME y "您现在使用的是OPENWRT安装青龙，是否继续?"
+	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " OPQL
+	case $opQL in
+		[Yy])
+			opkg update > /dev/null 2>&1
+			opkg install wget > /dev/null 2>&1
+			opkg install curl > /dev/null 2>&1
+		;;
+		[Nn])
+			TIME r "退出安装程序!"
+			sleep 2
+			exit 1
+		;;
+	esac
 else
 	sudo -E apt-get -qq update
 	apt install -y sudo curl dpkg wget

@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 #
-echo "安装依赖，所需时间比较长，请耐心等待..."
+TIME l "安装青龙脚本依赖"
+echo
+TIME y "最好使用翻墙网络来安装，或者更换虚拟机的源，要不然安装依赖的时候你会急死的"
+echo
+TIME g "没翻墙条件的话，也不更换源的话，安装依赖太慢就换时间安装，我测试过不同时段有不同效果"
+echo
+TIME y "依赖安装时看到显示ERR!错误提示不用管，只要依赖能从头到尾的下载运行完毕就好了"
+echo
+TIME g "如果安装太慢，而想换时间安装的话，按键盘的 Ctrl+C 退出就行了，到时候可以使用我的一键独立安装依赖脚本来安装"
+echo
 rm -rf npm.sh
 npm install -g typescript
 cd /ql
@@ -36,4 +45,7 @@ for i in $package_name; do
             ;;
     esac
 done
-echo "所有依赖安装完毕"
+echo
+TIME g "所有依赖安装完毕"
+echo
+

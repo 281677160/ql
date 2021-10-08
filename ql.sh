@@ -229,22 +229,4 @@ else
 fi
 echo
 echo
-if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
-	TIME l "安装依赖，依赖必须安装，要不然脚本不运行"
-	echo
-	TIME y "但是用国内的网络安装比较慢，请尽量使用翻墙网络"
-	echo
-	TIME g "没翻墙条件的话，安装依赖太慢就换时间安装，我测试过不同时段有不同效果"
-	echo
-	TIME y "依赖安装时看到显示ERR!错误提示不用管，只要依赖能从头到尾的下载运行完毕就好了"
-	echo
-	TIME g "如果安装太慢，而想换时间安装的话，按键盘的 Ctrl+C 退出就行了，到时候可以使用我的一键独立安装依赖脚本来安装"
-	echo
-	sleep 15
-	docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
-	if [[ $? -ne 0 ]];then
-		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/npm.sh)"
-	fi
-fi
-
 exit 0

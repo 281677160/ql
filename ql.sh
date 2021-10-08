@@ -34,9 +34,9 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	TIME z "脚本适用于（ubuntu、debian、openwrt）"
 	TIME z "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
-	TIME z "自动检测docker，有则跳过，无则执行安装，如果是openwrt则请自行安装docker和挂载好opt路径"
+	TIME z "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker和挂载好opt路径"
 	TIME z "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"
-	TIME z "如果您有需要备份的青龙文件，请先备份好文件再来安装，避免损失"
+	TIME z "如果您有需要备份的青龙文件，请先备份好文件再来安装，避免造成损失"
 	TIME z "建议使用翻墙网络安装，要不然安装依赖的时候你会急死的"
 	TIME g "如要不能接受的话，请选择 3 回车退出程序!"
 	echo

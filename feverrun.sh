@@ -146,7 +146,9 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
 fi
 echo
 echo
-TIME g "脚本安装完成，下面开始安装依赖!"
+if [ -n "$(ls -A "/repo/feverrun_my_scripts" 2>/dev/null)" ]; then
+	TIME g "脚本安装完成，下面开始安装依赖!"
+fi
 echo
 echo
 echo

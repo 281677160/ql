@@ -106,7 +106,7 @@ fi
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
-		TIME y "没检测到docker，openwrt请自行安装docker和挂载好硬盘"
+		TIME y "没检测到docker，openwrt请自行安装docker和挂载好opt路径"
 		echo
 		sleep 3
 		exit 1
@@ -126,7 +126,7 @@ fi
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
-		TIME y "没检测到docker，openwrt请自行安装docker和挂载好硬盘"
+		TIME y "没检测到docker，openwrt请自行安装docker和挂载好opt路径"
 		echo
 		sleep 3
 		exit 1

@@ -66,7 +66,7 @@ if [[ "$USER" == "root" ]]; then
 		;;
 		3)
 			echo
-			TIME r "您选择了退出编译程序"
+			TIME r "您选择了退出程序!"
 			echo
 			sleep 3
 			exit 1

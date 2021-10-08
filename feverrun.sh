@@ -148,6 +148,9 @@ echo
 echo
 if [ -n "$(ls -A "/repo/feverrun_my_scripts" 2>/dev/null)" ]; then
 	TIME g "脚本安装完成，下面开始安装依赖!"
+else
+	TIME r "脚本安装失败，请用一键单独安装任务重新尝试!"
+	exit 1
 fi
 echo
 echo

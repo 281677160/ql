@@ -364,6 +364,9 @@ export JD_UNSUB_SKEYWORDS=""
 export JD_UNSUB_INTERVAL="3000"
 export JD_UNSUB_PLOG="true"
 
+## 京东KEY转换成京东到家KEY
+export JDDJ_CKPATH="./jdCookie.js"
+
 
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果

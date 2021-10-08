@@ -35,7 +35,7 @@ if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	echo
 	exit 1
 fi
-apt install -y sudo curl wget
+apt install -y sudo curl
 if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"

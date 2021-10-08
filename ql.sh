@@ -183,7 +183,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
 	echo
-	TIME g "登录控制面板时，设置好帐号跟密码就可以了，信息推送设置直接跳过，以后再设置，然后点登录"
+	TIME g "登录页面，点击[开始安装]，设置好[用户名]跟[密码],然后点击[提交]，[通知方式]跳过，以后再设置，然后点击[去登录]，完成!"
 	echo
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU

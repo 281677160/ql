@@ -137,7 +137,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
 	echo
     fi
 fi
-
+rm -fr /ql/azcg.log
 ql extra |tee azcg.log
 
 echo

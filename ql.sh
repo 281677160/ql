@@ -152,6 +152,7 @@ if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 fi
 rm -rf /opt/ql
 rm -rf /root/ql
+rm -fr /root/ql.sh
 if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then
 	mkdir -p /opt
 fi
@@ -206,7 +207,6 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			if [[ $? -ne 0 ]];then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			fi
-			rm -fr ql.sh
 			sleep 2
 			exit 0
 		break

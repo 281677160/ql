@@ -96,7 +96,7 @@ else
 	fi
 fi
 sudo apt-key fingerprint 0EBFCD88
-if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "CD88"` -ge '0' ]]; then
+if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
 	TIME r "密匙验证出错"
 	sleep 2
 	exit 1

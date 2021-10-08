@@ -143,6 +143,8 @@ else
 		echo
 		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
 		echo
+		sleep 2
+		exit 1
 	fi
 fi
 exit 0

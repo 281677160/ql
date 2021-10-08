@@ -98,7 +98,7 @@ if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
 	apt update
 	apt install -y sudo curl
 else
-	QL_PATH="$PWD"
+	QL_PATH="/opt"
 fi
 
 if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
@@ -152,6 +152,9 @@ if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 fi
 rm -rf /opt/ql
 rm -rf /root/ql
+if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then
+	mkdir -p /opt
+fi
 echo
 echo
 TIME g "正在安装青龙面板，请稍后..."

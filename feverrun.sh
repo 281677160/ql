@@ -125,9 +125,9 @@ pip3 install requests
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
     TIME g "执行WSKEY转换PT_KEY操作"
-    task wskey.py
+    task wskey.py |tee azcg.log
     echo
-    if [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 1 ]]; then
+    if [[ `ls -a |grep -c "账号添加完成" /ql/azcg.log` -ge '1' ]]; then
     	echo
     	TIME g "WSKEY转换PT_KEY成功"
 	echo
@@ -138,7 +138,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     fi
 fi
 
-ql extra
+ql extra |tee azcg.log
 
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
@@ -146,7 +146,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
 fi
 echo
 echo
-if [ -n "$(ls -A "/repo/feverrun_my_scripts" 2>/dev/null)" ]; then
+if [[ `ls -a |grep -c "账号添加完成" /ql/azcg.log` -ge '1' ]]; then
 	TIME g "脚本安装完成，下面开始安装依赖!"
 else
 	TIME r "脚本安装失败，请用一键单独安装任务重新尝试!"

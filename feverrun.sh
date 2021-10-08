@@ -146,10 +146,12 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
 fi
 echo
 echo
-if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]]; then
 	TIME g "脚本安装完成，下面开始安装依赖!"
+	rm -fr /ql/azcg.log
 else
 	TIME r "脚本安装失败，请用一键单独安装任务重新尝试!"
+	rm -fr /ql/azcg.log
 	exit 1
 fi
 echo

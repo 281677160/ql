@@ -177,9 +177,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	echo
 	echo
-	TIME z "青龙面板安装完成"
+	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
-	TIME g "请使用 IP:${QL_PORT} 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY"
+	TIME g "请使用 IP:${QL_PORT} 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
 	echo
 	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
 	echo

@@ -40,7 +40,7 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"
 	echo
-	TIME g "重新安装会把您现有的所以容器及镜像全部删除"
+	TIME g "重新安装会把您现有的所有容器及镜像全部删除，请慎重!"
 	echo
 	while :; do
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " ANDK
@@ -141,7 +141,7 @@ else
 		echo
 	else
 		echo
-		TIME y "docker安装成功虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
+		TIME y "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
 		echo
 		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
 		echo

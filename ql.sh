@@ -204,6 +204,8 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			fi
 			rm -fr ql.sh
+			sleep 2
+			exit 0
 		break
 		;;
 		[Nn])

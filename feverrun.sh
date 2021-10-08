@@ -161,7 +161,7 @@ TIME y "依赖安装时看到显示ERR!错误提示不用管，只要依赖能�
 echo
 TIME g "如果安装太慢，而想换时间安装的话，按键盘的 Ctrl+C 退出就行了，到时候可以使用我的一键独立安装依赖脚本来安装"
 echo
-sleep 15
+sleep 5
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
 npm install -g typescript

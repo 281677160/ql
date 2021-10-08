@@ -95,7 +95,11 @@ else
 		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	fi
 fi
-sudo apt-key fingerprint 0EBFCD88
+if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` -ge '0' ]]; then
+	TIME r "密匙验证出错"
+	sleep 2
+	exit 1
+fi
 if [[ "${Ubuntu}" == "ubuntu" ]]; then
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 else

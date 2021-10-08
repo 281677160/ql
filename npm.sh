@@ -48,4 +48,4 @@ done
 echo
 TIME g "所有依赖安装完毕"
 echo
-
+exit 0

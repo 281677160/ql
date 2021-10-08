@@ -116,7 +116,7 @@ if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
 fi
 sudo rm -fr build.log
 sudo rm -fr docker.sh
-if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
+if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2
 	exit 1

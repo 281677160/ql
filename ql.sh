@@ -67,6 +67,7 @@ if [[ "$USER" == "root" ]]; then
 		3)
 			echo
 			TIME r "您选择了退出程序!"
+			rm -fr /root/ql.sh
 			echo
 			sleep 3
 			exit 1
@@ -91,6 +92,7 @@ echo
 }
 echo
 echo
+rm -fr /root/ql.sh
 TIME g "正在安装宿主机所需要的依赖，请稍后..."
 echo
 if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
@@ -152,7 +154,6 @@ if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 fi
 rm -rf /opt/ql
 rm -rf /root/ql
-rm -fr /root/ql.sh
 if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then
 	mkdir -p /opt
 fi

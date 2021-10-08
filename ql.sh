@@ -42,7 +42,7 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	echo
 	echo
-	TIME y " 如要继续的话，请选择容器的网络类型!"
+	TIME y " 如要继续的话，请选择容器的网络类型!（输入 1、2或3 编码）"
 	echo
 	TIME l " 1. bridge [默认类型]"
 	echo

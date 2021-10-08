@@ -116,29 +116,13 @@ if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 	sleep 2
 	exit 1
 else
-	if [ -n "$(ls -A "/etc/pve/lxc" 2>/dev/null)" ]; then
-		cat >lxcconf <<-EOF
-		lxc.mount.auto: cgroup:rw
-		lxc.mount.auto: proc:rw
-		lxc.mount.auto: sys:rw
-		lxc.cap.drop:
-		EOF
-	fi
-	if [ -n "$(ls -A "/etc/pve/lxc" 2>/dev/null)" ]; then
-	for X in $(ls -1 /etc/pve/lxc | grep ".conf")
-	do 
-	[[ `grep -c "lxc.cap.drop:" /etc/pve/lxc/${X}` -eq '0' ]] && [[ `grep -c "lxc.cap.drop:" /etc/pve/lxc/${X}` -eq '0' ]] &&{
-		echo -e "\n$(cat lxcconf)" >> /etc/pve/lxc/${X}
-	}
-	done
-	fi
 	sudo systemctl restart docker
 	sleep 12
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"
 	TIME y ""
-	sudo docker run hello-world
-	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]]; then
+	sudo docker run hello-world |tee build.log
+	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "docs.docker" build.log` -ge '1' ]]; then
 		echo
 		TIME g "测试镜像拉取成功，正在删除测试镜像..."
 		echo

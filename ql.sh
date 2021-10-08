@@ -83,7 +83,7 @@ fi
 echo
 echo
 [[ "${QING_PORT}" == "YES" ]] && {
-	TIME g "请设置端口，默认为端口[5700]，不设置的话直接回车跳过"
+	TIME g "请设置端口，默认为端口[5700]，不需要设置的话，直接回车跳过"
 	read -p " 请输入端口：" QL_PORT
 	QL_PORT=${QL_PORT:-"5700"}
 	TIME y "您端口为：${QL_PORT}"
@@ -189,6 +189,10 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 		S="Yy"
+	else
+		echo
+		TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
+		echo
 	fi
 	case $MENU in
 		[${S}])
@@ -212,7 +216,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
     		;;
     		*)
 			echo
-			TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
+			TIME r "输入错误，请输入正确选择!"
 			echo
 		;;
 	esac

@@ -121,6 +121,8 @@ if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	sleep 2
 	exit 1
 else
+	TIME y ""
+	TIME g "docker安装成功，正在重启docker，请稍后..."
 	sudo systemctl restart docker
 	sleep 12
 	TIME y ""

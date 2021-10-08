@@ -42,6 +42,7 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	echo
 	TIME g "重新安装会把您现有的所以容器及镜像全部删除"
 	echo
+	while :; do
 	read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " ANDK
 	case $ANDK in
 		[Yy])
@@ -60,13 +61,23 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 			sudo rm -rf /etc/docker
 			sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
 			rm /var/lib/dpkg/info/$nomdupaquet* -f
+		break
 		;;
 		[Nn])
-			TIME r "退出安装程序!"
-			sleep 2
+			echo
+			TIME r "您选择了退出程序!"
+			echo
+			sleep 3
 			exit 1
+		break
+    		;;
+    		*)
+			echo
+			TIME b "提示：请输入正确的选择!"
+			echo
 		;;
 	esac
+	done
 fi
 echo
 TIME y "正在安装docker，请耐心等候..."
@@ -75,8 +86,14 @@ sudo -E apt-get -qq update
 sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 if [[ "${Ubuntu}" == "ubuntu" ]]; then
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+	if [[ $? -ne 0 ]];then
+		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+	fi
 else
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
+	if [[ $? -ne 0 ]];then
+		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
+	fi
 fi
 sudo apt-key fingerprint 0EBFCD88
 if [[ "${Ubuntu}" == "ubuntu" ]]; then

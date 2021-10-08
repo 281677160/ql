@@ -95,7 +95,8 @@ else
 		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	fi
 fi
-if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` -ge '1' ]]; then
+sudo apt-key fingerprint 0EBFCD88
+if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "CD88"` -ge '0' ]]; then
 	TIME r "密匙验证出错"
 	sleep 2
 	exit 1

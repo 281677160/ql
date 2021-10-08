@@ -215,9 +215,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 		break
     		;;
     		*)
-			echo
-			TIME r "输入错误，请输入正确选择!"
-			echo
+			TIME r ""
 		;;
 	esac
 	done

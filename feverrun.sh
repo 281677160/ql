@@ -89,7 +89,7 @@ chmod -R +x $dir_shell
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加任务 ql extra"
+    TIME g "开始添加 [每8小时更新任务]"
     echo
     echo
     # 获取token
@@ -100,7 +100,7 @@ fi
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加任务 task wskey.py"
+    TIME g "开始添加 [每天检测WSKEY]"
     echo
     echo
     # 获取token
@@ -112,7 +112,7 @@ fi
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加任务 ql bot"
+    TIME g "开始添加 [拉取机器人]"
     echo
     echo
     # 获取token

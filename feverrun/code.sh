@@ -7,7 +7,9 @@
 
 ql repo https://github.com/feverrun/my_scripts.git "jd_|jx_|gua|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
 
-echo "yilai" > /ql/yilai.log
+if [ -z "$(ls -A "/ql/yilai.log" 2>/dev/null)" ]; then
+    echo "yilai" > /ql/yilai.log
+fi
 
 if [[ `grep -c "001" /ql/yilai.log` = '0' ]]; then
     echo -e "正在安装001依赖中.."

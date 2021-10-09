@@ -118,7 +118,7 @@ else
 		echo
 		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 		if [[ $? -ne 0 ]];then
-			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh && bash docker.sh
+			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh > docker.sh && bash docker.sh
 		fi
 		
 	fi

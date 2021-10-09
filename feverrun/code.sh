@@ -11,15 +11,6 @@ if [ -z "$(ls -A "/ql/yilai.log" 2>/dev/null)" ]; then
     echo "yilai" > /ql/yilai.log
 fi
 
-if [[ `grep -c "001" /ql/yilai.log` = '0' ]]; then
-    echo -e "正在安装001依赖中.."
-    apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
-  if [[ $? == 0 ]];then
-    echo -e "\n001" >> /ql/yilai.log
-  fi
-else
-    echo -e "001依赖已安装"
-fi
 
 if [[ `grep -c "002" /ql/yilai.log` = '0' ]]; then
     echo -e "正在安装002依赖中.."
@@ -121,6 +112,15 @@ else
     echo -e "010依赖已安装"
 fi
 
+if [[ `grep -c "001" /ql/yilai.log` = '0' ]]; then
+    echo -e "正在安装001依赖中.."
+    apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+  if [[ $? == 0 ]];then
+    echo -e "\n001" >> /ql/yilai.log
+  fi
+else
+    echo -e "001依赖已安装"
+fi
 
 if [[ `grep -c "011" /ql/yilai.log` = '0' ]]; then
     echo -e "正在安装011依赖中.."

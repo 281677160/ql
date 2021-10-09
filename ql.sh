@@ -93,9 +93,9 @@ echo
 echo
 echo
 rm -fr /root/ql.sh
-TIME g "正在安装宿主机所需要的依赖，请稍后..."
 echo
 if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	apt update
 	apt install -y sudo curl

@@ -10,11 +10,7 @@
 如果您以前安装有青龙的话，则自动删除您的青龙，全部推倒重新安装
 建议使用翻墙网络安装，要不然安装依赖的时候你会急死的
 
-首先怼个安装wget命令，因为好多虚拟机安装好都没带的，要不然一键命令用了也没效果，下载不了文件
 
-apt install -y wget
-
-然后使用下面的一键命令搞起
 
 wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
 

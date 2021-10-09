@@ -112,7 +112,7 @@ fi
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加 ql bot"
+    TIME g "开始添加任务 ql bot"
     echo
     echo
     # 获取token

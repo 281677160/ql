@@ -24,15 +24,16 @@ TIME() {
 	echo
 	exit 1
 }
-if [[ `lsb_release -a | grep -c "buntu"` -ge '1' ]]; then
+if [[ `lsb_release -a | grep -c "Ubuntu"` -ge '1' ]]; then
 	export Ubuntu="ubuntu"
-elif [[ `lsb_release -a | grep -c "ebian"` -ge '1' ]]; then
+elif [[ `lsb_release -a | grep -c "Debian"` -ge '1' ]]; then
 	export Debian="debian"
 fi
 if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
 	echo
 	TIME r "本脚本只适用于Ubuntu和Debian安装docker"
 	echo
+	sleep 2
 	exit 1
 fi
 apt install -y sudo curl

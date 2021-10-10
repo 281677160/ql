@@ -42,7 +42,7 @@ pin=您的账号;wskey=XXXXXX;
 
 ```sh
 
-# > 或者添加JD_COOKIE，WSKEY和JD_COOKIE二选一即可
+# > 或者添加PT_KEY，WSKEY和PT_KEY二选一即可
 
 名称
 JD_COOKIE

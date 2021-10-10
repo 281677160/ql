@@ -46,7 +46,7 @@ wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /
 if [[ $? -ne 0 ]];then
 	wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
     	if [[ $? -ne 0 ]];then
-      		TIME r "下载下载秘钥失败，请检查网络再尝试!"
+      		TIME r "下载秘钥失败，请检查网络再尝试!"
       		sleep 2
       		exit 1
     	fi

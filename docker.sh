@@ -98,9 +98,10 @@ else
 fi
 sudo apt-key fingerprint 0EBFCD88
 if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
-	TIME r "密匙验证出错"
-	sleep 2
+	TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
+	sleep 5
 	exit 1
+	sleep 5
 fi
 if [[ "${Ubuntu}" == "ubuntu" ]]; then
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"

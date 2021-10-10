@@ -60,10 +60,11 @@ sed -i 's#if (res === null || res === undefined || !res || res#if (false) {#g' /
 sed -i '/data.status.toLowerCase/d' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 echo
 echo
-TIME g "更新源和安装常用软件"
+TIME g "更新源、安装常用软件和升级"
 echo
 echo
 apt-get update && apt-get install -y net-tools curl git
+apt dist-upgrade -y
 sleep 3
 sed -i 's#http://download.proxmox.com#https://mirrors.ustc.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
 echo

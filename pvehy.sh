@@ -27,6 +27,9 @@ wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /
       exit 1
     fi
 	fi
+echo "去掉无效订阅"
+sed -i 's#if (res === null || res === undefined || !res || res#if (false) {#g' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+sed -i '/data.status.toLowerCase/d' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 echo "更新源和安装常用软件"
 apt-get update && apt-get install -y lrzsz net-tools curl screen uuid-runtime git
 echo "更换DNS"

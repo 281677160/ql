@@ -27,7 +27,7 @@ wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /
     fi
 	fi
 echo "更新源和安装常用软件"
-apt-get update && apt-get install lrzsz unzip net-tools curl screen uuid-runtime git vim -y
+apt-get update && apt-get install -y lrzsz net-tools curl screen uuid-runtime git
 echo "去除不用的内核"
 git clone https://ghproxy.com/https://github.com/jordanhillis/pvekclean.git && cd pvekclean && chmod +x pvekclean.sh
 ./pvekclean.sh

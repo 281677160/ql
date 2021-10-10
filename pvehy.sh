@@ -29,11 +29,6 @@ wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /
 	fi
 echo "更新源和安装常用软件"
 apt-get update && apt-get install -y lrzsz net-tools curl screen uuid-runtime git
-echo "去除不用的内核"
-rm -fr /root/pvekclean
-git clone https://ghproxy.com/https://github.com/jordanhillis/pvekclean.git && cd pvekclean && chmod +x pvekclean.sh
-./pvekclean.sh
-cd ../
 echo "更换DNS"
 echo '
 search com
@@ -41,6 +36,11 @@ nameserver 223.5.5.5
 nameserver 114.114.114.114
 ' > /etc/resolv.conf
 sed -i '1d' /etc/resolv.conf
+echo "去除不用的内核"
+rm -fr /root/pvekclean
+git clone https://ghproxy.com/https://github.com/jordanhillis/pvekclean.git && cd pvekclean && chmod +x pvekclean.sh
+./pvekclean.sh
+cd ../
 echo "重启PVE，需要几分钟时间，请耐心等候..."
 rm -fr /root/pvehy.sh
 reboot

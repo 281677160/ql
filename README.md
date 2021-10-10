@@ -29,7 +29,7 @@ wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql
 
 # > 信息推送不需要填写，直接跳过就好了，任务运行后在配置文件添加就可以
 
-# > 面板安装成功后，登录面板，然后在‘ 环境变量 ’项添加 WSKEY
+# > 面板安装成功后，登录面板，然后在‘ 环境变量 ’项添加 WSKEY 或者 PT_KEY
 
 # > 添加 wskey 或者 pt_key 都要注意KEY里面的分号，两个英文分号，记得别省略了
 
@@ -42,7 +42,7 @@ pin=您的账号;wskey=XXXXXX;
 
 ```sh
 
-# > 您也可以使用 JD_COOKIE，WSKEY和JD_COOKIE二选一即可
+# > 或者添加JD_COOKIE，WSKEY和JD_COOKIE二选一即可
 
 名称
 JD_COOKIE

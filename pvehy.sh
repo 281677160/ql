@@ -36,7 +36,6 @@ sed -i '1d' /etc/apt/sources.list
 
 rm -rf /etc/apt/sources.list.d/pve-enterprise.list
 echo "deb http://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription" >/etc/apt/sources.list.d/pve-install-repo.list
-sed -i 's#http://download.proxmox.com#https://mirrors.tuna.tsinghua.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
 echo
 echo
 TIME g "下载PVE7.0源的密匙!"
@@ -65,6 +64,7 @@ TIME g "更新源和安装常用软件"
 echo
 echo
 apt-get update && apt-get install -y net-tools curl git
+sed -i 's#http://download.proxmox.com#https://mirrors.tuna.tsinghua.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
 echo
 echo
 TIME g "更换DNS"

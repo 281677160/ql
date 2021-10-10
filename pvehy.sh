@@ -64,7 +64,7 @@ echo
 TIME g "更新源和安装常用软件"
 echo
 echo
-apt-get update && apt-get install -y lrzsz net-tools curl screen uuid-runtime git
+apt-get update && apt-get install -y net-tools curl git
 echo
 echo
 TIME g "更换DNS"

@@ -22,6 +22,7 @@ echo
 TIME g "正在更换源...!"
 echo
 echo
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
 echo '
 deb http://mirrors.aliyun.com/debian/ buster main non-free contrib
 deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib
@@ -34,6 +35,7 @@ deb-src http://mirrors.aliyun.com/debian-security/ buster/updates main non-free 
 ' > /etc/apt/sources.list
 sed -i '1d' /etc/apt/sources.list
 
+cp -fr /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak
 rm -rf /etc/apt/sources.list.d/pve-enterprise.list
 echo "deb http://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription" >/etc/apt/sources.list.d/pve-install-repo.list
 echo
@@ -41,6 +43,7 @@ echo
 TIME g "下载PVE7.0源的密匙!"
 echo
 echo
+cp -fr /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg.bak
 rm -fr /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 if [[ $? -ne 0 ]];then
@@ -56,6 +59,7 @@ echo
 TIME g "去掉无效订阅"
 echo
 echo
+mv /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.bak
 sed -i 's#if (res === null || res === undefined || !res || res#if (false) {#g' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 sed -i '/data.status.toLowerCase/d' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 echo
@@ -72,6 +76,7 @@ echo
 TIME g "更换DNS为223.5.5.5和114.114.114.114"
 echo
 echo
+cp /etc/resolv.conf /etc/resolv.conf.bak
 echo '
 search com
 nameserver 223.5.5.5

@@ -69,7 +69,7 @@ sleep 3
 sed -i 's#http://download.proxmox.com#https://mirrors.ustc.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
 echo
 echo
-TIME g "更换DNS"
+TIME g "更换DNS为223.5.5.5和114.114.114.114"
 echo
 echo
 echo '

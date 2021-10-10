@@ -17,6 +17,7 @@ rm -rf /etc/apt/sources.list.d/pve-enterprise.list
 echo "deb http://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription" >/etc/apt/sources.list.d/pve-install-repo.list
 sed -i 's#http://download.proxmox.com#https://mirrors.tuna.tsinghua.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
 echo "下载PVE7.0源的密匙!"
+rm -fr /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 	if [[ $? -ne 0 ]];then
 		wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
@@ -29,6 +30,7 @@ wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /
 echo "更新源和安装常用软件"
 apt-get update && apt-get install -y lrzsz net-tools curl screen uuid-runtime git
 echo "去除不用的内核"
+rm -fr /root/pvekclean
 git clone https://ghproxy.com/https://github.com/jordanhillis/pvekclean.git && cd pvekclean && chmod +x pvekclean.sh
 ./pvekclean.sh
 cd ../
@@ -40,4 +42,5 @@ nameserver 114.114.114.114
 ' > /etc/resolv.conf
 sed -i '1d' /etc/resolv.conf
 echo "重启PVE，需要几分钟时间，请耐心等候..."
+rm -fr /root/pvehy.sh
 reboot

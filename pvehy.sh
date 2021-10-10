@@ -78,11 +78,10 @@ nameserver 223.5.5.5
 nameserver 114.114.114.114
 ' > /etc/resolv.conf
 sed -i '1d' /etc/resolv.conf
-rm -fr /root/pvekclean
+rm -fr /root/pvehy.sh
 echo
 echo
 TIME g "重启PVE，需要几分钟时间，请耐心等候..."
 echo
 echo
-rm -fr /root/pvehy.sh
 reboot

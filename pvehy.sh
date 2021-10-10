@@ -64,7 +64,7 @@ TIME g "更新源和安装常用软件"
 echo
 echo
 apt-get update && apt-get install -y net-tools curl git
-sed -i 's#http://download.proxmox.com#https://mirrors.tuna.tsinghua.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
+sed -i 's#http://download.proxmox.com#https://mirrors.ustc.edu.cn/proxmox#g' /usr/share/perl5/PVE/APLInfo.pm
 echo
 echo
 TIME g "更换DNS"

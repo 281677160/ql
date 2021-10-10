@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "正在更新源...!"
+echo "正在更换源...!"
 echo '
 deb http://mirrors.aliyun.com/debian/ buster main non-free contrib
 deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib

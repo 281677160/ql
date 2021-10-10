@@ -43,14 +43,14 @@ echo
 echo
 rm -fr /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
-	if [[ $? -ne 0 ]];then
-		wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
-    if [[ $? -ne 0 ]];then
-      TIME r "下载下载秘钥失败，请检查网络再尝试!"
-      sleep 2
-      exit 1
-    fi
-	fi
+if [[ $? -ne 0 ]];then
+	wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+    	if [[ $? -ne 0 ]];then
+      		TIME r "下载下载秘钥失败，请检查网络再尝试!"
+      		sleep 2
+      		exit 1
+    	fi
+fi
 echo
 echo
 TIME g "去掉无效订阅"

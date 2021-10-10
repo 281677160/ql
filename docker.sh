@@ -151,4 +151,5 @@ else
 		exit 1
 	fi
 fi
+frm -fr build.log
 exit 0

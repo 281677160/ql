@@ -5,3 +5,5 @@
 ## 安装python依赖使用 pip3 install xxx
 
 ql repo https://github.com/feverrun/my_scripts.git "jd_|jx_|gua|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
+ql raw https://raw.githubusercontent.com/shidahuilang/QL-/main/wx_jysz/crypto-js.js
+ql raw https://raw.githubusercontent.com/shidahuilang/QL-/main/wx_jysz/wx_jysz.js

@@ -28,6 +28,8 @@ extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
 disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
+crypto_shell_path=$dir_script/crypto-js.js
+wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
@@ -80,6 +82,22 @@ OpenCard_size=$(ls -l $OpenCard_shell_path | awk '{print $5}')
 if (( $(echo "${OpenCard_size} < 100" | bc -l) )); then
     echo
     TIME y "raw_jd_OpenCard.py 下载失败"
+    exit 0
+fi
+
+# 下载 crypto-js.js
+if [ ! -a "$crypto_shell_path" ]; then
+    touch $crypto_shell_path
+fi
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
+cp $crypto_shell_path $dir_script/crypto-js.js
+
+# 判断是否下载成功
+crypto_size=$(ls -l $crypto_shell_path | awk '{print $5}')
+if (( $(echo "${crypto_size} < 100" | bc -l) )); then
+    echo
+    TIME y "crypto-js.js 下载失败"
     exit 0
 fi
 

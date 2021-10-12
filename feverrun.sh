@@ -23,13 +23,14 @@ TIME() {
 
 dir_shell=/ql/config
 dir_script=/ql/scripts
+dir_raw=/ql/raw
 config_shell_path=$dir_shell/config.sh
 extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
 disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
-crypto_shell_path=$dir_script/crypto-js.js
-wx_jysz_shell_path=$dir_script/wx_jysz.js
+crypto_shell_path=$dir_raw/crypto-js.js
+wx_jysz_shell_path=$dir_raw/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh

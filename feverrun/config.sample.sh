@@ -43,9 +43,9 @@ export BARK_GROUP="QingLong"
 
 ## 3. Telegram 
 ## 下方填写自己申请@BotFather的Token，如10xxx4:AAFcqxxxxgER5uw
-export TG_BOT_TOKEN="1622585953:AAGeQmivyLJjVC5iydQkqix45tZbWyY_LGY"
+export TG_BOT_TOKEN=""
 ## 下方填写 @getuseridbot 中获取到的纯数字ID
-export TG_USER_ID="1209082658"
+export TG_USER_ID=""
 ## Telegram 代理IP（选填）
 ## 下方填写代理IP地址，代理类型为 http，比如您代理是 http://127.0.0.1:1080，则填写 "127.0.0.1"
 ## 如需使用，请自行解除下一行的注释
@@ -86,7 +86,7 @@ export IGOT_PUSH_KEY=""
 ## 8. Push Plus
 ## 官方网站：http://www.pushplus.plus
 ## 下方填写您的Token，微信扫码登录后一对一推送或一对多推送下面的token，只填 PUSH_PLUS_TOKEN 默认为一对一推送
-export PUSH_PLUS_TOKEN="643598b30ad24e0c8f4ffc3972d5cdf3"
+export PUSH_PLUS_TOKEN=""
 ## 一对一多推送（选填）
 ## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
 ## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送

@@ -94,10 +94,13 @@ if [[ ${XITONG} == "centos" ]]; then
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 	sudo yum -y update
-	sudo yum install -y docker-ce docker-ce-cli containerd.io
+	sudo yum install -y docker-ce
+	sudo yum install -y docker-ce-cli
+	sudo yum install -y containerd.io
+	sudo yum install -y docker.io
 fi
 if [[ ${XITONG} == "ubuntu" ]]; then
-	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
 		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
@@ -111,7 +114,10 @@ if [[ ${XITONG} == "ubuntu" ]]; then
 	fi
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 	sudo apt-get update
-	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+	sudo apt-get install -y docker-ce
+	sudo apt-get install -y docker-ce-cli
+	sudo apt-get install -y containerd.io
+	sudo apt-get install -y docker.io
 if [[ ${XITONG} == "debian" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
@@ -127,7 +133,10 @@ if [[ ${XITONG} == "debian" ]]; then
 	fi
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 	sudo apt-get update
-	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+	sudo apt-get install -y docker-ce
+	sudo apt-get install -y docker-ce-cli
+	sudo apt-get install -y containerd.io
+	sudo apt-get install -y docker.io
 fi
 if [[ ${CHONGXIN} == "YES" ]]; then
 	TIME y "本一键"

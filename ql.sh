@@ -98,20 +98,24 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	yum update
-	yum install -y sudo curl
+	yum install -y sudo curl net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	apt update
-	apt install -y sudo curl
+	apt install -y sudo curl net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	apt update
-	apt install -y sudo curl
+	apt install -y sudo curl net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	QL_PATH="/opt"
 	XTong="openwrt"
+fi
+IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2}'|tr -d "addr:")"
+if [[ -z "${IP}" ]]; then
+	IP="IP"
 fi
 if [[ "${XTong}" == "openwrt" ]]; then
 	 if [[ -x "$(command -v docker)" ]]; then
@@ -198,7 +202,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
-	TIME g "请使用 IP:${QL_PORT} 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
+	TIME g "请使用 "${IP}":"${QL_PORT}" 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
 	echo
 	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
 	echo

@@ -143,38 +143,3 @@ if [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
 fi
-
-if [[ `docker --version | grep -c "version"` = '0' ]]; then
-	TIME y "docker安装失败"
-	sleep 2
-	exit 1
-else
-	TIME y ""
-	TIME g "docker安装成功，正在启动docker，请稍后..."
-	sleep 12
-	TIME y ""
-	TIME g "测试docker拉取镜像是否成功"
-	TIME y ""
-	sudo docker run hello-world |tee build.log
-	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "docs.docker" build.log` -ge '1' ]]; then
-		echo
-		TIME g "测试镜像拉取成功，正在删除测试镜像..."
-		echo
-		docker stop $(docker ps -a -q)
-		docker rm $(docker ps -a -q)
-		docker rmi $(docker images -q)
-		echo
-		TIME y "测试镜像删除完毕，docker安装成功!"
-		echo
-	else
-		echo
-		TIME y "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
-		echo
-		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
-		echo
-		sleep 2
-		exit 1
-	fi
-fi
-rm -fr build.log
-exit 0

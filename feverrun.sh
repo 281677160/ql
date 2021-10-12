@@ -41,7 +41,9 @@ if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > $sample_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
+fi
 cp $sample_shell_path $config_shell_path
 
 # 判断是否下载成功
@@ -58,7 +60,9 @@ if [ ! -a "$wskey_shell_path" ]; then
     touch $wskey_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > $wskey_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
+fi
 cp $wskey_shell_path $dir_script/wskey.py
 
 # 判断是否下载成功
@@ -74,7 +78,9 @@ if [ ! -a "$OpenCard_shell_path" ]; then
     touch $OpenCard_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $OpenCard_shell_path
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $OpenCard_shell_path
+fi
 cp $OpenCard_shell_path $dir_script/raw_jd_OpenCard.py
 
 # 判断是否下载成功
@@ -90,7 +96,9 @@ if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > $extra_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
+fi
 cp $extra_shell_path $dir_shell/extra.sh
 
 # 判断是否下载成功
@@ -106,7 +114,9 @@ if [ ! -a "$crypto_shell_path" ]; then
     touch $crypto_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
+fi
 cp $crypto_shell_path $dir_script/crypto-js.js
 
 # 判断是否下载成功
@@ -122,7 +132,9 @@ if [ ! -a "$wx_jysz_shell_path" ]; then
     touch $wx_jysz_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wx_jysz.js > $wx_jysz_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wx_jysz.js > $wx_jysz_shell_path
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wx_jysz.js > $wx_jysz_shell_path
+fi
 cp $wx_jysz_shell_path $dir_script/wx_jysz.js
 
 # 判断是否下载成功

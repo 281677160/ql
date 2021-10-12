@@ -143,19 +143,7 @@ if [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
 fi
-if [[ "${CHONGXIN_anzhuang}" == "YES" ]]; then
-	TIME y "本一键"
-	sudo rm -fr /etc/systemd/system/docker.service.d
-	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
-	sudo systemctl daemon-reload
-fi
-sudo rm -fr docker.sh
-if [[ ${XITONG} == "cent_os" ]]; then
-	sudo systemctl start docker
-else
-	sudo systemctl restart docker
-	sudo systemctl start docker
-fi
+
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2

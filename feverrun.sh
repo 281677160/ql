@@ -41,16 +41,14 @@ if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > $sample_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
-cp $sample_shell_path $config_shell_path
-
-# 判断是否下载成功
-config_size=$(ls -l $config_shell_path | awk '{print $5}')
-if (( $(echo "${config_size} < 100" | bc -l) )); then
-    echo
-    TIME y "config.sh 下载失败"
-    exit 0
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
+	if [[ $? -ne 0 ]];then
+		TIME y "config.sh 下载失败"
+		    exit 1
+	fi
 fi
+cp $sample_shell_path $config_shell_path
 
 
 # 下载 wskey.py
@@ -58,64 +56,56 @@ if [ ! -a "$wskey_shell_path" ]; then
     touch $wskey_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > $wskey_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
-cp $wskey_shell_path $dir_script/wskey.py
-
-# 判断是否下载成功
-wskey_size=$(ls -l $wskey_shell_path | awk '{print $5}')
-if (( $(echo "${wskey_size} < 100" | bc -l) )); then
-    echo
-    TIME y "wskey.py 下载失败"
-    exit 0
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
+	if [[ $? -ne 0 ]];then
+		TIME y "config.sh 下载失败"
+		    exit 1
+	fi
 fi
+cp $wskey_shell_path $dir_script/wskey.py
 
 # 下载 raw_jd_OpenCard.py
 if [ ! -a "$OpenCard_shell_path" ]; then
     touch $OpenCard_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
-cp $OpenCard_shell_path $dir_script/raw_jd_OpenCard.py
-
-# 判断是否下载成功
-OpenCard_size=$(ls -l $OpenCard_shell_path | awk '{print $5}')
-if (( $(echo "${OpenCard_size} < 100" | bc -l) )); then
-    echo
-    TIME y "raw_jd_OpenCard.py 下载失败"
-    exit 0
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
+	if [[ $? -ne 0 ]];then
+		TIME y "config.sh 下载失败"
+		    exit 1
+	fi
 fi
+cp $OpenCard_shell_path $dir_script/raw_jd_OpenCard.py
 
 # 下载 crypto-js.js
 if [ ! -a "$crypto_shell_path" ]; then
     touch $crypto_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
-cp $crypto_shell_path $dir_script/crypto-js.js
-
-# 判断是否下载成功
-crypto_size=$(ls -l $crypto_shell_path | awk '{print $5}')
-if (( $(echo "${crypto_size} < 100" | bc -l) )); then
-    echo
-    TIME y "crypto-js.js 下载失败"
-    exit 0
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
+	if [[ $? -ne 0 ]];then
+		TIME y "config.sh 下载失败"
+		    exit 1
+	fi
 fi
+cp $crypto_shell_path $dir_script/crypto-js.js
 
 # 下载 extra.sh
 if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > $extra_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
-cp $extra_shell_path $dir_shell/extra.sh
-
-# 判断是否下载成功
-extra_size=$(ls -l $extra_shell_path | awk '{print $5}')
-if (( $(echo "${extra_size} < 100" | bc -l) )); then
-    echo
-    TIME y "extra.sh 下载失败"
-    exit 0
+if [[ $? -ne 0 ]];then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
+	if [[ $? -ne 0 ]];then
+		TIME y "config.sh 下载失败"
+		    exit 1
+	fi
 fi
+cp $extra_shell_path $dir_shell/extra.sh
 
 # 授权
 chmod -R +x $dir_shell

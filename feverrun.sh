@@ -23,14 +23,11 @@ TIME() {
 
 dir_shell=/ql/config
 dir_script=/ql/scripts
-dir_raw=/ql/raw
 config_shell_path=$dir_shell/config.sh
 extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
 disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
-crypto_shell_path=$dir_raw/crypto-js.js
-wx_jysz_shell_path=$dir_raw/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
@@ -42,9 +39,7 @@ if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > $sample_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
-fi
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
 
 # 判断是否下载成功
@@ -61,9 +56,7 @@ if [ ! -a "$wskey_shell_path" ]; then
     touch $wskey_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > $wskey_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
-fi
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
 cp $wskey_shell_path $dir_script/wskey.py
 
 # 判断是否下载成功
@@ -79,9 +72,7 @@ if [ ! -a "$OpenCard_shell_path" ]; then
     touch $OpenCard_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $OpenCard_shell_path
-fi
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $OpenCard_shell_path
 cp $OpenCard_shell_path $dir_script/raw_jd_OpenCard.py
 
 # 判断是否下载成功
@@ -97,9 +88,7 @@ if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > $extra_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
-fi
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
 cp $extra_shell_path $dir_shell/extra.sh
 
 # 判断是否下载成功

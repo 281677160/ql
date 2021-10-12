@@ -55,7 +55,7 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	case $ANDK in
 		[Yy])
 			TIME g "正在御载老版本docker"
-			export CHONGXIN_anzhuang="YES"
+			export CHONGXIN="YES"
 			docker stop $(docker ps -a -q)
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)
@@ -93,7 +93,7 @@ TIME y "正在安装docker，请耐心等候..."
 "${Aptget}" -y update
 "${Aptget}" install -y sudo curl
 echo
-if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
+if [[ ${XITONG} == "cent_os" ]]; then
 	TIME y "centos正在安装docker，请耐心等候..."
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
@@ -103,7 +103,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	sudo yum install -y containerd.io
 	sudo yum install -y docker.io
 fi
-if [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
+if [[ ${XITONG} == "ubuntu_os" ]]; then
 	TIME y "ubuntu正在安装docker，请耐心等候..."
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
@@ -123,7 +123,8 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
-if [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
+fi
+if [[ ${XITONG} == "debian_os" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -143,4 +144,52 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
 fi
+
+if [[ "${CHONGXIN}" == "YES" ]]; then
+	TIME y "本一键"
+	sudo rm -fr /etc/systemd/system/docker.service.d
+	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+	sudo systemctl daemon-reload
+fi
+sudo rm -fr docker.sh
+if [[ ${XITONG} == "cent_os" ]]; then
+	sudo systemctl start docker
+else
+	sudo systemctl restart docker
+	sudo systemctl start docker
+fi
+
+if [[ `docker --version | grep -c "version"` = '0' ]]; then
+	TIME y "docker安装失败"
+	sleep 2
+	exit 1
+else
+	TIME y ""
+	TIME g "docker安装成功，正在启动docker，请稍后..."
+	sleep 12
+	TIME y ""
+	TIME g "测试docker拉取镜像是否成功"
+	TIME y ""
+	sudo docker run hello-world |tee build.log
+	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "docs.docker" build.log` -ge '1' ]]; then
+		echo
+		TIME g "测试镜像拉取成功，正在删除测试镜像..."
+		echo
+		docker stop $(docker ps -a -q)
+		docker rm $(docker ps -a -q)
+		docker rmi $(docker images -q)
+		echo
+		TIME y "测试镜像删除完毕，docker安装成功!"
+		echo
+	else
+		echo
+		TIME y "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
+		echo
+		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
+		echo
+		sleep 2
+		exit 1
+	fi
+fi
+rm -fr build.log
 exit 0

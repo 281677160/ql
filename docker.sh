@@ -96,7 +96,8 @@ if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 	sudo yum -y update
 	sudo yum install -y docker-ce docker-ce-cli containerd.io
-elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
+fi
+if [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -112,7 +113,7 @@ elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 	sudo apt-get update
 	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-elif [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
+if [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -128,11 +129,6 @@ elif [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
 	sudo apt-get update
 	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-else
-	echo
-	TIME y "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
-	echo
-	exit 1
 fi
 if [[ ${CHONGXIN} == "YES" ]]; then
 	TIME y "本一键"

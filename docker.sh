@@ -150,7 +150,7 @@ if [[ "${CHONGXIN_anzhuang}" == "YES" ]]; then
 	sudo systemctl daemon-reload
 fi
 sudo rm -fr docker.sh
-if [[ ${XITONG} == "centos" ]]; then
+if [[ ${XITONG} == "cent_os" ]]; then
 	sudo systemctl start docker
 else
 	sudo systemctl restart docker

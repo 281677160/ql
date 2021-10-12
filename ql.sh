@@ -32,7 +32,7 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	echo
 	echo
-	TIME z "脚本适用于（ubuntu、debian、openwrt）"
+	TIME z "脚本适用于（ubuntu、debian、openwrt、centos）"
 	TIME z "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
 	TIME z "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker和挂载好opt路径"
 	TIME z "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"

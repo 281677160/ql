@@ -97,22 +97,22 @@ echo
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
-	yum update
+	yum -y update
 	yum -y install sudo
 	yum -y curl
 	yum -y net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
-	apt update
-	apt install -y sudo curl
-	apt install -y net-tools
+	apt -y update
+	apt -y install sudo curl
+	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
-	apt update
-	apt install -y sudo curl
-	apt install -y net-tools
+	apt -y update
+	apt -y install sudo curl
+	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	QL_PATH="/opt"
 	XTong="openwrt"

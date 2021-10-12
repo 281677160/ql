@@ -28,6 +28,7 @@ TIME() {
 if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
 	Aptget="yum"
 	XITONG="centos"
+	TIME y "警告：centos"
 elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	Aptget="apt-get"
 	XITONG="ubuntu"
@@ -91,6 +92,7 @@ TIME y "正在安装docker，请耐心等候..."
 "${Aptget}" install -y sudo curl
 echo
 if [ "XITONG" == "centos" ]; then
+	TIME y "警222告：centos"
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 	sudo yum -y update

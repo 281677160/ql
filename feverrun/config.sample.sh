@@ -411,6 +411,11 @@ export JD_UNSUB_PLOG="true"
 ### 京东KEY自动转换成京东到家KEY
 export JDDJ_CKPATH="./jdCookie.js"
 
+### 微信_金银手指 阅读脚本
+export soy_wx_jysz_token=""
+export soy_wx_jysz_User_Agent=""
+
+
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果
 scr_name="$1"                                 ## 不可删除

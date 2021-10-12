@@ -26,16 +26,16 @@ TIME() {
 }
 
 if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
-	Aptget="yum"
-	XITONG="cent_os"
+	export Aptget="yum"
+	export XITONG="cent_os"
 	TIME g "centos"
 elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	Aptget="apt-get"
-	XITONG="ubuntu_os"
-	TIME g "ubuntu"
+	export XITONG="ubuntu_os"
+	export TIME g "ubuntu"
 elif [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
-	Aptget="apt"
-	XITONG="debian_os"
+	export Aptget="apt"
+	export XITONG="debian_os"
 	TIME g "debian"
 else
 	echo
@@ -55,7 +55,7 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	case $ANDK in
 		[Yy])
 			TIME g "正在御载老版本docker"
-			CHONGXIN_anzhuang="YES"
+			export CHONGXIN_anzhuang="YES"
 			docker stop $(docker ps -a -q)
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)

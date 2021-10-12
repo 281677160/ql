@@ -28,15 +28,12 @@ TIME() {
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	export Aptget="yum"
 	export XITONG="cent_os"
-	TIME g "centos"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
-	Aptget="apt-get"
+	export Aptget="apt-get"
 	export XITONG="ubuntu_os"
-	export TIME g "ubuntu"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	export Aptget="apt"
 	export XITONG="debian_os"
-	TIME g "debian"
 else
 	echo
 	TIME y "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
@@ -94,7 +91,6 @@ TIME y "正在安装docker，请耐心等候..."
 "${Aptget}" install -y sudo curl
 echo
 if [[ ${XITONG} == "cent_os" ]]; then
-	TIME y "centos正在安装docker，请耐心等候..."
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 	sudo yum -y update
@@ -104,7 +100,6 @@ if [[ ${XITONG} == "cent_os" ]]; then
 	sudo yum install -y docker.io
 fi
 if [[ ${XITONG} == "ubuntu_os" ]]; then
-	TIME y "ubuntu正在安装docker，请耐心等候..."
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -146,19 +141,11 @@ if [[ ${XITONG} == "debian_os" ]]; then
 fi
 
 if [[ "${CHONGXIN}" == "YES" ]]; then
-	TIME y "本一键"
 	sudo rm -fr /etc/systemd/system/docker.service.d
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
 fi
 sudo rm -fr docker.sh
-if [[ ${XITONG} == "cent_os" ]]; then
-	sudo systemctl start docker
-else
-	sudo systemctl restart docker
-	sudo systemctl start docker
-fi
-
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2
@@ -166,6 +153,8 @@ if [[ `docker --version | grep -c "version"` = '0' ]]; then
 else
 	TIME y ""
 	TIME g "docker安装成功，正在启动docker，请稍后..."
+	sudo systemctl restart docker
+	sudo systemctl start docker
 	sleep 12
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"

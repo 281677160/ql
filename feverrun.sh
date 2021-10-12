@@ -73,7 +73,7 @@ fi
 if [ ! -a "$OpenCard_shell_path" ]; then
     touch $OpenCard_shell_path
 fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > $OpenCard_shell_path
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
 curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $OpenCard_shell_path
 cp $OpenCard_shell_path $dir_script/raw_jd_OpenCard.py
 

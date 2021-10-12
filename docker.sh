@@ -24,19 +24,23 @@ TIME() {
 	echo
 	exit 1
 }
-if [[ `lsb_release -a | grep -c "Ubuntu"` -ge '1' ]]; then
-	export Ubuntu="ubuntu"
-elif [[ `lsb_release -a | grep -c "Debian"` -ge '1' ]]; then
-	export Debian="debian"
-fi
-if [[ -z "${Ubuntu}" ]] && [[ -z "${Debian}" ]]; then
+
+if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
+	Aptget="yum"
+	XITONG="centos"
+elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
+	Aptget="apt-get"
+	XITONG="ubuntu"
+elif [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
+	Aptget="apt"
+	XITONG="debian"
+else
 	echo
-	TIME r "本脚本只适用于Ubuntu和Debian安装docker"
+	TIME y "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
 	echo
-	sleep 2
 	exit 1
 fi
-apt install -y sudo curl
+
 if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	echo
 	TIME y "检测到docker存在，是否重新安装?"
@@ -48,16 +52,17 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 	case $ANDK in
 		[Yy])
 			TIME g "正在御载老版本docker"
+			CHONGXIN="YES"
 			docker stop $(docker ps -a -q)
 			docker rm $(docker ps -a -q)
 			docker rmi $(docker images -q)
-			sudo -E apt-get -qq remove -y docker docker-engine docker.io containerd runc
-			sudo -E apt-get -qq remove -y docker
-			sudo -E apt-get -qq remove -y docker-ce
-			sudo -E apt-get -qq remove -y docker-ce-cli
-			sudo -E apt-get -qq remove -y docker-ce-rootless-extras
-			sudo -E apt-get -qq remove -y docker-scan-plugin
-			sudo -E apt-get -qq remove -y --auto-remove docker
+			sudo "${Aptget}" remove -y docker docker-engine docker.io containerd runc
+			sudo "${Aptget}" remove -y docker
+			sudo "${Aptget}" remove -y docker-ce
+			sudo "${Aptget}" remove -y docker-ce-cli
+			sudo "${Aptget}" remove -y docker-ce-rootless-extras
+			sudo "${Aptget}" remove -y docker-scan-plugin
+			sudo "${Aptget}" remove -y --auto-remove docker
 			sudo rm -rf /var/lib/docker
 			sudo rm -rf /etc/docker
 			sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
@@ -82,50 +87,62 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 fi
 echo
 TIME y "正在安装docker，请耐心等候..."
+"${Aptget}" -y update
+"${Aptget}" install -y sudo curl
 echo
-sudo -E apt-get -qq update
-sudo -E apt-get -qq install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-if [[ "${Ubuntu}" == "ubuntu" ]]; then
+if [ "XITONG" == "centos" ]; then
+	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+	sudo yum -y update
+	sudo yum install -y docker-ce docker-ce-cli containerd.io
+elif [ "XITONG" == "ubuntu" ]; then
+	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
 		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	fi
-else
+	sudo apt-key fingerprint 0EBFCD88
+	if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
+		TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
+		sleep 5
+		exit 1
+		sleep 5
+	fi
+	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+	sudo apt-get update
+	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+elif [ "XITONG" == "debian" ]; then
+	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
 		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	fi
-fi
-sudo apt-key fingerprint 0EBFCD88
-if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
-	TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
-	sleep 5
-	exit 1
-	sleep 5
-fi
-if [[ "${Ubuntu}" == "ubuntu" ]]; then
-	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-else
+	sudo apt-key fingerprint 0EBFCD88
+	if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
+		TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者上游有问题"
+		sleep 5
+		exit 1
+		sleep 5
+	fi
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
+	sudo apt-get update
+	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 fi
-sudo -E apt-get -qq update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io |tee build.log
-if [[ `grep -c "dockerd -H fd://" build.log` -ge '1' ]]; then
-	TIME g "检测到文件有错误，尝试修复"
+if [[ ${CHONGXIN} == "YES" ]]; then
 	sudo rm -fr /etc/systemd/system/docker.service.d
 	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 	sudo systemctl daemon-reload
 fi
-sudo rm -fr build.log
 sudo rm -fr docker.sh
+sudo systemctl restart docker
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2
 	exit 1
 else
 	TIME y ""
-	TIME g "docker安装成功，正在重启docker，请稍后..."
-	sudo systemctl restart docker
+	TIME g "docker安装成功，正在启动docker，请稍后..."
+	sudo systemctl start docker
 	sleep 12
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"

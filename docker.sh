@@ -27,7 +27,7 @@ TIME() {
 
 if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
 	Aptget="yum"
-	TIME y "警告：centos"
+	XITONG="centos"
 elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	Aptget="apt-get"
 	XITONG="ubuntu"
@@ -90,14 +90,13 @@ TIME y "正在安装docker，请耐心等候..."
 "${Aptget}" -y update
 "${Aptget}" install -y sudo curl
 echo
-if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
-	TIME y "警222告：centos"
+if [[ ${XITONG} == "centos" ]]; then
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 	sudo yum -y update
 	sudo yum install -y docker-ce docker-ce-cli containerd.io
 fi
-if [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
+if [[ ${XITONG} == "ubuntu" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -113,7 +112,7 @@ if [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 	sudo apt-get update
 	sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-if [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
+if [[ ${XITONG} == "debian" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -137,7 +136,12 @@ if [[ ${CHONGXIN} == "YES" ]]; then
 	sudo systemctl daemon-reload
 fi
 sudo rm -fr docker.sh
-sudo systemctl restart docker
+if [[ ${XITONG} == "centos" ]]; then
+	sudo systemctl start docker
+else
+	sudo systemctl restart docker
+	sudo systemctl start docker
+fi
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2
@@ -145,7 +149,6 @@ if [[ `docker --version | grep -c "version"` = '0' ]]; then
 else
 	TIME y ""
 	TIME g "docker安装成功，正在启动docker，请稍后..."
-	sudo systemctl start docker
 	sleep 12
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"

@@ -28,12 +28,15 @@ TIME() {
 if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
 	Aptget="yum"
 	XITONG="centos"
+	TIME g "centos"
 elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	Aptget="apt-get"
 	XITONG="ubuntu"
+	TIME g "ubuntu"
 elif [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
 	Aptget="apt"
 	XITONG="debian"
+	TIME g "debian"
 else
 	echo
 	TIME y "本一键安装docker脚本只支持（centos、ubuntu和debian）!"

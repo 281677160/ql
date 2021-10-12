@@ -98,7 +98,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	yum update
-	yum install -y sudo curl net-tools
+	yum -y install sudo curl net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"

@@ -84,14 +84,15 @@ if [ ! -a "$crypto_shell_path" ]; then
     touch $crypto_shell_path
 fi
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/raw/crypto-js.js
 if [[ $? -ne 0 ]];then
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/raw/crypto-js.js
 	if [[ $? -ne 0 ]];then
 		TIME y "config.sh 下载失败"
 		    exit 1
 	fi
 fi
-cp $crypto_shell_path $dir_script/crypto-js.js
 
 # 下载 extra.sh
 if [ ! -a "$extra_shell_path" ]; then

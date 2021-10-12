@@ -94,16 +94,26 @@ echo
 echo
 rm -fr /root/ql.sh
 echo
-if [[ -z "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
+	TIME g "正在安装宿主机所需要的依赖，请稍后..."
+	QL_PATH="/opt"
+	yum update
+	yum install -y sudo curl
+elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	apt update
 	apt install -y sudo curl
-else
+elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
+	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
+	apt update
+	apt install -y sudo curl
+elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	QL_PATH="/opt"
+	XTong="openwrt"
 fi
-
-if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+if [[ "${XTong}" == "openwrt" ]]; then
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没检测到docker，openwrt请自行安装docker和挂载好opt路径"
@@ -123,7 +133,7 @@ else
 		
 	fi
 fi
-if [[ -n "$(ls -A "/etc/openwrt_release" 2>/dev/null)" ]]; then
+if [[ "${XTong}" == "openwrt" ]]; then
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没检测到docker，openwrt请自行安装docker和挂载好opt路径"

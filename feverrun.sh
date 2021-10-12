@@ -110,42 +110,6 @@ if (( $(echo "${extra_size} < 100" | bc -l) )); then
     exit 0
 fi
 
-# 下载 crypto-js.js
-if [ ! -a "$crypto_shell_path" ]; then
-    touch $crypto_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
-fi
-cp $crypto_shell_path $dir_script/crypto-js.js
-
-# 判断是否下载成功
-crypto_size=$(ls -l $crypto_shell_path | awk '{print $5}')
-if (( $(echo "${crypto_size} < 100" | bc -l) )); then
-    echo
-    TIME y "crypto-js.js 下载失败"
-    exit 0
-fi
-
-# 下载 wx_jysz.js
-if [ ! -a "$wx_jysz_shell_path" ]; then
-    touch $wx_jysz_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wx_jysz.js > $wx_jysz_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wx_jysz.js > $wx_jysz_shell_path
-fi
-cp $wx_jysz_shell_path $dir_script/wx_jysz.js
-
-# 判断是否下载成功
-wx_jysz_size=$(ls -l $wx_jysz_shell_path | awk '{print $5}')
-if (( $(echo "${wx_jysz_size} < 100" | bc -l) )); then
-    echo
-    TIME y "wx_jysz.js 下载失败"
-    exit 0
-fi
-
 # 授权
 chmod -R +x $dir_shell
 
@@ -182,18 +146,6 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
-fi
-
-# 将 wx_jysz.js 添加到定时任务
-if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
-    echo
-    echo
-    TIME g "开始添加 [微信金手指]"
-    echo
-    echo
-    # 获取token
-    token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"微信金手指","command":"task wx_jysz.js","schedule":"0 8-22/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041525995'
 fi
 
 # 将 raw_jd_OpenCard.py 添加到定时任务

@@ -114,7 +114,9 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	XTong="openwrt"
 fi
 if [[ "${XTong}" == "openwrt" ]]; then
-	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
+	 if [[ -x "$(command -v docker)" ]]; then
+	 	echo
+	 else
 		echo
 		TIME y "没检测到docker，openwrt请自行安装docker和挂载好opt路径"
 		echo
@@ -134,7 +136,9 @@ else
 	fi
 fi
 if [[ "${XTong}" == "openwrt" ]]; then
-	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
+	 if [[ -x "$(command -v docker)" ]]; then
+	 	echo
+	 else
 		echo
 		TIME y "没检测到docker，openwrt请自行安装docker和挂载好opt路径"
 		echo

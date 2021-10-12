@@ -93,7 +93,8 @@ TIME y "正在安装docker，请耐心等候..."
 "${Aptget}" -y update
 "${Aptget}" install -y sudo curl
 echo
-if [[ ${XITONG} == "centos" ]]; then
+if [[ "${XITONG}" == "centos" ]]; then
+	TIME y "centos正在安装docker，请耐心等候..."
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 	sudo yum -y update
@@ -102,7 +103,8 @@ if [[ ${XITONG} == "centos" ]]; then
 	sudo yum install -y containerd.io
 	sudo yum install -y docker.io
 fi
-if [[ ${XITONG} == "ubuntu" ]]; then
+if [[ "${XITONG}" == "ubuntu" ]]; then
+	TIME y "ubuntu正在安装docker，请耐心等候..."
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -121,7 +123,7 @@ if [[ ${XITONG} == "ubuntu" ]]; then
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
-if [[ ${XITONG} == "debian" ]]; then
+if [[ "${XITONG}" == "debian" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then

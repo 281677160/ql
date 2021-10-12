@@ -28,7 +28,7 @@ extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
 disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
-crypto-js_shell_path=$dir_script/crypto-js.js
+crypto_shell_path=$dir_script/crypto-js.js
 wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
@@ -102,16 +102,16 @@ if (( $(echo "${extra_size} < 100" | bc -l) )); then
 fi
 
 # 下载 crypto-js.js
-if [ ! -a "$crypto-js_shell_path" ]; then
-    touch $crypto-js_shell_path
+if [ ! -a "$crypto_shell_path" ]; then
+    touch $crypto_shell_path
 fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto-js_shell_path
-curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto-js_shell_path
-cp $wskey_shell_path $dir_script/crypto-js.js
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
+curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
+cp $crypto_shell_path $dir_script/crypto-js.js
 
 # 判断是否下载成功
-crypto-js_size=$(ls -l $crypto-js_shell_path | awk '{print $5}')
-if (( $(echo "${crypto-js_size} < 100" | bc -l) )); then
+crypto_size=$(ls -l $crypto_shell_path | awk '{print $5}')
+if (( $(echo "${crypto_size} < 100" | bc -l) )); then
     echo
     TIME y "crypto-js.js 下载失败"
     exit 0
@@ -140,7 +140,7 @@ chmod -R +x $dir_shell
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加 [每8小时更新任务]"
+    TIME g "开始添加 [每4小时更新任务]"
     echo
     echo
     # 获取token
@@ -151,7 +151,7 @@ fi
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加 [每天检测WSKEY]"
+    TIME g "开始添加 [每8小时检测WSKEY]"
     echo
     echo
     # 获取token

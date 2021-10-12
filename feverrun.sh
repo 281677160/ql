@@ -127,13 +127,13 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     TIME g "执行WSKEY转换PT_KEY操作"
     task wskey.py |tee azcg.log
     echo
-    if [[ `ls -a |grep -c "更新成功" /ql/azcg.log` -ge '1' ]]; then
+    if [[ `ls -a |grep -c "wskey添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /ql/azcg.log` = '0' ]]; then
     	echo
     	TIME g "WSKEY转换PT_KEY成功"
 	echo
     else
     	echo
-    	TIME g "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，然后在任务里手动转换"
+    	TIME g "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，如果是多个WSKEY的话，或者有个别KEY出问题"
 	echo
     fi
 fi

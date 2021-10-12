@@ -25,15 +25,15 @@ TIME() {
 	exit 1
 }
 
-if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
+if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	export Aptget="yum"
 	export XITONG="cent_os"
 	TIME g "centos"
-elif [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
+elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	Aptget="apt-get"
 	export XITONG="ubuntu_os"
 	export TIME g "ubuntu"
-elif [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
+elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	export Aptget="apt"
 	export XITONG="debian_os"
 	TIME g "debian"
@@ -93,7 +93,7 @@ TIME y "正在安装docker，请耐心等候..."
 "${Aptget}" -y update
 "${Aptget}" install -y sudo curl
 echo
-if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
+if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME y "centos正在安装docker，请耐心等候..."
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
@@ -103,7 +103,7 @@ if [ "$(. /etc/os-release && echo "$ID")" == "centos" ]; then
 	sudo yum install -y containerd.io
 	sudo yum install -y docker.io
 fi
-if [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
+if [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME y "ubuntu正在安装docker，请耐心等候..."
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
@@ -123,7 +123,7 @@ if [ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]; then
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
-if [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
+if [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
 	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
 	if [[ $? -ne 0 ]];then
@@ -143,3 +143,4 @@ if [ "$(. /etc/os-release && echo "$ID")" == "debian" ]; then
 	sudo apt-get install -y containerd.io
 	sudo apt-get install -y docker.io
 fi
+exit 0

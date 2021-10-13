@@ -36,13 +36,13 @@ sample_shell_path=/ql/sample/config.sample.sh
 
 rm -rf /ql/feverrun.sh
 
+curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2@main/sendNotify.js > /ql/qlwj/sendNotify.js
+curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2@main/sendNotify.py > /ql/qlwj/sendNotify.py
 git clone https://ghproxy.com/https://github.com/281677160/ql qlwj
-curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.js > /ql/qlwj/sendNotify.js
-curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.py > /ql/qlwj/sendNotify.py
 if [[ $? -ne 0 ]];then
 	mkdir -p /ql/qlwj
-	curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.js > /ql/qlwj/sendNotify.js
-	curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.py > /ql/qlwj/sendNotify.py
+	curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2@main/sendNotify.js > /ql/qlwj/sendNotify.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2@main/sendNotify.py > /ql/qlwj/sendNotify.py
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh

@@ -67,7 +67,7 @@ if [[ "$USER" == "root" ]]; then
 		3)
 			echo
 			TIME r "您选择了退出程序!"
-			rm -fr /root/ql.sh
+			rm -fr ql.sh
 			echo
 			sleep 3
 			exit 1
@@ -92,7 +92,6 @@ echo
 }
 echo
 echo
-rm -fr /root/ql.sh
 rm -fr ql.sh
 echo
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
@@ -169,9 +168,7 @@ else
 fi
 if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 	echo
-	TIME g "检测到已有青龙面板，需要删除面板才能继续..."
-	echo
-	TIME y "正在删除旧的青龙容器和镜像，请稍后..."
+	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
 	docker=$(docker ps -a|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
@@ -211,13 +208,13 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
-	TIME g "请使用 "${IP}":"${QL_PORT}" 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
+	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
+	echo
+	TIME g "请使用 IP:端口 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
 	echo
 	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
 	echo
 	TIME g "登录页面，点击[开始安装]，设置好[用户名]跟[密码],然后点击[提交]，[通知方式]跳过，以后再设置，然后点击[去登录]，输入帐号密码完成登录!"
-	echo
-	TIME r "提示：如果您用的是VPS或者其他远程服务器，IP获取只显示你的内网IP的，请正确使用你的远程IP"
 	echo
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU

@@ -82,3 +82,4 @@ docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.
 ## 感谢！
 
 > [`whyour`](https://github.com/whyour/qinglong)
+> [`feverrun`](https://github.com/feverrun/my_scripts)

@@ -216,6 +216,8 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME g "登录页面，点击[开始安装]，设置好[用户名]跟[密码],然后点击[提交]，[通知方式]跳过，以后再设置，然后点击[去登录]，输入帐号密码完成登录!"
 	echo
+	TIME r "提示：如果您用的是VPS或者其他远程服务器，IP获取只显示你的内网IP的，请正确使用你的远程IP"
+	echo
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then

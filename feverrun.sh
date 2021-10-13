@@ -46,7 +46,7 @@ if [[ $? -ne 0 ]];then
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
 	if [[ $? -ne 0 ]];then
-		TIME y "config.sh 下载失败"
+		TIME y "应用文件下载失败"
 		    exit 1
 	fi
 fi

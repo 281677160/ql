@@ -244,7 +244,7 @@ export NOTIFY_AUTHOR="青龙"
 export NOTIFY_NOLOGINSUCCESS="true"
 ### 9. CK失效时自动执行
 ### 当接收到发送CK失效通知执行子线程任务.(jd_CheckCK.js 可替换成其他任意qinglong支持的脚本文件.)
-export NOTIFY_CKTASK="jd_CheckCK.js"
+export NOTIFY_CKTASK="feverrun_my_scripts_jd_check_cookie.js"
 
 # curtinlv 环境变量
 ## 1、赚京豆

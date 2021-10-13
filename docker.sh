@@ -72,6 +72,7 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 		[Nn])
 			echo
 			TIME r "您选择了退出程序!"
+			sudo rm -fr docker.sh
 			echo
 			sleep 3
 			exit 1

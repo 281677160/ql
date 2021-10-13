@@ -68,7 +68,7 @@ rm -rf /ql/qlwj
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加 [每4小时更新任务]"
+    TIME g "开始添加 [每8小时更新任务]"
     echo
     echo
     # 获取token

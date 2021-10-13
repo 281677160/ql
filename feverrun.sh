@@ -38,7 +38,13 @@ rm -rf /ql/feverrun.sh
 
 git clone https://ghproxy.com/https://github.com/281677160/ql qlwj
 if [[ $? -ne 0 ]];then
-	git clone https://pd.zwc365.com/https://github.com/281677160/ql qlwj
+	mkdir -p /ql/qlwj
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
 	if [[ $? -ne 0 ]];then
 		TIME y "config.sh 下载失败"
 		    exit 1

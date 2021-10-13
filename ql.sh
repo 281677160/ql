@@ -173,7 +173,7 @@ if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	docker=$(docker ps -|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	docker=$(docker ps -a|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
 	docker stop -t=5 "${dockerid}"
 	docker rm "${dockerid}"

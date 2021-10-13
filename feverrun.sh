@@ -144,8 +144,6 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
 fi
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
-cp -Rf /ql/qlwj/sendNotify.js /ql/scripts/sendNotify.js
-cp -Rf /ql/qlwj/sendNotify.py /ql/scripts/sendNotify.py
 rm -rf /ql/qlwj
 
 echo

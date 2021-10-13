@@ -114,6 +114,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	apt -y install sudo curl git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	XTong="openwrt"
 	opkg update

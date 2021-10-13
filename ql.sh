@@ -166,7 +166,7 @@ else
 		exit 1
 	fi
 fi
-if [[ `docker ps | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo

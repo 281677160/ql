@@ -34,82 +34,29 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 
-rm -rf feverrun.sh
+rm -rf /ql/feverrun.sh
 
-# 下载 config.sh
-if [ ! -a "$config_shell_path" ]; then
-    touch $config_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > $sample_shell_path
+git clone https://ghproxy.com/https://github.com/281677160/ql qlwj
 if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/config.sample.sh > $sample_shell_path
+	git clone https://pd.zwc365.com/https://github.com/281677160/ql qlwj
 	if [[ $? -ne 0 ]];then
 		TIME y "config.sh 下载失败"
 		    exit 1
 	fi
 fi
-cp $sample_shell_path $config_shell_path
-
-
-# 下载 wskey.py
-if [ ! -a "$wskey_shell_path" ]; then
-    touch $wskey_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > $wskey_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/wskey.py > $wskey_shell_path
-	if [[ $? -ne 0 ]];then
-		TIME y "config.sh 下载失败"
-		    exit 1
-	fi
-fi
-cp $wskey_shell_path $dir_script/wskey.py
-
-# 下载 raw_jd_OpenCard.py
-if [ ! -a "$OpenCard_shell_path" ]; then
-    touch $OpenCard_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/raw_jd_OpenCard.py > $OpenCard_shell_path
-	if [[ $? -ne 0 ]];then
-		TIME y "config.sh 下载失败"
-		    exit 1
-	fi
-fi
-cp $OpenCard_shell_path $dir_script/raw_jd_OpenCard.py
-
-# 下载 crypto-js.js
-if [ ! -a "$crypto_shell_path" ]; then
-    touch $crypto_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > $crypto_shell_path
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/raw/crypto-js.js
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/crypto-js.js > $crypto_shell_path
-	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/raw/crypto-js.js
-	if [[ $? -ne 0 ]];then
-		TIME y "config.sh 下载失败"
-		    exit 1
-	fi
-fi
-
-# 下载 extra.sh
-if [ ! -a "$extra_shell_path" ]; then
-    touch $extra_shell_path
-fi
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > $extra_shell_path
-if [[ $? -ne 0 ]];then
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/extra.sh > $extra_shell_path
-	if [[ $? -ne 0 ]];then
-		TIME y "config.sh 下载失败"
-		    exit 1
-	fi
-fi
-cp $extra_shell_path $dir_shell/extra.sh
 
 # 授权
-chmod -R +x $dir_shell
+chmod -R +x /ql/qlwj
+
+cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/config/config.sh
+cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
+cp -Rf /ql/qlwj/feverrun/extra.sh /ql/config/extra.sh
+cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
+cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
+cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
+cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
+
+rm -rf /ql/qlwj
 
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then

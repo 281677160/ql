@@ -93,6 +93,7 @@ echo
 echo
 echo
 rm -fr /root/ql.sh
+rm -fr ql.sh
 echo
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."

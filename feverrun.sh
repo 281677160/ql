@@ -37,8 +37,12 @@ sample_shell_path=/ql/sample/config.sample.sh
 rm -rf /ql/feverrun.sh
 
 git clone https://ghproxy.com/https://github.com/281677160/ql qlwj
+curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.js > /ql/qlwj/sendNotify.js
+curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.py > /ql/qlwj/sendNotify.py
 if [[ $? -ne 0 ]];then
 	mkdir -p /ql/qlwj
+	curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.js > /ql/qlwj/sendNotify.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/shufflewzc/faker2/main/sendNotify.py > /ql/qlwj/sendNotify.py
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
 	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
@@ -61,8 +65,6 @@ cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
 cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
-
-rm -rf /ql/qlwj
 
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
@@ -142,6 +144,9 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
 fi
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
+cp -Rf /ql/qlwj/sendNotify.js /ql/scripts/sendNotify.js
+cp -Rf /ql/qlwj/sendNotify.py /ql/scripts/sendNotify.py
+rm -rf /ql/qlwj
 
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then

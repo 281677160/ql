@@ -176,7 +176,7 @@ echo
 echo
 echo
 echo
-if [[ -z ${GENGXIN} ]]; then
+if [[ ! ${GENGXIN} == "1" ]]; then
 TIME l "安装依赖，依赖必须安装，要不然脚本不运行"
 echo
 TIME y "建议使用翻墙网络安装，要不然安装依赖的时候你会急死的"

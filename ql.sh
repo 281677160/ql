@@ -128,47 +128,6 @@ IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2
 if [[ -z "${IP}" ]]; then
 	IP="IP"
 fi
-if [[ "${XTong}" == "openwrt" ]]; then
-	 if [[ -x "$(command -v docker)" ]]; then
-	 	echo
-	 else
-		echo
-		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘"
-		echo
-		sleep 3
-		exit 1
-	fi
-else
-	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
-		echo
-		TIME y "没发现有docker，正在安装docker，请稍后..."
-		echo
-		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
-		if [[ $? -ne 0 ]];then
-			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh > docker.sh && bash docker.sh
-		fi
-		
-	fi
-fi
-if [[ "${XTong}" == "openwrt" ]]; then
-	 if [[ -x "$(command -v docker)" ]]; then
-	 	echo
-	 else
-		echo
-		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘"
-		echo
-		sleep 3
-		exit 1
-	fi
-else
-	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
-		echo
-		TIME y "没检测到docker，请先安装docker"
-		echo
-		sleep 3
-		exit 1
-	fi
-fi
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
@@ -228,6 +187,47 @@ else
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
 		echo		
 		sleep 2
+		exit 1
+	fi
+fi
+if [[ "${XTong}" == "openwrt" ]]; then
+	 if [[ -x "$(command -v docker)" ]]; then
+	 	echo
+	 else
+		echo
+		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘"
+		echo
+		sleep 3
+		exit 1
+	fi
+else
+	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
+		echo
+		TIME y "没发现有docker，正在安装docker，请稍后..."
+		echo
+		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
+		if [[ $? -ne 0 ]];then
+			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh > docker.sh && bash docker.sh
+		fi
+		
+	fi
+fi
+if [[ "${XTong}" == "openwrt" ]]; then
+	 if [[ -x "$(command -v docker)" ]]; then
+	 	echo
+	 else
+		echo
+		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘"
+		echo
+		sleep 3
+		exit 1
+	fi
+else
+	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
+		echo
+		TIME y "没检测到docker，请先安装docker"
+		echo
+		sleep 3
 		exit 1
 	fi
 fi

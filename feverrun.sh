@@ -19,8 +19,12 @@ TIME() {
 	 }
       }
 }
-
-
+if [[ `cat /ql/config/auth.json| grep -c "\"token\""` = '0' ]]; then
+	echo
+	TIME r "提示：请先登录青龙面板再执行命令安装任务!"
+	exit 1
+	echo
+fi
 dir_shell=/ql/config
 dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh

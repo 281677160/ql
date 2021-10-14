@@ -169,6 +169,18 @@ else
 		exit 1
 	fi
 fi
+if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+	echo
+	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
+	echo
+	docker=$(docker ps -a|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
+	docker stop -t=5 "${dockerid}"
+	docker rm "${dockerid}"
+	docker rmi "${imagesid}"
+fi
+rm -rf /opt/ql
+rm -rf /root/ql
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
 	FINAL=`echo ${Overlay_Available: -1}`
@@ -219,18 +231,6 @@ else
 		echo
 	fi
 fi
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
-	echo
-	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
-	echo
-	docker=$(docker ps -a|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
-	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
-	docker stop -t=5 "${dockerid}"
-	docker rm "${dockerid}"
-	docker rmi "${imagesid}"
-fi
-rm -rf /opt/ql
-rm -rf /root/ql
 if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then
 	mkdir -p /opt
 fi

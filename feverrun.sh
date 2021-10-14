@@ -19,7 +19,7 @@ TIME() {
 	 }
       }
 }
-if [[ `cat /ql/config/auth.json| grep -c "\"token\""` = '0' ]]; then
+if [ "$(grep -c \"token\" /ql/config/auth.json)" = 0 ]; then
 	echo
 	TIME r "提示：请先登录青龙面板再执行命令安装任务!"
 	exit 1

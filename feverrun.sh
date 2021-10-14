@@ -161,6 +161,7 @@ echo
 if [[ `ls -a |grep -c "feverrun_my_scripts成功" /ql/azcg.log` -ge '1' ]]; then
 	TIME g "脚本更新完成"
 	rm -fr /ql/azcg.log
+	GENGXIN="1"
 else
 	if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]]; then
 		TIME g "脚本安装完成，下面开始安装依赖!"
@@ -175,6 +176,7 @@ echo
 echo
 echo
 echo
+if [[ -z ${GENGXIN} ]]; then
 TIME l "安装依赖，依赖必须安装，要不然脚本不运行"
 echo
 TIME y "建议使用翻墙网络安装，要不然安装依赖的时候你会急死的"
@@ -221,4 +223,5 @@ for i in $package_name; do
     esac
 done
 TIME g "所有依赖安装完毕"
+fi
 exit 0

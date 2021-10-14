@@ -12,7 +12,7 @@
 
 
 
-wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
+wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && source ql.sh
 
 
 ---

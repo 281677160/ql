@@ -182,8 +182,8 @@ fi
 rm -rf /opt/ql
 rm -rf /root/ql
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
-	FINAL=`echo ${Overlay_Available: -1}`
+	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
+	FINAL=`echo ${Available: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好大于2G的[opt]路径的硬盘"
@@ -193,8 +193,8 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		echo
 	fi
 else
-	Ubuntu_kj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1')"
-	FINAL=`echo ${Ubuntu_kj: -1}`
+	Ubunkj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1')"
+	FINAL=`echo ${Ubunkj: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间容量"
@@ -226,9 +226,9 @@ else
 	if [[ "${Kongjian}" == "1" ]];then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
+		echo		
 		sleep 2
 		exit 1
-		echo
 	fi
 fi
 if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then

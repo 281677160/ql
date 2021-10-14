@@ -175,6 +175,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好大于2G的[opt]路径的硬盘"
+		echo
 		sleep 2
 		exit 1
 		echo
@@ -185,6 +186,7 @@ else
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间容量"
+		echo
 		sleep 2
 		exit 1
 		echo

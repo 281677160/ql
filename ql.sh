@@ -98,8 +98,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	yum -y update
-	yum -y install sudo git
-	yum -y install curl
+	yum -y install sudo curl git
 	yum -y install net-tools.x86_64
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
@@ -114,13 +113,11 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	apt -y install sudo curl git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	XTong="openwrt"
-	if [[ ! "$(cat Installed_PKG_List)" =~ git ]] || [[ ! "$(cat Installed_PKG_List)" =~ git-http ]]; then
-		TIME g "正在安装宿主机所需要的依赖，请稍后..."
-		opkg update
-		opkg install git-http
-	fi
+	opkg update
+	opkg install git-http
 fi
 IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2}'|tr -d "addr:")"
 if [[ -z "${IP}" ]]; then
@@ -186,7 +183,7 @@ else
 		echo
 		TIME z "您当前系统可用空间为${Ubuntu_kj}G"
 		echo
-	if [[ "${Ubuntu_kj}" -lt "2" ]];then
+	if [[ "${Kongjian}" == "1" ]];then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
 		sleep 2

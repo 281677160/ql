@@ -143,9 +143,9 @@ else
 		echo
 		TIME y "没发现有docker，正在安装docker，请稍后..."
 		echo
-		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
+		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
 		if [[ $? -ne 0 ]];then
-			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh > docker.sh && bash docker.sh
+			wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 		fi
 		
 	fi
@@ -283,9 +283,9 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
-			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+			docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			if [[ $? -ne 0 ]];then
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
+				docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 			fi
 			sleep 2
 			exit 0

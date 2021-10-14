@@ -37,9 +37,6 @@ wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
-rm -fr /ql/repo/feverrun_my_scripts
-wget -qO sendNotify.js https://ghproxy.com/https://raw.githubusercontent.com/shufflewzc/faker2/main/sendNotify.js
-wget -qO sendNotify.py https://ghproxy.com/https://raw.githubusercontent.com/shufflewzc/faker2/main/sendNotify.py
 git clone https://ghproxy.com/https://github.com/281677160/ql qlwj
 if [[ $? -ne 0 ]];then
 	mkdir -p /ql/qlwj
@@ -146,10 +143,6 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
 fi
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
-cp -Rf /ql/sendNotify.js /ql/scripts/sendNotify.js
-cp -Rf /ql/sendNotify.py /ql/scripts/sendNotify.py
-rm -rf /ql/sendNotify.js
-rm -rf /ql/sendNotify.py
 rm -rf /ql/qlwj
 
 echo

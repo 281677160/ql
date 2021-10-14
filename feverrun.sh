@@ -22,8 +22,8 @@ TIME() {
 if [ "$(grep -c \"token\" /ql/config/auth.json)" = 0 ]; then
 	echo
 	TIME r "提示：请先登录青龙面板再执行命令安装任务!"
-	exit 1
 	echo
+	exit 1
 fi
 dir_shell=/ql/config
 dir_script=/ql/scripts

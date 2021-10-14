@@ -98,7 +98,6 @@ if [[ ${XITONG} == "cent_os" ]]; then
 	sudo yum install -y docker-ce
 	sudo yum install -y docker-ce-cli
 	sudo yum install -y containerd.io
-	sudo yum install -y docker.io
 fi
 if [[ ${XITONG} == "ubuntu_os" ]]; then
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -118,7 +117,6 @@ if [[ ${XITONG} == "ubuntu_os" ]]; then
 	sudo apt-get install -y docker-ce
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
-	sudo apt-get install -y docker.io
 fi
 if [[ ${XITONG} == "debian_os" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -138,7 +136,6 @@ if [[ ${XITONG} == "debian_os" ]]; then
 	sudo apt-get install -y docker-ce
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
-	sudo apt-get install -y docker.io
 fi
 
 if [[ "${CHONGXIN}" == "YES" ]]; then

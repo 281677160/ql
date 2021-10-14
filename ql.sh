@@ -166,6 +166,31 @@ else
 		exit 1
 	fi
 fi
+if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
+		echo
+		TIME z "您当前系统可用空间为${Overlay_Available}G"
+		echo
+	if [[ "${Overlay_Available}" -lt "2" ]];then
+		echo
+		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好[opt]路径的硬盘"
+		sleep 2
+		exit 1
+		echo
+	fi
+else
+	Ubuntu_kj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
+		echo
+		TIME z "您当前系统可用空间为${Ubuntu_kj}G"
+		echo
+	if [[ "${Ubuntu_kj}" -lt "2" ]];then
+		echo
+		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
+		sleep 2
+		exit 1
+		echo
+	fi
+fi
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."

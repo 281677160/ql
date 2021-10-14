@@ -12,7 +12,7 @@
 
 
 
-wget -qO ql.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash ql.sh
+wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
 
 
 ---
@@ -62,19 +62,19 @@ pt_key=XXXXXX;pt_pin=您的账号;
 ```sh
 
 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
-wget -qO ql.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash ql.sh
+wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
 
 
 一键单独安装docker
-wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
+wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 
 
 一键单独安装任务（青龙安装好后，登录页面后，可以用这个单独安装任务）
-docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
+docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 
 
 一键安装单独青龙的依赖
-docker exec -it qinglong bash -c  "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/npm.sh)"
+docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
 
 
 ```

@@ -119,7 +119,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	if [[ ! "$(cat Installed_PKG_List)" =~ git-http ]]; then
 		TIME g "正在安装宿主机所需要的依赖，请稍后..."
 		opkg update
-		opkg install git-http
+		opkg install git-http > /dev/null 2>&1
 		rm -fr Installed_PKG_List
 	fi
 

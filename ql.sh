@@ -170,6 +170,27 @@ else
 	fi
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
+	FINAL=`echo ${Overlay_Available: -1}`
+	if [[ "${FINAL}" =~ (M|K) ]]; then
+		echo
+		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
+		sleep 2
+		exit 1
+		echo
+	fi
+else
+	Ubuntu_kj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1')"
+	FINAL=`echo ${Ubuntu_kj: -1}`
+	if [[ "${FINAL}" =~ (M|K) ]]; then
+		echo
+		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
+		sleep 2
+		exit 1
+		echo
+	fi
+fi
+if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
 	Kongjian="$(awk -v num1=${Overlay_Available} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
 		echo

@@ -411,6 +411,9 @@ export JD_UNSUB_PLOG="true"
 ### 京东KEY自动转换成京东到家KEY
 export JDDJ_CKPATH="./jdCookie.js"
 
+### 京东工业品加购任务
+export FS_LEVEL=car
+
 ### 微信_金银手指 阅读脚本
 export soy_wx_jysz_token=""
 export soy_wx_jysz_User_Agent=""

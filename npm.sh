@@ -35,31 +35,25 @@ echo
 echo
 sleep 8
 rm -rf npm.sh
-npm i -g pnpm
-pnpm init -y
-pnpm install express
-pnpm update
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm i && pnpm i -S ts-node typescript @types/node date-fns axios png-js canvas
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
-pnpm install -g typescript
+npm install -g typescript
 cd /ql
-pnpm install axios date-fns
+npm install axios date-fns
 cd /ql
-pnpm install crypto -g
+npm install crypto -g
 cd /ql
-pnpm install ts-md5 -S
+npm install jsdom
 cd /ql
-pnpm install jsdom
+npm install png-js
 cd /ql
-pnpm install png-js
-cd /ql
-pnpm install -g npm
+npm install -g npm
 cd /ql
 pnpm i png-js
 cd /ql
 pip3 install requests
 cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && pnpm install canvas
+apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql

@@ -181,7 +181,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
 fi
 echo
 echo
-TIME g "拉取脚本"
+TIME g "拉取feverrun大佬的自动助力脚本"
 echo
 echo
 rm -fr /ql/azcg.log

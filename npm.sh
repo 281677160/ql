@@ -21,7 +21,7 @@ TIME() {
 echo
 echo
 echo
-TIME l "安装青龙脚本依赖"
+TIME l "安装青龙脚本依赖.."
 echo
 TIME y "最好使用翻墙网络来安装，要不然安装依赖的时候你会急死的"
 echo

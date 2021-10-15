@@ -35,6 +35,8 @@ cnpm install axios date-fns
 cd /ql
 cnpm install fs
 cd /ql
+cnpm install -g ws
+cd /ql
 cnpm install crypto -g
 cd /ql
 cnpm install ts-md5 -S

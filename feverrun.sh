@@ -173,31 +173,35 @@ TIME y "依赖安装时看到显示ERR!错误提示不用管，只要依赖能�
 TIME g "如果安装太慢，而想换时间安装的话，按键盘的 Ctrl+C 退出就行了，到时候可以使用我的一键独立安装依赖脚本来安装"
 echo
 sleep 5
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+rm -rf npm.sh
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
-npm install -g typescript
+cnpm install -g typescript
 cd /ql
-npm install axios date-fns
+cnpm install axios date-fns
 cd /ql
-npm install crypto -g
+cnpm install crypto -g
 cd /ql
-npm install jsdom
+cnpm install ts-md5 -S
 cd /ql
-npm install png-js
+cnpm install jsdom
 cd /ql
-npm install -g npm
+cnpm install png-js
 cd /ql
-pnpm i png-js
+cnpm install -g npm
+cd /ql
+cnpm i png-js
 cd /ql
 pip3 install requests
 cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && cnpm install canvas --build-from-source
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
 package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
 for i in $package_name; do
-	case $i in
+    case $i in
         canvas)
             cd /ql/scripts
             npm ls $i
@@ -205,7 +209,7 @@ for i in $package_name; do
         *)
             npm ls $i -g
             ;;
-esac
+    esac
 done
 TIME g "所有依赖安装完毕"
 exit 0

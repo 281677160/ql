@@ -170,7 +170,6 @@ echo
 sleep 3
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 rm -rf npm.sh
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
 cnpm install -g typescript
 cd /ql
@@ -179,6 +178,8 @@ cd /ql
 cnpm install crypto -g
 cd /ql
 cnpm install ts-md5 -S
+cd /ql
+cnpm install tslib -S
 cd /ql
 cnpm install jsdom
 cd /ql
@@ -193,6 +194,8 @@ cd /ql
 apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && cnpm install canvas --build-from-source
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
+cd /ql
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
 package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
 for i in $package_name; do

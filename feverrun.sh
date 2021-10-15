@@ -64,10 +64,10 @@ cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
 cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
-
-TIME y "安装依赖需要时间，请耐心等待!"
 echo
-sleep 3
+echo
+TIME y "开始安装依赖，安装依赖需要时间，请耐心等待!"
+echo
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 rm -rf npm.sh
 cd /ql
@@ -99,7 +99,8 @@ apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql
-
+echo
+echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -158,7 +159,8 @@ if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"微信_金银手指","command":"task wx_jysz.js","schedule":"0 8-22/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634097051985'
 fi
-
+echo
+echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
     TIME g "执行WSKEY转换PT_KEY操作"
@@ -174,6 +176,9 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
 	echo
     fi
 fi
+if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
+    TIME y "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
+fi
 echo
 echo
 TIME g "拉取脚本"
@@ -184,11 +189,6 @@ ql extra |tee azcg.log
 rm -rf /ql/qlwj
 
 echo
-if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
-    TIME y "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
-fi
-echo
-echo
 if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
 	TIME g "脚本安装完成，下面开始安装依赖!"
 	rm -fr /ql/azcg.log
@@ -198,8 +198,4 @@ else
 	exit 1
 fi
 echo
-echo
-echo
-echo
-
 exit 0

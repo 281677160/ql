@@ -34,7 +34,7 @@ echo
 echo
 echo
 sleep 8
-npm config set registry https://registry.npm.taobao.org
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 rm -rf npm.sh
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql

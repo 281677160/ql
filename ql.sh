@@ -84,7 +84,7 @@ fi
 echo
 echo
 [[ "${QING_PORT}" == "YES" ]] && {
-	TIME g "请设置端口，默认为端口[5700]，不懂设置的话，直接回车跳过"
+	TIME g "请设置端口，默认端口为[5700]，不懂设置的话，直接回车跳过"
 	read -p " 请输入端口：" QL_PORT
 	QL_PORT=${QL_PORT:-"5700"}
 	TIME y "您端口为：${QL_PORT}"

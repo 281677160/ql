@@ -179,6 +179,7 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	docker rm "${dockerid}"
 	docker rmi "${imagesid}"
 fi
+mv /opt/ql /root/qlbf
 rm -rf /opt/ql
 rm -rf /root/ql
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then

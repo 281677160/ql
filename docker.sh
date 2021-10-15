@@ -27,12 +27,18 @@ TIME() {
 
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	export Aptget="yum"
+	yum -y update
+	yum install -y sudo wget
 	export XITONG="cent_os"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	export Aptget="apt-get"
+	apt-get -y update
+	apt-get install -y sudo wget
 	export XITONG="ubuntu_os"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	export Aptget="apt"
+	apt-get -y update
+	apt-get install -y sudo wget
 	export XITONG="debian_os"
 else
 	echo
@@ -88,8 +94,6 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 fi
 echo
 TIME y "正在安装docker，请耐心等候..."
-"${Aptget}" -y update
-"${Aptget}" install -y sudo curl
 echo
 if [[ ${XITONG} == "cent_os" ]]; then
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2

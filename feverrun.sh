@@ -65,6 +65,41 @@ cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
 cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 
+TIME y "安装依赖需要时间，请耐心等待!"
+echo
+sleep 3
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+rm -rf npm.sh
+cd /ql
+cnpm install -g typescript
+cd /ql
+cnpm install axios date-fns
+cd /ql
+cnpm install fs
+cd /ql
+cnpm install crypto -g
+cd /ql
+cnpm install ts-md5 -S
+cd /ql
+cnpm install tslib -S
+cd /ql
+cnpm install jsdom
+cd /ql
+cnpm install png-js
+cd /ql
+cnpm install -g npm
+cd /ql
+cnpm i png-js
+cd /ql
+pip3 install requests
+cd /ql
+apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && cnpm install canvas --build-from-source
+cd /ql
+apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
+cd /ql
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
+cd /ql
+
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -124,8 +159,6 @@ if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"微信_金银手指","command":"task wx_jysz.js","schedule":"0 8-22/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634097051985'
 fi
 
-pip3 install requests
-
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
     TIME g "执行WSKEY转换PT_KEY操作"
@@ -141,6 +174,11 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
 	echo
     fi
 fi
+echo
+echo
+TIME g "拉取脚本"
+echo
+echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
 rm -rf /ql/qlwj
@@ -163,53 +201,5 @@ echo
 echo
 echo
 echo
-TIME l "安装依赖，依赖必须安装，要不然脚本不运行"
-echo
-TIME y "安装依赖需要时间，请耐心等待!"
-echo
-sleep 3
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-rm -rf npm.sh
-cd /ql
-cnpm install -g typescript
-cd /ql
-cnpm install axios date-fns
-cd /ql
-cnpm install fs
-cd /ql
-cnpm install crypto -g
-cd /ql
-cnpm install ts-md5 -S
-cd /ql
-cnpm install tslib -S
-cd /ql
-cnpm install jsdom
-cd /ql
-cnpm install png-js
-cd /ql
-cnpm install -g npm
-cd /ql
-cnpm i png-js
-cd /ql
-pip3 install requests
-cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && cnpm install canvas --build-from-source
-cd /ql
-apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
-cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
-cd /ql
-package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
-for i in $package_name; do
-    case $i in
-        canvas)
-            cd /ql/scripts
-            npm ls $i
-            ;;
-        *)
-            npm ls $i -g
-            ;;
-    esac
-done
-TIME g "所有依赖安装完毕"
+
 exit 0

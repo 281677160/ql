@@ -28,17 +28,17 @@ TIME() {
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	export Aptget="yum"
 	yum -y update
-	yum install -y sudo wget
+	yum install -y sudo wget curl
 	export XITONG="cent_os"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	export Aptget="apt-get"
 	apt-get -y update
-	apt-get install -y sudo wget
+	apt-get install -y sudo wget curl
 	export XITONG="ubuntu_os"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	export Aptget="apt"
 	apt-get -y update
-	apt-get install -y sudo wget
+	apt-get install -y sudo wget curl
 	export XITONG="debian_os"
 else
 	echo

@@ -165,14 +165,9 @@ echo
 echo
 TIME l "安装依赖，依赖必须安装，要不然脚本不运行"
 echo
-TIME y "建议使用翻墙网络安装，要不然安装依赖的时候你会急死的"
+TIME y "安装依赖需要时间，请耐心等待!"
 echo
-TIME g "没翻墙条件，安装依赖太慢就换时间安装，我测试过不同时段有不同效果"
-echo
-TIME y "依赖安装时看到显示ERR!错误提示不用管，只要依赖能从头到尾的下载运行完毕就好了"echo
-TIME g "如果安装太慢，而想换时间安装的话，按键盘的 Ctrl+C 退出就行了，到时候可以使用我的一键独立安装依赖脚本来安装"
-echo
-sleep 5
+sleep 3
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 rm -rf npm.sh
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source

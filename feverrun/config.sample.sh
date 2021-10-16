@@ -414,9 +414,6 @@ export JDDJ_CKPATH="./jdCookie.js"
 ### 京东工业品加购任务
 export FS_LEVEL="car"
 
-### 美丽研究院开关
-export JD_USER_AGENT="true"
-
 ### 微信_金银手指 阅读脚本
 export soy_wx_jysz_User_Agent=""
 export soy_wx_jysz_token=""

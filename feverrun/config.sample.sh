@@ -244,7 +244,7 @@ export NOTIFY_AUTHOR="青龙"
 export NOTIFY_NOLOGINSUCCESS="true"
 ### 9. CK失效时自动执行
 ### 当接收到发送CK失效通知执行子线程任务.(jd_CheckCK.js 可替换成其他任意qinglong支持的脚本文件.)
-export NOTIFY_CKTASK="feverrun_my_scripts_jd_check_cookie.js"
+export NOTIFY_CKTASK="jd_CheckCK.js"
 
 # curtinlv 环境变量
 ## 1、赚京豆
@@ -262,7 +262,7 @@ export cash_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\
 ### 变量ENV 指定开团账号。可填用户名 或 pt_pin 的值。示例：export jxgc_kaituan="用户1&用户2"
 export jxgc_kaituan="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\)\S*;/\1/g; s/ /\&/g;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
 ## 5、入会开卡
-### int，入会送豆满足此值，否则不入会
+### 开卡入会送豆满足此值，否则不入会（默认没获得30豆不进）
 export openCardBean="30"
 ### 布尔值，是否记录符合条件的shopid(默认True)
 export record="true"
@@ -416,9 +416,6 @@ export FS_LEVEL="car"
 
 ### 美丽研究院开关
 export JD_USER_AGENT="true"
-
-### 开卡入会设置，少于N数获豆不进（默认少于获得30豆的不进）
-export openCardBean="30"
 
 ### 微信_金银手指 阅读脚本
 export soy_wx_jysz_token=""

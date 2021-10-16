@@ -63,44 +63,6 @@ cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
 cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 echo
-echo
-TIME y "开始安装依赖，安装依赖需要时间，请耐心等待!"
-echo
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-rm -rf npm.sh
-cd /ql
-cnpm install -g typescript
-cd /ql
-cnpm install axios date-fns
-cd /ql
-cnpm install fs
-cd /ql
-cnpm install -g ws
-cd /ql
-cnpm install crypto -g
-cd /ql
-cnpm install ts-md5 -S
-cd /ql
-cnpm install tslib -S
-cd /ql
-cnpm install jsdom
-cd /ql
-cnpm install png-js
-cd /ql
-cnpm install -g npm
-cd /ql
-cnpm i png-js
-cd /ql
-pip3 install requests
-cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && cnpm install canvas --build-from-source
-cd /ql
-apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
-cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
-cd /ql
-echo
-echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -198,4 +160,32 @@ else
 	exit 1
 fi
 echo
+npm config set registry https://registry.npm.taobao.org
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
+cd /ql
+npm install -g typescript
+cd /ql
+npm install axios date-fns
+cd /ql
+npm install fs
+cd /ql
+npm install -g ws
+cd /ql
+npm install crypto -g
+cd /ql
+npm install jsdom
+cd /ql
+npm install png-js
+cd /ql
+npm install -g npm
+cd /ql
+pnpm i png-js
+cd /ql
+pip3 install requests
+cd /ql
+apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+cd /ql
+apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
+cd /ql
+package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
 exit 0

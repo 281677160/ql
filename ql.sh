@@ -258,6 +258,7 @@ docker run -dit \
   whyour/qinglong:latest
 
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf
 	docker cp /root/nginx.conf "${dockerid}":/ql/docker/
 	docker restart qinglong
 	sleep 13

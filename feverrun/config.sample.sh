@@ -417,7 +417,7 @@ export FS_LEVEL="car"
 ### 美丽研究院开关
 export JD_USER_AGENT="true"
 
-### 入会开卡设置，少于N数获豆不进（默认少于获得30豆的不进）
+### 开卡入会设置，少于N数获豆不进（默认少于获得30豆的不进）
 export openCardBean="30"
 
 ### 微信_金银手指 阅读脚本

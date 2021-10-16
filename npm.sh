@@ -26,40 +26,44 @@ echo
 TIME y "安装依赖需要时间，请耐心等待!"
 echo
 sleep 3
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-rm -rf npm.sh
+echo
+echo
+npm config set registry https://registry.npm.taobao.org
 cd /ql
-cnpm install -g typescript
+npm install -g typescript
 cd /ql
-cnpm install axios date-fns
+npm install axios date-fns
 cd /ql
-cnpm install fs
+npm install fs
 cd /ql
-cnpm install -g ws
+npm install -g ws
 cd /ql
-cnpm install crypto -g
+npm install crypto -g
 cd /ql
-cnpm install ts-md5 -S
+npm install jsdom
 cd /ql
-cnpm install tslib -S
+npm install png-js
 cd /ql
-cnpm install jsdom
+npm install -g npm
 cd /ql
-cnpm install png-js
-cd /ql
-cnpm install -g npm
-cd /ql
-cnpm i png-js
+npm i png-js
 cd /ql
 pip3 install requests
 cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && cnpm install canvas --build-from-source
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
+cd /ql
+apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cnpm i && cnpm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
-cd /ql
 package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
+cd /ql
+echo
+echo
+TIME g "依赖安装完毕..."
+echo
+echo
+package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require"
 for i in $package_name; do
     case $i in
         canvas)

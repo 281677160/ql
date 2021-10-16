@@ -257,7 +257,8 @@ docker run -dit \
   --restart always \
   whyour/qinglong:latest
 
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
+	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf
 	docker cp /root/nginx.conf "${dockerid}":/ql/docker/
 	docker restart qinglong

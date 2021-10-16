@@ -258,6 +258,7 @@ docker run -dit \
   whyour/qinglong:latest
 
 if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+	docker cp /root/nginx.conf "${dockerid}":/ql/docker/
 	docker restart qinglong
 	sleep 13
 	clear

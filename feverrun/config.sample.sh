@@ -197,8 +197,8 @@ export DREAMFACTORY_FORBID_ACCOUNT=""
 export PURCHASE_SHOPS="true"
 ## 21、京喜工厂拼团瓜分电力活动的activeId（当前需抓包替换或去群里求别人分享）
 export TUAN_ACTIVEID=""
-## 22、京东UA。点点券脚本运行环境变量
-export JD_USER_AGENT=""
+## 22、美丽研究院开关
+export JD_USER_AGENT="true"
 
 # ccwav 环境变量
 ## [1] jd_CheckCK.js

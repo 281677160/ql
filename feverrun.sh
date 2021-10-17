@@ -58,6 +58,7 @@ chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
 cp -Rf /ql/qlwj/feverrun/extra.sh /ql/config/extra.sh
+cp -Rf /ql/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js

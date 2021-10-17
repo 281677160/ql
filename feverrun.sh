@@ -172,7 +172,7 @@ if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
 fi
 echo
 if [[ -e /ql/sampleenv.sh ]]; then
-	cp -Rf /ql/sampleenv.sh /ql/config/env.sh
+	cp /ql/sampleenv.sh /ql/config/env.sh
 fi
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then

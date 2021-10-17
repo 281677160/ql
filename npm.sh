@@ -30,23 +30,35 @@ echo
 echo
 npm config set registry https://registry.npm.taobao.org
 cd /ql
-npm install -g typescript
-cd /ql
-npm install axios date-fns
-cd /ql
-npm install fs
-cd /ql
-npm install -g ws
-cd /ql
-npm install crypto -g
-cd /ql
-npm install jsdom
-cd /ql
-npm install png-js
-cd /ql
 npm install -g npm
 cd /ql
-npm i png-js
+npm install -g png-js
+cd /ql
+npm install -g date-fns
+cd /ql
+npm install -g axios
+cd /ql
+npm install -g crypto-js
+cd /ql
+npm install -g ts-md5
+cd /ql
+npm install -g tslib
+cd /ql
+npm install -g @types/node
+cd /ql
+npm install -g requests
+cd /ql
+npm install -g tough-cookie
+cd /ql
+npm install -g jsdom
+cd /ql
+npm install -g download
+cd /ql
+npm install -g tunnel
+cd /ql
+npm install -g fs
+cd /ql
+npm install -g ws
 cd /ql
 pip3 install requests
 cd /ql
@@ -56,24 +68,7 @@ apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts &
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
-package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
-cd /ql
-echo
 echo
 TIME g "依赖安装完毕..."
 echo
-echo
-package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require"
-for i in $package_name; do
-    case $i in
-        canvas)
-            cd /ql/scripts
-            npm ls $i
-            ;;
-        *)
-            npm ls $i -g
-            ;;
-    esac
-done
-TIME g "所有依赖安装完毕"
 exit 0

@@ -167,9 +167,12 @@ else
 		echo
 		sleep 3
 		exit 1
+	else
+		systemctl start docker
+		sleep 8
 	fi
 fi
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo

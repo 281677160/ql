@@ -175,7 +175,10 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	if [ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]; then
 		echo
-		TIME y "为避免损失，正在把 /opt/ql/config 备份到 /root/qlconfig"
+		TIME g "为避免损失，正在把 /opt/ql/config 备份到 /root/qlconfig"
+		echo
+		TIME y "如有需要备份文件的请到 /root/qlconfig 查看"
+		echo
 		rm -fr /root/qlconfig
 		mv /opt/ql/config /root/qlconfig
 		rm -rf /opt/ql

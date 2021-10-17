@@ -171,7 +171,7 @@ if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"微信_金银手指","command":"task wx_jysz.js","schedule":"0 8-22/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634097051985'
 fi
 echo
-if [[ "${Beifen_wenjian}" == "YES" ]]; then
+if [[ -e /ql/sampleenv.sh ]]; then
 	cp -Rf /ql/sampleenv.sh /ql/config/env.sh
 fi
 echo

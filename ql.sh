@@ -146,6 +146,12 @@ else
 		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 		if [[ $? -ne 0 ]];then
 			wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
+			if [[ $? -ne 0 ]];then
+				echo
+				TIME r "下载安装docker文件失败，请检查网络..."
+				exit 1
+				echo
+			fi
 		fi
 		
 	fi
@@ -303,6 +309,12 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 			if [[ $? -ne 0 ]];then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
+				if [[ $? -ne 0 ]];then
+					echo
+					TIME r "下载脚本文件失败，请检查网络..."
+					exit 1
+					echo
+				fi
 			fi
 			sleep 2
 			exit 0

@@ -290,83 +290,90 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	echo
 	echo
-	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
-	echo
-	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
-	echo
-	TIME g "请使用 IP:端口 在浏览器打开控制面板"
-	echo
-	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
-	echo
-	TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才继续下一步操作"
-	echo
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+		echo
+		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
+		echo
+		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
+		echo
+		TIME g "检测到你已有配置，正在使用您的旧帐号密码和还原环境变量配置继续使用"
+		echo
+		docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+		if [[ $? -ne 0 ]];then
+			docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			if [[ $? -ne 0 ]];then
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-				if [[ $? -ne 0 ]];then
-					echo
-					TIME r "下载脚本文件失败，请检查网络..."
-					exit 1
-					echo
-				fi
+				echo
+				TIME r "下载脚本文件失败，请检查网络..."
+				exit 1
+				echo
 			fi
+		fi
+		if [[ ${Beifen_wenjian} == "YES" ]]; then
+			echo
+			echo
+			TIME g "正在重启青龙，请稍等..."
+			echo
+			echo
+			docker restart qinglong
+			sleep 10
+			echo
+			echo
+			TIME y "青龙重启完成..."
+			echo
+			echo
+		fi
 	
 	else
-	while :; do
-	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-		S="Yy"
-	else
+		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 		echo
-		TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
+		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 		echo
-	fi
-	case $MENU in
-		[${S}])
+		TIME g "请使用 IP:端口 在浏览器打开控制面板"
+		echo
+		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+		echo
+		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才继续下一步操作"
+		echo
+		while :; do
+		read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
+		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+			S="Yy"
+		else
 			echo
-			TIME y "开始安装脚本，请耐心等待..."
+			TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
 			echo
-			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-			if [[ $? -ne 0 ]];then
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
+		fi
+		case $MENU in
+			[${S}])
+				echo
+				TIME y "开始安装脚本，请耐心等待..."
+				echo
+				docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 				if [[ $? -ne 0 ]];then
-					echo
-					TIME r "下载脚本文件失败，请检查网络..."
-					exit 1
-					echo
+					docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
+					if [[ $? -ne 0 ]];then
+						echo
+						TIME r "下载脚本文件失败，请检查网络..."
+						exit 1
+						echo
+					fi
 				fi
-			fi
-			if [[ ${Beifen_wenjian} == "YES" ]]; then
+				exit 0
+			break
+			;;
+			[Nn])
 				echo
+				TIME r "退出安装程序!"
 				echo
-				TIME g "正在重启青龙，请稍等..."
-				echo
-				echo
-				docker restart qinglong
-				sleep 10
-				echo
-				echo
-				TIME y "青龙重启完成..."
-				echo
-				echo
-			fi
-			exit 0
-		break
-		;;
-		[Nn])
-			echo
-			TIME r "退出安装程序!"
-			echo
-			sleep 2
-			exit 1
-		break
-    		;;
-    		*)
-			TIME r ""
-		;;
-	esac
-	done
+				sleep 2
+				exit 1
+			break
+    			;;
+    			*)
+				TIME r ""
+			;;
+		esac
+		done
 	fi
 else
 	echo

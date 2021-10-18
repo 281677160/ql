@@ -183,9 +183,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	if [ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]; then
 		echo
-		TIME g "为避免损失，正在把 /opt/ql/config 备份到 /root/qlconfig"
+		TIME g "为避免损失，正在把 /opt/ql/config和/opt/ql/db 备份到 /root 文件夹"
 		echo
-		TIME y "如有需要备份文件的请到 /root/qlconfig 查看"
+		TIME y "如有需要备份文件的请到 /root 文件夹查看"
 		echo
 		export Beifen_wenjian="YES"
 		rm -fr /root/qlconfig

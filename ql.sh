@@ -272,6 +272,7 @@ docker run -dit \
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ "${Beifen_wenjian}" == "YES" ]]; then
 		docker cp /root/qlconfig/env.sh qinglong:/ql/sampleenv.sh
+		docker cp /root/ql/db/env.db qinglong:/ql/sampleenv.db
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf

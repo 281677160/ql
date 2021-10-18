@@ -348,6 +348,19 @@ else
 	exit 1
 fi
 echo
-docker restart qinglong
+if [[ ${Huanyuan_wenjian} == "YES" ]]; then
+	echo
+	echo
+	TIME g "因为还原了 env.sh 文件，正在重启青龙，请稍等..."
+	echo
+	echo
+	docker restart qinglong
+	sleep 10
+	echo
+	echo
+	TIME y "青龙重启完成..."
+	echo
+	echo
+fi
 echo
 exit 0

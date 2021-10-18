@@ -348,5 +348,6 @@ else
 	exit 1
 fi
 echo
+docker restart qinglong
 echo
 exit 0

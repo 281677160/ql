@@ -308,20 +308,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 				echo
 			fi
 		fi
-		if [[ ${Beifen_wenjian} == "YES" ]]; then
-			echo
-			echo
-			TIME g "正在重启青龙，请稍等..."
-			echo
-			echo
-			docker restart qinglong
-			sleep 10
-			echo
-			echo
-			TIME y "青龙重启完成..."
-			echo
-			echo
-		fi
+		exit 0
 	
 	else
 		TIME z "青龙面板安装完成，下一步进入安装脚本程序"

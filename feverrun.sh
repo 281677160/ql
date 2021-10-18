@@ -174,7 +174,9 @@ echo
 if [[ -e /ql/sampleenv.sh ]]; then
 	cp /ql/sampleenv.sh /ql/config/env.sh
 	cp /ql/sampleenv.db /ql/db/env.db
-	rm -fr /ql/{sampleenv.sh,sampleenv.db}
+	cp /ql/sampleauth.json /ql/config/auth.json
+	cp /ql/sampleauth.db /ql/db/auth.db
+	rm -fr /ql/{sampleenv.sh,sampleenv.db,sampleauth.json,sampleauth.db}
 fi
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then

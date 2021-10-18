@@ -291,8 +291,11 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	echo
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-		MENU="Y"
+		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
+		export MENU="y"
+		export S="y"
 	fi
+	sleep 2
 	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
 	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"

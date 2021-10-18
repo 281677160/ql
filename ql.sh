@@ -273,8 +273,10 @@ docker run -dit \
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ "${Beifen_wenjian}" == "YES" ]]; then
-		docker cp /root/qlconfig/env.sh qinglong:/ql/sampleenv.sh
-		docker cp /root/qldb/env.db qinglong:/ql/sampleenv.db
+		docker cp /root/qlconfig/env.sh qinglong:/ql/config/env.sh
+		docker cp /root/qldb/env.db qinglong:/ql/db/env.db
+		docker cp /root/qlconfig/auth.json qinglong:/ql/config/auth.json
+		docker cp /root/qldb/auth.db qinglong:/ql/db/auth.db
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf
@@ -288,6 +290,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	echo
 	echo
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+		MENU="Y"
+	fi
 	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
 	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"

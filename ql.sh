@@ -322,7 +322,20 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 					echo
 				fi
 			fi
-			sleep 2
+			if [[ ${Beifen_wenjian} == "YES" ]]; then
+				echo
+				echo
+				TIME g "正在重启青龙，请稍等..."
+				echo
+				echo
+				docker restart qinglong
+				sleep 10
+				echo
+				echo
+				TIME y "青龙重启完成..."
+				echo
+				echo
+			fi
 			exit 0
 		break
 		;;
@@ -346,21 +359,6 @@ else
 	echo
 	sleep 2
 	exit 1
-fi
-echo
-if [[ ${Beifen_wenjian} == "YES" ]]; then
-	echo
-	echo
-	TIME g "正在重启青龙，请稍等..."
-	echo
-	echo
-	docker restart qinglong
-	sleep 10
-	echo
-	echo
-	TIME y "青龙重启完成..."
-	echo
-	echo
 fi
 echo
 exit 0

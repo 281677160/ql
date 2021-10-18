@@ -181,18 +181,21 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]] || [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
-		echo
-		TIME g "为避免损失，正在把opt或者root的 /ql/config和/ql/db 备份到 /opt/qlbeifen 文件夹"
-		echo
-		TIME y "如有需要备份文件的请到 /opt/qlbeifen 文件夹查看"
-		echo
-		rm -fr /opt/qlbeifen && mkdir -p /opt/qlbeifen
-		cp -r /opt/ql/config /opt/qlbeifen/config > /dev/null 2>&1
-		cp -r /opt/ql/db /opt/qlbeifen/db > /dev/null 2>&1
-		cp -r /root/ql/config /opt/qlbeifen/config > /dev/null 2>&1
-		cp -r /root/ql/db /opt/qlbeifen/db > /dev/null 2>&1
-		rm -rf /opt/ql
+	if [[ -z "$(ls -A "/opt/qlbeifen1" 2>/dev/null)" ]]; then
+		if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]] || [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
+			echo
+			TIME g "为避免损失，正在把opt或者root的 /ql/config和/ql/db 备份到 /opt/qlbeifen 文件夹"
+			echo
+			TIME y "如有需要备份文件的请到 /opt/qlbeifen 文件夹查看"
+			echo
+			rm -fr /opt/qlbeifen && mkdir -p /opt/qlbeifen
+			cp -r /opt/ql/config /opt/qlbeifen/config > /dev/null 2>&1
+			cp -r /opt/ql/db /opt/qlbeifen/db > /dev/null 2>&1
+			cp -r /root/ql/config /opt/qlbeifen/config > /dev/null 2>&1
+			cp -r /root/ql/db /opt/qlbeifen/db > /dev/null 2>&1
+			cp -r /opt/qlbeifen /opt/qlbeifen1 > /dev/null 2>&1
+			rm -rf /opt/ql
+		fi
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
@@ -273,10 +276,10 @@ docker run -dit \
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "/opt/qlbeifen" 2>/dev/null)" ]]; then
-		docker cp /opt/qlbeifen/config/env.sh qinglong:/ql/config/env.sh
-		docker cp /opt/qlbeifen/db/env.db qinglong:/ql/db/env.db
-		docker cp /opt/qlbeifen/config/auth.json qinglong:/ql/config/auth.json
-		docker cp /opt/qlbeifen/db/auth.db qinglong:/ql/db/auth.db
+		docker cp /opt/qlbeifen1/config/env.sh qinglong:/ql/config/env.sh
+		docker cp /opt/qlbeifen1/db/env.db qinglong:/ql/db/env.db
+		docker cp /opt/qlbeifen1/config/auth.json qinglong:/ql/config/auth.json
+		docker cp /opt/qlbeifen1/db/auth.db qinglong:/ql/db/auth.db
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf
@@ -312,6 +315,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME y "使用 "${IP}":"${QL_PORT}" 在浏览器打开页面，刷新页面，然后用你的旧帐号密码登录您的青龙面板"
 		echo
 		TIME g "如果不记得帐号密码请在 /opt/ql/config/auth.json 文件查看"
+		rm -fr /opt/qlbeifen1
 		echo
 		exit 0
 	

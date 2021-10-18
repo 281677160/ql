@@ -172,6 +172,11 @@ if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
 fi
 echo
 if [[ -e /ql/sampleenv.sh ]]; then
+    	echo
+    	echo
+    	TIME g "还原 env.sh 文件"
+    	echo
+    	echo
 	cp /ql/sampleenv.sh /ql/config/env.sh
 	cp /ql/sampleenv.db /ql/db/env.db
 	rm -fr /ql/{sampleenv.sh,sampleenv.db}

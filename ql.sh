@@ -290,12 +290,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	echo
 	echo
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
-		export MENU="y"
-		export S="y"
-	fi
-	sleep 2
 	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
 	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
@@ -306,6 +300,19 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才继续下一步操作"
 	echo
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+			if [[ $? -ne 0 ]];then
+				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
+				if [[ $? -ne 0 ]];then
+					echo
+					TIME r "下载脚本文件失败，请检查网络..."
+					exit 1
+					echo
+				fi
+			fi
+	
+	else
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
@@ -360,6 +367,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		;;
 	esac
 	done
+	fi
 else
 	echo
 	echo

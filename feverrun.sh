@@ -180,6 +180,7 @@ if [[ -e /ql/sampleenv.sh ]] && [[ -e /ql/sampleenv.db ]]; then
 	cp /ql/sampleenv.sh /ql/config/env.sh
 	cp /ql/sampleenv.db /ql/db/env.db
 	rm -fr /ql/{sampleenv.sh,sampleenv.db}
+	export Huanyuan_wenjian="YES"
 fi
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then

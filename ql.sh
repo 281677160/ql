@@ -351,7 +351,7 @@ echo
 if [[ ${Beifen_wenjian} == "YES" ]]; then
 	echo
 	echo
-	TIME g "任务完成，正在重启青龙，请稍等..."
+	TIME g "正在重启青龙，请稍等..."
 	echo
 	echo
 	docker restart qinglong

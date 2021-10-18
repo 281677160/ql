@@ -189,7 +189,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		export Beifen_wenjian="YES"
 		rm -fr /root/qlconfig
+		rm -fr /root/qldb
 		mv /opt/ql/config /root/qlconfig
+		mv /opt/ql/db /root/qldb
 		rm -rf /opt/ql
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -272,7 +274,9 @@ docker run -dit \
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ "${Beifen_wenjian}" == "YES" ]]; then
 		docker cp /root/qlconfig/env.sh qinglong:/ql/sampleenv.sh
-		docker cp /root/ql/db/env.db qinglong:/ql/sampleenv.db
+		docker cp /root/qlconfig/auth.json qinglong:/ql/sampleauth.json
+		docker cp /root/qldb/env.db qinglong:/ql/sampleenv.db
+		docker cp /root/qldb/auth.db qinglong:/ql/sampleauth.db
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf

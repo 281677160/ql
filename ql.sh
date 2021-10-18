@@ -308,6 +308,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 				echo
 			fi
 		fi
+		echo
+		TIME y "请刷新浏览器，使用你的旧帐号密码登录您的青龙面板"
+		echo
 		exit 0
 	
 	else

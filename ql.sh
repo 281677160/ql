@@ -36,7 +36,7 @@ if [[ "$USER" == "root" ]]; then
 	TIME z "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
 	TIME z "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker，如果空间太小请挂载好硬盘"
 	TIME z "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"
-	TIME z "如果您以前青龙文件在/opt/ql，如果您的[帐号密码文件]和[环境变量文件]符合要求，就会继续使用"
+	TIME z "如果您以前青龙文件在root/ql或者/opt/ql，如果您的[帐号密码文件]和[环境变量文件]符合要求，就会继续使用"
 	TIME g "如要不能接受的话，请选择 3 回车退出程序!"
 	echo
 	echo
@@ -181,17 +181,18 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	if [ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]; then
+	if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]] || [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
 		echo
-		TIME g "为避免损失，正在把 /opt/ql/config和/opt/ql/db 备份到 /root 文件夹"
+		TIME g "为避免损失，正在把opt或者root的 /ql/config和/ql/db 备份到 /opt/qlbeifen 文件夹"
 		echo
-		TIME y "如有需要备份文件的请到 /root 文件夹查看[qlconfig和qldb]"
+		TIME y "如有需要备份文件的请到 /opt/qlbeifen 文件夹查看"
 		echo
 		export Beifen_wenjian="YES"
-		rm -fr /root/qlconfig
-		rm -fr /root/qldb
-		mv /opt/ql/config /root/qlconfig
-		mv /opt/ql/db /root/qldb
+		rm -fr /opt/qlbeifen && mkdir -p /opt/qlbeifen
+		cp -r /opt/ql/config /opt/qlbeifen/config > /dev/null 2>&1
+		cp -r /opt/ql/db /opt/qlbeifen/db > /dev/null 2>&1
+		cp -r /root/ql/config /opt/qlbeifen/config > /dev/null 2>&1
+		cp -r /root/ql/db /opt/qlbeifen/db > /dev/null 2>&1
 		rm -rf /opt/ql
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -273,10 +274,10 @@ docker run -dit \
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ "${Beifen_wenjian}" == "YES" ]]; then
-		docker cp /root/qlconfig/env.sh qinglong:/ql/config/env.sh
-		docker cp /root/qldb/env.db qinglong:/ql/db/env.db
-		docker cp /root/qlconfig/auth.json qinglong:/ql/config/auth.json
-		docker cp /root/qldb/auth.db qinglong:/ql/db/auth.db
+		docker cp /opt/qlbeifen/config/env.sh qinglong:/ql/config/env.sh
+		docker cp /opt/qlbeifen/db/env.db qinglong:/ql/db/env.db
+		docker cp /opt/qlbeifen/config/auth.json qinglong:/ql/config/auth.json
+		docker cp /opt/qlbeifen/db/auth.db qinglong:/ql/db/auth.db
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf

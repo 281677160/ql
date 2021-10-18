@@ -309,7 +309,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			fi
 		fi
 		echo
-		TIME y "请刷新浏览器，使用你的旧帐号密码登录您的青龙面板"
+		TIME y "使用 "${IP}":"${QL_PORT}" 在浏览器打开页面，刷新页面，然后用你的旧帐号密码登录您的青龙面板"
+		echo
+		TIME g "如果不记得帐号密码请在 /opt/ql/config/auth.json 文件查看"
 		echo
 		exit 0
 	

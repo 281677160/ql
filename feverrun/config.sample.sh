@@ -156,7 +156,7 @@ export JOY_RUN_FLAG="true"
 ## 如果您有5个账号但只写了四个数字，那么第5个账号将默认参加2人赛，账号如果更多，与此类似
 export JOY_TEAM_LEVEL="2&2&50&10"
 ## 6、宠汪汪赛跑自己账号内部互助。输入true为开启内部互助
-export JOY_RUN_HELP_MYSELF="true"
+export JOY_RUN_HELP_MYSELF="false"
 ## 7、宠汪汪积分兑换多少京豆。目前可填值为20或者500,脚本默认0,0表示不兑换京豆
 export JD_JOY_REWARD_NAME="500"
 ## 8、东东超市兑换京豆数量。目前可输入值为20或者1000，或者其他商品的名称,例如碧浪洗衣凝珠

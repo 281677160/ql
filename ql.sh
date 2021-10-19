@@ -215,7 +215,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		echo
 	fi
 else
-	Ubunkj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1')"
+	Ubunkj="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1')"
 	FINAL=`echo ${Ubunkj: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
@@ -240,7 +240,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		exit 1
 	fi
 else
-	Ubuntu_kj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
+	Ubuntu_kj="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
 	Kongjian="$(awk -v num1=${Ubuntu_kj} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
 		echo
 		TIME y "您当前系统可用空间为${Ubuntu_kj}G"

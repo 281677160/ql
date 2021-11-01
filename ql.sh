@@ -112,9 +112,9 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	apt -y install sudo wget curl git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	if [[ -f /opt/docker ]]; then
+	if [[ -d /opt/docker ]]; then
 		QL_PATH="/opt"
-	elif [[ -f /mnt/*/docker ]]; then
+	elif [[ -d /mnt/*/docker ]]; then
 		QL_PATH="/mnt"
 	else
 		TIME g "没找到docker路径"

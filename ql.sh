@@ -53,14 +53,14 @@ if [[ "$USER" == "root" ]]; then
 	read -p " [输入您选择的编码]： " SCQL
 	case $SCQL in
 		1)
-			QL_PORT="5700"
-			QING_PORT="YES"
-			NETWORK="-p ${QL_PORT}:5700"
+			export QL_PORT="5700"
+			export QING_PORT="YES"
+			export NETWORK="-p ${QL_PORT}:5700"
 		break
 		;;
 		2)
-			NETWORK="--net host"
-			QL_PORT="5700"
+			export NETWORK="--net host"
+			export QL_PORT="5700"
 		break
 		;;
 		3)
@@ -85,9 +85,9 @@ echo
 [[ "${QING_PORT}" == "YES" ]] && {
 	TIME g "请设置端口，默认端口为[5700]，不懂设置的话，直接回车跳过"
 	read -p " 请输入端口：" QL_PORT
-	QL_PORT=${QL_PORT:-"5700"}
+	export QL_PORT=${QL_PORT:-"5700"}
 	TIME y "您端口为：${QL_PORT}"
-	NETWORK="-p ${QL_PORT}:5700"
+	export NETWORK="-p ${QL_PORT}:5700"
 }
 echo
 echo
@@ -95,29 +95,29 @@ rm -fr ql.sh
 echo
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
-	QL_PATH="/opt"
+	export QL_PATH="/opt"
 	yum -y update
 	yum -y install sudo wget curl git
 	yum -y install net-tools.x86_64
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
-	QL_PATH="/opt"
+	export QL_PATH="/opt"
 	apt-get -y update
 	apt-get -y install sudo wget curl git
 	apt-get -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
-	QL_PATH="/opt"
+	export QL_PATH="/opt"
 	apt -y update
 	apt -y install sudo wget curl git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	if [[ -d /opt/docker ]]; then
-		QL_PATH="/opt"
-		QL_Kongjian="/opt/docker"
+		export QL_PATH="/opt"
+		export QL_Kongjian="/opt/docker"
 	elif [[ -d /mnt/mmcblk2p4/docker ]]; then
-		QL_PATH="/root"
-		QL_Kongjian="/mnt/mmcblk2p4/docker"
+		export QL_PATH="/root"
+		export QL_Kongjian="/mnt/mmcblk2p4/docker"
 	else
 		TIME g "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
 		exit 1

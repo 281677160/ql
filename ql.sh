@@ -112,7 +112,13 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	apt -y install sudo wget curl git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	QL_PATH="/opt"
+	if [[ -f /opt/docker ]]; then
+		QL_PATH="/opt"
+	elif [[ -f /mnt/*/docker ]]; then
+		QL_PATH="/mnt"
+	else
+		TIME g "没找到docker路径"
+	fi
 	XTong="openwrt"
 	opkg list | awk '{print $1}' > Installed_PKG_List
 	if [[ ! "$(cat Installed_PKG_List)" =~ git-http ]]; then

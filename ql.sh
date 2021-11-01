@@ -114,10 +114,13 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	if [[ -d /opt/docker ]]; then
 		QL_PATH="/opt"
-	elif [[ -d /mnt/*/docker ]]; then
-		QL_PATH="/mnt"
+		QL_Kongjian="/opt/docker"
+	elif [[ -d /mnt/mmcblk2p4/docker ]]; then
+		QL_PATH="/root"
+		QL_Kongjian="/mnt/mmcblk2p4/docker"
 	else
-		TIME g "没找到docker路径"
+		TIME g "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
+		exit 1
 	fi
 	XTong="openwrt"
 	opkg list | awk '{print $1}' > Installed_PKG_List
@@ -188,19 +191,28 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
 	if [[ -z "$(ls -A "/opt/qlbeifen1" 2>/dev/null)" ]]; then
-		if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]] || [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
+		if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]]; then
 			echo
-			TIME g "为避免损失，正在把opt或者root的 /ql/config和/ql/db 备份到 /opt/qlbeifen 文件夹"
+			TIME g "为避免损失，正在把opt的 /ql/config和/ql/db 备份到 /opt/qlbeifen 文件夹"
 			echo
 			TIME y "如有需要备份文件的请到 /opt/qlbeifen 文件夹查看"
 			echo
 			rm -fr /opt/qlbeifen && mkdir -p /opt/qlbeifen
 			cp -r /opt/ql/config /opt/qlbeifen/config > /dev/null 2>&1
 			cp -r /opt/ql/db /opt/qlbeifen/db > /dev/null 2>&1
-			cp -r /root/ql/config /opt/qlbeifen/config > /dev/null 2>&1
-			cp -r /root/ql/db /opt/qlbeifen/db > /dev/null 2>&1
 			cp -r /opt/qlbeifen /opt/qlbeifen1 > /dev/null 2>&1
 			rm -rf /opt/ql
+		 elif [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
+			echo
+			TIME g "为避免损失，正在把root的 /ql/config和/ql/db 备份到 /root/qlbeifen 文件夹"
+			echo
+			TIME y "如有需要备份文件的请到 /root/qlbeifen 文件夹查看"
+			echo
+			rm -fr /root/qlbeifen && mkdir -p /root/qlbeifen
+			cp -r /root/ql/config /root/qlbeifen/config > /dev/null 2>&1
+			cp -r /root/ql/db /root/qlbeifen/db > /dev/null 2>&1
+			cp -r /root/qlbeifen /root/qlbeifen1 > /dev/null 2>&1
+			rm -rf /root/ql
 		fi
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -210,7 +222,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	docker rmi "${imagesid}"
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
+	Available="$(df -h | grep "${QL_Kongjian}" | awk '{print $4}' | awk 'NR==1')"
 	FINAL=`echo ${Available: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
@@ -233,7 +245,7 @@ else
 	fi
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
+	Overlay_Available="$(df -h | grep "${QL_Kongjian}" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
 	Kongjian="$(awk -v num1=${Overlay_Available} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
 		echo
 		TIME y "您当前系统可用空间为${Overlay_Available}G"

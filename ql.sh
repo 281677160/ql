@@ -293,11 +293,11 @@ docker run -dit \
   whyour/qinglong:latest
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-	if [[ -n "$(ls -A "/opt/qlbeifen1" 2>/dev/null)" ]]; then
-		docker cp /opt/qlbeifen1/config/env.sh qinglong:/ql/config/env.sh
-		docker cp /opt/qlbeifen1/db/env.db qinglong:/ql/db/env.db
-		docker cp /opt/qlbeifen1/config/auth.json qinglong:/ql/config/auth.json
-		docker cp /opt/qlbeifen1/db/auth.db qinglong:/ql/db/auth.db
+	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
+		docker cp /${QL_PATH}/qlbeifen1/config/env.sh qinglong:/ql/config/env.sh
+		docker cp /${QL_PATH}/qlbeifen1/db/env.db qinglong:/ql/db/env.db
+		docker cp /${QL_PATH}/qlbeifen1/config/auth.json qinglong:/ql/config/auth.json
+		docker cp /${QL_PATH}/qlbeifen1/db/auth.db qinglong:/ql/db/auth.db
 	fi
 	docker restart qinglong
 	sleep 10

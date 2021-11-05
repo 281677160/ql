@@ -78,6 +78,8 @@ npm install -g axios
 cd /ql
 npm install -g crypto-js
 cd /ql
+npm install -g md5
+cd /ql
 npm install -g ts-md5
 cd /ql
 npm install -g tslib
@@ -99,8 +101,6 @@ cd /ql
 npm install -g ws
 cd /ql
 pnpm install js-base64
-cd /ql
-pip3 install requests
 cd /ql
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 cd /ql

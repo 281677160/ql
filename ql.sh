@@ -152,7 +152,7 @@ else
 		TIME y "没发现有docker，正在安装docker，请稍后..."
 		echo
 		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
-		if [[ $? -ne 0 ]];then
+		if [[ ! 0 -eq $? ]]; then
 			wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
 			if [[ $? -ne 0 ]];then
 				echo
@@ -315,9 +315,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		sleep 5
 		docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-		if [[ $? -ne 0 ]];then
+		if [[ ! 0 -eq $? ]]; then
 			docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-			if [[ $? -ne 0 ]];then
+			if [[ ! 0 -eq $? ]]; then
 				echo
 				TIME r "下载脚本文件失败，请检查网络..."
 				exit 1
@@ -359,9 +359,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 				TIME y "开始安装脚本，请耐心等待..."
 				echo
 				docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-				if [[ $? -ne 0 ]];then
+				if [[ ! 0 -eq $? ]]; then
 					docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-					if [[ $? -ne 0 ]];then
+					if [[ ! 0 -eq $? ]]; then
 						echo
 						TIME r "下载脚本文件失败，请检查网络..."
 						exit 1

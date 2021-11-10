@@ -338,11 +338,11 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 		echo
-		TIME g "请使用 IP:端口 在浏览器打开控制面板"
+		TIME g "请使用您的 IP:"${QL_PORT}" 在浏览器打开控制面板"
 		echo
 		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
 		echo
-		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才继续下一步操作"
+		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
 		echo
 		while :; do
 		read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU

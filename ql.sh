@@ -150,17 +150,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没发现有docker，正在安装docker，请稍后..."
-		echo
-		wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
-		if [[ ! 0 -eq $? ]]; then
-			wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
-			if [[ $? -ne 0 ]];then
-				echo
-				TIME r "下载安装docker文件失败，请检查网络..."
-				exit 1
-				echo
-			fi
-		fi
+		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
 		
 	fi
 fi
@@ -169,7 +159,7 @@ if [[ "${XTong}" == "openwrt" ]]; then
 	 	echo
 	 else
 		echo
-		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘"
+		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好硬盘"
 		echo
 		sleep 3
 		exit 1
@@ -193,24 +183,22 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -z "$(ls -A "/opt/qlbeifen1" 2>/dev/null)" ]]; then
 		if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]]; then
 			echo
-			TIME g "为避免损失，正在把opt的 /ql/config和/ql/db 备份到 /opt/qlbeifen 文件夹"
+			TIME g "为避免损失，正在把opt的 ql 备份到 /opt/qlbeifen 文件夹"
 			echo
 			TIME y "如有需要备份文件的请到 /opt/qlbeifen 文件夹查看"
 			echo
 			rm -fr /opt/qlbeifen && mkdir -p /opt/qlbeifen
-			cp -r /opt/ql/config /opt/qlbeifen/config > /dev/null 2>&1
-			cp -r /opt/ql/db /opt/qlbeifen/db > /dev/null 2>&1
+			cp -r /opt/ql /opt/qlbeifen/ql > /dev/null 2>&1
 			cp -r /opt/qlbeifen /opt/qlbeifen1 > /dev/null 2>&1
 			rm -rf /opt/ql
 		 elif [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
 			echo
-			TIME g "为避免损失，正在把root的 /ql/config和/ql/db 备份到 /root/qlbeifen 文件夹"
+			TIME g "为避免损失，正在把root的 ql 备份到 /root/qlbeifen 文件夹"
 			echo
 			TIME y "如有需要备份文件的请到 /root/qlbeifen 文件夹查看"
 			echo
 			rm -fr /root/qlbeifen && mkdir -p /root/qlbeifen
-			cp -r /root/ql/config /root/qlbeifen/config > /dev/null 2>&1
-			cp -r /root/ql/db /root/qlbeifen/db > /dev/null 2>&1
+			cp -r /root/ql /root/qlbeifen/ql > /dev/null 2>&1
 			cp -r /root/qlbeifen /root/qlbeifen1 > /dev/null 2>&1
 			rm -rf /root/ql
 		fi
@@ -271,9 +259,6 @@ else
 		exit 1
 	fi
 fi
-if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then
-	mkdir -p /opt
-fi
 echo
 echo
 TIME g "正在安装青龙面板，请稍后..."
@@ -294,10 +279,10 @@ docker run -dit \
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
-		docker cp ${QL_PATH}/qlbeifen1/config/env.sh qinglong:/ql/config/env.sh
-		docker cp ${QL_PATH}/qlbeifen1/db/env.db qinglong:/ql/db/env.db
-		docker cp ${QL_PATH}/qlbeifen1/config/auth.json qinglong:/ql/config/auth.json
-		docker cp ${QL_PATH}/qlbeifen1/db/auth.db qinglong:/ql/db/auth.db
+		docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
+		docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
+		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
+		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
 	fi
 	docker restart qinglong
 	sleep 10
@@ -309,27 +294,15 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 		echo
-		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
-		echo
 		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
 		echo
 		sleep 5
-		docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-		if [[ ! 0 -eq $? ]]; then
-			docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-			if [[ ! 0 -eq $? ]]; then
-				echo
-				TIME r "下载脚本文件失败，请检查网络..."
-				exit 1
-				echo
-			fi
-		fi
+		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		echo
-		TIME y "使用 "${IP}":"${QL_PORT}" 在浏览器打开页面，刷新页面，然后用你的旧帐号密码登录您的青龙面板"
+		TIME y "使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，然后用你的旧帐号密码登录您的青龙面板"
 		echo
 		TIME g "如果不记得帐号密码请在 ${QL_PATH}/ql/config/auth.json 文件查看"
-		rm -fr /opt/qlbeifen1
-		rm -fr /root/qlbeifen1
+		rm -fr ${QL_PATH}/qlbeifen1
 		echo
 		exit 0
 	
@@ -357,18 +330,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			[${S}])
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
-				echo
-				docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-				if [[ ! 0 -eq $? ]]; then
-					docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-					if [[ ! 0 -eq $? ]]; then
-						echo
-						TIME r "下载脚本文件失败，请检查网络..."
-						exit 1
-						echo
-					fi
-				fi
-				exit 0
+				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			break
 			;;
 			[Nn])

@@ -15,7 +15,7 @@ GithubProxyUrl="https://ghproxy.com/"
 ## 设置定时任务执行的超时时间，默认1h，后缀"s"代表秒(默认值), "m"代表分, "h"代表小时, "d"代表天
 CommandTimeoutTime="1h"
 ## 设置批量执行任务时的并发数，默认同时执行5个任务
-MaxConcurrentNum="9"
+MaxConcurrentNum="10"
 ## 在运行 task 命令时，随机延迟启动任务的最大延迟时间
 ## 默认给javascript任务加随机延迟，如 RandomDelay="300" ，表示任务将在 1-300 秒内随机延迟一个秒数，然后再运行，取消延迟赋值为空
 RandomDelay="20"

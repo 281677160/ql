@@ -37,19 +37,12 @@ wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
-git clone https://ghproxy.com/https://github.com/281677160/ql qlwj
-if [[ ! 0 -eq $? ]]; then
-	mkdir -p /ql/qlwj
-	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
-	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
-	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
-	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
-	curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
-	if [[ ! 0 -eq $? ]]; then
-		TIME y "应用文件下载失败"
-		    exit 1
-	fi
-fi
+mkdir -p /ql/qlwj
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
 
 # 授权
 chmod -R +x /ql/qlwj

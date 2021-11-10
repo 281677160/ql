@@ -414,8 +414,6 @@ export JDDJ_CKPATH="./jdCookie.js"
 ### 京东工业品加购任务
 export FS_LEVEL="car"
 
-export qjd_zlzh="jd3358633"
-
 
 
 ## 组队环境变量

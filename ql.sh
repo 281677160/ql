@@ -142,7 +142,7 @@ if [[ "${XTong}" == "openwrt" ]]; then
 	 	echo
 	 else
 		echo
-		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘"
+		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘,N1或者其他晶晨系列的挂载到的挂载到[mnt]"
 		echo
 		sleep 3
 		exit 1
@@ -160,7 +160,7 @@ if [[ "${XTong}" == "openwrt" ]]; then
 	 	echo
 	 else
 		echo
-		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好硬盘"
+		TIME r "没检测到docker，openwrt请自行安装docker，如果空间太小请挂载好[opt]路径的硬盘,N1或者其他晶晨系列的挂载到的挂载到[mnt]"
 		echo
 		sleep 3
 		exit 1

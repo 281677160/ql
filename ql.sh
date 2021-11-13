@@ -324,10 +324,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		read -p " ${memutishi}： " MENU
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 			S="Yy"
-		else
-			echo
-			TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
-			echo
 		fi
 		case $MENU in
 			[${S}])

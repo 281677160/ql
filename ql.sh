@@ -49,8 +49,8 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	TIME l " 3. 退出安装程序!"
 	echo
-	while :; do
 	scqlbianma="[输入您选择的编码]"
+	while :; do
 	read -p " ${scqlbianma}： " SCQL
 	case $SCQL in
 		1)
@@ -319,8 +319,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
 		echo
-		while :; do
 		memutishi="[ N/n ]退出程序，[ Y/y ]回车继续安装脚本"
+		while :; do
 		read -p " ${memutishi}： " MENU
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 			S="Yy"

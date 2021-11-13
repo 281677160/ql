@@ -150,7 +150,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没发现有docker，正在安装docker，请稍后..."
-		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh && bash docker.sh
+		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh && bash docker.sh
 		
 	fi
 fi
@@ -168,6 +168,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
+		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh && bash docker.sh
 		echo
 		sleep 3
 		exit 1

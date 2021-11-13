@@ -50,7 +50,8 @@ if [[ "$USER" == "root" ]]; then
 	TIME l " 3. 退出安装程序!"
 	echo
 	while :; do
-	read -p " [输入您选择的编码]： " SCQL
+	scqlbianma="[输入您选择的编码]"
+	read -p " ${scqlbianma}： " SCQL
 	case $SCQL in
 		1)
 			export QL_PORT="5700"
@@ -74,7 +75,7 @@ if [[ "$USER" == "root" ]]; then
     		;;
     		*)
 			echo
-			TIME b "提示：请输入正确的选择!"
+			scqlbianma="[请输入正确的编码]"
 			echo
 		;;
 	esac
@@ -215,7 +216,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	FINAL=`echo ${Available: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
-		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好大于2G的[opt]路径的硬盘"
+		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好大于2G的硬盘"
 		echo
 		sleep 2
 		exit 1
@@ -319,7 +320,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
 		echo
 		while :; do
-		read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
+		memutishi="[ N/n ]退出程序，[ Y/y ]回车继续安装脚本"
+		read -p " ${memutishi}： " MENU
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 			S="Yy"
 		else
@@ -343,7 +345,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			break
     			;;
     			*)
-				TIME r ""
+				memutishi="请先登录面板再按[Yy]进行下一步,或者现在按[Nn]结束"
 			;;
 		esac
 		done

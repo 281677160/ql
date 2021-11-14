@@ -294,9 +294,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		sleep 3
 		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 		echo
-		TIME y "请使用您的 IP:${QL_PORT} 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
-		echo
-		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
+		TIME y "请使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
 		echo

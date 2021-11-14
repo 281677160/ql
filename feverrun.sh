@@ -191,6 +191,7 @@ if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep
 	rm -fr /ql/azcg.log
 	rm -rf /ql/qlwj
 else
+	cp -Rf /ql/qlwj/auth.json /ql/scripts/auth.json
 	TIME r "脚本安装失败，请登录面板后，再用一键单独安装任务重新尝试!"
 	rm -fr /ql/azcg.log
 	rm -rf /ql/qlwj

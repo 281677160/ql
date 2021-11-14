@@ -287,9 +287,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 		echo
-		TIME z "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-		echo
-		sleep 3
+		TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 		docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 		echo
 		docker restart qinglong > /dev/null 2>&1

@@ -60,7 +60,10 @@ docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.
 
 
 ```
-#
+## 感谢！
+
+> [`whyour`](https://github.com/whyour/qinglong)
+> [`feverrun`](https://github.com/feverrun/my_scripts)
 #
 - # 捐赠
 - 如果你觉得此项目对你有帮助，请请我喝一杯82年的凉白开，感谢！
@@ -68,8 +71,3 @@ docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.
 -微信-
 # <img src="https://github.com/danshui-git/shuoming/blob/master/doc/weixin4.png" />
 #
-#
-## 感谢！
-
-> [`whyour`](https://github.com/whyour/qinglong)
-> [`feverrun`](https://github.com/feverrun/my_scripts)

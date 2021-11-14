@@ -31,7 +31,7 @@ pin=您的账号;wskey=您的wskey值
 
 
 
-# > 或者添加PT_KEY，WSKEY和PT_KEY二选一即可
+# > 或者添加PT_KEY，注意：WSKEY和PT_KEY二选一即可
 
 名称
 JD_COOKIE

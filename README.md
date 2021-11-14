@@ -28,9 +28,8 @@ JD_WSCK
 
 值
 pin=您的账号;wskey=您的wskey值
-```
 
-```sh
+
 
 # > 或者添加PT_KEY，WSKEY和PT_KEY二选一即可
 

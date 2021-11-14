@@ -291,11 +291,13 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	echo
-	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
+	TIME y "${IP}:${QL_PORT}  (IP检测因数太多，不一定准确，仅供参考)"
 	echo
 	TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
 	echo
 	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+	echo
+	TIME y "完成登录后,请设置好 wskey 或者 pt_key "	
 	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 	rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
 	echo

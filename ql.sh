@@ -207,7 +207,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好大于2G的硬盘"
 		echo
-		sleep 2
+		sleep 1
 		exit 1
 		echo
 	fi
@@ -218,7 +218,7 @@ else
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间容量"
 		echo
-		sleep 2
+		sleep 1
 		exit 1
 		echo
 	fi
@@ -233,7 +233,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好[opt]路径的硬盘"
 		echo
-		sleep 2
+		sleep 1
 		exit 1
 	fi
 else
@@ -246,7 +246,7 @@ else
 		echo
 		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
 		echo		
-		sleep 2
+		sleep 1
 		exit 1
 	fi
 fi
@@ -280,14 +280,14 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 	fi
 	docker restart qinglong
-	sleep 8
+	sleep 5
 	clear
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 	echo
 	docker restart qinglong > /dev/null 2>&1
-	sleep 3
+	sleep 2
 	clear
 	echo
 	echo

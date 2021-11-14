@@ -182,27 +182,18 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	if [[ -z "$(ls -A "/opt/qlbeifen1" 2>/dev/null)" ]]; then
-		if [[ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]]; then
+	if [[ -z "$(ls -A "$QL_PATH/qlbeifen1" 2>/dev/null)" ]]; then
+		if [[ -n "$(ls -A "$QL_PATH/ql/config" 2>/dev/null)" ]]; then
 			echo
-			TIME g "为避免损失，正在把opt的 ql 备份到 /opt/qlbeifen 文件夹"
+			TIME g "检测到 $QL_PATH/ql ,为避免损失，正在把 $QL_PATH/ql 备份到 $QL_PATH/qlbeifen 文件夹"
 			echo
-			TIME y "如有需要备份文件的请到 /opt/qlbeifen 文件夹查看"
+			TIME y "如有需要备份文件的请到 $QL_PATH/qlbeifen 文件夹查看"
 			echo
-			rm -fr /opt/qlbeifen && mkdir -p /opt/qlbeifen
-			cp -r /opt/ql /opt/qlbeifen/ql > /dev/null 2>&1
-			cp -r /opt/qlbeifen /opt/qlbeifen1 > /dev/null 2>&1
-			rm -rf /opt/ql
-		 elif [[ -n "$(ls -A "/root/ql/config" 2>/dev/null)" ]]; then
-			echo
-			TIME g "为避免损失，正在把root的 ql 备份到 /root/qlbeifen 文件夹"
-			echo
-			TIME y "如有需要备份文件的请到 /root/qlbeifen 文件夹查看"
-			echo
-			rm -fr /root/qlbeifen && mkdir -p /root/qlbeifen
-			cp -r /root/ql /root/qlbeifen/ql > /dev/null 2>&1
-			cp -r /root/qlbeifen /root/qlbeifen1 > /dev/null 2>&1
-			rm -rf /root/ql
+			rm -fr $QL_PATH/qlbeifen && mkdir -p $QL_PATH/qlbeifen
+			cp -r $QL_PATH/ql $QL_PATH/qlbeifen/ql > /dev/null 2>&1
+			cp -r $QL_PATH/qlbeifen $QL_PATH/qlbeifen1 > /dev/null 2>&1
+			rm -rf $QL_PATH/ql
+			sleep 3
 		fi
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})

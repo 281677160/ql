@@ -283,25 +283,20 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	sleep 8
 	clear
 	echo
+	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
+	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
 	echo
+	docker restart qinglong > /dev/null 2>&1
+	sleep 3
+	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 	echo
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-		echo
-		TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-		docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-		echo
-		docker restart qinglong > /dev/null 2>&1
-		sleep 3
-		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
-		echo
-		TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
-		echo
-		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
-		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
-		rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
-		echo
-		exit 0
-	fi
+	TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
+	echo
+	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
+	rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
+	echo
+	exit 0
 else
 	echo
 	echo

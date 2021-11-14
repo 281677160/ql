@@ -25,13 +25,13 @@ wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql
 
 # > 登录面板后，在‘ 环境变量 ’项添加 WSKEY 或者 PT_KEY
 
-# > 添加 wskey 或者 pt_key 都要注意KEY里面的分号，英文分号，记得别省略了
+# > 添加 wskey 或者 pt_key 都要注意KEY里面的分号，英文分号，记得别省略了，格式如下
 
 名称
 JD_WSCK
 
 值
-pin=您的账号;wskey=XXXXXX
+pin=您的账号;wskey=您的wskey值
 ```
 
 ```sh
@@ -42,7 +42,7 @@ pin=您的账号;wskey=XXXXXX
 JD_COOKIE
 
 值
-pt_key=XXXXXX;pt_pin=您的账号;
+pt_key=您的pt_key值;pt_pin=您的账号;
 ```
 
 #

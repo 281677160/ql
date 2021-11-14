@@ -296,55 +296,35 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 		echo
-		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
+		TIME g "检测到你已有配置，继续使用您的[环境变量文件]来安装使用!"
 		echo
 		sleep 5
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		echo
-		TIME y "使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，然后用你的旧帐号密码登录您的青龙面板"
+		TIME y "使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:"${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
 		echo
-		TIME g "如果不记得帐号密码请在 ${QL_PATH}/ql/config/auth.json 文件查看"
+		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
 		rm -fr ${QL_PATH}/qlbeifen1
 		echo
 		exit 0
 	
 	else
+		echo
 		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 		echo
-		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
+		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > ${QL_PATH}/ql/authbk.json
+		sleep 3
+		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 		echo
-		TIME g "请使用您的 IP:"${QL_PORT}" 在浏览器打开控制面板"
+		sleep 2
+		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		echo
-		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+		TIME y "使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:"${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
 		echo
-		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
+		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
+		rm -fr ${QL_PATH}/ql/authbk.json
 		echo
-		memutishi="[ N/n ]退出程序，[ Y/y ]回车继续安装脚本"
-		while :; do
-		read -p " ${memutishi}： " MENU
-		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-			S="Yy"
-		fi
-		case $MENU in
-			[${S}])
-				echo
-				TIME y "开始安装脚本，请耐心等待..."
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-			break
-			;;
-			[Nn])
-				echo
-				TIME r "退出安装程序!"
-				echo
-				sleep 2
-				exit 1
-			break
-    			;;
-    			*)
-				memutishi="请先登录面板再按[Yy]进行下一步,或者现在按[Nn]结束"
-			;;
-		esac
-		done
+		exit 0
 	fi
 else
 	echo

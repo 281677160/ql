@@ -3,10 +3,10 @@
 - 脚本适用于（ubuntu、debian、centos、openwrt）
 - 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
 - 自动检测docker，有则跳过，无则执行安装
-- openwrt请编译之时加入docker,然后挂载好盘
+- openwrt请[编译](https://github.com/281677160/build-actions)之时加入docker,然后挂载好盘
 - 如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装
 - 如果您以前青龙文件在root/ql或opt/ql，[环境变量文件]又符合要求，就会继续使用
-- 
+
 #### 🚩 一键安装青龙面板命令
 ```sh
 wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh

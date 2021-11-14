@@ -285,9 +285,13 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
+	else
+		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > ${QL_PATH}/ql/authbk.json
+		sleep 2
+		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 	fi
 	docker restart qinglong
-	sleep 10
+	sleep 8
 	clear
 	echo
 	echo
@@ -295,28 +299,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 		echo
 		TIME z "青龙面板安装完成，下一步进入安装脚本程序，请耐心等候..."
-		echo
-		TIME g "检测到你已有配置，继续使用您的[环境变量文件]来安装使用!"
-		echo
-		sleep 5
-		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
-		echo
-		docker restart qinglong
-		sleep 5
-		TIME y "请使用您的 IP:${QL_PORT} 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
-		echo
-		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
-		rm -fr ${QL_PATH}/qlbeifen1
-		echo
-		exit 0
-	
-	else
-		echo
-		TIME z "青龙面板安装完成，下一步进入安装脚本程序，请耐心等候..."
-		echo
-		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > ${QL_PATH}/ql/authbk.json
-		sleep 2
-		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 		echo
 		sleep 3
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
@@ -326,7 +308,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME y "请使用您的 IP:${QL_PORT} 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
 		echo
 		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
-		rm -fr ${QL_PATH}/ql/authbk.json
+		rm -fr ${QL_PATH}/qlbeifen1
 		echo
 		exit 0
 	fi

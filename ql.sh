@@ -315,10 +315,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME z "青龙面板安装完成，下一步进入安装脚本程序，请耐心等候..."
 		echo
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > ${QL_PATH}/ql/authbk.json
-		sleep 3
+		sleep 2
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 		echo
-		sleep 2
+		sleep 3
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		echo
 		docker restart qinglong

@@ -302,7 +302,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		echo
 		docker restart qinglong
-		TIME y "使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:"${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
+		sleep 5
+		TIME y "请使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:"${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
 		echo
 		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
 		rm -fr ${QL_PATH}/qlbeifen1
@@ -321,7 +322,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		echo
 		docker restart qinglong
-		TIME y "使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:"${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
+		sleep 5
+		TIME y "请使用您的 IP:"${QL_PORT}" 在浏览器打开页面，刷新页面，建议最好清除浏览器缓存再用IP:"${QL_PORT}登录面板，然后用帐号密码都是admin登录面板"
 		echo
 		TIME g "记住，首次登录帐号密码都是：admin，进入面板后更改帐号密码"
 		rm -fr ${QL_PATH}/ql/authbk.json

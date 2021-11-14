@@ -187,7 +187,7 @@ echo
 echo
 if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
 	cp -Rf /ql/qlwj/auth.json /ql/scripts/auth.json
-	TIME g "脚本安装完成!"
+	TIME g "脚本安装完成，正在重启青龙面板，请稍后...!"
 	rm -fr /ql/azcg.log
 	rm -rf /ql/qlwj
 else

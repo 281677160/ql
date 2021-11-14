@@ -175,7 +175,7 @@ else
 		exit 1
 	else
 		systemctl start docker
-		sleep 8
+		sleep 5
 	fi
 fi
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then

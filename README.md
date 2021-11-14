@@ -9,7 +9,7 @@
 # > 如果您以前青龙文件在root/ql或opt/ql，[环境变量文件]又符合要求，就会继续使用
  ```
 ---
-#### 执行以下命令
+#### 🚩 一键安装青龙面板命令
 ```sh
 wget -O ql.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh && bash ql.sh
 ```

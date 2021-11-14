@@ -43,6 +43,7 @@ curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > /ql/qlwj/auth.json
 
 # 授权
 chmod -R +x /ql/qlwj
@@ -177,7 +178,6 @@ echo
 echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
-rm -rf /ql/qlwj
 echo
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
@@ -186,11 +186,14 @@ fi
 echo
 echo
 if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
+	cp -Rf /ql/qlwj/auth.json /ql/scripts/auth.json
 	TIME g "脚本安装完成!"
 	rm -fr /ql/azcg.log
+	rm -rf /ql/qlwj
 else
 	TIME r "脚本安装失败，请用一键单独安装任务重新尝试!"
 	rm -fr /ql/azcg.log
+	rm -rf /ql/qlwj
 	exit 1
 fi
 echo

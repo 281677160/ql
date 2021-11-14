@@ -2,6 +2,7 @@
 ## 第一步
 - 脚本适用于（ubuntu、debian、centos、openwrt）
 - 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
+- N1或者其他晶晨系列安装在root文件夹，其他设备都安装在opt文件夹内
 - 自动检测docker，有则跳过，无则执行安装
 - openwrt请[编译](https://github.com/281677160/build-actions)之时加入docker,然后挂载好盘
 - 如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装

@@ -4,7 +4,7 @@
 #### 执行以下命令
 
 
-#### > 脚本适用于（ubuntu、debian、centos、openwrt）
+ > #### 脚本适用于（ubuntu、debian、centos、openwrt）
 #### > 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
 #### > 自动检测docker，有则跳过，无则执行安装
 #### > openwrt请编译之时加入docker,然后挂载好盘

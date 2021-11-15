@@ -293,7 +293,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	echo
-	TIME y "${IP}:${QL_PORT}  (IP检测因数太多，不一定准确，仅供参考)"
+	TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
 	echo
 	TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
 	echo

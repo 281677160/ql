@@ -57,9 +57,8 @@ echo
 TIME g "正在安装依赖，安装依赖需要时间，请耐心等候..."
 echo
 echo
-npm config set registry https://registry.npm.taobao.org
-cd /ql
-npm install -g npm
+npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+npm config get registry
 cd /ql
 npm install -g png-js
 cd /ql
@@ -95,9 +94,7 @@ npm install -g js-base64
 cd /ql
 npm install -g jieba
 cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
-cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm install -S ts-node typescript @types/node date-fns axios png-js canvas
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql

@@ -149,7 +149,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没发现有docker，正在安装docker，请稍后..."
-		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh && bash docker.sh
+		bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh)"
 		
 	fi
 fi
@@ -167,7 +167,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
-		wget -qO docker.sh https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh && bash docker.sh
+		bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh)"
 		echo
 		sleep 3
 		exit 1
@@ -284,7 +284,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
+	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 	echo
 	docker restart qinglong > /dev/null 2>&1
 	sleep 2

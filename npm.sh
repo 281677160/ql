@@ -27,8 +27,10 @@ TIME y "安装依赖需要时间，请耐心等待!"
 echo
 sleep 2
 pip3 install requests
+TIME l "安装依赖pnpm"
 timeout -k 1s 2m pnpm install
 pnpm install
+TIME l "更改pnpm源"
 pnpm config set registry https://registry.npm.taobao.org/
 pnpm config get registry
 TIME l "安装依赖png-js"

@@ -63,11 +63,9 @@ TIME l "安装依赖js-base64"
 pnpm install js-base64
 TIME l "安装依赖jieba"
 pnpm install jieba
-cd /ql
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install -S ts-node typescript canvas
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
-cd /ql
 echo
 TIME g "依赖安装完毕..."
 echo

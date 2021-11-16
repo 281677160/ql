@@ -29,7 +29,7 @@ sleep 2
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
 pnpm install
-pnpm install png-js date-fns axios crypto-js md5 ts-md5 tslib @types/node requests tough-cookie jsdom download tunnel fs ws js-base64 jieba --unsafe-perm
+pnpm install png-js date-fns axios crypto-js md5 ts-md5 tslib @types/node requests tough-cookie jsdom download tunnel fs ws js-base64 jiebats-node typescript canvas --unsafe-perm
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev

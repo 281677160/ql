@@ -32,7 +32,7 @@ timeout -k 1s 2m pnpm install
 TIME y "安装依赖pnpm"
 pnpm install
 TIME l "更改pnpm源"
-pnpm config set registry https://registry.npm.taobao.org/
+pnpm config set registry https://mirrors.huaweicloud.com/repository/npm/
 pnpm config get registry
 TIME l "安装依赖png-js"
 pnpm install png-js

@@ -30,41 +30,41 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
 pnpm install
 TIME l "安装依赖png-js"
-npm install png-js
+pnpm install png-js
 TIME l "安装依赖date-fns"
-npm install date-fns
+pnpm install date-fns
 TIME l "安装依赖axios"
-npm install axios
+pnpm install axios
 TIME l "安装依赖crypto-js"
-npm install crypto-js
+pnpm install crypto-js
 TIME l "安装依赖md5"
-npm install md5
+pnpm install md5
 TIME l "安装依赖ts-md5"
-npm install ts-md5
+pnpm install ts-md5
 TIME l "安装依赖tslib"
-npm install tslib
+pnpm install tslib
 TIME l "安装依赖@types/node"
-npm install @types/node
+pnpm install @types/node
 TIME l "安装依赖requests"
-npm install requests
+pnpm install requests
 TIME l "安装依赖tough-cookie"
-npm install tough-cookie
+pnpm install tough-cookie
 TIME l "安装依赖jsdom"
-npm install jsdom
+pnpm install jsdom
 TIME l "安装依赖download"
-npm install download
+pnpm install download
 TIME l "安装依赖tunnel"
-npm install tunnel
+pnpm install tunnel
 TIME l "安装依赖fs"
-npm install fs
+pnpm install fs
 TIME l "安装依赖ws"
-npm install ws
+pnpm install ws
 TIME l "安装依赖js-base64"
-npm install js-base64
+pnpm install js-base64
 TIME l "安装依赖jieba"
-npm install jieba
+pnpm install jieba
 cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm install -S ts-node typescript @types/node date-fns axios png-js canvas
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install -S ts-node typescript canvas
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql

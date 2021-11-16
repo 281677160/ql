@@ -26,9 +26,9 @@ echo
 TIME y "安装依赖需要时间，请耐心等待!"
 echo
 sleep 2
+pip3 install requests
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
-pip3 install requests
 pnpm install
 TIME l "安装依赖png-js"
 pnpm install png-js

@@ -25,50 +25,12 @@ TIME l "安装依赖..."
 echo
 TIME y "安装依赖需要时间，请耐心等待!"
 echo
-sleep 3
-echo
-echo
-npm config set registry https://registry.npm.taobao.org
-cd /ql
-npm install -g npm
-cd /ql
-npm install -g png-js
-cd /ql
-npm install -g date-fns
-cd /ql
-npm install -g axios
-cd /ql
-npm install -g crypto-js
-cd /ql
-npm install -g md5
-cd /ql
-npm install -g ts-md5
-cd /ql
-npm install -g tslib
-cd /ql
-npm install -g @types/node
-cd /ql
-npm install -g requests
-cd /ql
-npm install -g tough-cookie
-cd /ql
-npm install -g jsdom
-cd /ql
-npm install -g download
-cd /ql
-npm install -g tunnel
-cd /ql
-npm install -g fs
-cd /ql
-npm install -g ws
-cd /ql
-npm install -g js-base64
-cd /ql
-npm install -g jieba
-cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
-cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
+sleep 2
+npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+npm config get registry
+pnpm install
+pnpm install png-js date-fns axios crypto-js md5 ts-md5 tslib @types/node requests tough-cookie jsdom download tunnel fs ws js-base64 jieba
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql

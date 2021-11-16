@@ -179,7 +179,6 @@ fi
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
-	echo
 	if [[ -z "$(ls -A "$QL_PATH/qlbeifen1" 2>/dev/null)" ]]; then
 		if [[ -n "$(ls -A "$QL_PATH/ql/config" 2>/dev/null)" ]]; then
 			echo

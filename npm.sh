@@ -28,8 +28,7 @@ echo
 sleep 2
 pip3 install requests
 pnpm install
-npm config set registry https://mirrors.huaweicloud.com/repository/npm/
-npm config get registry
+pnpm config get registry
 TIME l "安装依赖png-js"
 pnpm install png-js
 TIME l "安装依赖date-fns"

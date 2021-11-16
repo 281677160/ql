@@ -27,7 +27,10 @@ TIME y "安装依赖需要时间，请耐心等待!"
 echo
 sleep 2
 pip3 install requests
-pnpm install
+npm i -g pnpm
+pnpm init -y
+pnpm install express
+pnpm update
 pnpm config get registry
 TIME l "安装依赖png-js"
 pnpm install png-js

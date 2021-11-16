@@ -27,6 +27,7 @@ TIME y "安装依赖需要时间，请耐心等待!"
 echo
 sleep 2
 pip3 install requests
+timeout -k 1s 90s pnpm install
 pnpm install
 pnpm config set registry https://registry.npm.taobao.org/
 pnpm config get registry

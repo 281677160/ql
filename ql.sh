@@ -275,7 +275,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
 	fi
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
 		export local_ip="$(curl -4L api64.ipify.org)"
 		sed -i "s/178.128.119.193/${local_ip}/g" ${QL_PATH}/ql/authbk.json

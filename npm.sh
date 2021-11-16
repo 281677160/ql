@@ -29,6 +29,7 @@ sleep 2
 pip3 install requests
 TIME l "安装依赖pnpm"
 timeout -k 1s 2m pnpm install
+TIME y "安装依赖pnpm"
 pnpm install
 TIME l "更改pnpm源"
 pnpm config set registry https://registry.npm.taobao.org/

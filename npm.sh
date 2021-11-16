@@ -28,11 +28,11 @@ echo
 sleep 2
 pip3 install requests
 TIME l "安装依赖pnpm"
-timeout -k 1s 2m pnpm install
+timeout -k 1s 3m pnpm install
 TIME y "安装依赖pnpm"
 pnpm install
 TIME l "更改pnpm源"
-pnpm config set registry https://mirrors.huaweicloud.com/repository/npm/
+pnpm config set registry https://registry.npm.taobao.org/
 pnpm config get registry
 TIME l "安装依赖png-js"
 pnpm i png-js

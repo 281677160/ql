@@ -31,9 +31,6 @@ TIME l "安装依赖pnpm"
 pnpm i
 TIME y "安装依赖pnpm"
 pnpm updated
-TIME l "更改pnpm源"
-pnpm config set registry https://registry.npm.taobao.org/
-pnpm config get registry
 TIME l "安装依赖png-js"
 pnpm i png-js
 TIME l "安装依赖date-fns"

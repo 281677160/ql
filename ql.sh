@@ -195,7 +195,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
-	docker stop -t=5 "${dockerid}"
+	docker stop -t=5 "${dockerid}" > /dev/null 2>&1
 	docker rm "${dockerid}"
 	docker rmi "${imagesid}"
 fi

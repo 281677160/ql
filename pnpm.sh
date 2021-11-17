@@ -26,52 +26,43 @@ echo
 TIME y "安装依赖需要时间，请耐心等待!"
 echo
 sleep 2
-pip3 install requests
-TIME l "安装依赖pnpm"
-pnpm i
-TIME y "安装依赖pnpm"
-pnpm updated
+npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+npm config get registry
 TIME l "安装依赖png-js"
-pnpm i png-js
+npm install -g png-js
 TIME l "安装依赖date-fns"
-pnpm i date-fns
+npm install -g date-fns
 TIME l "安装依赖axios"
-pnpm i axios
+npm install -g axios
 TIME l "安装依赖crypto-js"
-pnpm i crypto-js
+npm install -g crypto-js
 TIME l "安装依赖md5"
-pnpm i md5
+npm install -g md5
 TIME l "安装依赖ts-md5"
-pnpm i ts-md5
+npm install -g ts-md5
 TIME l "安装依赖tslib"
-pnpm i tslib
+npm install -g tslib
 TIME l "安装依赖@types/node"
-pnpm i @types/node
+npm install -g @types/node
 TIME l "安装依赖requests"
-pnpm i requests
+npm install -g requests
 TIME l "安装依赖tough-cookie"
-pnpm i tough-cookie
+npm install -g tough-cookie
 TIME l "安装依赖jsdom"
-pnpm i jsdom
+npm install -g jsdom
 TIME l "安装依赖download"
-pnpm i download
+npm install -g download
 TIME l "安装依赖tunnel"
-pnpm i tunnel
+npm install -g tunnel
 TIME l "安装依赖fs"
-pnpm i fs
+npm install -g fs
 TIME l "安装依赖ws"
-pnpm i ws
+npm install -g ws
 TIME l "安装依赖js-base64"
-pnpm i js-base64
+npm install -g js-base64
 TIME l "安装依赖jieba"
-pnpm i jieba
-TIME l "安装依赖ts-node"
-pnpm i ts-node
-TIME l "安装依赖typescript"
-pnpm i typescript
-TIME l "安装依赖canvas"
-pnpm i canvas
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev
+npm install -g jieba
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm install -S ts-node typescript @types/node date-fns axios png-js canvas
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql

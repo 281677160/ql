@@ -54,60 +54,60 @@ cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
 echo
 echo
-TIME g "正在安装依赖，安装依赖需要时间，请耐心等候..."
+TIME l "安装依赖..."
 echo
+TIME y "安装依赖需要时间，请耐心等待!"
 echo
+sleep 2
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
-cd /ql
+TIME l "安装依赖png-js"
 npm install -g png-js
-cd /ql
+TIME l "安装依赖date-fns"
 npm install -g date-fns
-cd /ql
+TIME l "安装依赖axios"
 npm install -g axios
-cd /ql
+TIME l "安装依赖crypto-js"
 npm install -g crypto-js
-cd /ql
+TIME l "安装依赖md5"
 npm install -g md5
-cd /ql
+TIME l "安装依赖ts-md5"
 npm install -g ts-md5
-cd /ql
+TIME l "安装依赖tslib"
 npm install -g tslib
-cd /ql
+TIME l "安装依赖@types/node"
 npm install -g @types/node
-cd /ql
+TIME l "安装依赖requests"
 npm install -g requests
-cd /ql
+TIME l "安装依赖tough-cookie"
 npm install -g tough-cookie
-cd /ql
+TIME l "安装依赖jsdom"
 npm install -g jsdom
-cd /ql
+TIME l "安装依赖download"
 npm install -g download
-cd /ql
+TIME l "安装依赖tunnel"
 npm install -g tunnel
-cd /ql
+TIME l "安装依赖fs"
 npm install -g fs
-cd /ql
+TIME l "安装依赖ws"
 npm install -g ws
-cd /ql
+TIME l "安装依赖js-base64"
 npm install -g js-base64
-cd /ql
+TIME l "安装依赖jieba"
 npm install -g jieba
+TIME l "安装pnpm"
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm install -S ts-node typescript @types/node date-fns axios download canvas
 cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm install -S ts-node typescript @types/node date-fns axios png-js canvas
-cd /ql
+TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
 echo
 TIME g "依赖安装完毕..."
 echo
-echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
-    echo
     TIME g "开始添加 [每6小时更新任务]"
-    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -116,9 +116,7 @@ fi
 
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
-    echo
     TIME g "开始添加 [每6小时转换WSKEY]"
-    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -128,9 +126,7 @@ fi
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo
-    echo
     TIME g "开始添加 [拉取机器人]"
-    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -140,16 +136,13 @@ fi
 # 将 raw_jd_OpenCard.py 添加到定时任务
 if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     echo
-    echo
     TIME g "开始添加 [JD入会开卡领取京豆]"
-    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
-echo
-echo
+
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
     TIME g "执行WSKEY转换PT_KEY操作"
@@ -172,12 +165,9 @@ echo
 echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
-echo
-echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
     TIME y "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
-echo
 echo
 if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
 	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json

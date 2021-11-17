@@ -266,7 +266,7 @@ docker run -dit \
   --hostname qinglong \
   --restart always \
   whyour/qinglong:latest
-
+export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
@@ -276,7 +276,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	fi
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
-		export local_ip=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 		sed -i "s/178.128.119.193/${local_ip}/g" ${QL_PATH}/ql/authbk.json
 		sleep 2
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json

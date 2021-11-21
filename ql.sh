@@ -287,6 +287,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 	echo
+	if [[ ! -d /opt/ql/scripts/feverrun_my_scripts ]]; then
+		sleep 2
+		exit 1
+	fi	
 	docker restart qinglong > /dev/null 2>&1
 	sleep 2
 	clear

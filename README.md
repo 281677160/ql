@@ -20,6 +20,8 @@ sudo yum install -y curl
 
 - 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
 
+---
+- 安装完curl后，执行下面一键命令安装青龙+依赖+任务
 ```sh
 bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 ```

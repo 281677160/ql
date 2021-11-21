@@ -9,6 +9,10 @@
 - 如果安装的当前文件夹里有青龙文件存在，[环境变量文件]又符合要求，就会继续使用
 
 #### 🚩 一键安装青龙面板命令
+- 为防止个别系统没安装curl，使用一键安装青龙面板命令之前选执行一次安装curl命令:
+```sh
+sudo apt-get update && sudo apt-get install -y curl
+```
 ```sh
 bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 ```

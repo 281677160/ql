@@ -278,6 +278,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
 		sleep 2
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
+		curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/authbk.json > /opt/ql/config/auth.json
 	fi
 	docker restart qinglong
 	sleep 5

@@ -26,7 +26,7 @@ TIME() {
 	sleep 2
 	exit 1
 }
-	echo
+	clear
 	echo
 	echo
 	TIME z "脚本适用于（ubuntu、debian、centos、openwrt）"
@@ -37,5 +37,38 @@ TIME() {
 	TIME g "如要不能接受的话，请选择 3 回车退出程序!"
 	echo
 	echo
+	TIME l " 1. 自动提交助力码脚本，要去脚本作者群提交资料过白名单"
 	echo
-	TIME y " 如要继续的话，请选择容器的网络类型!（输入 1、2或3 编码）"
+	TIME l " 2. 手动提交助力码脚本，Telegram添加机器人自己每个星期提交一次助力码"
+	echo
+	TIME l " 3. 退出安装程序!"
+	echo
+	scqlbianma="[输入您选择的编码]"
+	while :; do
+	read -p " ${scqlbianma}： " SCQL
+	case $SCQL in
+		1)
+			export QL_PORT="5700"
+			export QING_PORT="YES"
+			export NETWORK="-p ${QL_PORT}:5700"
+		break
+		;;
+		2)
+			export NETWORK="--net host"
+			export QL_PORT="5700"
+		break
+		;;
+		3)
+			echo
+			TIME r "您选择了退出程序!"
+			rm -fr ql.sh
+			echo
+			sleep 3
+			exit 1
+		break
+    		;;
+    		*)
+			scqlbianma="[请输入正确的编码]"
+		;;
+	esac
+	done

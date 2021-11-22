@@ -34,8 +34,6 @@ if [[ "$USER" == "root" ]]; then
 	echo
 	TIME l " 2. host [一般为openwrt旁路由才选择的]"
 	echo
-	TIME l " 3. 退出安装程序!"
-	echo
 	scqlbianma="[输入您选择的编码]"
 	while :; do
 	read -p " ${scqlbianma}： " SCQL
@@ -49,15 +47,6 @@ if [[ "$USER" == "root" ]]; then
 		2)
 			export NETWORK="--net host"
 			export QL_PORT="5700"
-		break
-		;;
-		3)
-			echo
-			TIME r "您选择了退出程序!"
-			rm -fr ql.sh
-			echo
-			sleep 3
-			exit 1
 		break
     		;;
     		*)

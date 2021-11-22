@@ -180,7 +180,7 @@ fi
 echo
 echo
 echo
-TIME y "拉取feverrun大佬的自动助力脚本"
+TIME y "拉取Aaron-lv和faker2大佬们的脚本"
 echo
 echo
 rm -fr /ql/azcg.log

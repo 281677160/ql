@@ -21,6 +21,9 @@ if [[ "$USER" == "root" ]]; then
 	clear
 	echo
 	echo
+	TIME y " 请选择网络类型"
+	echo
+	echo
 	TIME l " 1. bridge [默认类型]"
 	echo
 	TIME l " 2. host [一般为openwrt旁路由才选择的]"

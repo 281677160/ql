@@ -37,9 +37,9 @@ TIME() {
 	TIME g "如要不能接受的话，请选择 3 回车退出程序!"
 	echo
 	echo
-	TIME l " 1. 自动提交助力码脚本，要去脚本作者群提交资料过白名单(挂机帐号太少一般不收)"
+	TIME l " 1. 手动提交助力码脚本，Telegram添加机器人自己每个星期提交一次助力码"
 	echo
-	TIME l " 2. 手动提交助力码脚本，Telegram添加机器人自己每个星期提交一次助力码"
+	TIME l " 2. 自动提交助力码脚本，要去脚本作者群提交资料过白名单(挂机帐号太少一般不收)"
 	echo
 	TIME l " 3. 退出安装程序!"
 	echo
@@ -48,11 +48,11 @@ TIME() {
 	read -p " ${scqlbianmaa}： " SCQL
 	case $SCQL in
 		1)
-			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/zdzl.sh)"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/tjzl.sh)"
 		break
 		;;
 		2)
-			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/tjzl.sh)"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/zdzl.sh)"
 		break
 		;;
 		3)

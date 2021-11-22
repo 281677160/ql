@@ -33,7 +33,9 @@ bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 
 - 登录面板后，在‘ 环境变量 ’项添加 WSKEY 或者 PT_KEY
 
-- 添加 wskey 或者 pt_key 都要注意KEY里面的分号，英文分号，记得别省略了，WSKEY和PT_KEY二选一即可，格式如下
+- 添加 wskey 或者 pt_key 都要注意KEY里面的分号，英文分号，记得别省略了，WSKEY和PT_KEY二选一即可
+
+- 格式如下：
 
 ```sh
 # > 添加 wskey

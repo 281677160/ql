@@ -105,6 +105,7 @@ cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
+task curtinlv_JD-Script_jd_tool_dl.py
 echo
 TIME g "依赖安装完毕..."
 echo

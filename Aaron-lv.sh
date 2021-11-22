@@ -204,12 +204,13 @@ TIME y "拉取Aaron-lv和faker2大佬们的脚本"
 echo
 echo
 rm -fr /ql/azcg.log
+ql extra
 ql extra |tee azcg.log
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
     TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
 echo
-if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
 	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
 	TIME g "脚本安装完成，正在重启青龙面板，请稍后...!"
 	rm -fr /ql/azcg.log

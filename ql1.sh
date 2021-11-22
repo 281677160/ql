@@ -33,9 +33,11 @@ TIME() {
 	TIME z "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
 	TIME z "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker，如果空间太小请挂载好硬盘"
 	TIME z "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"
-	TIME z "如果您以前青龙文件在root/ql或者/opt/ql，如果您的[帐号密码文件]和[环境变量文件]符合要求，就会继续使用"
+	TIME z "如果安装当前文件夹已经存在 ql 文件的话，如果您的[环境变量文件]符合要求，就会继续使用"
 	TIME g "如要不能接受的话，请选择 3 回车退出程序!"
 	echo
+	echo
+	TIME y " 请选择要安装的脚本库"
 	echo
 	TIME l " 1. 手动提交助力码脚本，Telegram添加机器人自己每个星期提交一次助力码"
 	echo
@@ -45,8 +47,8 @@ TIME() {
 	echo
 	scqlbianmaa="[输入您选择的编码]"
 	while :; do
-	read -p " ${scqlbianmaa}： " SCQL
-	case $SCQL in
+	read -p " ${scqlbianmaa}： " QLJB
+	case $QLJB in
 		1)
 			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/tjzl.sh)"
 		break
@@ -60,7 +62,7 @@ TIME() {
 			TIME r "您选择了退出程序!"
 			rm -fr ql.sh
 			echo
-			sleep 3
+			sleep 1
 			exit 1
 		break
     		;;

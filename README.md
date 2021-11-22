@@ -9,16 +9,20 @@
 - 如果安装的当前文件夹里有青龙文件存在，[环境变量文件]又符合要求，就会继续使用
 
 #### 🚩 一键安装青龙面板命令
-- 为防止ubuntu或者debian没安装curl，使用一键安装青龙面板命令之前选执行一次安装curl命令:
+- 为防止系统没安装curl，使用不了一键命令，使用一键安装青龙面板命令之前选执行一次安装curl命令
+
+- 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
+
+- ubuntu或者debian系统
 ```sh
 sudo apt-get update && sudo apt-get install -y curl
 ```
-- 为防止centos没安装curl，使用一键安装青龙面板命令之前选执行一次安装curl命令:
+- centos系统
 ```sh
 sudo yum install -y curl
 ```
 
-- 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
+
 
 ---
 - 安装完curl后，执行下面一键命令安装青龙+依赖+任务

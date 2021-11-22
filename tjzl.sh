@@ -56,6 +56,9 @@ if [[ "$USER" == "root" ]]; then
 		;;
 	esac
 	done
+else
+	echo
+	TIME y "警告：请使用root用户操作!~~"
 fi
 echo
 echo

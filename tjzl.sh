@@ -17,6 +17,9 @@ TIME() {
 	 }
       }
 }
+if [[ "$USER" == "root" ]]; then
+	clear
+	echo
 	echo
 	TIME l " 1. bridge [默认类型]"
 	echo

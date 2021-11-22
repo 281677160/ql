@@ -29,6 +29,7 @@ TIME() {
 if [[ "$USER" == "root" ]]; then
 	clear
 	echo
+	echo
 	TIME g " 您选择了手动自动提交助力码库"
 	echo
 	TIME y " 请选择网络类型"

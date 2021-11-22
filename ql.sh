@@ -43,19 +43,16 @@ TIME() {
 	echo
 	TIME l " 3. 退出安装程序!"
 	echo
-	scqlbianma="[输入您选择的编码]"
+	scqlbianmaa="[输入您选择的编码]"
 	while :; do
-	read -p " ${scqlbianma}： " SCQL
+	read -p " ${scqlbianmaa}： " SCQL
 	case $SCQL in
 		1)
-			export QL_PORT="5700"
-			export QING_PORT="YES"
-			export NETWORK="-p ${QL_PORT}:5700"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/zdzl.sh)"
 		break
 		;;
 		2)
-			export NETWORK="--net host"
-			export QL_PORT="5700"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/tjzl.sh)"
 		break
 		;;
 		3)
@@ -68,7 +65,8 @@ TIME() {
 		break
     		;;
     		*)
-			scqlbianma="[请输入正确的编码]"
+			scqlbianmaa="[请输入正确的编码]"
 		;;
 	esac
 	done
+exit 0

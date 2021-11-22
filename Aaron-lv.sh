@@ -108,14 +108,14 @@ cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
-echo
 task curtinlv_JD-Script_jd_tool_dl.py
+echo
 TIME g "依赖安装完毕..."
 echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [每6小时更新任务]"
+    TIME g "添加任务 [每6小时更新任务]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -124,7 +124,7 @@ fi
 echo
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [每6小时转换WSKEY]"
+    TIME g "添加任务 [每6小时转换WSKEY]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -134,7 +134,7 @@ echo
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [拉取机器人]"
+    TIME g "添加任务 [拉取机器人]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -144,7 +144,7 @@ echo
 # 将 raw_jd_OpenCard.py 添加到定时任务
 if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [JD入会开卡领取京豆]"
+    TIME g "添加任务 [JD入会开卡领取京豆]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -154,7 +154,7 @@ echo
 # 将 jd_Evaluation.py 添加到定时任务
 if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [自动评价]"
+    TIME g "添加任务 [自动评价]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -164,7 +164,7 @@ echo
 # 将 jd_get_share_code.js 添加到定时任务
 if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [获取互助码1-5]"
+    TIME g "添加任务 [获取互助码1-5]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
@@ -174,7 +174,7 @@ echo
 # 将 jd_get_share_code.js 添加到定时任务
 if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 1 ]; then
     echo
-    TIME g "开始添加 [获取互助码6-10]"
+    TIME g "添加任务 [获取互助码6-10]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)

@@ -68,9 +68,9 @@ npm config get registry
 TIME l "安装依赖png-js"
 npm install -g png-js
 TIME l "安装依赖date-fns"
-npm install -g date-fns
+pip3 install date-fns
 TIME l "安装依赖axios"
-npm install -g axios
+pip3 install axios
 TIME l "安装依赖crypto-js"
 npm install -g crypto-js
 TIME l "安装依赖md5"
@@ -88,7 +88,7 @@ npm install -g tough-cookie
 TIME l "安装依赖jsdom"
 npm install -g jsdom
 TIME l "安装依赖download"
-npm install -g download
+pip3 install download
 TIME l "安装依赖tunnel"
 npm install -g tunnel
 TIME l "安装依赖fs"
@@ -100,7 +100,7 @@ npm install -g js-base64
 TIME l "安装依赖jieba"
 npm install -g jieba
 TIME l "安装pnpm"
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios download
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios
 cd /ql
 pip3 install canvas
 cd /ql

@@ -38,12 +38,16 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > /ql/qlwj/auth.json
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/auth.json > /ql/qlwj/auth.json
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/crypto-js.js > /ql/qlwj/crypto-js.js
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/config.sample.sh > /ql/qlwj/config.sample.sh
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/extra.sh > /ql/qlwj/extra.sh
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/wskey.py > /ql/qlwj/wskey.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -51,7 +55,11 @@ cp -Rf /ql/qlwj/extra.sh /ql/config/extra.sh
 cp -Rf /ql/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
-cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
+cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
+cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTasksImplement.py
+cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
+cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
+cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 echo
 echo
 TIME l "安装依赖..."

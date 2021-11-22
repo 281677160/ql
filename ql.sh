@@ -290,7 +290,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ ! -d /opt/ql/scripts/feverrun_my_scripts ]]; then
 		sleep 2
 		exit 1
-	fi
+	fi	
+	docker restart qinglong > /dev/null 2>&1
 	sleep 2
 	clear
 	echo

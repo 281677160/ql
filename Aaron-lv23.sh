@@ -230,5 +230,3 @@ else
 	rm -rf /ql/qlwj
 	exit 1
 fi
-echo
-exit 0

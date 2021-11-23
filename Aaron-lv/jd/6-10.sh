@@ -26,7 +26,7 @@ import os
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_path)
-client = TelegramClient("bot${TG}", "${api_id}", "${api_ms}", connection_retries=None).start()
+client = TelegramClient("bot${TG}", "${api_id}", "${api_hash}", connection_retries=None).start()
 
 async def main():
     await client.send_message("@JDShareCodebot", "${FARM}")

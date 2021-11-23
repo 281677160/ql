@@ -68,9 +68,9 @@ npm config get registry
 TIME l "安装依赖png-js"
 npm install -g png-js
 TIME l "安装依赖date-fns"
-pip3 install date-fns
+npm install -g date-fns
 TIME l "安装依赖axios"
-pip3 install axios
+npm install -g axios
 TIME l "安装依赖crypto-js"
 npm install -g crypto-js
 TIME l "安装依赖md5"

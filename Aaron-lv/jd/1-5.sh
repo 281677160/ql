@@ -45,7 +45,7 @@ with client:
     client.loop.run_until_complete(main())
 EOF
 
-cat >/ql/jd/tg/${TG}.sh <<-EOF
+cat >/ql/jd/${TG}rw.sh <<-EOF
 #!/usr/bin/env bash
 if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -63,5 +63,5 @@ if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
 fi
 EOF
 
-task /ql/jd/tg/"${TG}.sh"
-rm -rf /ql/jd/tg/"${TG}.sh"
+task /ql/jd/"${TG}rw.sh"
+rm -rf /ql/jd/"${TG}rw.sh"

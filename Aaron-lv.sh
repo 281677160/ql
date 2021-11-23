@@ -48,7 +48,6 @@ curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/curtinlv_JD-Sc
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/doocode.py > /ql/qlwj/doocode.py
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
 
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
@@ -68,7 +67,6 @@ cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_
 cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTasksImplement.py
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
-cp -Rf /ql/qlwj/doocode.py /ql/config/doocode.py
 cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
 echo
 echo

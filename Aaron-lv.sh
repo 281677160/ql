@@ -73,9 +73,9 @@ npm config get registry
 TIME l "安装依赖png-js"
 npm install -g png-js
 TIME l "安装依赖date-fns"
-pip3 install date-fns
+npm install -g date-fns
 TIME l "安装依赖axios"
-pip3 install axios
+npm install -g axios
 TIME l "安装依赖crypto-js"
 npm install -g crypto-js
 TIME l "安装依赖md5"
@@ -182,14 +182,12 @@ fi
 sleep 2
 echo
 # 将 jd_get_share_code.js 添加到定时任务
-if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 1 ]; then
-    echo
-    TIME g "添加任务 [获取互助码6-10]"
-    echo
-    # 获取token
-    token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码6-10","command":"task jd_get_share_code.js desi JD_COOKIE 6-10","schedule":"22 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637509073623'
-fi
+echo
+TIME g "添加任务 [获取互助码6-10]"
+echo
+# 获取token
+token=$(cat /ql/config/auth.json | jq --raw-output .token)
+curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码6-10","command":"task jd_get_share_code.js desi JD_COOKIE 6-10","schedule":"22 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637509073623'
 sleep 2
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then

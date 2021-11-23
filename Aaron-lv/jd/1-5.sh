@@ -7,7 +7,7 @@ export CRON="$(date +163764742%M%S)"
 export CRON1="$(date +163764761%M%S)"
 export CRON2="$(date +%M)"
 export token=$(cat /ql/config/auth.json | jq --raw-output .token)
-source /ql/config/tg/"${TG}"
+source /ql/jd/tg/"${TG}"
 [[ -d '/ql/log/jd_get_share_code' ]] && rm -rf /ql/log/jd_get_share_code/*
 task jd_get_share_code.js desi JD_COOKIE "${TG}"
 lOGName="$(ls -a /ql/log/jd_get_share_code |egrep -o [0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+.log |awk 'END {print}')"
@@ -42,7 +42,7 @@ with client:
     client.loop.run_until_complete(main())
 EOF
 
-cat >/ql/config/tg/${TG}.sh <<-EOF
+cat >/ql/jd/tg/${TG}.sh <<-EOF
 #!/usr/bin/env bash
 if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -60,4 +60,4 @@ if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
 fi
 EOF
 
-task /ql/config/tg/"${TG}.sh"
+task /ql/jd/tg/"${TG}.sh"

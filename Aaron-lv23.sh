@@ -116,7 +116,6 @@ cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-
 cd /ql
 pip3 install canvas
 cd /ql
-TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
 task curtinlv_JD-Script_jd_tool_dl.py

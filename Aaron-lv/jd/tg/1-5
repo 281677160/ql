@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+# 
 # 打开 https://my.telegram.org/auth 此网站，如果是大陆手机就输入 +86手机号码，Telegram接收验证码，登录
 # 然后点击 API development tools 进去弄API ID跟密匙
 
-api_id="填写您Telegram的API的ID"
-api_hash="填写您Telegram的API的密匙"
+export api_id="填写您Telegram的API的ID"
+export api_hash="填写您Telegram的API的密匙"

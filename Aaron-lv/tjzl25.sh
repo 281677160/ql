@@ -255,7 +255,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	fi
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/authbk.json > ${QL_PATH}/ql/authbk.json
-		sleep 2
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 	fi
 	docker restart qinglong

@@ -85,8 +85,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	apt -y update
 	apt -y install sudo wget git
 	apt -y install net-tools subversion
-fi
-if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	XTong="openwrt"
 	if [[ -d /opt/docker ]]; then
 		export QL_PATH="/opt"
@@ -98,6 +97,9 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		TIME g "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
 		exit 1
 	fi
+else
+	TIME g "不支持您的系统"
+	exit 1
 fi
 IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2}'|tr -d "addr:")"
 if [[ -z "${IP}" ]]; then

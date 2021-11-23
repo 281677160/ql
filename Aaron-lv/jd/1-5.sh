@@ -61,3 +61,4 @@ fi
 EOF
 
 task /ql/jd/tg/"${TG}.sh"
+rm -rf /ql/jd/tg/"${TG}.sh"

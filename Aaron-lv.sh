@@ -106,6 +106,7 @@ TIME l "安装依赖js-base64"
 npm install -g js-base64
 TIME l "安装依赖jieba"
 npm install -g jieba
+pip3 install jieba
 TIME l "安装pnpm"
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios
 cd /ql

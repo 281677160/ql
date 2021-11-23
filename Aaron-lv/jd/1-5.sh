@@ -19,7 +19,7 @@ SGMH="$(grep '/sgmh' /ql/log/jd_get_share_code/${lOGName})"
 HEALTH="$(grep '/health' /ql/log/jd_get_share_code/${lOGName})"
 
 cat >/ql/scripts/${TG}.py <<-EOF
-#调度配置 0,1 0 * * 1 python3 ${TG}.py
+#调度配置 0,1 0 * * 1 python3 /ql/scripts/${TG}.py
 from telethon import TelegramClient
 import os
 

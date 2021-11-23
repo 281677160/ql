@@ -50,6 +50,7 @@ curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_Evaluation.
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/doocode.py > /ql/qlwj/doocode.py
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
+svn co https://github.com/281677160/ql/trunk/Aaron-lv/jd /ql/config/jd
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh

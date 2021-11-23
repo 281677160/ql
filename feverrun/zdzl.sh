@@ -95,6 +95,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	apt -y install sudo wget git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	XTong="openwrt"
 	if [[ -d /opt/docker ]]; then
 		export QL_PATH="/opt"
 		export QL_Kongjian="/opt/docker"
@@ -105,15 +106,9 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		TIME g "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
 		exit 1
 	fi
-	XTong="openwrt"
-	opkg list | awk '{print $1}' > Installed_PKG_List
-	if [[ ! "$(cat Installed_PKG_List)" =~ git-http ]]; then
-		TIME g "正在安装宿主机所需要的依赖，请稍后..."
-		opkg update
-		opkg install git-http > /dev/null 2>&1
-		rm -fr Installed_PKG_List
-	fi
-
+else
+	TIME r "不支持您的系统"
+	exit 1
 fi
 IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2}'|tr -d "addr:")"
 if [[ -z "${IP}" ]]; then

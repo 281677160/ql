@@ -46,12 +46,12 @@ if [[ "$USER" == "root" ]]; then
 		1)
 			export QL_PORT="5700"
 			export QING_PORT="YES"
-			export NETWORK="-p ${QL_PORT}:5700"
+			export NETWORK="-p ${QL_PORT}:5600"
 		break
 		;;
 		2)
 			export NETWORK="--net host"
-			export QL_PORT="5700"
+			export QL_PORT="5600"
 		break
     		;;
     		*)
@@ -66,11 +66,11 @@ fi
 echo
 echo
 [[ "${QING_PORT}" == "YES" ]] && {
-	TIME g "请设置端口，默认端口为[5700]，不懂设置的话，直接回车使用默认[5700]端口"
+	TIME g "请设置端口，默认端口为[5600]，不懂设置的话，直接回车使用默认[5600]端口"
 	read -p " 请输入端口：" QL_PORT
-	export QL_PORT=${QL_PORT:-"5700"}
+	export QL_PORT=${QL_PORT:-"5600"}
 	TIME y "您端口为：${QL_PORT}"
-	export NETWORK="-p ${QL_PORT}:5700"
+	export NETWORK="-p ${QL_PORT}:5600"
 }
 echo
 echo

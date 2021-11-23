@@ -211,7 +211,9 @@ echo
 echo
 rm -fr /ql/azcg.log
 ql extra
+TIME y "更新脚本"
 ql extra |tee azcg.log
+TIME y "拉取机器人"
 ql bot
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
     TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"

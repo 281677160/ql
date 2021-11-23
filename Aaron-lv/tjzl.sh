@@ -98,7 +98,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		exit 1
 	fi
 else
-	TIME g "不支持您的系统"
+	TIME r "不支持您的系统"
 	exit 1
 fi
 IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2}'|tr -d "addr:")"

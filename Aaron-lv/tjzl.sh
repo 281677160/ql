@@ -250,7 +250,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
 	fi
-	if [[ -d "${QL_PATH}/qlbeifen1/ql/jd" ]]; then
+	if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 	fi
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then

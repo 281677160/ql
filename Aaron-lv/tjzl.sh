@@ -294,23 +294,23 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
 		echo
+		QLMEUN="[ N/n ]退出程序，[ Y/y ]回车继续安装脚本"
 		while :; do
-		read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
+		read -p " ${QLMEUN}： " MENU
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-			S="Yy"
-		else
-			echo
-			TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
-			echo
+			S="Y"
 		fi
-		case $MENU in
-			[${S}])
+		if [[ ${MENU} == "N" ]][[ ${MENU} == "n" ]]; then
+			S="N"
+		fi
+		case $S in
+			Y)
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
 			break
 			;;
-			[Nn])
+			N)
 				echo
 				TIME r "退出安装程序!"
 				echo
@@ -319,7 +319,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			break
     			;;
     			*)
-				TIME r ""
+				QLMEUN="请先登录再按[Y/y]继续，或者现在按[ N/n ]退出程序"
 			;;
 		esac
 		done

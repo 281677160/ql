@@ -151,7 +151,7 @@ else
 	rm -fr /ql/azcg.log
 	rm -rf /ql/qlwj
 	exit 1
-	sleep 2
+	sleep 5
 	exit 0
 fi
 echo

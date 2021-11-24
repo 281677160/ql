@@ -174,7 +174,8 @@ else
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
 	rm -fr /ql/azcg.log
 	rm -rf /ql/qlwj
-	exit
 	exit 1
+	sleep 5
+	exit 0
 fi
 exit 0

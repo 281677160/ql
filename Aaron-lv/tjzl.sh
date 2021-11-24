@@ -325,6 +325,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
+		TIME g "安装完成"
 	fi
 else
 	echo

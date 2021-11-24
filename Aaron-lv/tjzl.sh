@@ -302,7 +302,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
 			S="Y"
 		fi
-		if [[ ${MENU} == "N" ]][[ ${MENU} == "n" ]]; then
+		if [[ ${MENU} == "N" ]] || [[ ${MENU} == "n" ]]; then
 			S="N"
 		fi
 		case $S in

@@ -26,6 +26,7 @@ echo
 sleep 2
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
+npm install -g npm@8.1.4
 npm install npm -g
 TIME l "安装依赖png-js"
 npm install -g png-js

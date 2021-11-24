@@ -261,7 +261,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
 	if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
-		for X in $(ls -a /opt/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+		for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
 	fi
 	echo
 	docker restart qinglong > /dev/null 2>&1

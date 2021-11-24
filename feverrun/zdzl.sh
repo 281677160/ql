@@ -253,10 +253,11 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
 	fi
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]] || [[ `grep -c "\"token\"" $QL_PATH/ql/config/auth.json` == '0' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
 		sleep 2
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
+		rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
 	fi
 	docker restart qinglong
 	sleep 5
@@ -270,6 +271,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		exit 1
 	fi	
 	docker restart qinglong > /dev/null 2>&1
+	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 	sleep 2
 	clear
 	echo
@@ -280,9 +282,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
 	echo
-	TIME y "完成登录后,请设置好 wskey 或者 pt_key "	
-	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
-	rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
+	TIME y "完成登录后,请设置好 wskey 或者 pt_key"
 	echo
 	exit 0
 else

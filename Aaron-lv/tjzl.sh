@@ -255,30 +255,82 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	echo
-	sleep 3
-	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
-	[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-	if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
-		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
-		for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+		echo
+		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
+		echo
+		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
+		echo
+		sleep 5
+		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
+		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
+			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+		fi
+		echo
+		docker restart qinglong > /dev/null 2>&1
+		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
+		sleep 2
+		clear
+		echo
+		echo
+		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
+		echo
+		TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
+		echo
+		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+		echo
+		TIME y "完成登录后,请设置好 wskey 或者 pt_key"
+		exit 0
+	else
+		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
+		echo
+		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
+		echo
+		TIME g "请使用您的 IP:"${QL_PORT}" 在浏览器打开控制面板"
+		echo
+		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+		echo
+		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
+		echo
+		while :; do
+		read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
+		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+			S="Yy"
+		else
+			echo
+			TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
+			echo
+		fi
+		case $MENU in
+			[${S}])
+				echo
+				TIME y "开始安装脚本，请耐心等待..."
+				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
+			break
+			;;
+			[Nn])
+				echo
+				TIME r "退出安装程序!"
+				echo
+				sleep 2
+				exit 1
+			break
+    			;;
+    			*)
+				TIME r ""
+			;;
+		esac
+		done
+		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
+			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+		fi
+		docker restart qinglong > /dev/null 2>&1
+		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 	fi
-	echo
-	docker restart qinglong > /dev/null 2>&1
-	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
-	sleep 2
-	clear
-	echo
-	echo
-	TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
-	echo
-	TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
-	echo
-	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
-	echo
-	TIME y "完成登录后,请设置好 wskey 或者 pt_key"
-	echo
-	exit 0
 else
 	echo
 	echo
@@ -287,5 +339,4 @@ else
 	sleep 2
 	exit 1
 fi
-echo
 exit 0

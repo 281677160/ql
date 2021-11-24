@@ -272,6 +272,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp  /ql/qlwj/auth.json qinglong:/ql/config/auth.json
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
+		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
 		sleep 2
 		clear
 		echo
@@ -331,6 +332,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		fi
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
+		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
 	fi
 else
 	echo

@@ -257,7 +257,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 	echo
 	sleep 3
-	docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/qlcs/main/Aaron-lv.sh)"
+	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
 	[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
 	if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/

@@ -297,7 +297,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			Y)
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
+				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			break
 			;;
 			N)

@@ -245,21 +245,26 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
 	fi
-	if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
-		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
-	fi
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/authbk.json > ${QL_PATH}/ql/authbk.json
 		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 	fi
 	docker restart qinglong
-	sleep 5
 	clear
 	echo
+	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
-	echo	
+	echo
+	sleep 3
+	docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/qlcs/main/Aaron-lv.sh)"
+	[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+	if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
+		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+		for X in $(ls -a /opt/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+	fi
+	echo
 	docker restart qinglong > /dev/null 2>&1
+	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 	sleep 2
 	clear
 	echo

@@ -236,7 +236,7 @@ docker run -dit \
   --name qinglong \
   --hostname qinglong \
   --restart always \
-  whyour/qinglong:latest
+  whyour/qinglong:2.10.6
 export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
@@ -245,19 +245,12 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
 	fi
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]] || [[ `grep -c "\"token\"" $QL_PATH/ql/config/auth.json` == '0' ]]; then
-		curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/authbk.json > ${QL_PATH}/ql/authbk.json
-		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
-		rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
-	fi
 	docker restart qinglong
 	clear
 	echo
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-		echo
-		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 		echo
 		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
 		echo
@@ -286,7 +279,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME y "完成登录后,请设置好 wskey 或者 pt_key"
 		exit 0
 	else
-		TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 		echo
 		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
 		echo
@@ -296,7 +288,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
 		echo
-		QLMEUN="[ N/n ]退出程序，[ Y/y ]回车继续安装脚本"
+		QLMEUN="[ N/n ]退出程序，登录后按回车继续安装脚本"
 		while :; do
 		read -p " ${QLMEUN}： " MENU
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
@@ -321,7 +313,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			break
     			;;
     			*)
-				QLMEUN="请先登录再按[Y/y]继续，或者现在按[ N/n ]退出程序"
+				QLMEUN="请先登录后按回车继续安装脚本，或者现在按[ N/n ]退出程序"
 			;;
 		esac
 		done

@@ -168,12 +168,10 @@ if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] 
 	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
 	TIME g "脚本安装完成，正在处理最后数据，请稍后...!"
 	rm -fr /ql/azcg.log
-	rm -rf /ql/qlwj
 else
 	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
 	rm -fr /ql/azcg.log
-	rm -rf /ql/qlwj
 	exit 1
 	sleep 5
 	exit 0

@@ -166,7 +166,6 @@ fi
 echo
 if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
 	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
-	TIME g "脚本安装完成，正在处理最后数据，请稍后...!"
 	rm -fr /ql/azcg.log
 else
 	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json

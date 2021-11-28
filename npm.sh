@@ -26,8 +26,10 @@ echo
 sleep 2
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
-npm install -g npm@8.1.4
-npm install npm -g
+latest_ver="$(wget -qO- -t1 -T2 "https://api.github.com/repos/npm/cli/releases/latest" |grep "tag_name" |head -n 1 |awk -F ":" '{print $2}' |sed 's/\"//g;s/,//g;s/ //g' |sed 's/^v//')"
+npm install -g npm
+TIME l "升级npm至${latest_ver}"
+npm install -g npm@${latest_ver}
 TIME l "安装依赖png-js"
 npm install -g png-js
 TIME l "安装依赖date-fns"

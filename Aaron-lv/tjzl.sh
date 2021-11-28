@@ -254,7 +254,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		sleep 3
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
-		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
+		if [[ -f ${QL_PATH}/ql/config/Error ]]; then
+			rm -fr ${QL_PATH}/ql/config ${QL_PATH}/qlbeifen1
+			exit 1
+		fi
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
 		[[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" -ge 1 ]] && [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then			
@@ -319,7 +322,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			;;
 		esac
 		done
-		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
+		if [[ -f ${QL_PATH}/ql/config/Error ]]; then
+			rm -fr ${QL_PATH}/ql/config ${QL_PATH}/qlbeifen1
+			exit 1
+		fi
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
 		[[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" -ge 1 ]] && [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then			

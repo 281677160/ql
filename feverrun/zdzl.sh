@@ -160,7 +160,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			cp -r $QL_PATH/ql $QL_PATH/qlbeifen/ql > /dev/null 2>&1
 			cp -r $QL_PATH/qlbeifen $QL_PATH/qlbeifen1 > /dev/null 2>&1
 			rm -rf $QL_PATH/ql
-			sleep 3
+			sleep 2
+		else
+			rm -rf $QL_PATH/ql
 		fi
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})

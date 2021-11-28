@@ -53,7 +53,7 @@ if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [获取互助码${TG}]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 0"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
 fi
 EOF
 task /ql/jd/"${RWWJ}"

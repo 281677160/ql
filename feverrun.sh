@@ -38,13 +38,22 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
+echo
+TIME l "拉取auth.json"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > /ql/qlwj/auth.json
+TIME l "拉取crypto-js.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
+TIME l "拉取config.sample.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
+TIME l "拉取extra.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
+TIME l "拉取jd_OpenCard.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+TIME l "拉取wskey.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
+TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+TIME l "拉取jd_Evaluation.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh

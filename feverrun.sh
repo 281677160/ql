@@ -68,7 +68,7 @@ if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时更新任务","command":"ql extra","schedule":"40 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
-sleep 2
+sleep 1
 echo
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -78,7 +78,7 @@ if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时转换WSKEY","command":"task wskey.py","schedule":"58 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
 fi
-sleep 2
+sleep 1
 echo
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
@@ -89,7 +89,7 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
-sleep 2
+sleep 1
 echo
 # 将 raw_jd_OpenCard.py 添加到定时任务
 if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
@@ -100,7 +100,7 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_Evaluation.py 添加到定时任务
 if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
@@ -111,7 +111,7 @@ if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task jd_Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
 fi
-sleep 2
+sleep 1
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
@@ -140,19 +140,11 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
     TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
 echo
-if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
-	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
-	TIME g "脚本安装完成，正在重启青龙面板，请稍后...!"
+if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
-	rm -rf /ql/qlwj
 else
-	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
 	rm -fr /ql/azcg.log
-	rm -rf /ql/qlwj
-	exit 1
-	sleep 5
-	exit 0
+	echo "Error" > /ql/config/Error
 fi
-echo
 exit 0

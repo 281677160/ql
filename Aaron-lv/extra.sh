@@ -6,5 +6,5 @@
 
 ql repo https://ghproxy.com/https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp|jd_disable.py|jd_get_share_code.js" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql"
 ql repo https://ghproxy.com/https://github.com/smiek2121/scripts.git "jd_|gua_" "" "ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js"
-ql repo https://ghproxy.com/https://github.com/Aaron-lv/sync.git "jd_|jx_|getJDCookie" "activity|backUp|jd_get_share_code.js|getJDCookie.js|Coupon" "^jd[^_]|USER|utils|Notify" "jd_scripts"
+ql repo https://ghproxy.com/https://github.com/Aaron-lv/sync.git "jd_|jx_|getJDCookie" "activity|backUp|jd_get_share_code.js|getJDCookie.js|jd_bean_change.js|Coupon" "^jd[^_]|USER|utils|Notify" "jd_scripts"
 task disableDuplicateTasksImplement.py

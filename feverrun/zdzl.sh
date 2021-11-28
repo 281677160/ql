@@ -289,7 +289,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
 		echo
-		QLMEUN="[ N/n ]退出程序，登录后按回车继续安装脚本"
+		QLMEUN="请先登录后按回车继续安装任务脚本，或者按[ N/n ]退出程序"
 		while :; do
 		read -p " ${QLMEUN}： " MENU
 		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
@@ -314,7 +314,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			break
     			;;
     			*)
-				QLMEUN="请先登录后按回车继续安装脚本，或者现在按[ N/n ]退出程序"
+				QLMEUN="请先登录后按回车继续安装任务脚本，或者按[ N/n ]退出程序"
 			;;
 		esac
 		done

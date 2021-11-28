@@ -236,7 +236,7 @@ docker run -dit \
   --name qinglong \
   --hostname qinglong \
   --restart always \
-  whyour/qinglong:2.10.6
+  whyour/qinglong:latest
 export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
@@ -249,16 +249,15 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	echo
-	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+		TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 		echo
-		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
-		echo
-		sleep 5
-		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
+		sleep 3
+		docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/Aaron-lv.sh)"
+		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
-			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+		[[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" -ge 1 ]] && [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then			
 			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
 		fi
 		echo
@@ -269,6 +268,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		sleep 2
 		clear
 		echo
+		TIME g "任务安装完成"
 		echo
 		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
 		echo
@@ -276,9 +276,12 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
 		echo
-		TIME y "完成登录后,请设置好 wskey 或者 pt_key"
+		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" == 0 ]]; then
+			TIME y "完成登录后,请设置好 wskey 或者 pt_key"
+		fi
 		exit 0
 	else
+		TIME y "青龙面板安装完成，请先登录面板再按回车，进行下一步任务安装程序..."
 		echo
 		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
 		echo
@@ -301,7 +304,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			Y)
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
-				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
+				docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/Aaron-lv.sh)"
 			break
 			;;
 			N)
@@ -317,15 +320,16 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			;;
 		esac
 		done
+		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
-			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+		[[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" -ge 1 ]] && [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then			
 			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
 		fi
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
-		TIME g "安装完成"
+		TIME g "任务安装完成"
 	fi
 else
 	echo

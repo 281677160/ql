@@ -38,6 +38,7 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
+echo
 TIME l "拉取auth.json"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/auth.json > /ql/qlwj/auth.json
 TIME l "拉取crypto-js.js"

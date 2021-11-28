@@ -38,18 +38,31 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
+TIME l "拉取auth.json"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/auth.json > /ql/qlwj/auth.json
+TIME l "拉取crypto-js.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/crypto-js.js > /ql/qlwj/crypto-js.js
+TIME l "拉取config.sample.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/config.sample.sh > /ql/qlwj/config.sample.sh
+TIME l "拉取extra.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/extra.sh > /ql/qlwj/extra.sh
+TIME l "拉取jd_OpenCard.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+TIME l "拉取wskey.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/wskey.py > /ql/qlwj/wskey.py
+TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
+TIME l "拉取jd_Evaluation.py"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
+TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
+TIME l "拉取jdCookie.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
+TIME l "拉取1-5.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
+TIME l "拉取6-10.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd/6-10.sh > /ql/jd/6-10.sh
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh

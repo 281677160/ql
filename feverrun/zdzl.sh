@@ -253,14 +253,9 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
 		echo
 		sleep 3
-		docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/Aaron-lv.sh)"
+		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-		[[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
-		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" -ge 1 ]] && [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then			
-			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
-		fi
-		echo
 		docker cp  /ql/qlwj/auth.json qinglong:/ql/config/auth.json
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
@@ -304,7 +299,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			Y)
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
-				docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/Aaron-lv.sh)"
+				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 			break
 			;;
 			N)
@@ -322,10 +317,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		done
 		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-		[[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
-		if [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/ql/config/env.sh)" -ge 1 ]] && [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then			
-			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
-		fi
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"

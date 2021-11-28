@@ -256,7 +256,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun.sh)"
 		[[ -f ${QL_PATH}/ql/config/Error ]] && exit 1
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-		docker cp  /ql/qlwj/auth.json qinglong:/ql/config/auth.json
+		docker exec -it qinglong bash -c "cp /ql/qlwj/auth.json /ql/config/auth.json"
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"

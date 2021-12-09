@@ -160,7 +160,7 @@ if [ "$(grep -c jd_jxmc_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
 fi
 sleep 2
 echo
-# 将 jd_get_share_code.js 添加到定时任务
+# 将 jd_cfd_sharecodes.ts 添加到定时任务
 if [ "$(grep -c jd_cfd_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
     echo
     TIME g "添加任务 [京喜财富岛上车]"
@@ -189,7 +189,7 @@ fi
 echo
 echo
 echo
-TIME y "拉取Aaron-lv和faker2大佬们的脚本"
+TIME y "拉取Aaron-lv和JDHelloWorld大佬们的脚本"
 echo
 echo
 rm -fr /ql/azcg.log

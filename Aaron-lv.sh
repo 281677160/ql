@@ -61,6 +61,10 @@ TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 TIME l "拉取jdCookie.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
+TIME l "拉取jd_cfd_sharecodes.ts"
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_cfd_sharecodes.ts > /ql/qlwj/jd_cfd_sharecodes.ts
+TIME l "拉取jd_jxmc_sharecodes.ts"
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_jxmc_sharecodes.ts > /ql/qlwj/jd_jxmc_sharecodes.ts
 TIME l "拉取1-5.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
@@ -192,6 +196,8 @@ rm -fr /ql/azcg.log
 ql extra
 TIME y "更新脚本"
 ql extra |tee azcg.log
+cp -Rf /ql/qlwj/jd_jxmc_sharecodes.ts /ql/scripts/JDHelloWorld_jd_scripts/jd_jxmc_sharecodes.ts
+cp -Rf /ql/qlwj/jd_cfd_sharecodes.ts /ql/scripts/JDHelloWorld_jd_scripts/jd_cfd_sharecodes.ts
 TIME y "拉取机器人"
 ql bot
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then

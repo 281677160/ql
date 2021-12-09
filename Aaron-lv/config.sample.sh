@@ -397,8 +397,9 @@ export CleanUsers=""
 export JD_BEAN_CHANGE_SENDNUM="10"
 ## 2、清空购物车
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_cart_remove.js
-### 当环境变量中存在JD_CART并设置为true时才会执行删除购物车
+### 当环境变量中存在JD_CART和rush_clean并设置为true时才会执行删除购物车
 export JD_CART="true"
+export rush_clean="true"
 ### 运行一次取消多全部已关注的商品。数字0表示不取关任何商品，默认20
 export JD_CART_REMOVESIZE="20"
 ### 是否清空，如果为false，则上面设置了多少就只删除多少条

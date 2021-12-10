@@ -50,10 +50,12 @@ TIME() {
 	case $QLJB in
 		1)
 			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/tjzl.sh)"
+			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/timesync.sh > /root/timesync.sh
 		break
 		;;
 		2)
 			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/zdzl.sh)"
+			curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/timesync.sh > /root/timesync.sh
 		break
 		;;
 		3)

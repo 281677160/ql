@@ -38,6 +38,14 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
+
+mkdir -p /ql/scripts/utils
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/utils/jd_jxmc.js > /ql/scripts/utils/jd_jxmc.js
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/utils/jd_jxmcToken.js > /ql/scripts/utils/jd_jxmcToken.js
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_cfd_sharecodes.ts > /ql/scripts/jd_cfd_sharecodes.ts
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_jxmc_sharecodes.ts > /ql/scripts/jd_jxmc_sharecodes.ts
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/TS_USER_AGENTS.ts > /ql/scripts/TS_USER_AGENTS.ts
+
 echo
 TIME l "拉取auth.json"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/auth.json > /ql/qlwj/auth.json
@@ -61,10 +69,8 @@ TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 TIME l "拉取jdCookie.js"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
-TIME l "拉取jd_cfd_sharecodes.ts"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_cfd_sharecodes.ts > /ql/qlwj/jd_cfd_sharecodes.ts
-TIME l "拉取jd_jxmc_sharecodes.ts"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_jxmc_sharecodes.ts > /ql/qlwj/jd_jxmc_sharecodes.ts
+TIME l "拉取jd_cleancartAll.js"
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_cleancartAll.js > /ql/qlwj/jd_cleancartAll.js
 TIME l "拉取1-5.sh"
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
@@ -81,6 +87,7 @@ cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTa
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
+cp -Rf /ql/qlwj/jd_cleancartAll.js /ql/scripts/jd_cleancartAll.js
 echo
 bash -c  "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/npm.sh)"
 echo
@@ -156,7 +163,7 @@ if [ "$(grep -c jd_jxmc_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜牧场上车","command":"task JDHelloWorld_jd_scripts/jd_jxmc_sharecodes.ts","schedule":"1 0 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639071292827'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜牧场上车","command":"task jd_jxmc_sharecodes.ts","schedule":"1 0 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639071292827'
 fi
 sleep 2
 echo
@@ -167,7 +174,18 @@ if [ "$(grep -c jd_cfd_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜财富岛上车","command":"task JDHelloWorld_jd_scripts/jd_cfd_sharecodes.ts","schedule":"2 0 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639071050874'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜财富岛上车","command":"task jd_cfd_sharecodes.ts","schedule":"2 0 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639071050874'
+fi
+sleep 2
+echo
+# 将 jd_cleancartAll.js 添加到定时任务
+if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
+    echo
+    TIME g "添加任务 [清空购物车]"
+    echo
+    # 获取token
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"清空购物车","command":"task jd_cleancartAll.js","schedule":"3 6,12,23 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639110553549'
 fi
 sleep 2
 echo
@@ -189,15 +207,13 @@ fi
 echo
 echo
 echo
-TIME y "拉取Aaron-lv和JDHelloWorld大佬们的脚本"
+TIME y "拉取faker2和JDHelloWorld大佬们的脚本"
 echo
 echo
 rm -fr /ql/azcg.log
 ql extra
 TIME y "更新脚本"
 ql extra |tee azcg.log
-cp -Rf /ql/qlwj/jd_jxmc_sharecodes.ts /ql/scripts/JDHelloWorld_jd_scripts/jd_jxmc_sharecodes.ts
-cp -Rf /ql/qlwj/jd_cfd_sharecodes.ts /ql/scripts/JDHelloWorld_jd_scripts/jd_cfd_sharecodes.ts
 TIME y "拉取机器人"
 ql bot
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then

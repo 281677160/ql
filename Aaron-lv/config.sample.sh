@@ -435,6 +435,7 @@ export guaopencard_rewardBean="1,2,3"
 
 ## 过期京豆兑换为喜豆
 export BEANCHANGE_ExJxBeans="true"
+export exjxbeans="true"
 
 
 

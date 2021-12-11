@@ -219,6 +219,6 @@ EOF
 	sudo systemctl enable docker > /dev/null 2>&1
 	/lib/systemd/systemd-sysv-install enable docker
 fi
-TIME g "docker安装成功!"
+TIME g "docker安装完成!"
 rm -fr build.log
 exit 0

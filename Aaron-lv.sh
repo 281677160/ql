@@ -224,6 +224,7 @@ if [[ `ls -a |grep -c "JDHelloWorld_jd_scripts成功" /ql/azcg.log` -ge '1' ]] |
 	rm -fr /ql/azcg.log
 else
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
+	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
 	rm -fr /ql/azcg.log
 	echo "Error" > /ql/config/Error
 fi

@@ -151,6 +151,7 @@ cat >/etc/docker/daemon.json <<-EOF
 }
 EOF
 sudo systemctl restart docker.service
+sleep 2
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
 	sleep 2
@@ -160,7 +161,7 @@ else
 	TIME g "docker安装成功，正在启动docker，请稍后..."
 	sudo systemctl restart docker
 	sudo systemctl enable docker
-	sleep 12
+	sleep 3
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"
 	TIME y ""

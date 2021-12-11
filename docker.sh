@@ -187,5 +187,37 @@ else
 		exit 1
 	fi
 fi
+if [[ ${XITONG} == "cent_os" ]]; then
+cat >/etc/docker/daemon.json <<-EOF
+{
+    "registry-mirrors": ["https://qndprgwv.mirror.aliyuncs.com"],
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+         }  
+    }
+}
+EOF
+	sudo systemctl daemon-reload
+	sudo systemctl restart docker
+	sudo systemctl enable docker > /dev/null 2>&1
+else
+cat >/etc/docker/daemon.json <<-EOF
+{
+    "registry-mirrors": ["https://qndprgwv.mirror.aliyuncs.com"],
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+         }  
+    }
+}
+EOF
+	sudo systemctl daemon-reload
+	sudo systemctl restart docker
+	sudo systemctl enable docker > /dev/null 2>&1
+	/lib/systemd/systemd-sysv-install enable docker
+fi
 rm -fr build.log
 exit 0

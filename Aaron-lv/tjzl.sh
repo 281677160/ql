@@ -257,7 +257,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		sleep 3
 		docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv.sh)"
 		if [[ -f ${QL_PATH}/ql/config/Error ]]; then
-			rm -fr ${QL_PATH}/ql/config ${QL_PATH}/qlbeifen1
+			rm -fr ${QL_PATH}/ql/config/Error ${QL_PATH}/qlbeifen1
 			exit 1
 		fi
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
@@ -326,7 +326,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		esac
 		done
 		if [[ -f ${QL_PATH}/ql/config/Error ]]; then
-			rm -fr ${QL_PATH}/ql/config ${QL_PATH}/qlbeifen1
+			rm -fr ${QL_PATH}/ql/config/Error ${QL_PATH}/qlbeifen1
 			exit 1
 		fi
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json

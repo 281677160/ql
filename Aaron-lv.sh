@@ -220,7 +220,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_C
     TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
 echo
-if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "JDHelloWorld_jd_scripts成功" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"

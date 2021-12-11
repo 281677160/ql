@@ -45,6 +45,7 @@ curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/utils/jd_jxmcT
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_cfd_sharecodes.ts > /ql/scripts/jd_cfd_sharecodes.ts
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_jxmc_sharecodes.ts > /ql/scripts/jd_jxmc_sharecodes.ts
 curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/TS_USER_AGENTS.ts > /ql/scripts/TS_USER_AGENTS.ts
+curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/Aaron-lv/jd_cfd_loop.js > /ql/scripts/jd_cfd_loop.js
 
 echo
 TIME l "拉取auth.json"

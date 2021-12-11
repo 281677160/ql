@@ -30,6 +30,7 @@ latest_ver="$(wget -qO- -t1 -T2 "https://api.github.com/repos/npm/cli/releases/l
 npm install -g npm
 TIME l "升级npm至${latest_ver}"
 npm install -g npm@${latest_ver}
+npm install -g yarn
 TIME l "安装依赖png-js"
 npm install -g png-js
 TIME l "安装依赖date-fns"

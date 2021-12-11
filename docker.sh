@@ -175,7 +175,7 @@ else
 		docker rm $(docker ps -a -q)
 		docker rmi $(docker images -q)
 		echo
-		TIME y "测试镜像删除完毕，docker安装成功!"
+		TIME y "测试镜像删除完毕"
 		echo
 	else
 		echo
@@ -219,5 +219,6 @@ EOF
 	sudo systemctl enable docker > /dev/null 2>&1
 	/lib/systemd/systemd-sysv-install enable docker
 fi
+TIME g "docker安装成功!"
 rm -fr build.log
 exit 0

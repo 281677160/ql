@@ -30,13 +30,18 @@ latest_ver="$(wget -qO- -t1 -T2 "https://api.github.com/repos/npm/cli/releases/l
 npm install -g npm
 TIME l "升级npm至${latest_ver}"
 npm install -g npm@${latest_ver} --force
+TIME l "安装yarn"
 npm install -g yarn --force
-TIME l "安装依赖png-js"
-yarn add png-js
 TIME l "安装依赖date-fns"
 yarn add date-fns
 TIME l "安装依赖axios"
 yarn add axios
+TIME l "安装依赖ts-node"
+yarn add ts-node
+TIME l "安装依赖typescript"
+yarn add typescript
+TIME l "安装依赖png-js"
+npm install -g png-js
 TIME l "安装依赖crypto-js"
 npm install -g crypto-js
 TIME l "安装依赖md5"
@@ -65,9 +70,9 @@ TIME l "安装依赖js-base64"
 npm install -g js-base64
 TIME l "安装依赖jieba"
 pip3 install jieba
-TIME l "安装pnpm"
+TIME l "安装cairo-dev"
 npm install -g got@11.8.3
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript axios
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev
 cd /ql
 pip3 install canvas
 cd /ql

@@ -143,8 +143,13 @@ else
 		exit 1
 	else
 		systemctl start docker
-		sleep 5
+		sleep 3
 	fi
+fi
+if [[ `systemctl status docker |grep -c "active (running) "` == '0' ]]; then
+	TIME y "docker没有启动，请先启动docker"
+	sleep 1
+	exit 1
 fi
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo

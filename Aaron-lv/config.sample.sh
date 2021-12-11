@@ -329,6 +329,8 @@ export guaopencard_All="true"
 export guaopencard_addSku_All="true"
 export guaopencardRun_All="true"
 export guaopencard_draw="true"
+### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
+export guaopencard_rewardBean="1,2,3"
 
 # cdle 环境变量
 ## 1、签到领现金兑换
@@ -428,9 +430,6 @@ export JDDJ_CKPATH="./jdCookie.js"
 
 ### 京东工业品加购任务
 export FS_LEVEL="car"
-
-### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
-export guaopencard_rewardBean="1,2,3"
 
 ## 过期京豆兑换为喜豆
 export BEANCHANGE_ExJxBeans="true"

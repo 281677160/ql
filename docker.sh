@@ -160,7 +160,8 @@ else
 	TIME y ""
 	TIME g "docker安装成功，正在启动docker，请稍后..."
 	sudo systemctl restart docker
-	sudo systemctl enable docker
+	sudo systemctl enable docker > /dev/null 2>&1
+	/lib/systemd/systemd-sysv-install enable docker
 	sleep 3
 	TIME y ""
 	TIME g "测试docker拉取镜像是否成功"

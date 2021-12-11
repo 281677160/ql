@@ -144,10 +144,12 @@ else
 	else
 		systemctl start docker
 		sleep 2
+		echo
 		TIME g "检测docker是否在运行"
 		if [[ `systemctl status docker |grep -c "active (running) "` == '1' ]]; then
 			TIME g "docker正在运行中!"
 		else
+			echo
 			TIME y "docker没有启动，请先启动docker"
 			sleep 1
 			exit 1

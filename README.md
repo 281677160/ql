@@ -24,14 +24,13 @@ apt -y update && apt -y install curl
 ```sh
 yum install -y curl
 ```
+#
 
-
-
----
 - 安装完curl后，执行下面一键命令安装青龙+依赖+任务
 ```sh
 bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 ```
+#
 
 ## 第二步
 

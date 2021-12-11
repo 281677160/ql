@@ -178,6 +178,17 @@ if [ "$(grep -c jd_cfd_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
 fi
 sleep 2
 echo
+# 将 jd_cfd_loop.js 添加到定时任务
+if [ "$(grep -c jd_cfd_loop.js /ql/config/crontab.list)" = 0 ]; then
+    echo
+    TIME g "添加任务 [京喜财富岛热气球]"
+    echo
+    # 获取token
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜财富岛热气球","command":"task jd_cfd_loop.js","schedule":"25 * * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639205306669'
+fi
+sleep 2
+echo
 # 将 jd_cleancartAll.js 添加到定时任务
 if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
     echo

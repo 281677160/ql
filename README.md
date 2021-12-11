@@ -13,13 +13,14 @@
 
 - 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
 
-- ubuntu或者debian系统
+- 使用root用户登录ubuntu或者debian系统，后执行一下命令安装curl
 ```sh
-sudo apt-get update && sudo apt-get install -y curl
+apt -y update && apt -y install curl
 ```
-- centos系统
+
+- 使用root用户登录centos系统，后执行一下命令安装curl
 ```sh
-sudo yum install -y curl
+yum install -y curl
 ```
 
 
@@ -70,11 +71,6 @@ pt_key=您的pt_key值;pt_pin=您的账号;
 wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
 ```
 
-- 一键单独安装任务（青龙安装好后，登录页面后，可以用这个单独安装任务）
-```sh
-docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun.sh)"
-```
-
 - 一键安装单独青龙的依赖
 ```sh
 docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
@@ -82,7 +78,6 @@ docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.
 ## 感谢！
 
 > [`whyour`](https://github.com/whyour/qinglong)
-> [`feverrun`](https://github.com/feverrun/my_scripts)
 #
 - # 捐赠
 - 如果你觉得此项目对你有帮助，请请我喝一杯82年的凉白开，感谢！

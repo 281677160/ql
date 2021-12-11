@@ -29,14 +29,14 @@ npm config get registry
 latest_ver="$(wget -qO- -t1 -T2 "https://api.github.com/repos/npm/cli/releases/latest" |grep "tag_name" |head -n 1 |awk -F ":" '{print $2}' |sed 's/\"//g;s/,//g;s/ //g' |sed 's/^v//')"
 npm install -g npm
 TIME l "升级npm至${latest_ver}"
-npm install -g npm@${latest_ver}
-npm install -g yarn
+npm install -g npm@${latest_ver} --force
+npm install -g yarn --force
 TIME l "安装依赖png-js"
-npm install -g png-js
+yarn add png-js
 TIME l "安装依赖date-fns"
-npm install -g date-fns
+yarn add date-fns
 TIME l "安装依赖axios"
-npm install -g axios
+yarn add axios
 TIME l "安装依赖crypto-js"
 npm install -g crypto-js
 TIME l "安装依赖md5"

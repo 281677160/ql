@@ -190,7 +190,6 @@ if __name__ == "__main__":
     sum = f"所有任务数量为：{len(tasklist)}"
     filter = f"过滤的任务数量为：{len(res_list)}"
     disable = f"禁用的任务数量为：{len(ids)}"
-    logging.info("\n=== 禁用数量统计 ===\n" + sum + "\n" + filter + "\n" + disable)
 
     if len(ids) == 0:
         logger.info("😁没有重复任务~")

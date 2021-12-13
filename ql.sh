@@ -620,7 +620,7 @@ memunvjdc() {
   2)
     ECHOY "开始升级nvjdc面板，请耐心等候..."
     Google_Check
-    bash -c  "$(curl -fsSL ${curlurl}/upjdc.sh)"
+    bash -c  "$(curl -fsSL ${curlurl}/jdcup.sh)"
   break
   ;;
   3)

@@ -339,7 +339,7 @@ function install_rw() {
     [[ ${Npm_yilai} == "true" ]] && docker exec -it qinglong bash -c  "$(curl -fsSL ${curlurl}/npm.sh)"
     [[ ${Npm_yilai} == "false" ]] && docker exec -it qinglong bash -c  "$(curl -fsSL ${curlurl}/python3.sh)"
     ECHOG "开始安装脚本，请耐心等待..."
-    docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/qlcs/main/${Sh_Path})"
+    docker exec -it qinglong bash -c "$(curl -fsSL ${curlurl}/${Sh_Path})"
   break
   ;;
   N)
@@ -413,7 +413,7 @@ function pull_nvjdc() {
 function Config_json() {
   ECHOY "修改配置文件"
   mkdir -p ${Config}
-  bash -c  "$(curl -fsSL https://raw.githubusercontent.com/281677160/qlcs/main/json.sh)"
+  bash -c  "$(curl -fsSL ${curlurl}/json.sh)"
   judge "配置修改"
   chmod +x ${Config}/Config.json
 }
@@ -520,18 +520,18 @@ function OpenApi_Client() {
 function Google_Check() {
   export Google_Check=$(curl -I -s --connect-timeout 8 google.com -w %{http_code} | tail -n1)
   if [ ! "$Google_Check" == 301 ];then
-    export curlurl="https://cdn.jsdelivr.net/gh/281677160/qlcs@main"
+    export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export ghproxy_Path="https://ghproxy.com/"
     ECHOGG "切换至使用代理下载文件"
     echo "
-    export curlurl="https://cdn.jsdelivr.net/gh/281677160/qlcs@main"
+    export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export ghproxy_Path="https://ghproxy.com/"
     " > /root/ghproxy.sh
   else
-    export curlurl="https://raw.githubusercontent.com/281677160/qlcs/main"
+    export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
     export ghproxy_Path=""
     echo "
-    export curlurl="https://raw.githubusercontent.com/281677160/qlcs/main"
+    export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
     export ghproxy_Path=""
     " > /root/ghproxy.sh
   fi

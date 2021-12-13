@@ -79,6 +79,7 @@ docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.
 ## 感谢！
 
 > [`whyour`](https://github.com/whyour/qinglong)
+> [`NolanHzy`](https://github.com/NolanHzy/nvjdcdocker)
 #
 - # 捐赠
 - 如果你觉得此项目对你有帮助，请请我喝一杯82年的凉白开，感谢！

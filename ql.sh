@@ -639,6 +639,7 @@ function azqinglong() {
   system_docker
   systemctl_status
   Unstall_qinglong
+  jiance_nvjdc
   sys_kongjian
   install_ql
   hnanyuan_bf

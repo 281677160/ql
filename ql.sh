@@ -820,6 +820,7 @@ memu() {
   ECHORR "nvjdc面板可以进行手机验证挂机，无需复杂的抓KEY，如果是外网架设的话，任何人都可以用您的面板进入您的青龙挂机"
   ECHORR "安装过程会有重启docker操作，如不能接受，请退出安装"
   echo
+  ECHOY " 请选择您要安装什么类型的任务库"
   ECHOB " 1. TG机器人每周提交助力码库（faker2+JDHelloWorld）"
   ECHOB " 2. 自动提交助力码库,要去库的作者那里提交资料过白名单（feverrun）"
   ECHOB " 3. 退出安装程序!"

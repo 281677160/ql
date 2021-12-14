@@ -832,14 +832,14 @@ memu() {
   1)
     export wjmz="Aaron-lv"
     export Sh_Path="Aaron-lv.sh"
-    export kugonggao="库选择：TG机器人每周提交助力码库"
+    export kugonggao="您的库选择：TG机器人每周提交助力码库"
     memuaz
   break
   ;;
   2)
     export wjmz="feverrun"
     export Sh_Path="feverrun.sh"
-    export kugonggao="库选择：自动提交助力码库"
+    export kugonggao="您的库选择：自动提交助力码库"
     memuaz
   break
   ;;

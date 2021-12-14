@@ -509,12 +509,12 @@ function OpenApi_Client() {
   ECHOYY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret，设置步骤如下："
   ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部点击选上] --> 点一下新建应用空白处 --> 点击确定"
   echo
-  read -p " 请输入您要设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
+  read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
+  export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
+  read -p " 请输入您想设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
   export JDC_PORT=${JDC_PORT:-"5701"}
   read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
   export CAPACITY=${CAPACITY:-"99"}
-  read -p " www.pushplus.plus一对一推送的Token值(不填为不推送): " PUSHPLUS && printf "\n"
-  export PUSHPLUS=${PUSHPLUS:-""}
   export IDMING="请输入青龙Client ID"
   while :; do
   read -p " ${IDMING}：" CLIENTID

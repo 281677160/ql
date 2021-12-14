@@ -136,9 +136,15 @@ function qinglong_port() {
      read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
      export JDC_PORT="${5701}"
+     export QLurl="http://${IP}:${QL_PORT}"
   fi
   ECHOGG "您的IP为：${IP}"
   ECHOGG "${YPORT}：${QL_PORT}"
+  if [[ "${Api_Client}" == "true" ]]; then
+    ECHOGG "您的nvjdc面板名称为：${NVJDCNAME}"
+    ECHOGG "您的nvjdc面板端口为：${JDC_PORT}"
+    ECHOGG "您的青龙最大挂机数为：${CAPACITY}"
+  fi
   echo
   read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNRT
   case $NNRT in
@@ -519,12 +525,12 @@ function up_nvjdc() {
 
 function OpenApi_Client() {
   if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
-  clear
-  echo
-  echo
-  echo
-  ECHOYY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret，设置步骤如下："
-  ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部点击选上] --> 点一下新建应用空白处 --> 点击确定"
+    clear
+    echo
+    echo
+    echo
+    ECHOYY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret，设置步骤如下："
+    ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部点击选上] --> 点一下新建应用空白处 --> 点击确定"
   fi
   echo
   CLMEUN="请设置好Client ID和Client Secret按回车"
@@ -545,33 +551,9 @@ function OpenApi_Client() {
   ;;
   esac
   done
-    
-    
-     read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
-     export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
-     read -p " 请输入您想设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
-     export JDC_PORT=${JDC_PORT:-"5701"}
-     read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
-     export CAPACITY=${CAPACITY:-"99"}
-     export MANEID="$(grep 'name' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-     export CLIENTID="$(grep 'client_id' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-     export CLIENTID_SECRET="$(grep 'client_secret' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-     echo
-     ECHOGG "您的nvjdc面板名称为：${NVJDCNAME}"
-     ECHOGG "您的nvjdc面板端口为：${JDC_PORT}"
-     ECHOGG "您的青龙最大挂机数为：${CAPACITY}"
-     ECHOGG "您的青龙Client ID为：${CLIENTID}"
-     ECHOGG "您的青龙Client Secret为：${CLIENTID_SECRET}"
-     echo
-     read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNKC
-     case $NNKC in
-     [Qq])
-       OpenApi_Client "$@"
-     ;;
-     *)
-       print_ok "您已确认数据无误!"
-     ;;
-     esac
+  export MANEID="$(grep 'name' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export CLIENTID="$(grep 'client_id' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export CLIENTID_SECRET="$(grep 'client_secret' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
 }
 
 function Google_Check() {

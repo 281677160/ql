@@ -132,7 +132,6 @@ function qinglong_port() {
   case $NNRT in
   [Qq])
     qinglong_port
-    exit 0
   ;;
   *)
     print_ok "您已确认无误!"
@@ -189,14 +188,14 @@ function system_docker() {
     if [[ ! -x "$(command -v docker)" ]]; then
       print_error "没检测到docker，openwrt请自行安装docker，和挂载好5G或以上的硬盘"
       sleep 1
-      exit 0
+      exit 1
     fi
   else
     if [[ ! -x "$(command -v docker)" ]]; then
       ECHOR "没检测到docker，正在安装docker"
       bash -c "$(curl -fsSL ${curlurl}/docker.sh)"
       sleep 1
-      exit 0
+      exit 1
     fi
   fi
 }

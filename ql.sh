@@ -657,8 +657,8 @@ memunvjdc() {
   ECHOB " 2. 升级nvjdc面板"
   ECHOB " 3. 御载nvjdc面板"
   ECHOB " 4. 御载青龙+nvjdc面板"
-  ECHOB " 5. 重新安装青龙+nvjdc面板"
-  ECHOB " 6. 退出安装程序!"
+  ECHOB " 5. 进入第一主菜单（安装选择界面）"
+  ECHOB " 6. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -710,8 +710,8 @@ memuqinglong() {
   echo
   ECHOY " 1. 升级青龙面板"
   ECHOYY " 2. 御载青龙面板"
-  ECHOY " 3. 重新安装青龙面板"
-  ECHOYY " 4. 退出安装程序!"
+  ECHOY " 5. 进入第一主菜单（安装选择界面）"
+  ECHOYY " 6. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do

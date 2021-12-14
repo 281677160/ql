@@ -515,12 +515,24 @@ function OpenApi_Client() {
   echo
   CLMEUN="请设置好Client ID和Client Secret按回车"
   while :; do
-  read -p " ${CLMEUN}： " MENUCL
+  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '0' ]]; then
+    read -p " ${CLMEUN}： " MENUCL
+  fi
   if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '1' ]]; then
     X="Y"
   fi
   case $X in
     Y)
+    echo
+  break
+  ;;
+  *)
+    CLMEUN="请设置好Client ID和Client Secret按回车"
+  ;;
+  esac
+  done
+    
+    
      read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
      read -p " 请输入您想设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
@@ -547,13 +559,6 @@ function OpenApi_Client() {
        print_ok "您已确认数据无误!"
      ;;
      esac
-  break
-  ;;
-  *)
-    CLMEUN="请设置好Client ID和Client Secret按回车"
-  ;;
-  esac
-  done
 }
 
 function Google_Check() {

@@ -572,7 +572,7 @@ function Google_Check() {
   if [ ! "$Google_Check" == 301 ];then
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export ghproxy_Path="https://ghproxy.com/"
-    ECHOGG "切换至使用代理下载文件"
+    ECHOGG "使用代理"
     echo "
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export ghproxy_Path="https://ghproxy.com/"

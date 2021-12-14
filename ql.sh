@@ -216,7 +216,7 @@ function systemctl_status() {
 
 function Unstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-    ECHOY "检测到已有青龙面板，正在御载旧的青龙容器和镜像，请稍后..."
+    ECHOY "检测青龙面板，正在御载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
     images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
     docker stop -t=5 "${dockerid}" > /dev/null 2>&1
@@ -376,7 +376,7 @@ function install_yanzheng() {
 
 function jiance_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "检测到已有nvjdc面板，正在御载旧的nvjdc容器和镜像，请稍后..."
+    ECHOY "检测到nvjdc面板，正在御载nvjdc面板，请稍后..."
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1

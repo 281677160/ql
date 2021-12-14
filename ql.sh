@@ -204,7 +204,7 @@ function system_docker() {
 function systemctl_status() {
   systemctl start docker
   sleep 2
-  ECHOG "检测docker是否在运行"
+  ECHOGG "检测docker是否在运行"
   if [[ `systemctl status docker |grep -c "active (running) "` == '1' ]]; then
     print_ok "docker正在运行中!"
   else

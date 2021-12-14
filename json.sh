@@ -28,7 +28,7 @@ cat > ${Config}/Config.json << EOF
       //序号必填从1 开始
       "QLkey": 1,
       //服务器名称
-      "QLName": "qinglong",
+      "QLName": "${MANEID}",
       //青龙地址
       "QLurl": "${QLurl}",
       //青龙2,9 OpenApi Client ID

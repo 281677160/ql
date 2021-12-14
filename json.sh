@@ -4,7 +4,7 @@ cat > ${Config}/Config.json << EOF
   ///浏览器最多几个网页
   "MaxTab": "8",
   //回收时间分钟 不填默认3分钟
-  "Closetime": "3",
+  "Closetime": "2",
   //网站标题
   "Title": "NolanJDCloud",
   //网站公告

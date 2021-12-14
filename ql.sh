@@ -661,8 +661,8 @@ memunvjdc() {
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
-  read -p " ${scqlbianmaa}： " QLJB
-  case $QLJB in
+  read -p " ${scqlbianmaa}： " MVQLJB
+  case $MVQLJB in
   1)
     ECHOG "正在检测更新青龙面板,请耐心等候..."
     docker exec -it qinglong ql update

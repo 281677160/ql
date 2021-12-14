@@ -411,7 +411,6 @@ function pull_nvjdc() {
 }
 
 function Config_json() {
-  ECHOY "修改配置文件"
   mkdir -p ${Config}
   bash -c  "$(curl -fsSL ${curlurl}/json.sh)"
   judge "配置修改"
@@ -439,7 +438,6 @@ function linux_nolanjdc() {
   sudo docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
   -v /etc/localtime:/etc/localtime:ro \
   -it --privileged=true  nolanhzy/nvjdc:latest
-  
   cd /root
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     print_ok "nvjdc镜像启动成功"
@@ -447,10 +445,60 @@ function linux_nolanjdc() {
     print_error "nvjdc镜像启动成功"
     exit 1
   fi
-  timeout -k 1s 4s docker logs -f nolanjdc
-  print_ok "nvjdc安装完成"
+  timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
+  if [[ `grep -c "序列号" ${Home}/build.log` -eq '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -eq '1' ]]; then
+    print_ok "nvjdc安装完成"
+  else
+    print_error "nvjdc安装失败"
+  fi
   ECHOY "您的nvjdc面板地址为：http://${IP}:${JDC_PORT}"
-  
+}
+
+function up_nvjdc() {
+  [[ -f /etc/bianliang.sh ]] && source /etc/bianliang.sh
+  ECHOY "下载nvjdc源码"
+  rm -rf ${QL_PATH}/nvjdcbf
+  cp -Rf ${Home} ${QL_PATH}/nvjdcbf
+  rm -rf "${Home}" && git clone ${ghproxy_Path}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
+  judge "下载源码"
+  cp -Rf ${QL_PATH}/nvjdcbf/Config ${Home}/Config
+  cp -Rf ${QL_PATH}/nvjdcbf/.local-chromium ${Home}/.local-chromium
+  if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
+    ECHOY "御载nvjdc镜像"
+    dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
+    imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
+    docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
+    docker rm "${dockernvid}"
+    docker rmi "${imagesnvid}"
+  fi
+  if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
+    print_ok "nvjdc镜像御载完成"
+  else
+    print_error "nvjdc镜像御载失败，再次尝试删除"
+    up_nvjdc
+  fi
+  cd /root
+  ECHOY "更新镜像，请耐心等候..."
+  sudo docker pull nolanhzy/nvjdc:latest
+  cd ${Home}
+  sudo docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+  -v /etc/localtime:/etc/localtime:ro \
+  -it --privileged=true  nolanhzy/nvjdc:latest
+  rm -rf ${QL_PATH}/nvjdcbf
+  if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
+    print_ok "nvjdc镜像启动成功"
+  else
+    print_error "nvjdc镜像启动失败"
+    exit 1
+  fi
+  timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
+  if [[ `grep -c "序列号" ${Home}/build.log` -eq '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -eq '1' ]]; then
+    print_ok "nvjdc升级完成"
+  else
+    print_error "nvjdc升级失败"
+  fi
+  rm -rf ${Home}/build.log
+  exit 0
 }
 
 function OpenApi_Client() {

@@ -555,7 +555,6 @@ function OpenApi_Client() {
      case $NNKC in
      [Qq])
        OpenApi_Client "$@"
-       exit 0
      ;;
      *)
        print_ok "您已确认数据无误!"

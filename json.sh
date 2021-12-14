@@ -6,7 +6,7 @@ cat > ${Config}/Config.json << EOF
   //回收时间分钟 不填默认3分钟
   "Closetime": "2",
   //网站标题
-  "Title": "NolanJDCloud",
+  "Title": "${NVJDCNAME}",
   //网站公告
   "Announcement": "本项目脚本收集于互联网。为了您的财产安全，请关闭京东免密支付。",
   ///XDD PLUS Url  http://IP地址:端口/api/login/smslogin

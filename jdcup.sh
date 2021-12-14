@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
   [[ -f /etc/bianliang.sh ]] && source /etc/bianliang.sh
-  if [[ `docker images | grep -c "nolanjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nolanjdc"` -ge '1' ]]; then
-    dockernv=$(docker ps -a|grep nolanjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
-    imagesnv=$(docker images|grep nolanjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
+  if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
+    dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
+    imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
     docker rm "${dockernvid}"
     docker rmi "${imagesnvid}"

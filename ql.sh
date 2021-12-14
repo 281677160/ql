@@ -796,6 +796,7 @@ memu() {
     export Api_Client="false"
     export Npm_yilai="true"
     export Sys_kj="5"
+    export Ql_nvjdc=""
     ECHOG " 安装青龙+任务+依赖"
     azqinglong
   break
@@ -806,6 +807,7 @@ memu() {
     export Api_Client="false"
     export Npm_yilai="false"
     export Sys_kj="5"
+    export Ql_nvjdc=""
     ECHOG " 安装青龙+任务（依赖自行在青龙面板安装）"
     azqinglong
   break

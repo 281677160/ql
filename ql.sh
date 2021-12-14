@@ -456,7 +456,9 @@ function linux_nolanjdc() {
 function OpenApi_Client() {
   clear
   echo
-  ECHOY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret"
+  echo
+  echo
+  ECHOYY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret，设置步骤如下："
   ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部点击选上] --> 点一下新建应用空白处 --> 点击确定"
   echo
   read -p " 请输入您要设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"

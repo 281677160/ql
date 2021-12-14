@@ -28,7 +28,7 @@ yum install -y curl
 
 - 安装完curl后，执行下面一键命令安装青龙+依赖+任务
 ```sh
-bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh)"
 ```
 #
 
@@ -69,7 +69,7 @@ pt_key=您的pt_key值;pt_pin=您的账号;
 
 - 一键单独安装docker
 ```sh
-wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh && bash docker.sh
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh)"
 ```
 
 - 一键安装单独青龙的依赖

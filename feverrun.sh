@@ -37,6 +37,8 @@ wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
+chmod +x /ql/repo/ghproxy.sh && source /ql/repo/ghproxy.sh
+rm -rf /ql/repo/ghproxy.sh
 mkdir -p /ql/qlwj
 echo
 TIME l "拉取auth.json"

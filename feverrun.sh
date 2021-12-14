@@ -40,21 +40,21 @@ sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
 echo
 TIME l "拉取auth.json"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/auth.json > /ql/qlwj/auth.json
+curl -fsSL ${curlurl}/feverrun/auth.json > /ql/qlwj/auth.json
 TIME l "拉取crypto-js.js"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
+curl -fsSL ${curlurl}/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
 TIME l "拉取config.sample.sh"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
+curl -fsSL ${curlurl}/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
 TIME l "拉取extra.sh"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/extra.sh > /ql/qlwj/extra.sh
+curl -fsSL ${curlurl}/feverrun/extra.sh > /ql/qlwj/extra.sh
 TIME l "拉取jd_OpenCard.py"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+curl -fsSL ${curlurl}/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 TIME l "拉取wskey.py"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/wskey.py > /ql/qlwj/wskey.py
+curl -fsSL ${curlurl}/feverrun/wskey.py > /ql/qlwj/wskey.py
 TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+curl -fsSL ${curlurl}/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
 TIME l "拉取jd_Evaluation.py"
-curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
+curl -fsSL ${curlurl}/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -120,40 +120,17 @@ if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task jd_Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
 fi
-sleep 1
-echo
-if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
-    echo
-    TIME g "执行WSKEY转换PT_KEY操作"
-    task wskey.py |tee azcg.log
-    echo
-    if [[ `ls -a |grep -c "wskey添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /ql/azcg.log` = '0' ]] || [[ `ls -a |grep -c "wskey更新成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /ql/azcg.log` = '0' ]]; then
-    	echo
-    	TIME g "WSKEY转换PT_KEY成功"
-	echo
-    else
-    	echo
-    	TIME r "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，如果是多个WSKEY的话，或者有个别KEY出问题"
-	echo
-    fi
-fi
-echo
-echo
+task wskey.py
 echo
 TIME y "拉取feverrun大佬的自动助力脚本"
 echo
-echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
-if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
-    TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
-fi
-echo
-if [[ `ls -a |grep -c "添加定时任务" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]]; then
+task curtinlv_JD-Script_jd_tool_dl.py
+if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else
-	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装（特别是看到请先登录字眼的）"
-	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
+	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
 	rm -fr /ql/azcg.log
 	echo "Error" > /ql/config/Error
 fi

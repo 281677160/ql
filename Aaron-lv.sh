@@ -213,8 +213,7 @@ ql bot
 if [[ `ls -a |grep -c "成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else
-	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装（特别是看到请先登录字眼的）"
-	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
+	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
 	rm -fr /ql/azcg.log
 	echo "Error" > /ql/config/Error
 fi

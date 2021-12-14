@@ -744,19 +744,11 @@ memuqinglong() {
   done
 }
 
-memu() {
+memuaz() {
   clear
   echo
   echo
-  ECHORR "脚本适用于（ubuntu、debian、centos、openwrt）"
-  ECHORR "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
-  ECHORR "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker，如果空间太小请挂载好硬盘"
-  ECHORR "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"
-  ECHORR "如果安装当前文件夹已经存在 ql 文件的话，如果您的[环境变量文件]符合要求，就会继续使用，免除重新输入KEY的烦恼"
-  ECHORR "nvjdc面板可以进行手机验证挂机，无需复杂的抓KEY，如果是外网架设的话，任何人都可以用您的面板进入您的青龙挂机"
-  ECHORR "安装过程会有重启docker操作，如不能接受，请退出安装"
-  echo
-  ECHOY " 请选择要安装的脚本库"
+  ECHOY " ${kugonggao}"
   ECHOB " 1. 安装青龙+任务+依赖+nvjdc面板"
   ECHOB " 2. 安装青龙+任务+nvjdc面板（依赖自行在青龙面板安装）"
   ECHOB " 3. 安装青龙+任务+依赖"
@@ -768,8 +760,6 @@ memu() {
   read -p " ${scqlbianmaa}： " QLJB
   case $QLJB in
   1)
-    wjmz="Aaron-lv"
-    Sh_Path="Aaron-lv.sh"
     export Api_Client="true"
     export Npm_yilai="true"
     export Sys_kj="12"
@@ -779,8 +769,6 @@ memu() {
   break
   ;;
   2)
-    wjmz="Aaron-lv"
-    Sh_Path="Aaron-lv.sh"
     export Api_Client="true"
     export Npm_yilai="false"
     export Sys_kj="12"
@@ -790,8 +778,6 @@ memu() {
   break
   ;;
   3)
-    wjmz="Aaron-lv"
-    Sh_Path="Aaron-lv.sh"
     export Api_Client="false"
     export Npm_yilai="true"
     export Sys_kj="5"
@@ -801,8 +787,6 @@ memu() {
   break
   ;;
   4)
-    wjmz="Aaron-lv"
-    Sh_Path="Aaron-lv.sh"
     export Api_Client="false"
     export Npm_yilai="false"
     export Sys_kj="5"
@@ -823,6 +807,54 @@ memu() {
   esac
   done
 }
+
+memu() {
+  clear
+  echo
+  echo
+  ECHORR "脚本适用于（ubuntu、debian、centos、openwrt）"
+  ECHORR "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
+  ECHORR "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker，如果空间太小请挂载好硬盘"
+  ECHORR "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"
+  ECHORR "如果安装当前文件夹已经存在 ql 文件的话，如果您的[环境变量文件]符合要求，就会继续使用，免除重新输入KEY的烦恼"
+  ECHORR "nvjdc面板可以进行手机验证挂机，无需复杂的抓KEY，如果是外网架设的话，任何人都可以用您的面板进入您的青龙挂机"
+  ECHORR "安装过程会有重启docker操作，如不能接受，请退出安装"
+  echo
+  ECHOB " 1. TG机器人每周提交助力码库（faker2+JDHelloWorld）"
+  ECHOB " 2. 自动提交助力码库,要去库的作者那里提交资料过白名单（feverrun）"
+  ECHOB " 3. 退出安装程序!"
+  echo
+  scqlanmaa="输入您选择的编码"
+  while :; do
+  read -p " ${scqlanmaa}： " TGQLJB
+  case $TGQLJB in
+  1)
+    export wjmz="Aaron-lv"
+    export Sh_Path="Aaron-lv.sh"
+    export kugonggao="库选择：TG机器人每周提交助力码库"
+    memuaz
+  break
+  ;;
+  2)
+    export wjmz="feverrun"
+    export Sh_Path="feverrun.sh"
+    export kugonggao="库选择：自动提交助力码库"
+    memuaz
+  break
+  ;;
+  3)
+    ECHOR "您选择了退出程序!"
+    sleep 1
+    exit 1
+  break
+  ;;
+  *)
+    scqlanmaa="请输入正确的编码"
+  ;;
+  esac
+  done
+}
+
   if [[ -f /etc/bianliang.sh ]] && [[ `docker images | grep -c "qinglong"` -ge '1' ]] && [[ `docker images | grep -c "nvjdc"` -ge '1' ]]; then
     source /etc/bianliang.sh
     memunvjdc "$@"

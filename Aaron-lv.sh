@@ -198,25 +198,7 @@ if [ "$(grep -c jd_cfd_loop.js /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜财富岛热气球","command":"task jd_cfd_loop.js","schedule":"25 * * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639205306669'
 fi
-sleep 2
-echo
-if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
-    echo
-    TIME g "执行WSKEY转换PT_KEY操作"
-    task wskey.py |tee azcg.log
-    echo
-    if [[ `ls -a |grep -c "wskey添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /ql/azcg.log` = '0' ]] || [[ `ls -a |grep -c "wskey更新成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /ql/azcg.log` = '0' ]]; then
-    	echo
-    	TIME g "WSKEY转换PT_KEY成功"
-	echo
-    else
-    	echo
-    	TIME r "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，如果是多个WSKEY的话，或者有个别KEY出问题"
-	echo
-    fi
-fi
-echo
-echo
+task wskey.py |tee azcg.log
 echo
 TIME y "拉取Aaron-lv和faker2大佬们的脚本"
 echo
@@ -228,10 +210,6 @@ TIME y "更新脚本"
 ql extra |tee azcg.log
 TIME y "拉取机器人"
 ql bot
-if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
-    TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
-fi
-echo
 if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else

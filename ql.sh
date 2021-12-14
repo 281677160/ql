@@ -506,12 +506,14 @@ function up_nvjdc() {
 }
 
 function OpenApi_Client() {
+  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '0' ]]; then
   clear
   echo
   echo
   echo
   ECHOYY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret，设置步骤如下："
   ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部点击选上] --> 点一下新建应用空白处 --> 点击确定"
+  fi
   echo
   CLMEUN="请设置好Client ID和Client Secret按回车"
   while :; do

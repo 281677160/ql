@@ -18,6 +18,14 @@ RedBG="\033[41;37m"
 OK="${Green}[OK]${Font}"
 ERROR="${Red}[ERROR]${Font}"
 
+if [[ -f /opt/ql/scripts/rwwc ]]; then
+  rwwc="$(cat /opt/ql/scripts/rwwc)"
+elif [[ -f /root/ql/scripts/rwwc ]]; then
+  rwwc="$(cat /root/ql/scripts/rwwc)"
+else
+  rwwc=""
+fi
+
 function print_ok() {
   echo
   echo -e " ${OK} ${Blue} $1 ${Font}"
@@ -96,6 +104,8 @@ function qinglong_port() {
   done
   export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
   export YUMING="请输入您当前服务器的IP[比如：${local_ip}]"
+  echo
+  echo
   while :; do
   read -p " ${YUMING}：" IP
   oip="$(echo ${IP} |egrep -o "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")"
@@ -112,6 +122,7 @@ function qinglong_port() {
   ;;
   esac
   done
+  echo
   if [[ "${QING_PORT}" == "YES" ]]; then
     read -p " 请输入青龙端口(回车默认端口为:5700)：" QL_PORT
     export QL_PORT=${QL_PORT:-"5700"}
@@ -391,8 +402,7 @@ function install_yanzheng() {
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
   docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
-  echo "rwwc" > $QL_PATH/ql/scripts/rwwc
-  rwwc="$QL_PATH/ql/scripts/rwwc"
+  echo "$QL_PATH/ql/scripts/rwwc" > $QL_PATH/ql/scripts/rwwc
   sleep 2
   print_ok "任务安装完成"
 }
@@ -614,6 +624,7 @@ function qinglong_nvjdc() {
   system_docker
   systemctl_status
   Unstall_qinglong
+  jiance_nvjdc
   sys_kongjian
   install_ql
   hnanyuan_bf

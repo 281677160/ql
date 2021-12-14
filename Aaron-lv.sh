@@ -210,7 +210,7 @@ TIME y "更新脚本"
 ql extra |tee azcg.log
 TIME y "拉取机器人"
 ql bot
-if [[ `ls -a |grep -c "Aaron-lv_sync_jd_scripts成功" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "shufflewzc_faker2成功" /ql/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装（特别是看到请先登录字眼的）"

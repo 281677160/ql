@@ -131,7 +131,7 @@ function qinglong_port() {
   read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNRT
   case $NNRT in
   [Qq])
-    qinglong_port
+    qinglong_port "$@"
   ;;
   *)
     print_ok "您已确认无误!"
@@ -225,8 +225,8 @@ function Unstall_qinglong() {
     if [[ `docker ps -a | grep -c "qinglong"` == '0' ]]; then
       print_ok "青龙面板御载完成"
     else
-      print_error "青龙面板御载失败，再次尝试删除"
-      Unstall_qinglong
+      print_error "青龙面板御载失败"
+      exit 1
     fi
   fi
 
@@ -385,8 +385,8 @@ function jiance_nvjdc() {
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
       print_ok "nvjdc面板御载完成"
     else
-      print_error "nvjdc面板御载失败，再次尝试删除"
-      jiance_nvjdc
+      print_error "nvjdc面板御载失败"
+      exit 1
     fi
     rm -rf "${Home}"
   fi
@@ -514,9 +514,9 @@ function OpenApi_Client() {
   while :; do
   read -p " ${CLMEUN}： " MENUCL
   if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '1' ]]; then
-    S="Y"
+    X="Y"
   fi
-  case $S in
+  case $X in
     Y)
      read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
@@ -537,7 +537,7 @@ function OpenApi_Client() {
      read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNKC
      case $NNKC in
      [Qq])
-       OpenApi_Client
+       OpenApi_Client "$@"
        exit 0
      ;;
      *)

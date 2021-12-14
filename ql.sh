@@ -709,8 +709,8 @@ memuqinglong() {
   echo
   ECHOY " 1. 升级青龙面板"
   ECHOYY " 2. 御载青龙面板"
-  ECHOY " 5. 进入第一主菜单（安装选择界面）"
-  ECHOYY " 6. 退出程序!"
+  ECHOY " 3. 进入第一主菜单（安装选择界面）"
+  ECHOYY " 4. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do

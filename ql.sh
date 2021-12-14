@@ -317,7 +317,7 @@ function hnanyuan_bf() {
   fi
 }
 
-function install_rw() {
+function qinglong_dl() {
   clear
   echo
   ECHOY "青龙面板安装完成，请先登录面板再按回车，进行下一步任务安装程序..."
@@ -335,11 +335,7 @@ function install_rw() {
   fi
   case $S in
     Y)
-    [[ ${Api_Client} == "true" ]] && OpenApi_Client
-    [[ ${Npm_yilai} == "true" ]] && docker exec -it qinglong bash -c  "$(curl -fsSL ${curlurl}/npm.sh)"
-    [[ ${Npm_yilai} == "false" ]] && docker exec -it qinglong bash -c  "$(curl -fsSL ${curlurl}/python3.sh)"
-    ECHOG "开始安装脚本，请耐心等待..."
-    docker exec -it qinglong bash -c "$(curl -fsSL ${curlurl}/${Sh_Path})"
+    ECHOG ""
   break
   ;;
   N)
@@ -353,6 +349,13 @@ function install_rw() {
   ;;
   esac
   done
+}
+
+function install_rw() {
+  [[ ${Npm_yilai} == "true" ]] && docker exec -it qinglong bash -c  "$(curl -fsSL ${curlurl}/npm.sh)"
+  [[ ${Npm_yilai} == "false" ]] && docker exec -it qinglong bash -c  "$(curl -fsSL ${curlurl}/python3.sh)"
+  ECHOG "开始安装脚本，请耐心等待..."
+  docker exec -it qinglong bash -c "$(curl -fsSL ${curlurl}/${Sh_Path})"
 }
 
 function install_yanzheng() {
@@ -612,6 +615,8 @@ function qinglong_nvjdc() {
   sys_kongjian
   install_ql
   hnanyuan_bf
+  qinglong_dl
+  OpenApi_Client
   install_rw
   install_yanzheng
   config_bianliang
@@ -629,6 +634,7 @@ function azqinglong() {
   sys_kongjian
   install_ql
   hnanyuan_bf
+  qinglong_dl
   install_rw
   install_yanzheng
   config_bianliang

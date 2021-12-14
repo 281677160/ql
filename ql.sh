@@ -506,7 +506,7 @@ function up_nvjdc() {
 }
 
 function OpenApi_Client() {
-  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '0' ]]; then
+  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
   clear
   echo
   echo
@@ -517,7 +517,7 @@ function OpenApi_Client() {
   echo
   CLMEUN="请设置好Client ID和Client Secret按回车"
   while :; do
-  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '0' ]]; then
+  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
     read -p " ${CLMEUN}： " MENUCL
   fi
   if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '1' ]]; then

@@ -391,6 +391,8 @@ function install_yanzheng() {
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
   docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
+  echo "rwwc" > /opt/ql/scripts/rwwc
+  rwwc="/opt/ql/scripts/rwwc"
   sleep 2
   print_ok "任务安装完成"
 }
@@ -848,10 +850,10 @@ memu() {
   done
 }
 
-  if [[ -f /etc/bianliang.sh ]] && [[ `docker images | grep -c "qinglong"` -ge '1' ]] && [[ `docker images | grep -c "nvjdc"` -ge '1' ]]; then
+  if [[ -f /etc/bianliang.sh ]] && [[ `docker images |grep -c "qinglong"` -ge '1' ]] && [[ `docker images |grep -c "nvjdc"` -ge '1' ]] && [[ -f ${rwwc} ]]; then
     source /etc/bianliang.sh
     memunvjdc "$@"
-  elif [[ -f /etc/bianliang.sh ]] && [[ `docker images | grep -c "qinglong"` -ge '1' ]]; then
+  elif [[ -f /etc/bianliang.sh ]] && [[ `docker images | grep -c "qinglong"` -ge '1' ]] && [[ -f ${rwwc} ]]; then
     source /etc/bianliang.sh
     memuqinglong "$@"
   else

@@ -391,8 +391,8 @@ function install_yanzheng() {
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
   docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
-  echo "rwwc" > /opt/ql/scripts/rwwc
-  rwwc="/opt/ql/scripts/rwwc"
+  echo "rwwc" > $QL_PATH/ql/scripts/rwwc
+  rwwc="$QL_PATH/ql/scripts/rwwc"
   sleep 2
   print_ok "任务安装完成"
 }

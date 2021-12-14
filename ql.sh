@@ -484,6 +484,7 @@ function up_nvjdc() {
   sudo docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
   -v /etc/localtime:/etc/localtime:ro \
   -it --privileged=true  nolanhzy/nvjdc:latest
+  cd /root
   rm -rf ${QL_PATH}/nvjdcbf
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     print_ok "nvjdc镜像启动成功"

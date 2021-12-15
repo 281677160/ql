@@ -134,7 +134,6 @@ function qinglong_port() {
     export NETWORK="--net host"
     export NETLEIXING="host"
   fi
-  echo
   if [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "YES" ]]; then
      read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}

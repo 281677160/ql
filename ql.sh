@@ -679,15 +679,31 @@ memunvjdc() {
   break
   ;;
   4)
-    ECHOG " 正在御载+nvjdc面板"
-    jiance_nvjdc
+    read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
+    case $YZJDC in
+    [Yy])
+      ECHOG " 正在御载nvjdc面板"
+      jiance_nvjdc
+    ;;
+    *)
+      memunvjdc "$@"
+    ;;
+    esac
   break
   ;;
   5)
-    ECHOG "正在御载青龙+nvjdc面板"
-    Unstall_qinglong
-    jiance_nvjdc
-    rm -rf /etc/bianliang.sh
+    read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
+    case $YZQLNV in
+    [Yy])
+      ECHOG "正在御载青龙+nvjdc面板"
+      Unstall_qinglong
+      jiance_nvjdc
+      rm -rf /etc/bianliang.sh
+    ;;
+    *)
+      memunvjdc "$@"
+    ;;
+    esac
   break
   ;;
   6)
@@ -732,9 +748,17 @@ memuqinglong() {
   break
   ;;
   3)
-    ECHOG "正在御载青龙面板"
-    Unstall_qinglong
-    rm -rf /etc/bianliang.sh
+    read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
+    case $YZQLN in
+    [Yy])
+      ECHOG "正在御载青龙面板"
+      Unstall_qinglong
+      rm -rf /etc/bianliang.sh
+    ;;
+    *)
+      memunvjdc "$@"
+    ;;
+    esac
   break
   ;;
   4)

@@ -122,12 +122,12 @@ if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
 fi
 task wskey.py
 echo
-TIME y "拉取feverrun大佬的自动助力脚本"
+TIME y "拉取feverrun大佬的自动提交助力码脚本（要找库的作者过白名单）"
 echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
 task curtinlv_JD-Script_jd_tool_dl.py
-if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"

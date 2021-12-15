@@ -74,6 +74,8 @@ typescript
 png-js
 crypto-js
 md5
+dotenv
+got
 ts-md5
 tslib
 @types/node
@@ -86,7 +88,7 @@ fs
 ws
 js-base64
 jieba
-got@11.8.3
+canvas
 ```
 #
 #### 🚩 单独安装某项的一键脚本

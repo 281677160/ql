@@ -181,8 +181,8 @@ function system_check() {
   elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
     opkg update
-    opkg install git-http
-    opkg install ca-bundle
+    opkg install git-http > /dev/null 2>&1
+    opkg install ca-bundle > /dev/null 2>&1
     opkg install unzip
     XTong="openwrt"
     if [[ -d /opt/docker ]]; then

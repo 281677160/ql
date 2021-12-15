@@ -412,12 +412,12 @@ function install_yanzheng() {
   if [[ `ls $QL_PATH/ql/jd | grep -c ".session"` -ge '1' ]] && [[ ${wjmz} == "Aaron-lv" ]]; then
     for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
   fi
-  docker restart qinglong > /dev/null 2>&1
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
   docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
   echo "${QL_PATH}/ql/scripts/rwwc" > ${QL_PATH}/ql/scripts/rwwc
   echo "export rwwc=${QL_PATH}/ql/scripts/rwwc" > /etc/bianliang.sh
+  docker restart qinglong > /dev/null 2>&1
   sleep 1
   print_ok "任务安装完成"
 }
@@ -489,6 +489,10 @@ function linux_nolanjdc() {
   -it --privileged=true  nolanhzy/nvjdc:latest
   cd /root
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
+    sleep 1
+    docker restart qinglong > /dev/null 2>&1
+    docker restart nolanjdc > /dev/null 2>&1
+    sleep 1
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"

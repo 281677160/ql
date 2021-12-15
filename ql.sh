@@ -679,6 +679,7 @@ memunvjdc() {
   break
   ;;
   4)
+    ECHOY " 是否御载nvjdc面板?"
     read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
     [Yy])
@@ -692,6 +693,7 @@ memunvjdc() {
   break
   ;;
   5)
+    ECHOY " 是否御载青龙+nvjdc面板?"
     read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
     [Yy])
@@ -748,6 +750,8 @@ memuqinglong() {
   break
   ;;
   3)
+    ECHOB " 是否御载青龙面板?"
+    echo
     read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
     case $YZQLN in
     [Yy])

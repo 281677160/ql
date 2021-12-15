@@ -409,6 +409,10 @@ function install_yanzheng() {
   fi
   [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
   [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+  if [[ -f ${QL_PATH}/qlbeifen1/ql/scripts/rwwc ]]; then
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/config/config.sh
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/sample/config.sample.sh
+  fi
   if [[ `ls $QL_PATH/ql/jd | grep -c ".session"` -ge '1' ]] && [[ ${wjmz} == "Aaron-lv" ]]; then
     for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
   fi

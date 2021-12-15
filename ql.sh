@@ -756,7 +756,7 @@ memuqinglong() {
       rm -rf /etc/bianliang.sh
     ;;
     *)
-      memunvjdc "$@"
+      memuqinglong "$@"
     ;;
     esac
   break

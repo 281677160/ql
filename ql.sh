@@ -426,7 +426,8 @@ function install_yanzheng() {
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
   docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
-  echo "$QL_PATH/ql/scripts/rwwc" > $QL_PATH/ql/scripts/rwwc
+  echo "${QL_PATH}/ql/scripts/rwwc" > ${QL_PATH}/ql/scripts/rwwc
+  echo "export rwwc=${QL_PATH}/ql/scripts/rwwc" > /etc/bianliang.sh
   sleep 1
   print_ok "任务安装完成"
 }
@@ -500,7 +501,7 @@ function linux_nolanjdc() {
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     print_ok "nvjdc镜像启动成功"
   else
-    print_error "nvjdc镜像启动成功"
+    print_error "nvjdc镜像启动失败"
     exit 1
   fi
   timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
@@ -508,6 +509,7 @@ function linux_nolanjdc() {
     print_ok "nvjdc安装完成"
   else
     print_error "nvjdc安装失败"
+    exit 1
   fi
   ECHOY "您的nvjdc面板地址为：http://${IP}:${JDC_PORT}"
 }
@@ -555,8 +557,10 @@ function up_nvjdc() {
     print_ok "nvjdc升级完成"
   else
     print_error "nvjdc升级失败"
+    exit 1
   fi
   rm -rf ${Home}/build.log
+  config_bianliang
   exit 0
 }
 
@@ -587,22 +591,23 @@ function Google_Check() {
 }
 
 function config_bianliang() {
-cat >/etc/bianliang.sh <<-EOF
-#!/usr/bin/env bash
-export IP="${IP}"
-export QL_PATH="${QL_PATH}"
-export QL_PORT="${QL_PORT}"
-export JDC_PORT="${JDC_PORT}"
-export QLurl="http://${IP}:${QL_PORT}"
-export CAPACITY="${CAPACITY}"
-export PUSHPLUS="${PUSHPLUS}"
-export CLIENTID="${CLIENTID}"
-export CLIENTID_SECRET="${CLIENTID_SECRET}"
-export Home="${Home}"
-export Config="${Config}"
-export Chromium="${Chromium}"
-EOF
-chmod +x /etc/bianliang.sh
+  echo "${Home}/rwwc" > ${Home}/rwwc
+  echo "
+  export IP="${IP}"
+  export QL_PATH="${QL_PATH}"
+  export QL_PORT="${QL_PORT}"
+  export JDC_PORT="${JDC_PORT}"
+  export QLurl="http://${IP}:${QL_PORT}"
+  export CAPACITY="${CAPACITY}"
+  export PUSHPLUS="${PUSHPLUS}"
+  export CLIENTID="${CLIENTID}"
+  export CLIENTID_SECRET="${CLIENTID_SECRET}"
+  export Home="${Home}"
+  export Config="${Config}"
+  export Chromium="${Chromium}"
+  export nvrwwc="${Home}/rwwc"
+  " >> /etc/bianliang.sh
+  chmod +x /etc/bianliang.sh
 }
 
 function aznvjdc() {
@@ -612,6 +617,7 @@ function aznvjdc() {
   Config_json
   chrome_linux
   linux_nolanjdc
+  config_bianliang
 }
 
 function qinglong_nvjdc() {
@@ -630,7 +636,6 @@ function qinglong_nvjdc() {
   OpenApi_Client
   install_rw
   install_yanzheng
-  config_bianliang
   aznvjdc
 }
 
@@ -858,13 +863,11 @@ memu() {
   esac
   done
 }
-
-  if [[ -f /etc/bianliang.sh ]] && [[ `docker images |grep -c "qinglong"` -ge '1' ]] && [[ `docker images |grep -c "nvjdc"` -ge '1' ]] && [[ -f ${rwwc} ]]; then
-    source /etc/bianliang.sh
-    memunvjdc "$@"
-  elif [[ -f /etc/bianliang.sh ]] && [[ `docker images | grep -c "qinglong"` -ge '1' ]] && [[ -f ${rwwc} ]]; then
-    source /etc/bianliang.sh
-    memuqinglong "$@"
-  else
-    memu "$@"
-  fi
+[[ -f /etc/bianliang.sh ]] && source /etc/bianliang.sh
+if [[ `docker images |grep -c "qinglong"` -ge '1' ]] && [[ `docker images |grep -c "nvjdc"` -ge '1' ]] && [[ -f ${rwwc} ]] && [[ -f ${nvrwwc} ]]; then
+  memunvjdc "$@"
+elif [[ `docker images | grep -c "qinglong"` -ge '1' ]] && [[ -f ${rwwc} ]]; then
+  memuqinglong "$@"
+else
+  memu "$@"
+fi

@@ -234,8 +234,8 @@ function system_docker() {
 
 function systemctl_status() {
   systemctl start docker
-  sleep 2
-  
+  sleep 1
+  echo
   ECHOGG "检测docker是否在运行"
   if [[ `systemctl status docker |grep -c "active (running) "` == '1' ]]; then
     print_ok "docker正在运行中!"
@@ -352,7 +352,8 @@ function hnanyuan_bf() {
 function qinglong_dl() {
   clear
   echo
-  ECHOY "青龙面板安装完成，请先登录面板再按回车，进行下一步安装程序，步骤如下："
+  echo
+  ECHOG "青龙面板安装完成，请先登录面板再按回车，进行下一步安装程序，步骤如下："
   ECHOYY "请使用 ${IP}:${QL_PORT} 在浏览器打开青龙面板"
   ECHOB "点击[开始安装] --> [通知方式]跳过 --> 设置好[用户名]跟[密码] --> 点击[提交] --> 点击[去登录] --> 输入帐号密码完成登录!"
   echo
@@ -395,6 +396,7 @@ function qinglong_dl() {
       echo
       QLMEUN="请登录青龙面板和设置好Client ID和Client Secret,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
     else
+      echo
       QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
     fi
   ;;

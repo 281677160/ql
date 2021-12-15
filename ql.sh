@@ -367,11 +367,11 @@ function qinglong_dl() {
   while :; do
   read -p " ${QLMEUN}： " MENU
   if [[ "${Api_Client}" == "true" ]]; then
-    if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then; then
+    if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
       S="Y"
     fi
   elif [[ "${Api_Client}" == "false" ]]; then
-    if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then; then
+    if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
       S="Y"
     fi
   fi

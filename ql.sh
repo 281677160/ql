@@ -218,7 +218,7 @@ function nolanjdc_lj() {
 function system_docker() {
   if [[ "${XTong}" == "openwrt" ]]; then
     if [[ ! -x "$(command -v docker)" ]]; then
-      print_error "没检测到docker，openwrt请自行安装docker，和挂载好5G或以上的硬盘"
+      print_error "没检测到docker，openwrt请自行安装docker，和挂载好硬盘"
       sleep 1
       exit 1
     fi

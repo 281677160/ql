@@ -711,8 +711,8 @@ memuqinglong() {
   clear
   echo
   echo
-  ECHOY " 1. 升级青龙面板"
-  ECHOB " 2. 更新撸豆脚本库"
+  ECHOYY " 1. 升级青龙面板"
+  ECHOY " 2. 更新撸豆脚本库"
   ECHOYY " 3. 御载青龙面板"
   ECHOY " 4. 进入第一主菜单（安装选择界面）"
   ECHOYY " 5. 退出程序!"

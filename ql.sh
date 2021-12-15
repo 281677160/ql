@@ -247,7 +247,7 @@ function systemctl_status() {
 
 function Unstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-    ECHOY "检测青龙面板，正在御载青龙面板，请稍后..."
+    ECHOY "检测到青龙面板，正在御载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
     images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
     docker stop -t=5 "${dockerid}" > /dev/null 2>&1
@@ -268,11 +268,11 @@ function Unstall_qinglong() {
       rm -fr $QL_PATH/qlbeifen && mkdir -p $QL_PATH/qlbeifen
       cp -r $QL_PATH/ql $QL_PATH/qlbeifen/ql > /dev/null 2>&1
       cp -r $QL_PATH/qlbeifen $QL_PATH/qlbeifen1 > /dev/null 2>&1
-      rm -rf $QL_PATH/ql
+      rm -rf $QL_PATH/ql > /dev/null 2>&1
       sleep 1
     fi
   else
-      rm -rf $QL_PATH/ql
+      rm -rf $QL_PATH/ql > /dev/null 2>&1
   fi
 }
 
@@ -442,7 +442,8 @@ function jiance_nvjdc() {
       print_error "nvjdc面板御载失败"
       exit 1
     fi
-    rm -rf "${Home}"
+    rm -rf "${Home}" > /dev/null 2>&1
+    rm -rf root/{nolanjdc,nvjdc} > /dev/null 2>&1
   fi
 }
 

@@ -270,7 +270,7 @@ function Unstall_qinglong() {
       cp -r $QL_PATH/ql $QL_PATH/qlbeifen/ql > /dev/null 2>&1
       cp -r $QL_PATH/qlbeifen $QL_PATH/qlbeifen1 > /dev/null 2>&1
       rm -rf $QL_PATH/ql
-      sleep 2
+      sleep 1
     fi
   else
       rm -rf $QL_PATH/ql
@@ -385,7 +385,7 @@ function qinglong_dl() {
   ;;
   N)
     ECHOR "退出安装脚本程序!"
-    sleep 2
+    sleep 1
     exit 1
   break
   ;;
@@ -424,7 +424,7 @@ function install_yanzheng() {
   docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
   echo "$QL_PATH/ql/scripts/rwwc" > $QL_PATH/ql/scripts/rwwc
-  sleep 2
+  sleep 1
   print_ok "任务安装完成"
 }
 

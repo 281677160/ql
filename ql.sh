@@ -651,11 +651,12 @@ memunvjdc() {
   echo
   echo
   ECHOB " 1. 升级青龙面板"
-  ECHOB " 2. 升级nvjdc面板"
-  ECHOB " 3. 御载nvjdc面板"
-  ECHOB " 4. 御载青龙+nvjdc面板"
-  ECHOB " 5. 进入第一主菜单（安装选择界面）"
-  ECHOB " 6. 退出程序!"
+  ECHOB " 2. 更新撸豆任务"
+  ECHOB " 3. 升级nvjdc面板"
+  ECHOB " 4. 御载nvjdc面板"
+  ECHOB " 5. 御载青龙+nvjdc面板"
+  ECHOB " 6. 进入第一主菜单（安装选择界面）"
+  ECHOB " 7. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -667,28 +668,33 @@ memunvjdc() {
   break
   ;;
   2)
+    ECHOY "正在更新任务，请耐心等候..."
+    docker exec -it qinglong bash -c "ql extra"
+  break
+  ;;
+  3)
     ECHOY "开始升级nvjdc面板，请耐心等候..."
     Google_Check
     up_nvjdc
   break
   ;;
-  3)
+  4)
     ECHOG " 正在御载+nvjdc面板"
     jiance_nvjdc
   break
   ;;
-  4)
+  5)
     ECHOG "正在御载青龙+nvjdc面板"
     Unstall_qinglong
     jiance_nvjdc
     rm -rf /etc/bianliang.sh
   break
   ;;
-  5)
+  6)
     memu
   break
   ;;
-  6)
+  7)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1
@@ -706,9 +712,10 @@ memuqinglong() {
   echo
   echo
   ECHOY " 1. 升级青龙面板"
-  ECHOYY " 2. 御载青龙面板"
-  ECHOY " 3. 进入第一主菜单（安装选择界面）"
-  ECHOYY " 4. 退出程序!"
+  ECHOB " 2. 更新撸豆任务"
+  ECHOYY " 3. 御载青龙面板"
+  ECHOY " 4. 进入第一主菜单（安装选择界面）"
+  ECHOYY " 5. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -720,16 +727,21 @@ memuqinglong() {
   break
   ;;
   2)
+    ECHOY "正在更新任务，请耐心等候..."
+    docker exec -it qinglong bash -c "ql extra"
+  break
+  ;;
+  3)
     ECHOG "正在御载青龙面板"
     Unstall_qinglong
     rm -rf /etc/bianliang.sh
   break
   ;;
-  3)
+  4)
     memu
   break
   ;;
-  4)
+  5)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1

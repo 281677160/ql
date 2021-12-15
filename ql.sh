@@ -157,7 +157,7 @@ function qinglong_port() {
   if [[ "${Api_Client}" == "true" ]]; then
     ECHOGG "您的nvjdc面板名称为：${NVJDCNAME}"
     ECHOGG "您的nvjdc面板端口为：${JDC_PORT}"
-    ECHOGG "您的青龙最大挂机数为：${CAPACITY}"
+    ECHOGG "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
   fi
   echo
   read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNRT

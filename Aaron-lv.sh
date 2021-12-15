@@ -204,9 +204,7 @@ TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周�
 echo
 echo
 rm -fr /ql/azcg.log
-ql extra
 task curtinlv_JD-Script_jd_tool_dl.py
-TIME y "更新脚本"
 ql extra |tee azcg.log
 TIME y "拉取机器人"
 ql bot

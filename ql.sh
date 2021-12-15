@@ -542,6 +542,11 @@ function up_nvjdc() {
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     rm -rf ${QL_PATH}/nvjdcbf
     echo "${Home}/rwwc" > ${Home}/rwwc
+  if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
+    sleep 1
+    docker restart qinglong > /dev/null 2>&1
+    docker restart nolanjdc > /dev/null 2>&1
+    sleep 1
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"

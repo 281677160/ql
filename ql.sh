@@ -320,17 +320,11 @@ docker run -dit \
   --hostname qinglong \
   --restart always \
   whyour/qinglong:latest
-  if [[ `docker ps -a | grep -c "qinglong"` == '1' ]]; then
-    print_ok "青龙面板安装完成"
-  else
-    print_error "青龙面板安装失败"
-    exit 1
+  
+  if [[ -f /root/ghproxy.sh ]]; then
+    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
+    rm -rf /root/ghproxy.sh
   fi
-}
-
-function hnanyuan_bf() {
-  docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
-  rm -rf /root/ghproxy.sh
   if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
     curl -fsSL ${curlurl}/${wjmz}/auth.json > ${QL_PATH}/qlbeifen1/auth.json
     docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
@@ -338,6 +332,12 @@ function hnanyuan_bf() {
     docker cp ${QL_PATH}/qlbeifen1/auth.json qinglong:/ql/config/auth.json
     docker cp ${QL_PATH}/qlbeifen1/auth.json qinglong:/ql/db/auth.db
     docker restart qinglong
+  fi
+  if [[ `docker ps -a | grep -c "qinglong"` == '1' ]]; then
+    print_ok "青龙面板安装完成"
+  else
+    print_error "青龙面板安装失败"
+    exit 1
   fi
 }
 
@@ -623,7 +623,6 @@ function qinglong_nvjdc() {
   jiance_nvjdc
   sys_kongjian
   install_ql
-  hnanyuan_bf
   qinglong_dl
   OpenApi_Client
   install_rw
@@ -641,7 +640,6 @@ function azqinglong() {
   jiance_nvjdc
   sys_kongjian
   install_ql
-  hnanyuan_bf
   qinglong_dl
   install_rw
   install_yanzheng

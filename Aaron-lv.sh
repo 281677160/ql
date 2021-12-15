@@ -100,7 +100,7 @@ if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每4小时更新任务","command":"ql extra","schedule":"40 0-23/3 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
-sleep 2
+sleep 1
 echo
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -110,7 +110,7 @@ if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时转换WSKEY","command":"task wskey.py","schedule":"58 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
 fi
-sleep 2
+sleep 1
 echo
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
@@ -121,7 +121,7 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"30 11 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
-sleep 2
+sleep 1
 echo
 # 将 raw_jd_OpenCard.py 添加到定时任务
 if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
@@ -132,7 +132,7 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_Evaluation.py 添加到定时任务
 if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
@@ -143,7 +143,7 @@ if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task jd_Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_get_share_code.js 添加到定时任务
 if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 0 ]; then
@@ -154,7 +154,7 @@ if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取助力码","command":"task jd_get_share_code.js","schedule":"20 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637505495835'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_jxmc_sharecodes.ts 添加到定时任务
 if [ "$(grep -c jd_jxmc_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
@@ -165,7 +165,7 @@ if [ "$(grep -c jd_jxmc_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜牧场上车","command":"task jd_jxmc_sharecodes.ts","schedule":"1 0 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639071292827'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_cfd_sharecodes.ts 添加到定时任务
 if [ "$(grep -c jd_cfd_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
@@ -176,7 +176,7 @@ if [ "$(grep -c jd_cfd_sharecodes.ts /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京喜财富岛上车","command":"task jd_cfd_sharecodes.ts","schedule":"2 0 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639071050874'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_cleancartAll.js 添加到定时任务
 if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
@@ -187,7 +187,7 @@ if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"清空购物车","command":"task jd_cleancartAll.js","schedule":"3 6,12,23 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639110553549'
 fi
-sleep 2
+sleep 1
 echo
 # 将 jd_cfd_loop.js 添加到定时任务
 if [ "$(grep -c jd_cfd_loop.js /ql/config/crontab.list)" = 0 ]; then

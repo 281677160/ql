@@ -200,7 +200,7 @@ if [ "$(grep -c jd_cfd_loop.js /ql/config/crontab.list)" = 0 ]; then
 fi
 task wskey.py |tee azcg.log
 echo
-TIME y "拉取Aaron-lv和faker2大佬们的脚本"
+TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"
 echo
 echo
 rm -fr /ql/azcg.log

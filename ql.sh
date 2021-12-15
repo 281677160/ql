@@ -357,6 +357,9 @@ function qinglong_dl() {
   ECHOB "点击[开始安装] --> [通知方式]跳过 --> 设置好[用户名]跟[密码] --> 点击[提交] --> 点击[去登录] --> 输入帐号密码完成登录!"
   echo
   if [[ "${Api_Client}" == "true" ]]; then
+    echo
+    ECHOY "登录青龙面板面板后，请在青龙面板设置好Client ID和Client Secret，设置步骤如下："
+    ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部版块都点击选上] --> 点一下新建应用空白处 --> 点击确定"
     QLMEUN="请登录青龙面板和设置好Client ID和Client Secret,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
   else
     QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
@@ -367,7 +370,7 @@ function qinglong_dl() {
     if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then; then
       S="Y"
     fi
-  else
+  elif [[ "${Api_Client}" == "false" ]]; then
     if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then; then
       S="Y"
     fi
@@ -387,7 +390,12 @@ function qinglong_dl() {
   break
   ;;
   *)
-    QLMEUN="请先登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+    if [[ "${Api_Client}" == "true" ]]; then
+      echo
+      QLMEUN="请登录青龙面板和设置好Client ID和Client Secret,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+    else
+      QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+    fi
   ;;
   esac
   done
@@ -549,33 +557,6 @@ function up_nvjdc() {
 }
 
 function OpenApi_Client() {
-  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
-    clear
-    echo
-    echo
-    echo
-    ECHOYY "您选择了安装nvjdc面板，请先在青龙面板设置好Client ID和Client Secret，设置步骤如下："
-    ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[qinglong] --> 权限[全部点击选上] --> 点一下新建应用空白处 --> 点击确定"
-  fi
-  echo
-  CLMEUN="请设置好Client ID和Client Secret按回车"
-  while :; do
-  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
-    read -p " ${CLMEUN}： " MENUCL
-  fi
-  if [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '1' ]]; then
-    X="Y"
-  fi
-  case $X in
-    Y)
-    echo
-  break
-  ;;
-  *)
-    CLMEUN="请设置好Client ID和Client Secret按回车"
-  ;;
-  esac
-  done
   export MANEID="$(grep 'name' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
   export CLIENTID="$(grep 'client_id' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
   export CLIENTID_SECRET="$(grep 'client_secret' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"

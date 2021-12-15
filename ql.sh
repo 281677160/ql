@@ -536,8 +536,9 @@ function up_nvjdc() {
     up_nvjdc
   fi
   cd /root
-  ECHOY "更新镜像，请耐心等候..."
+  ECHOG "更新镜像，请耐心等候..."
   sudo docker pull nolanhzy/nvjdc:latest
+  ECHOY "启动镜像"
   cd ${Home}
   sudo docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
   -v /etc/localtime:/etc/localtime:ro \

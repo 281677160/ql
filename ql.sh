@@ -218,8 +218,6 @@ function system_docker() {
     if [[ ! -x "$(command -v docker)" ]]; then
       ECHOR "没检测到docker，正在安装docker"
       bash -c "$(curl -fsSL ${curlurl}/docker.sh)"
-      sleep 1
-      exit 1
     fi
   fi
 }

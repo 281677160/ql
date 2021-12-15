@@ -18,14 +18,6 @@ RedBG="\033[41;37m"
 OK="${Green}[OK]${Font}"
 ERROR="${Red}[ERROR]${Font}"
 
-if [[ -f /opt/ql/scripts/rwwc ]]; then
-  rwwc="$(cat /opt/ql/scripts/rwwc)"
-elif [[ -f /root/ql/scripts/rwwc ]]; then
-  rwwc="$(cat /root/ql/scripts/rwwc)"
-else
-  rwwc=""
-fi
-
 function print_ok() {
   echo
   echo -e " ${OK} ${Blue} $1 ${Font}"

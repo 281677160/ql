@@ -124,13 +124,15 @@ function qinglong_port() {
   done
   echo
   if [[ "${QING_PORT}" == "YES" ]]; then
-    read -p " 请输入青龙端口(回车默认端口为:5700)：" QL_PORT
+    read -p " 请输入您想设置的青龙面板端口(直接回车默认：5700): " QL_PORT && printf "\n"
     export QL_PORT=${QL_PORT:-"5700"}
+    export NETLEIXING="bridge"
     export NETWORK="-p ${QL_PORT}:5700"
     export YPORT="您设置的青龙面板端口为"
-  else
+  elif [[ "${QING_PORT}" == "NO" ]]; then
     export YPORT="host默认青龙端口为"
     export NETWORK="--net host"
+    export NETLEIXING="host"
   fi
   echo
   if [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "YES" ]]; then
@@ -141,7 +143,7 @@ function qinglong_port() {
      read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
      export QLurl="http://${IP}:${QL_PORT}"
-  else
+  elif [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "NO" ]]; then
      read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
      read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
@@ -151,6 +153,7 @@ function qinglong_port() {
   fi
   ECHOGG "您的IP为：${IP}"
   ECHOGG "${YPORT}：${QL_PORT}"
+  ECHOGG "网络类型：${NETLEIXING}"
   if [[ "${Api_Client}" == "true" ]]; then
     ECHOGG "您的nvjdc面板名称为：${NVJDCNAME}"
     ECHOGG "您的nvjdc面板端口为：${JDC_PORT}"
@@ -353,11 +356,21 @@ function qinglong_dl() {
   ECHOYY "请使用 ${IP}:${QL_PORT} 在浏览器打开控制面板"
   ECHOB "点击[开始安装] --> [通知方式]跳过 --> 设置好[用户名]跟[密码] --> 点击[提交] --> 点击[去登录] --> 输入帐号密码完成登录!"
   echo
-  QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+  if [[ "${Api_Client}" == "true" ]]; then
+    QLMEUN="请登录青龙面板和设置好Client ID和Client Secret,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+  else
+    QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+  fi
   while :; do
   read -p " ${QLMEUN}： " MENU
-  if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
-    S="Y"
+  if [[ "${Api_Client}" == "true" ]]; then
+    if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then; then
+      S="Y"
+    fi
+  else
+    if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then; then
+      S="Y"
+    fi
   fi
   if [[ ${MENU} == "N" ]] || [[ ${MENU} == "n" ]]; then
     S="N"

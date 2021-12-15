@@ -140,7 +140,7 @@ function qinglong_port() {
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
      read -p " 请输入您想设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
      export JDC_PORT=${JDC_PORT:-"5701"}
-     read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
+     read -p " 请输入通过nvjdc面板验证最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
      export QLurl="http://${IP}:${QL_PORT}"
   elif [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "NO" ]]; then

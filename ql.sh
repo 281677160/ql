@@ -537,8 +537,9 @@ function up_nvjdc() {
   -v /etc/localtime:/etc/localtime:ro \
   -it --privileged=true  nolanhzy/nvjdc:latest
   cd /root
-  rm -rf ${QL_PATH}/nvjdcbf
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
+    rm -rf ${QL_PATH}/nvjdcbf
+    echo "${Home}/rwwc" > ${Home}/rwwc
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
@@ -552,7 +553,6 @@ function up_nvjdc() {
     exit 1
   fi
   rm -rf ${Home}/build.log
-  config_bianliang
   exit 0
 }
 

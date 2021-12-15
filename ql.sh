@@ -111,7 +111,7 @@ function qinglong_port() {
   if [[ -n "${IP}" ]] && [[ "$(echo ${IP} |grep -c '.*\..*\..*\..*')" == '1' ]]; then
     domainy="Y"
   else
-    domainy="N"
+    domainy=""
   fi
   case $domainy in
   Y)
@@ -366,7 +366,7 @@ function qinglong_dl() {
   echo
   while :; do
   read -p " ${QLMEUN}： " MENU
-  S="W"
+  S=""
   if [[ "${Api_Client}" == "true" ]]; then
     if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` -ge '1' ]]; then
       S="Y"

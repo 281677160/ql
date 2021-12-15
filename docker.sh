@@ -145,12 +145,6 @@ sudo rm -fr /etc/systemd/system/docker.service.d
 sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
 sudo systemctl daemon-reload
 sudo rm -fr docker.sh
-cat >/etc/docker/daemon.json <<-EOF
-{
-  "registry-mirrors":["https://registry.docker-cn.com"]
-}
-EOF
-sudo systemctl restart docker.service
 sleep 2
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"

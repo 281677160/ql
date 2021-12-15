@@ -64,6 +64,31 @@ pt_key=您的pt_key值;pt_pin=您的账号;
 ```
 
 #
+#### 🚩 青龙面板安装依赖方法
+# > 依赖管理 --> 添加依赖 --> 依赖类型(NodeJs) --> 自动拆分(是) --> 名称(把下面依赖名称全复制粘贴) --> 确定 
+```sh
+date-fns
+axios
+ts-node
+typescript
+png-js
+crypto-js
+md5
+ts-md5
+tslib
+@types/node
+requests
+tough-cookie
+jsdom
+download
+tunnel
+fs
+ws
+js-base64
+jieba
+got@11.8.3
+```
+#
 #### 🚩 单独安装某项的一键脚本
 
 

@@ -71,7 +71,7 @@ npm install -g js-base64
 TIME l "安装依赖jieba"
 pip3 install jieba
 TIME l "安装cairo-dev"
-npm install -g got@11.8.3
+npm install -g got
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev
 cd /ql
 pip3 install canvas

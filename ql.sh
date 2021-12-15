@@ -108,8 +108,8 @@ function qinglong_port() {
   echo
   while :; do
   read -p " ${YUMING}：" IP
-  oip="$(echo ${IP} |egrep -o "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")"
   if [[ "${IP}" == "${oip}" ]] && [[ -n "${IP}" ]]; then
+  if [[ -n "${IP}" ]] && [[ "$(echo ${${IP}} |grep -c '.*\..*\..*\..*\..*')" -ge '1' ]]; then
     export domainy="Y"
   fi
   case $domainy in

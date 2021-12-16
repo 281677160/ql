@@ -44,17 +44,17 @@ fi
 function system_check() {
   if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
     yum install -y sudo wget curl
-    [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
+    [[ ${CHONGXIN} == "YES" ]] && uninstall_centos_dk
     install_centos_dk
   elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
     apt-get -y update
     apt-get install -y sudo wget curl
-    [[ ${CHONGXIN} == "YES" ]] && unstall_ubuntu_dk
+    [[ ${CHONGXIN} == "YES" ]] && uninstall_ubuntu_dk
     install_ubuntu_dk
   elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
     apt-get -y update
     apt-get install -y sudo wget curl
-    [[ ${CHONGXIN} == "YES" ]] && unstall_debian_dk
+    [[ ${CHONGXIN} == "YES" ]] && uninstall_debian_dk
     install_debian_dk
   else
     print_error "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
@@ -107,7 +107,7 @@ function install_centos_dk() {
   fi
 }
 
-function unstall_centos_dk() {
+function uninstall_centos_dk() {
   ECHOY "正在御载docker..."
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
@@ -148,7 +148,7 @@ function install_ubuntu_dk() {
   fi
 }
 
-function unstall_ubuntu_dk() {
+function uninstall_ubuntu_dk() {
   ECHOY "正在御载docker..."
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
@@ -189,7 +189,7 @@ function install_debian_dk() {
   fi
 }
 
-function unstall_debian_dk() {
+function uninstall_debian_dk() {
   ECHOY "正在御载docker..."
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)

@@ -389,10 +389,10 @@ function qinglong_dl() {
       elif [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
         echo
         QLMEUN="您已经登录青龙面板,请设置好Client ID和Client Secret,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
-      else
+      fi
+    else
         echo
         QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
-       fi
      fi
   ;;
   esac

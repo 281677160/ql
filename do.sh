@@ -112,8 +112,8 @@ function unstall_centos_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
-  yum -y remove docker-ce.x86_64
-  yum -y remove
+  sudo yum -y remove docker-ce.x86_64
+  sudo yum -y remove docker-*
   sudo rm -rf /var/lib/docker
   sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
   sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}

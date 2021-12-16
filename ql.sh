@@ -70,12 +70,10 @@ judge() {
   fi
 }
 
-function is_root() {
-  if [[ ! "$USER" == "root" ]]; then
-    print_error "警告：请使用root用户操作!~~"
-    exit 1
-  fi
-}
+if [[ ! "$USER" == "root" ]]; then
+  print_error "警告：请使用root用户操作!~~"
+  exit 1
+fi
 
 function qinglong_port() {
   clear
@@ -635,7 +633,6 @@ function aznvjdc() {
 }
 
 function qinglong_nvjdc() {
-  is_root
   qinglong_port
   Google_Check
   system_check
@@ -654,7 +651,6 @@ function qinglong_nvjdc() {
 }
 
 function azqinglong() {
-  is_root
   qinglong_port
   Google_Check
   system_check

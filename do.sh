@@ -95,6 +95,7 @@ function install_centos_dk() {
   yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
   sudo yum install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
   sudo systemctl enable docker
@@ -133,6 +134,7 @@ function install_ubuntu_dk() {
   sudo apt-get update
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
   if [[ -x "$(command -v docker)" ]]; then
@@ -170,6 +172,7 @@ function install_debian_dk() {
   sudo apt update
   sudo apt install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
   if [[ -x "$(command -v docker)" ]]; then
@@ -209,6 +212,22 @@ function hello_world() {
     sleep 2
     exit 1
   fi
+}
+
+function docker_daemon() {
+sudo mkdir -p /etc/docker
+cat >/etc/docker/daemon.json <<-EOF
+{
+    "registry-mirrors": ["https://qndprgwv.mirror.aliyuncs.com"],
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+         }  
+    }
+}
+EOF
+chmod +x /etc/docker/daemon.json
 }
 
 memu() {

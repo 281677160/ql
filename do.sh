@@ -94,125 +94,113 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 fi
 echo
 TIME y "正在安装docker，请耐心等候..."
-echo
-if [[ ${XITONG} == "cent_os" ]]; then
-	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-	sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-	sudo yum -y update
-	sudo yum install -y docker-ce
-	sudo yum install -y docker-ce-cli
-	sudo yum install -y containerd.io
-fi
-if [[ ${XITONG} == "ubuntu_os" ]]; then
-	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
-	if [[ $? -ne 0 ]];then
-		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
-	fi
-	sudo apt-key fingerprint 0EBFCD88
-	if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
-		TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
-		sleep 5
-		exit 1
-		sleep 5
-	fi
-	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-	sudo apt-get update
-	sudo apt-get install -y docker-ce
-	sudo apt-get install -y docker-ce-cli
-	sudo apt-get install -y containerd.io
-fi
-if [[ ${XITONG} == "debian_os" ]]; then
-	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-	curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
-	if [[ $? -ne 0 ]];then
-		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
-	fi
-	sudo apt-key fingerprint 0EBFCD88
-	if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
-		TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者上游有问题"
-		sleep 5
-		exit 1
-		sleep 5
-	fi
-	sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
-	sudo apt-get update
-	sudo apt-get install -y docker-ce
-	sudo apt-get install -y docker-ce-cli
-	sudo apt-get install -y containerd.io
-fi
-sudo rm -fr /etc/systemd/system/docker.service.d
-sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
-sudo systemctl daemon-reload
-sudo rm -fr docker.sh
-sleep 2
-if [[ `docker --version | grep -c "version"` = '0' ]]; then
-	TIME y "docker安装失败"
-	sleep 2
-	exit 1
-else
-	TIME y ""
-	TIME g "docker安装成功，正在启动docker，请稍后..."
-	sudo systemctl restart docker
-	sudo systemctl enable docker > /dev/null 2>&1
-	/lib/systemd/systemd-sysv-install enable docker
-	sleep 3
-	TIME y ""
-	TIME g "测试docker拉取镜像是否成功"
-	TIME y ""
-	sudo docker run hello-world |tee build.log
-	if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "docs.docker" build.log` -ge '1' ]]; then
-		echo
-		TIME g "测试镜像拉取成功，正在删除测试镜像..."
-		echo
-		docker stop $(docker ps -a -q)
-		docker rm $(docker ps -a -q)
-		docker rmi $(docker images -q)
-		echo
-		TIME y "测试镜像删除完毕"
-		echo
-	else
-		echo
-		TIME y "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
-		echo
-		TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
-		echo
-		sleep 2
-		exit 1
-	fi
-fi
-if [[ ${XITONG} == "cent_os" ]]; then
-cat >/etc/docker/daemon.json <<-EOF
-{
-    "registry-mirrors": ["https://qndprgwv.mirror.aliyuncs.com"],
-    "runtimes": {
-        "nvidia": {
-            "path": "/usr/bin/nvidia-container-runtime",
-            "runtimeArgs": []
-         }  
-    }
+function install_centos_dk() {
+  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+  yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+  sudo yum install -y docker-ce docker-ce-cli containerd.io
+  sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  sudo systemctl daemon-reload
+  sudo systemctl restart docker
+  sudo systemctl enable docker
+  if [[ -x "$(command -v docker)" ]]; then
+    echo "docker安装成功"
+  else
+    echo "docker安装失败"
+    exit 1
+  fi
 }
-EOF
-	sudo systemctl daemon-reload
-	sudo systemctl restart docker
-	sudo systemctl enable docker > /dev/null 2>&1
-else
-cat >/etc/docker/daemon.json <<-EOF
-{
-    "registry-mirrors": ["https://qndprgwv.mirror.aliyuncs.com"],
-    "runtimes": {
-        "nvidia": {
-            "path": "/usr/bin/nvidia-container-runtime",
-            "runtimeArgs": []
-         }  
-    }
+
+function unstall_centos_dk() {
+  docker stop $(docker ps -a -q)
+  docker rm $(docker ps -a -q)
+  docker rmi $(docker images -q)
+  yum -y remove docker-ce.x86_64
+  yum -y remove
+  find / -iname 'docker' | xargs -i rm -rf {}
 }
-EOF
-	sudo systemctl daemon-reload
-	sudo systemctl restart docker
-	sudo systemctl enable docker > /dev/null 2>&1
-	/lib/systemd/systemd-sysv-install enable docker
-fi
-TIME g "docker安装完成!"
-rm -fr build.log
-exit 0
+
+
+function install_ubuntu_dk() {
+  sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+  if [[ $? -ne 0 ]];then
+    curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+  fi
+  sudo apt-key fingerprint 0EBFCD88
+  if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
+    TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
+    exit 1
+  fi
+  sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+  sudo apt-get update
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+  sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  sudo systemctl daemon-reload
+  sudo systemctl restart docker
+  if [[ -x "$(command -v docker)" ]]; then
+    echo "docker安装成功"
+  else
+    echo "docker安装失败"
+    exit 1
+  fi
+}
+
+function unstall_ubuntu_dk() {
+  docker stop $(docker ps -a -q)
+  docker rm $(docker ps -a -q)
+  docker rmi $(docker images -q)
+  sudo apt-get autoremove docker-* --purge
+  sudo find / -iname 'docker' | xargs -i rm -rf {}
+}
+
+function install_debian_dk() {
+  sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
+  if [[ $? -ne 0 ]];then
+    curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
+  fi
+  sudo apt-key fingerprint 0EBFCD88
+  if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
+    TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者上游有问题"
+    exit 1
+  fi
+  sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
+  sudo apt update
+  sudo apt install -y docker-ce docker-ce-cli containerd.io
+  sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  sudo systemctl daemon-reload
+  sudo systemctl restart docker
+  if [[ -x "$(command -v docker)" ]]; then
+    echo "docker安装成功"
+  else
+    echo "docker安装失败"
+    exit 1
+  fi
+}
+
+function unstall_debian_dk() {
+  docker stop $(docker ps -a -q)
+  docker rm $(docker ps -a -q)
+  docker rmi $(docker images -q)
+  sudo apt autoremove docker-* --purge
+  find / -iname 'docker' | xargs -i rm -rf {}
+}
+
+function hello_world() {
+  TIME g "测试docker拉取镜像是否成功"
+  sudo docker run hello-world |tee build.log
+  if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "docs.docker" build.log` -ge '1' ]]; then
+    TIME g "测试镜像拉取成功，正在删除测试镜像..."
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -q)
+    rm -fr build.log
+    TIME y "测试镜像删除完毕"
+  else
+    TIME y "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
+    TIME y "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
+    rm -fr build.log
+    sleep 2
+    exit 1
+  fi
+}

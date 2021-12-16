@@ -65,7 +65,7 @@ function system_check() {
 function jiance_dk() {
   if [[ -x "$(command -v docker)" ]]; then
     ECHOY "检测到docker存在，是否重新安装?"
-    ECHOB "重新安装会把您现有的所有容器及镜像全部删除，请慎重!"
+    ECHOG "重新安装会把您现有的所有容器及镜像全部删除，请慎重!"
     while :; do
     export CHONGXIN=""
     read -p " 输入[ N/n ]退出安装，输入[ Y/y ]回车继续： " ANDK

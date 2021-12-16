@@ -152,7 +152,7 @@ function unstall_ubuntu_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
-  sudo apt-get autoremove docker-* --purge
+  sudo apt-get -y autoremove docker-* --purge
   sudo find / -iname 'docker' | xargs -i rm -rf {}
 }
 
@@ -186,7 +186,7 @@ function unstall_debian_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
-  sudo apt autoremove docker-* --purge
+  sudo apt -y autoremove docker-* --purge
   find / -iname 'docker' | xargs -i rm -rf {}
 }
 

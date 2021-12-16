@@ -113,6 +113,10 @@ function unstall_centos_dk() {
   docker rmi $(docker images -q)
   yum -y remove docker-ce.x86_64
   yum -y remove
+  sudo rm -rf /var/lib/docker
+  sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
+  sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+  rm /var/lib/dpkg/info/$nomdupaquet* -f
 }
 
 
@@ -151,7 +155,10 @@ function unstall_ubuntu_dk() {
   sudo apt-get -y autoremove docker-* --purge
   sudo apt-get -y autoremove --purge
   sudo apt-get -y clean
-  sudo find / -iname 'docker' | xargs -i rm -rf {}
+  sudo rm -rf /var/lib/docker
+  sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
+  sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+  rm /var/lib/dpkg/info/$nomdupaquet* -f
 }
 
 function install_debian_dk() {
@@ -189,7 +196,10 @@ function unstall_debian_dk() {
   sudo apt -y autoremove docker-* --purge
   sudo apt -y autoremove --purge
   sudo apt -y clean
-  find / -iname 'docker' | xargs -i rm -rf {}
+  sudo rm -rf /var/lib/docker
+  sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
+  sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+  rm /var/lib/dpkg/info/$nomdupaquet* -f
 }
 
 function hello_world() {

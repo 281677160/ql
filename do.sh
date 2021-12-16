@@ -68,7 +68,7 @@ function jiance_dk() {
     ECHOB "重新安装会把您现有的所有容器及镜像全部删除，请慎重!"
     while :; do
     export CHONGXIN=""
-    read -p " [输入[ N/n ]退出安装，输入[ Y/y ]回车继续]： " ANDK
+    read -p " 输入[ N/n ]退出安装，输入[ Y/y ]回车继续： " ANDK
     case $ANDK in
      [Yy])
        export CHONGXIN="YES"
@@ -76,13 +76,13 @@ function jiance_dk() {
     ;;
     [Nn])
       export CHONGXIN="NO"
-      TIME r "您选择了退出安装程序!"
+      ECHOG "您选择了退出安装程序!"
       sleep 1
       exit 1
     break
     ;;
     *)
-      TIME b "提示：请输入正确的选择!"
+      ECHOB "提示：请输入正确的选择!"
     ;;
     esac
     done

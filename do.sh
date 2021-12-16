@@ -48,18 +48,21 @@ function system_check() {
     [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
     ECHOY "正在安装docker，请耐心等候..."
     install_centos_dk
+    hello_world
   elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
     apt-get -y update
     apt-get install -y sudo wget curl
     [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
     ECHOY "正在安装docker，请耐心等候..."
     install_centos_dk
+    hello_world
   elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
     apt-get -y update
     apt-get install -y sudo wget curl
     [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
     ECHOY "正在安装docker，请耐心等候..."
     install_centos_dk
+    hello_world
   else
     print_error "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
     exit 1
@@ -206,3 +209,10 @@ function hello_world() {
     exit 1
   fi
 }
+
+memu() {
+system_check
+jiance_dk
+}
+
+memu "$@"

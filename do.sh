@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # 字体颜色配置
-Green="\033[32m"
+Green="\033[32;1m"
 Red="\033[31m"
-Yellow="\033[33m"
-Blue="\033[36m"
+Yellow="\033[33;1m"
+Blue="\033[36;1m"
 Font="\033[0m"
 GreenBG="\033[42;37m"
 RedBG="\033[41;37m"

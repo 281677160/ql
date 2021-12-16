@@ -97,8 +97,8 @@ function install_centos_dk() {
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
   docker_daemon
   sudo systemctl daemon-reload
-  sudo systemctl restart docker
   sudo systemctl enable docker
+  sudo systemctl restart docker
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else

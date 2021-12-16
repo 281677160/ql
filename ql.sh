@@ -350,9 +350,9 @@ function qinglong_dl() {
   if [[ "${Api_Client}" == "true" ]]; then
     ECHOYY "登录青龙面板面板后，请在青龙面板设置好Client ID和Client Secret，设置步骤如下："
     ECHOB "系统设置 --> 应用设置 --> 添加应用 --> 名称[随意] --> 权限[全部版块都点击选上] --> 点一下新建应用空白处 --> 点击确定"
-    QLMEUN="请登录青龙面板和设置好Client ID和Client Secret,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+    QLMEUN="请登录青龙面板后,再设置好Client ID和Client Secret,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
   else
-    QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
+    QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
   fi
   echo
   while :; do
@@ -383,12 +383,17 @@ function qinglong_dl() {
   ;;
   *)
     if [[ "${Api_Client}" == "true" ]]; then
-      echo
-      QLMEUN="请登录青龙面板和设置好Client ID和Client Secret,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
-    else
-      echo
-      QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者现在按[ N/n ]退出安装程序"
-    fi
+      if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
+        echo
+        QLMEUN="请先登录青龙面板后,再设置好Client ID和Client Secret,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
+      elif [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]] && [[ `docker exec -it qinglong bash -c "cat /ql/db/app.db" | grep -c "\"name\""` == '0' ]]; then
+        echo
+        QLMEUN="您已经登录青龙面板,请设置好Client ID和Client Secret,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
+      else
+        echo
+        QLMEUN="请登录青龙面板后,按回车继续安装脚本,或者按[ N/n ]退出安装程序"
+       fi
+     fi
   ;;
   esac
   done

@@ -95,6 +95,7 @@ function install_centos_dk() {
   yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
   sudo yum install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+  docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl enable docker
   sudo systemctl restart docker

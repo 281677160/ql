@@ -43,7 +43,6 @@ fi
 
 function system_check() {
   if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
-    yum -y update
     yum install -y sudo wget curl
     [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
     ECHOY "正在安装docker，请耐心等候..."
@@ -52,16 +51,16 @@ function system_check() {
   elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
     apt-get -y update
     apt-get install -y sudo wget curl
-    [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
+    [[ ${CHONGXIN} == "YES" ]] && unstall_ubuntu_dk
     ECHOY "正在安装docker，请耐心等候..."
-    install_centos_dk
+    install_ubuntu_dk
     hello_world
   elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
     apt-get -y update
     apt-get install -y sudo wget curl
-    [[ ${CHONGXIN} == "YES" ]] && unstall_centos_dk
+    [[ ${CHONGXIN} == "YES" ]] && unstall_debian_dk
     ECHOY "正在安装docker，请耐心等候..."
-    install_centos_dk
+    install_debian_dk
     hello_world
   else
     print_error "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
@@ -105,7 +104,7 @@ function install_centos_dk() {
   sudo systemctl restart docker
   sudo systemctl enable docker
   if [[ -x "$(command -v docker)" ]]; then
-    print_ok "docker安装成功"
+    print_ok "docker安装完成"
   else
     print_error "docker安装失败"
     exit 1
@@ -141,7 +140,7 @@ function install_ubuntu_dk() {
   sudo systemctl daemon-reload
   sudo systemctl restart docker
   if [[ -x "$(command -v docker)" ]]; then
-    print_ok "docker安装成功"
+    print_ok "docker安装完成"
   else
     print_error "docker安装失败"
     exit 1
@@ -175,7 +174,7 @@ function install_debian_dk() {
   sudo systemctl daemon-reload
   sudo systemctl restart docker
   if [[ -x "$(command -v docker)" ]]; then
-    print_ok "docker安装成功"
+    print_ok "docker安装完成"
   else
     print_error "docker安装失败"
     exit 1
@@ -201,6 +200,7 @@ function hello_world() {
     docker rmi $(docker images -q)
     rm -fr build.log
     ECHOY "测试镜像删除完毕"
+    print_ok "docker安装成功"
   else
     ECHOY "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
     ECHOY "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"

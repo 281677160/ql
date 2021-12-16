@@ -211,8 +211,8 @@ function hello_world() {
 }
 
 memu() {
-system_check
-jiance_dk
+  jiance_dk
+  system_check
 }
 
 memu "$@"

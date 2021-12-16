@@ -193,7 +193,7 @@ function unstall_debian_dk() {
 function hello_world() {
   ECHOY "测试docker拉取镜像是否成功"
   sudo docker run hello-world |tee build.log
-  if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "docs.docker" build.log` -ge '1' ]]; then
+  if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "hub.docker.com" build.log` -ge '1' ]]; then
     ECHOG "测试镜像拉取成功，正在删除测试镜像..."
     docker stop $(docker ps -a -q)
     docker rm $(docker ps -a -q)

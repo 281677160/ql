@@ -126,7 +126,7 @@ function install_ubuntu_dk() {
   fi
   sudo apt-key fingerprint 0EBFCD88
   if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
-    TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
+    print_error "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
     exit 1
   fi
   sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
@@ -163,7 +163,7 @@ function install_debian_dk() {
   fi
   sudo apt-key fingerprint 0EBFCD88
   if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
-    TIME r "密匙验证出错，或者没下载到密匙了，请检查网络，或者上游有问题"
+    print_error "密匙验证出错，或者没下载到密匙了，请检查网络，或者上游有问题"
     exit 1
   fi
   sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"

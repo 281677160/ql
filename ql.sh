@@ -128,6 +128,7 @@ function qinglong_port() {
     export NETWORK="-p ${QL_PORT}:5700"
     export YPORT="您设置的青龙面板端口为"
   elif [[ "${QING_PORT}" == "NO" ]]; then
+    export QL_PORT="5700"
     export YPORT="host默认青龙端口为"
     export NETWORK="--net host"
     export NETLEIXING="host"
@@ -145,7 +146,7 @@ function qinglong_port() {
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
      read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
-     export JDC_PORT="${5701}"
+     export JDC_PORT="5701"
      export QLurl="http://${IP}:${QL_PORT}"
   fi
   ECHOGG "您的IP为：${IP}"

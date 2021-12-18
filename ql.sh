@@ -84,6 +84,7 @@ function qinglong_port() {
   echo
   scqlbianma="输入您选择的编码"
   while :; do
+  domainy=""
   read -p " ${scqlbianma}： " SCQL
   case $SCQL in
   1)
@@ -107,8 +108,6 @@ function qinglong_port() {
   read -p " ${YUMING}：" IP
   if [[ -n "${IP}" ]] && [[ "$(echo ${IP} |grep -c '.*\..*\..*\..*')" == '1' ]]; then
     domainy="Y"
-  else
-    domainy=""
   fi
   case $domainy in
   Y)

@@ -478,7 +478,7 @@ function git_clone() {
 
 function pull_nvjdc() {
   ECHOY "安装nvjdc镜像中，安装需要时间，请耐心等候..."
-  sudo docker pull nolanhzy/nvjdc:latest
+  docker pull nolanhzy/nvjdc:latest
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]]; then
     print_ok "镜像安装成功"
   else
@@ -512,7 +512,7 @@ function chrome_linux() {
 function linux_nolanjdc() {
   cd  ${Home}
   ECHOY "启动镜像"
-  sudo docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+  docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
   -v /etc/localtime:/etc/localtime:ro \
   -it --privileged=true  nolanhzy/nvjdc:latest
   cd /root

@@ -234,6 +234,7 @@ function systemctl_status() {
   if [[ "${XTong}" == "openwrt" ]]; then
     /etc/init.d/dockerman start > /dev/null 2>&1
     /etc/init.d/dockerd start > /dev/null 2>&1
+    sleep 2
   else
     systemctl start docker
     sleep 1

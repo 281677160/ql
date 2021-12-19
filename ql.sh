@@ -232,6 +232,7 @@ function system_docker() {
 function systemctl_status() {
   echo
   if [[ "${XTong}" == "openwrt" ]]; then
+    /etc/init.d/dockerman start
     /etc/init.d/dockerd start
   else
     systemctl start docker

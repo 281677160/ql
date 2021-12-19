@@ -149,7 +149,6 @@ function qinglong_port() {
      export QLurl="http://${IP}:${QL_PORT}"
   elif [[ "${Api_Client}" == "false" ]] && [[ "${QING_PORT}" == "NO" ]]; then
      export JDC_PORT="5701"
-     export QLurl="http://${IP}:${QL_PORT}"
   fi
   ECHOGG "您的IP为：${IP}"
   ECHOGG "${YPORT}：${QL_PORT}"

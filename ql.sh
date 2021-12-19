@@ -230,17 +230,14 @@ function system_docker() {
 }
 
 function systemctl_status() {
+  echo
   if [[ "${XTong}" == "openwrt" ]]; then
     ECHOGG "检测docker是否在运行"
-    /etc/init.d/dockerd start
-    sleep 1
     /etc/init.d/dockerd restart
       if [[ $? -ne 0 ]];then
         print_error "docker没有启动，请先启动docker，或者检查一下是否安装失败"
         sleep 1
         exit 1
-      else
-        print_ok "docker正在运行中!"
       fi
   else
     systemctl start docker

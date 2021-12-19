@@ -636,6 +636,14 @@ function config_bianliang() {
   chmod +x /etc/bianliang.sh
 }
 
+function system_openwrt() {
+  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+    memuop
+  else
+    memuaz
+  fi
+}
+
 function aznvjdc() {
   jiance_nvjdc
   git_clone
@@ -804,6 +812,50 @@ memuqinglong() {
   break
   ;;
   5)
+    ECHOR "您选择了退出程序!"
+    sleep 1
+    exit 1
+  break
+  ;;
+  *)
+    scqlbianmaa="请输入正确的编码"
+  ;;
+  esac
+  done
+}
+
+memuop() {
+  clear
+  echo
+  echo
+  [[ -n "${kugonggao}" ]] && ECHOY " ${kugonggao}"
+  ECHOB " 3. 安装青龙+任务+依赖"
+  ECHOB " 4. 安装青龙+任务（依赖自行在青龙面板安装）"
+  ECHOB " 5. 退出安装程序!"
+  echo
+  scqlbianmaa="输入您选择的编码"
+  while :; do
+  read -p " ${scqlbianmaa}： " QLJB
+  case $QLJB in
+  1)
+    export Api_Client="false"
+    export Npm_yilai="true"
+    export Sys_kj="5"
+    export Ql_nvjdc=""
+    ECHOG " 安装青龙+任务+依赖"
+    azqinglong
+  break
+  ;;
+  2)
+    export Api_Client="false"
+    export Npm_yilai="false"
+    export Sys_kj="5"
+    export Ql_nvjdc=""
+    ECHOG " 安装青龙+任务（依赖自行在青龙面板安装）"
+    azqinglong
+  break
+  ;;
+  3)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1

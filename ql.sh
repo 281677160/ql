@@ -829,9 +829,9 @@ memuop() {
   echo
   echo
   [[ -n "${kugonggao}" ]] && ECHOY " ${kugonggao}"
-  ECHOB " 3. 安装青龙+任务+依赖"
-  ECHOB " 4. 安装青龙+任务（依赖自行在青龙面板安装）"
-  ECHOB " 5. 退出安装程序!"
+  ECHOB " 1. 安装青龙+任务+依赖"
+  ECHOB " 2. 安装青龙+任务（依赖自行在青龙面板安装）"
+  ECHOB " 3. 退出安装程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do

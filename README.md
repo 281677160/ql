@@ -50,7 +50,7 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 JD_WSCK
 
 值
-pin=您的账号;wskey=您的wskey值
+pin=您的账号;wskey=您的wskey值;
 
 
 

@@ -125,14 +125,13 @@ function qinglong_port() {
     export QL_PORT=${QL_PORT:-"5700"}
     export NETLEIXING="bridge"
     export NETWORK="-p ${QL_PORT}:5700"
-    export YPORT="您设置的青龙端口为"
   elif [[ "${QING_PORT}" == "NO" ]]; then
-    export QL_PORT="5700"
-    export YPORT="host默认青龙端口为"
+    read -p " 请输入您想设置的青龙面板端口(直接回车默认：5700): " QL_PORT && printf "\n"
+    export QL_PORT=${QL_PORT:-"5700"}
     export NETWORK="--net host"
     export NETLEIXING="host"
   fi
-  if [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "YES" ]]; then
+  if [[ "${Api_Client}" == "true" ]]; then
      read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
      read -p " 请输入您想设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
@@ -140,23 +139,16 @@ function qinglong_port() {
      read -p " 请输入通过nvjdc面板验证最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
      export QLurl="http://${IP}:${QL_PORT}"
-  elif [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "NO" ]]; then
-     read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
-     export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
-     read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
-     export CAPACITY=${CAPACITY:-"99"}
-     export JDC_PORT="5701"
-     export QLurl="http://${IP}:${QL_PORT}"
   fi
   ECHOGG "网络类型：${NETLEIXING}"
   ECHOGG "您的IP为：${IP}"
-  ECHOGG "${YPORT}：${QL_PORT}"
-  ECHOGG "您的青龙登录地址将为：http://${IP}:${QL_PORT}
+  ECHOGG "青龙端口为：${QL_PORT}"
+  ECHOGG "您的青龙登录地址将为：http://${IP}:${QL_PORT}"
   if [[ "${Api_Client}" == "true" ]]; then
-    ECHOYY "您的nvjdc面板名称为：${NVJDCNAME}"
-    ECHOYY "您的nvjdc面板端口为：${JDC_PORT}"
+    ECHOYY "nvjdc面板名称为：${NVJDCNAME}"
+    ECHOYY "nvjdc面板端口为：${JDC_PORT}"
     ECHOYY "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
-    ECHOYY "您的nvjdc登录地址将为：http://${IP}:${JDC_PORT}
+    ECHOYY "您的nvjdc登录地址将为：http://${IP}:${JDC_PORT}"
   fi
   echo
   read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNRT

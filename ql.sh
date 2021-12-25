@@ -189,6 +189,7 @@ function system_check() {
     opkg install git-http > /dev/null 2>&1
     opkg install ca-bundle > /dev/null 2>&1
     opkg install coreutils-timeout > /dev/null 2>&1
+    opkg install findutils-xargs > /dev/null 2>&1
     opkg install unzip
     XTong="openwrt"
     if [[ -d /opt/docker ]]; then
@@ -458,8 +459,8 @@ function jiance_nvjdc() {
       print_error "nvjdc面板御载失败"
       exit 1
     fi
-    rm -rf "${Home}" > /dev/null 2>&1
-    rm -rf root/{nolanjdc,nvjdc} > /dev/null 2>&1
+    find / -iname 'nolanjdc' | xargs -i rm -rf {}
+    find / -iname 'nvjdc' | xargs -i rm -rf {}
   fi
 }
 
@@ -534,6 +535,7 @@ function linux_nolanjdc() {
     print_error "nvjdc安装失败"
     exit 1
   fi
+  rm -rf ${Home}/build.log
   ECHOY "您的nvjdc面板地址为：http://${IP}:${JDC_PORT}"
 }
 
@@ -558,7 +560,6 @@ function up_nvjdc() {
     print_ok "nvjdc镜像御载完成"
   else
     print_error "nvjdc镜像御载失败，再次尝试删除"
-    up_nvjdc
   fi
   cd /root
   ECHOG "更新镜像，请耐心等候..."
@@ -599,9 +600,9 @@ function up_nvjdc() {
 }
 
 function OpenApi_Client() {
-  export MANEID="$(grep 'name' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-  export CLIENTID="$(grep 'client_id' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-  export CLIENTID_SECRET="$(grep 'client_secret' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export MANEID="$(grep 'name' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export CLIENTID="$(grep 'client_id' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export CLIENTID_SECRET="$(grep 'client_secret' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
 }
 
 function Google_Check() {

@@ -126,8 +126,6 @@ function qinglong_port() {
     export NETLEIXING="bridge"
     export NETWORK="-p ${QL_PORT}:5700"
   elif [[ "${QING_PORT}" == "NO" ]]; then
-    read -p " 请输入您想设置的青龙面板端口(直接回车默认：5700): " QL_PORT && printf "\n"
-    export QL_PORT=${QL_PORT:-"5700"}
     export NETWORK="--net host"
     export NETLEIXING="host"
   fi

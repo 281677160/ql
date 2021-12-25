@@ -6,3 +6,5 @@ cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-
 cd /ql
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
+python3 -m pip install --upgrade telethon
+cd /ql

@@ -6,7 +6,7 @@ cat > ${Config}/Config.json << EOF
   //网站标题
   "Title": "NolanJDCloud",
   //回收时间分钟 不填默认3分钟
-  "Closetime": "5",
+  "Closetime": "2",
   //网站公告
   "Announcement": "为提高账户的安全性，请关闭免密支付。",
   ///开启打印等待日志卡短信验证登陆 可开启 拿到日志群里回复 默认不要填写

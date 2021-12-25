@@ -188,6 +188,7 @@ function system_check() {
     opkg update
     opkg install git-http > /dev/null 2>&1
     opkg install ca-bundle > /dev/null 2>&1
+    opkg install coreutils-timeout > /dev/null 2>&1
     opkg install unzip
     XTong="openwrt"
     if [[ -d /opt/docker ]]; then

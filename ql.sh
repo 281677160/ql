@@ -528,7 +528,7 @@ function linux_nolanjdc() {
     exit 1
   fi
   timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
-  if [[ `grep -c "序列号" ${Home}/build.log` -eq '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -eq '1' ]]; then
+  if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装完成"
   else
     print_error "nvjdc安装失败"
@@ -588,7 +588,7 @@ function up_nvjdc() {
     exit 1
   fi
   timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
-  if [[ `grep -c "序列号" ${Home}/build.log` -eq '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -eq '1' ]]; then
+  if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"
   else
     print_error "nvjdc升级失败"

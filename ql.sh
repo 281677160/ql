@@ -555,9 +555,9 @@ function up_nvjdc() {
     docker rmi "${imagesnvid}"
   fi
   if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-    print_ok "nvjdc镜像御载完成"
+    print_ok "nvjdc镜像卸载完成"
   else
-    print_error "nvjdc镜像御载失败，再次尝试删除"
+    print_error "nvjdc镜像卸载失败，再次尝试删除"
     up_nvjdc
   fi
   cd /root
@@ -695,8 +695,8 @@ memunvjdc() {
   ECHOB " 1. 升级青龙面板"
   ECHOB " 2. 更新撸豆脚本库"
   ECHOB " 3. 升级nvjdc面板"
-  ECHOB " 4. 御载nvjdc面板"
-  ECHOB " 5. 御载青龙+nvjdc面板"
+  ECHOB " 4. 卸载nvjdc面板"
+  ECHOB " 5. 卸载青龙+nvjdc面板"
   ECHOB " 6. 进入第一主菜单（安装选择界面）"
   ECHOB " 7. 退出程序!"
   echo
@@ -721,11 +721,11 @@ memunvjdc() {
   break
   ;;
   4)
-    ECHOY " 是否御载nvjdc面板?"
-    read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
+    ECHOY " 是否卸载nvjdc面板?"
+    read -p " 是否卸载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
     [Yy])
-      ECHOG " 正在御载nvjdc面板"
+      ECHOG " 正在卸载nvjdc面板"
       jiance_nvjdc
     ;;
     *)
@@ -735,11 +735,11 @@ memunvjdc() {
   break
   ;;
   5)
-    ECHOY " 是否御载青龙+nvjdc面板?"
-    read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
+    ECHOY " 是否卸载青龙+nvjdc面板?"
+    read -p " 是否卸载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
     [Yy])
-      ECHOG "正在御载青龙+nvjdc面板"
+      ECHOG "正在卸载青龙+nvjdc面板"
       Unstall_qinglong
       jiance_nvjdc
       rm -rf /etc/bianliang.sh
@@ -773,7 +773,7 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOYY " 3. 御载青龙面板"
+  ECHOYY " 3. 卸载青龙面板"
   ECHOY " 4. 进入第一主菜单（安装选择界面）"
   ECHOYY " 5. 退出程序!"
   echo
@@ -792,12 +792,12 @@ memuqinglong() {
   break
   ;;
   3)
-    ECHOB " 是否御载青龙面板?"
+    ECHOB " 是否卸载青龙面板?"
     echo
-    read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
+    read -p " 是否卸载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
     case $YZQLN in
     [Yy])
-      ECHOG "正在御载青龙面板"
+      ECHOG "正在卸载青龙面板"
       Unstall_qinglong
       rm -rf /etc/bianliang.sh
     ;;

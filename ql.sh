@@ -147,8 +147,6 @@ function qinglong_port() {
      export CAPACITY=${CAPACITY:-"99"}
      export JDC_PORT="5701"
      export QLurl="http://${IP}:${QL_PORT}"
-  elif [[ "${Api_Client}" == "false" ]] && [[ "${QING_PORT}" == "NO" ]]; then
-     export JDC_PORT="5701"
   fi
   ECHOGG "您的IP为：${IP}"
   ECHOGG "${YPORT}：${QL_PORT}"
@@ -505,11 +503,20 @@ function chrome_linux() {
 }
 
 function linux_nolanjdc() {
-  cd  ${Home}
   ECHOY "启动镜像"
-  docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
-  -v /etc/localtime:/etc/localtime:ro \
-  -it --privileged=true  nolanhzy/nvjdc:latest
+  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
+    -it --privileged=true  nolanhzy/nvjdc:latest
+    sleep 1
+    docker exec -it nolanjdc bash
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    exit
+  else
+    cd  ${Home}
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    -v /etc/localtime:/etc/localtime:ro \
+    -it --privileged=true  nolanhzy/nvjdc:latest
+  fi
   cd /root
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     sleep 1
@@ -558,10 +565,19 @@ function up_nvjdc() {
   ECHOG "更新镜像，请耐心等候..."
   sudo docker pull nolanhzy/nvjdc:latest
   ECHOY "启动镜像"
-  cd ${Home}
-  sudo docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
-  -v /etc/localtime:/etc/localtime:ro \
-  -it --privileged=true  nolanhzy/nvjdc:latest
+  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
+    -it --privileged=true  nolanhzy/nvjdc:latest
+    sleep 1
+    docker exec -it nolanjdc bash
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    exit
+  else
+    cd  ${Home}
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    -v /etc/localtime:/etc/localtime:ro \
+    -it --privileged=true  nolanhzy/nvjdc:latest
+  fi
   cd /root
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     rm -rf ${QL_PATH}/nvjdcbf
@@ -819,50 +835,6 @@ memuqinglong() {
   done
 }
 
-memuop() {
-  clear
-  echo
-  echo
-  [[ -n "${kugonggao}" ]] && ECHOY " ${kugonggao}"
-  ECHOB " 1. 安装青龙+任务+依赖"
-  ECHOB " 2. 安装青龙+任务（依赖自行在青龙面板安装）"
-  ECHOB " 3. 退出安装程序!"
-  echo
-  scqlbianmaa="输入您选择的编码"
-  while :; do
-  read -p " ${scqlbianmaa}： " QLJB
-  case $QLJB in
-  1)
-    export Api_Client="false"
-    export Npm_yilai="true"
-    export Sys_kj="5"
-    export Ql_nvjdc=""
-    ECHOG " 安装青龙+任务+依赖"
-    azqinglong
-  break
-  ;;
-  2)
-    export Api_Client="false"
-    export Npm_yilai="false"
-    export Sys_kj="5"
-    export Ql_nvjdc=""
-    ECHOG " 安装青龙+任务（依赖自行在青龙面板安装）"
-    azqinglong
-  break
-  ;;
-  3)
-    ECHOR "您选择了退出程序!"
-    sleep 1
-    exit 1
-  break
-  ;;
-  *)
-    scqlbianmaa="请输入正确的编码"
-  ;;
-  esac
-  done
-}
-
 memuaz() {
   clear
   echo
@@ -952,14 +924,14 @@ memu() {
     export wjmz="Aaron-lv"
     export Sh_Path="Aaron-lv.sh"
     export kugonggao="您的库选择：TG机器人每周提交助力码库"
-    system_openwrt
+    memuaz
   break
   ;;
   2)
     export wjmz="feverrun"
     export Sh_Path="feverrun.sh"
     export kugonggao="您的库选择：自动提交助力码库"
-    system_openwrt
+    memuaz
   break
   ;;
   3)

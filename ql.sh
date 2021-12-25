@@ -647,14 +647,6 @@ function config_bianliang() {
   chmod +x /etc/bianliang.sh
 }
 
-function system_openwrt() {
-  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-    memuop
-  else
-    memuaz
-  fi
-}
-
 function aznvjdc() {
   jiance_nvjdc
   git_clone

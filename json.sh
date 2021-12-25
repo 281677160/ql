@@ -6,13 +6,13 @@ cat > ${Config}/Config.json << EOF
   //网站标题
   "Title": "${NVJDCNAME}",
   //回收时间分钟 不填默认3分钟
-  "Closetime": "2",
+  "Closetime": "3",
   //网站公告
   "Announcement": "为提高账户的安全性，请关闭免密支付。",
   ///开启打印等待日志卡短信验证登陆 可开启 拿到日志群里回复 默认不要填写
   "Debug": "",
   ///自动滑块次数5次 5次后手动滑块 可设置为0默认手动滑块
-  "AutoCaptchaCount": "0",
+  "AutoCaptchaCount": "5",
   ///XDD PLUS Url  http://IP地址:端口/api/login/smslogin
   "XDDurl": "",
   ///xddToken

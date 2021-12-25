@@ -508,9 +508,7 @@ function linux_nolanjdc() {
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     sleep 1
-    docker exec -it nolanjdc bash
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-    exit
+    docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
@@ -569,9 +567,7 @@ function up_nvjdc() {
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     sleep 1
-    docker exec -it nolanjdc bash
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-    exit
+    docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \

@@ -902,7 +902,7 @@ memu() {
   echo
   ECHOY " 请选择您要安装什么类型的任务库"
   ECHOB " 1. TG机器人每周提交助力码库（shufflewzc/faker2和JDHelloWorld/jd_scripts）两个库"
-  ECHOB " 2. 自动提交助力码库,要去库的作者那里提交资料过白名单（feverrun/my_scripts）"
+  ECHOB " 2. 自动提交助力码库,要去库的作者那里提交资料过白名单（feverrun/my_scripts）单库"
   ECHOB " 3. 退出安装程序!"
   echo
   scqlanmaa="输入您选择的编码"

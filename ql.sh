@@ -125,7 +125,10 @@ function qinglong_port() {
     export QL_PORT=${QL_PORT:-"5700"}
     export NETLEIXING="bridge"
     export NETWORK="-p ${QL_PORT}:5700"
+    export YPORT="青龙面口为"
   elif [[ "${QING_PORT}" == "NO" ]]; then
+    export QL_PORT="5700"
+    export YPORT="host模式默认青龙端口为"
     export NETWORK="--net host"
     export NETLEIXING="host"
   fi
@@ -140,7 +143,7 @@ function qinglong_port() {
   fi
   ECHOGG "网络类型：${NETLEIXING}"
   ECHOGG "您的IP为：${IP}"
-  ECHOGG "青龙端口为：${QL_PORT}"
+  ECHOGG "${YPORT}：${QL_PORT}"
   ECHOGG "您的青龙登录地址将为：http://${IP}:${QL_PORT}"
   if [[ "${Api_Client}" == "true" ]]; then
     ECHOYY "nvjdc面板名称为：${NVJDCNAME}"

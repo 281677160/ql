@@ -90,7 +90,7 @@ export PUSH_PLUS_TOKEN=""
 ## 一对一多推送（选填）
 ## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
 ## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送
-export PUSH_PLUS_USER=""
+export PUSH_PLUS_USER="jdpush"
 
 ## 9. go-cqhttp
 ## gobot_url 推送到个人QQ: http://127.0.0.1/send_private_msg  群：http://127.0.0.1/send_group_msg 
@@ -105,7 +105,7 @@ export GOBOT_QQ=""
 
 # 定义每日签到的通知形式
 ## js脚本每日签到提供3种通知方式，分别为：关闭通知 0 / 简洁通知 1 / 原始通知 2（默认）
-NotifyBeanSign="0"
+NotifyBeanSign="1"
 # 定义每日签到每个接口间的延迟时间
 ## 默认每个签到接口并发无延迟，如需要依次进行每个接口，请自定义延迟时间，单位为毫秒，延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长)
 export JD_BEAN_STOP="9"
@@ -137,9 +137,9 @@ export JOY_RUN_NOTIFY="true"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送
 export MARKET_REWARD_NOTIFY="true"
 ## 12、京喜财富岛控制是否运行脚本后通知。输入true为通知,不填则为不通知
-export CFD_NOTIFY_CONTROL=""
+export CFD_NOTIFY_CONTROL="true"
 ## 13、京喜农场岛控制是否运行脚本后通知。0=只通知成熟;1=本次获得水滴>0;2=任务执行;3=任务执行+未种植种子
-export JXNC_NOTIFY_LEVEL="0"
+export JXNC_NOTIFY_LEVEL="3"
 
 # 功能配置类环境变量
 
@@ -240,7 +240,7 @@ export NOTIFY_COMPTOGROUP2="false" ##true为推送到群组2
 export NOTIFY_NOCKFALSE="true"
 ### 7. 测试人
 ### 通知底部显示：本通知 By 测试人
-export NOTIFY_AUTHOR="青龙"
+export NOTIFY_AUTHOR="未必然"
 ### 8. 屏蔽登录成功
 ### 屏蔽青龙登陆成功通知，登陆失败不屏蔽
 export NOTIFY_NOLOGINSUCCESS="true"
@@ -324,11 +324,15 @@ export DDQ_NOTIFY_CONTROL="true" ##不填或false为通知，true为不通知
 ## 5、组队瓜分京豆活动变量
 export jd_zdjr_activityId=""
 export jd_zdjr_activityUrl=""
+
 ## 6、 24 及之后的开卡变量
 export guaopencard_All="true"
 export guaopencard_addSku_All="true"
 export guaopencardRun_All="true"
 export guaopencard_draw="true"
+export guaunknownTask_addSku_All="true"
+export guaunknownTask_card_All="true"
+export gua_carnivalcity_draw="true"
 ### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
 export guaopencard_rewardBean="1,2,3"
 
@@ -399,9 +403,8 @@ export CleanUsers=""
 export JD_BEAN_CHANGE_SENDNUM="10"
 ## 2、清空购物车
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_cart_remove.js
-### 当环境变量中存在JD_CART和rush_clean并设置为true时才会执行删除购物车
+### 当环境变量中存在JD_CART并设置为true时才会执行删除购物车
 export JD_CART="true"
-export rush_clean="true"
 ### 运行一次取消多全部已关注的商品。数字0表示不取关任何商品，默认20
 export JD_CART_REMOVESIZE="20"
 ### 是否清空，如果为false，则上面设置了多少就只删除多少条
@@ -413,6 +416,7 @@ export JD_CART_KEYWORDS=""
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_try_xh.js
 export JD_TRY="true"
 export JD_TRY_PRICE="20"
+export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@卡针@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
 ## 4、批量取关店铺和商品
 ### 是否执行取消关注，默认true
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_unsubscribe_xh.js
@@ -434,8 +438,6 @@ export FS_LEVEL="car"
 ## 过期京豆兑换为喜豆
 export BEANCHANGE_ExJxBeans="true"
 export exjxbeans="true"
-
-
 
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果

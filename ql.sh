@@ -446,14 +446,14 @@ function jiance_nvjdc() {
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
     docker rm "${dockernvid}"
     docker rmi "${imagesnvid}"
+    find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
+    find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
       print_ok "nvjdc面板御载完成"
     else
       print_error "nvjdc面板御载失败"
       exit 1
     fi
-    find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
-    find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
   fi
 }
 

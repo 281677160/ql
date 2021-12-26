@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 #====================================================
-# Author:	281677160
-# Dscription: qinglong onekey Management
-# github: https://github.com/281677160/danshui
+# Author：281677160
+# Dscription：qinglong onekey Management
+# github：https://github.com/281677160/danshui
 #====================================================
 
 # 字体颜色配置

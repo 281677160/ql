@@ -618,7 +618,6 @@ function Google_Check() {
 }
 
 function config_bianliang() {
-  [[ -d ${Home} ]]echo "${Home}/rwwc" > ${Home}/rwwc
   echo "
   export IP="${IP}"
   export QL_PATH="${QL_PATH}"
@@ -635,6 +634,7 @@ function config_bianliang() {
   export nvrwwc="${Home}/rwwc"
   " >> /etc/bianliang.sh
   chmod +x /etc/bianliang.sh
+  [[ -d ${Home} ]] && echo "${Home}/rwwc" > ${Home}/rwwc
 }
 
 function aznvjdc() {

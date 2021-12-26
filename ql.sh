@@ -326,23 +326,22 @@ docker run -dit \
   --restart always \
   whyour/qinglong:latest
   
-  if [[ -f /root/ghproxy.sh ]]; then
-    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
-    rm -rf /root/ghproxy.sh
-  fi
-  if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
-    curl -fsSL ${curlurl}/${wjmz}/auth.json > ${QL_PATH}/qlbeifen1/auth.json
-    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
-    docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
-    docker cp ${QL_PATH}/qlbeifen1/auth.json qinglong:/ql/config/auth.json
-    docker cp ${QL_PATH}/qlbeifen1/auth.json qinglong:/ql/db/auth.db
-    docker restart qinglong
-  fi
   if [[ `docker ps -a | grep -c "qinglong"` == '1' ]]; then
     print_ok "青龙面板安装完成"
   else
     print_error "青龙面板安装失败"
     exit 1
+  fi
+}
+
+function ql_qlbeifen() {
+  if [[ -f /root/ghproxy.sh ]]; then
+    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
+    rm -rf /root/ghproxy.sh
+  fi
+  if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
+    docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
   fi
 }
 
@@ -660,6 +659,7 @@ function qinglong_nvjdc() {
   sys_kongjian
   install_ql
   qinglong_dl
+  ql_qlbeifen
   OpenApi_Client
   install_rw
   install_yanzheng
@@ -677,6 +677,7 @@ function azqinglong() {
   sys_kongjian
   install_ql
   qinglong_dl
+  ql_qlbeifen
   install_rw
   install_yanzheng
   config_bianliang

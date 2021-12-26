@@ -61,8 +61,6 @@ cp -Rf /ql/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
-cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
-cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
 echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then

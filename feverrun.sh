@@ -53,10 +53,6 @@ TIME l "拉取jd_OpenCard.py"
 curl -fsSL ${curlurl}/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 TIME l "拉取wskey.py"
 curl -fsSL ${curlurl}/feverrun/wskey.py > /ql/qlwj/wskey.py
-TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
-curl -fsSL ${curlurl}/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
-TIME l "拉取jd_Evaluation.py"
-curl -fsSL ${curlurl}/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -109,24 +105,12 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
-sleep 1
-echo
-# 将 jd_Evaluation.py 添加到定时任务
-if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
-    echo
-    TIME g "添加任务 [自动评价]"
-    echo
-    # 获取token
-    token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task jd_Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
-fi
 task wskey.py
 echo
 TIME y "拉取feverrun大佬的自动提交助力码脚本（要找库的作者过白名单）"
 echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
-task curtinlv_JD-Script_jd_tool_dl.py
 if [[ `ls -a |grep -c "成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else

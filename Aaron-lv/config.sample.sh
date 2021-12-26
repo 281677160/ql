@@ -458,6 +458,9 @@ export FS_LEVEL="car"
 export BEANCHANGE_ExJxBeans="true"
 export exjxbeans="true"
 
+## 自动评价
+export JD_Evaluation="true"
+
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果
 scr_name="$1"                                 ## 不可删除

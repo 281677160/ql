@@ -253,6 +253,7 @@ function Unstall_qinglong() {
     docker rmi "${imagesid}"
     if [[ `docker ps -a | grep -c "qinglong"` == '0' ]]; then
       print_ok "青龙面板御载完成"
+      rm -rf /etc/bianliang.sh
     else
       print_error "青龙面板御载失败"
       exit 1

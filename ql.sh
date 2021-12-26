@@ -451,8 +451,8 @@ function jiance_nvjdc() {
       print_error "nvjdc面板御载失败"
       exit 1
     fi
-    find / -iname 'nolanjdc' | xargs -i rm -rf {}
-    find / -iname 'nvjdc' | xargs -i rm -rf {}
+    find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
+    find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
   fi
 }
 

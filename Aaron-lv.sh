@@ -48,8 +48,6 @@ curl -fsSL ${curlurl}/Aaron-lv/jd_cfd_sharecodes.ts > /ql/scripts/jd_cfd_shareco
 curl -fsSL ${curlurl}/Aaron-lv/jd_jxmc_sharecodes.ts > /ql/scripts/jd_jxmc_sharecodes.ts
 curl -fsSL ${curlurl}/Aaron-lv/TS_USER_AGENTS.ts > /ql/scripts/TS_USER_AGENTS.ts
 
-TIME l "拉取auth.json"
-curl -fsSL ${curlurl}/Aaron-lv/auth.json > /ql/qlwj/auth.json
 TIME l "拉取crypto-js.js"
 curl -fsSL ${curlurl}/Aaron-lv/crypto-js.js > /ql/qlwj/crypto-js.js
 TIME l "拉取config.sample.sh"

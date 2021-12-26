@@ -352,7 +352,7 @@ function qinglong_dl() {
   echo
   echo
   ECHOG "青龙面板安装完成，请先登录面板再按回车，进行下一步安装程序，步骤如下："
-  ECHOYY "请使用 ${IP}:${QL_PORT} 在浏览器打开青龙面板"
+  ECHOYY "请使用 http://${IP}:${QL_PORT} 在浏览器打开青龙面板"
   ECHOB "点击[开始安装] --> [通知方式]跳过 --> 设置好[用户名]跟[密码] --> 点击[提交] --> 点击[去登录] --> 输入帐号密码完成登录!"
   echo
   if [[ "${Api_Client}" == "true" ]]; then

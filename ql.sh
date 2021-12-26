@@ -601,18 +601,18 @@ function Google_Check() {
   export Google_Check=$(curl -I -s --connect-timeout 8 google.com -w %{http_code} | tail -n1)
   if [ ! "$Google_Check" == 301 ];then
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
-    export ghproxy_Path="https://ghproxy.com/"
+    export GithubProxyUrl="https://ghproxy.com/"
     ECHOGG "使用代理"
     echo "
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
-    export ghproxy_Path="https://ghproxy.com/"
+    export GithubProxyUrl="https://ghproxy.com/"
     " > /root/ghproxy.sh
   else
     export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
-    export ghproxy_Path=""
+    export GithubProxyUrl=""
     echo "
     export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
-    export ghproxy_Path=""
+    export GithubProxyUrl=""
     " > /root/ghproxy.sh
   fi
 }

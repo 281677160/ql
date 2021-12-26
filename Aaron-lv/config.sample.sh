@@ -1,31 +1,42 @@
-#------ Version: 20210927 ------#
+## Version: v2.8.0
+## Date: 2021-06-20
+## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
-## 青龙环境变量
+## 上面版本号中，如果第2位数字有变化，那么代表增加了新的参数，如果只有第3位数字有变化，仅代表更新了注释，没有增加新的参数，可更新可不更新
 
 ## 在运行 ql repo 命令时，是否自动删除失效的脚本与定时任务
 AutoDelCron="true"
+
 ## 在运行 ql repo 命令时，是否自动增加新的本地定时任务
 AutoAddCron="true"
+
 ## 拉取脚本时默认的定时规则，当匹配不到定时规则时使用，例如: 0 9 * * *
-DefaultCronRule="22 0 * * *"
+DefaultCronRule=""
+
 ## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
-RepoFileExtensions="js py sh ts"
+RepoFileExtensions="js py"
+
 ## 由于github仓库拉取较慢，所以会默认添加代理前缀，如不需要请移除
 GithubProxyUrl="https://ghproxy.com/"
+
 ## 设置定时任务执行的超时时间，默认1h，后缀"s"代表秒(默认值), "m"代表分, "h"代表小时, "d"代表天
 CommandTimeoutTime="1h"
+
 ## 设置批量执行任务时的并发数，默认同时执行5个任务
 MaxConcurrentNum="10"
+
 ## 在运行 task 命令时，随机延迟启动任务的最大延迟时间
 ## 默认给javascript任务加随机延迟，如 RandomDelay="300" ，表示任务将在 1-300 秒内随机延迟一个秒数，然后再运行，取消延迟赋值为空
-RandomDelay="20"
+RandomDelay="300"
+
 ## 如果你自己会写shell脚本，并且希望在每次运行 ql update 命令时，额外运行你的 shell 脚本，请赋值为 "true"，默认为true
 EnableExtraShell="true"
+
 ## 是否自动启动bot，默认不启动，设置为true时自动启动，目前需要自行克隆bot仓库所需代码，存到ql/repo目录下，文件夹命名为dockerbot
 AutoStartBot=""
+
 ## 安装bot依赖时指定pip源，默认使用清华源，如不需要源，设置此参数为空
 PipMirror="https://pypi.tuna.tsinghua.edu.cn/simple"
-
 
 ## 通知环境变量
 ## 1. Server酱
@@ -90,7 +101,7 @@ export PUSH_PLUS_TOKEN=""
 ## 一对一多推送（选填）
 ## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
 ## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送
-export PUSH_PLUS_USER="jdpush"
+export PUSH_PLUS_USER=""
 
 ## 9. go-cqhttp
 ## gobot_url 推送到个人QQ: http://127.0.0.1/send_private_msg  群：http://127.0.0.1/send_group_msg 
@@ -100,6 +111,14 @@ export PUSH_PLUS_USER="jdpush"
 export GOBOT_URL=""
 export GOBOT_TOKEN=""
 export GOBOT_QQ=""
+
+## 10. gotify
+## gotify_url 填写gotify地址,如https://push.example.de:8080
+## gotify_token 填写gotify的消息应用token
+## gotify_priority 填写推送消息优先级,默认为0
+export GOTIFY_URL="";
+export GOTIFY_TOKEN="";
+export GOTIFY_PRIORITY=0;
 
 ## 其他需要的变量，脚本中需要的变量使用 export 变量名= 声明即可
 

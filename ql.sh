@@ -459,7 +459,7 @@ function jiance_nvjdc() {
 function git_clone() {
   ECHOG "开始安装nvjdc面板，请稍后..."
   ECHOY "下载nvjdc源码"
-  rm -rf "${Home}" && git clone ${ghproxy_Path}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
+  rm -rf "${Home}" && git clone ${GithubProxyUrl}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
   judge "下载源码"
 }
 
@@ -536,7 +536,7 @@ function up_nvjdc() {
   ECHOY "下载nvjdc源码"
   rm -rf ${QL_PATH}/nvjdcbf
   cp -Rf ${Home} ${QL_PATH}/nvjdcbf
-  rm -rf "${Home}" && git clone ${ghproxy_Path}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
+  rm -rf "${Home}" && git clone ${GithubProxyUrl}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
   judge "下载源码"
   cp -Rf ${QL_PATH}/nvjdcbf/Config ${Home}/Config
   cp -Rf ${QL_PATH}/nvjdcbf/.local-chromium ${Home}/.local-chromium

@@ -618,7 +618,7 @@ function Google_Check() {
 }
 
 function config_bianliang() {
-  echo "${Home}/rwwc" > ${Home}/rwwc
+  [[ -d ${Home} ]]echo "${Home}/rwwc" > ${Home}/rwwc
   echo "
   export IP="${IP}"
   export QL_PATH="${QL_PATH}"

@@ -60,12 +60,8 @@ TIME l "拉取raw_jd_OpenCard.py"
 curl -fsSL ${curlurl}/Aaron-lv/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 TIME l "拉取wskey.py"
 curl -fsSL ${curlurl}/Aaron-lv/wskey.py > /ql/qlwj/wskey.py
-TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
-curl -fsSL ${curlurl}/Aaron-lv/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
 TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL ${curlurl}/Aaron-lv/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
-TIME l "拉取jd_Evaluation.py"
-curl -fsSL ${curlurl}/Aaron-lv/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
 TIME l "拉取jd_get_share_code.js"
 curl -fsSL ${curlurl}/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 TIME l "拉取jdCookie.js"
@@ -133,17 +129,6 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
 fi
 sleep 1
 echo
-# 将 jd_Evaluation.py 添加到定时任务
-if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
-    echo
-    TIME g "添加任务 [自动评价]"
-    echo
-    # 获取token
-    token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task jd_Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
-fi
-sleep 1
-echo
 # 将 jd_get_share_code.js 添加到定时任务
 if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -192,7 +177,6 @@ TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周�
 echo
 echo
 rm -fr /ql/azcg.log
-task curtinlv_JD-Script_jd_tool_dl.py
 ql extra |tee azcg.log
 TIME y "拉取机器人"
 ql bot

@@ -206,6 +206,7 @@ function system_check() {
 }
 
 function kaiqiroot_ssh() {
+  ECHOG "开启root用户ssh"
   bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
 }
 

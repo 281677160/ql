@@ -150,6 +150,7 @@ function qinglong_port() {
     ECHOYY "nvjdc面板名称为：${NVJDCNAME}"
     ECHOYY "nvjdc面板端口为：${JDC_PORT}"
     ECHOYY "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
+    ECHOYY "pushplus的TOKEN为：${PUSHPLUS}"
     ECHOYY "您的nvjdc登录地址将为：http://${IP}:${JDC_PORT}"
   fi
   echo

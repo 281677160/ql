@@ -137,6 +137,9 @@ function qinglong_port() {
      export JDC_PORT=${JDC_PORT:-"5701"}
      read -p " 请输入通过nvjdc面板验证最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
+     ECHOGG "pushplus网址：http://www.pushplus.plus"
+     read -p " 输入pushplus的TOKEN，有人通过nvjdc面板进入挂机或删除KEY时通知您(直接回车默认不通知): " PUSHPLUS && printf "\n"
+     export PUSHPLUS=${PUSHPLUS:-""}
      export QLurl="http://${IP}:${QL_PORT}"
   fi
   ECHOGG "网络类型：${NETLEIXING}"

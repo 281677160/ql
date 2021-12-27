@@ -24,14 +24,21 @@ echo
 echo
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
 echo '
-deb http://mirrors.aliyun.com/debian/ buster main non-free contrib
-deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib
-deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib
-deb-src http://mirrors.aliyun.com/debian/ buster main non-free contrib
-deb-src http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib
-deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib
-deb http://mirrors.aliyun.com/debian-security/ buster/updates main non-free contrib
-deb-src http://mirrors.aliyun.com/debian-security/ buster/updates main non-free contrib
+# 阿里云源（升级不了版本）
+# deb http://mirrors.aliyun.com/debian/ buster main non-free contrib
+# deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib
+# deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib
+# deb-src http://mirrors.aliyun.com/debian/ buster main non-free contrib
+# deb-src http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib
+# deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib
+# deb http://mirrors.aliyun.com/debian-security/ buster/updates main non-free contrib
+# deb-src http://mirrors.aliyun.com/debian-security/ buster/updates main non-free contrib
+
+# 官方默认源
+deb http://deb.debian.org/debian bullseye main contrib
+deb http://deb.debian.org/debian bullseye-updates main contrib
+# security updates
+deb http://security.debian.org bullseye-security main contrib
 ' > /etc/apt/sources.list
 sed -i '1d' /etc/apt/sources.list
 

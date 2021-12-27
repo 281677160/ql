@@ -152,6 +152,7 @@ function qinglong_port() {
   ECHOGG "${YPORT}：${QL_PORT}"
   ECHOGG "您的青龙登录地址将为：http://${IP}:${QL_PORT}"
   if [[ "${Api_Client}" == "true" ]]; then
+    echo
     ECHOYY "nvjdc面板名称为：${NVJDCNAME}"
     ECHOYY "nvjdc面板端口为：${JDC_PORT}"
     ECHOYY "通过nvjdc面板验证最大挂机数为：${CAPACITY}"

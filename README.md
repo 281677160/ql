@@ -38,7 +38,7 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/2816
 #### 🚩 上面步骤的任务成功安装完成后，执行下面步骤
 ---
 
-- 如果安装了nvjdc面板，可以登录nvjdc面板手机验证自动获取pt_key，下面的步骤就不需要了，记住pt_key只有一个月时长，过期了需要再获取
+- 如果安装了nvjdc面板，可以登录nvjdc面板手机验证自动获取pt_key，记住pt_key只有一个月时长，过期了需要再获取，如果没安装nvjdc面板，请按下面的步骤操作。
 
 ---
 

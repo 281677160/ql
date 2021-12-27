@@ -435,7 +435,7 @@ function install_yanzheng() {
   echo "${QL_PATH}/ql/scripts/rwwc" > ${QL_PATH}/ql/scripts/rwwc
   echo "export rwwc=${QL_PATH}/ql/scripts/rwwc" > /etc/bianliang.sh
   docker restart qinglong > /dev/null 2>&1
-  print_ok "任务安装完成"
+  print_ok "任务安装完成，请刷新青龙面板查看"
 }
 
 function jiance_nvjdc() {

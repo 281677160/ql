@@ -37,7 +37,6 @@ echo '
 # 官方默认源
 deb http://deb.debian.org/debian bullseye main contrib
 deb http://deb.debian.org/debian bullseye-updates main contrib
-# security updates
 deb http://security.debian.org bullseye-security main contrib
 ' > /etc/apt/sources.list
 sed -i '1d' /etc/apt/sources.list

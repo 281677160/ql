@@ -205,6 +205,10 @@ function system_check() {
   fi
 }
 
+function kaiqiroot_ssh() {
+  bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
+}
+
 function nolanjdc_lj() {
   export Home="$QL_PATH/nolanjdc"
   export Config="$Home/Config"
@@ -656,6 +660,7 @@ function qinglong_nvjdc() {
   qinglong_port
   Google_Check
   system_check
+  kaiqiroot_ssh
   nolanjdc_lj
   system_docker
   systemctl_status
@@ -675,6 +680,7 @@ function azqinglong() {
   qinglong_port
   Google_Check
   system_check
+  kaiqiroot_ssh
   system_docker
   systemctl_status
   Unstall_qinglong

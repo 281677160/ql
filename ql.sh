@@ -137,10 +137,15 @@ function qinglong_port() {
      export JDC_PORT=${JDC_PORT:-"5701"}
      read -p " 请输入通过nvjdc面板验证最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
-     ECHOGG "pushplus网址：http://www.pushplus.plus"
+     echo -e "\033[32m pushplus网址：http://www.pushplus.plus \033[0m"
      read -p " 输入pushplus的TOKEN，有人通过nvjdc面板进入挂机或删除KEY时通知您(直接回车默认不通知): " PUSHPLUS && printf "\n"
      export PUSHPLUS=${PUSHPLUS:-""}
      export QLurl="http://${IP}:${QL_PORT}"
+     if [[ -z ${PUSHPLUS} ]]; then
+       PUSHP="不开启通知"
+     else
+       PUSHP="${PUSHPLUS}"
+     fi
   fi
   ECHOGG "网络类型：${NETLEIXING}"
   ECHOGG "您的IP为：${IP}"
@@ -150,7 +155,7 @@ function qinglong_port() {
     ECHOYY "nvjdc面板名称为：${NVJDCNAME}"
     ECHOYY "nvjdc面板端口为：${JDC_PORT}"
     ECHOYY "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
-    ECHOYY "pushplus的TOKEN为：${PUSHPLUS}"
+    ECHOYY "pushplus的TOKEN为：${PUSHP}"
     ECHOYY "您的nvjdc登录地址将为：http://${IP}:${JDC_PORT}"
   fi
   echo

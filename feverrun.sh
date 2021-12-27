@@ -110,7 +110,7 @@ ql extra |tee azcg.log
 if [[ `ls -a |grep -c "成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/azcg.log
 else
-	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
+	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装，或看看青龙面板有没有[每x小时更新任务]，有的话执行这个拉取任务试试"
 	rm -fr /ql/azcg.log
 	echo "Error" > /ql/config/Error
 fi

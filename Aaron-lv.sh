@@ -170,7 +170,7 @@ fi
 sleep 1
 echo
 # 将 7天删除日志 添加到定时任务
-if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
+if [ "$(grep -c rmlog /ql/config/crontab.list)" = 0 ]; then
     echo
     TIME g "添加任务 [每隔7天删除日志]"
     echo

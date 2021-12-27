@@ -79,6 +79,8 @@ cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
+python3 -m pip install --upgrade telethon
+cd /ql
 echo
 TIME g "依赖安装完毕..."
 echo

@@ -341,9 +341,11 @@ function ql_qlbeifen() {
     rm -rf /root/ghproxy.sh
   fi
   if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
+    ECHOG "正在还原env.sh文件（KEY文件）"
     docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
   fi
+  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 }
 
 function qinglong_dl() {
@@ -420,7 +422,6 @@ function install_yanzheng() {
     exit 1
   fi
   [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
   if [[ -f ${QL_PATH}/qlbeifen1/ql/scripts/rwwc ]]; then
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/config/config.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/sample/config.sample.sh
@@ -434,7 +435,6 @@ function install_yanzheng() {
   echo "${QL_PATH}/ql/scripts/rwwc" > ${QL_PATH}/ql/scripts/rwwc
   echo "export rwwc=${QL_PATH}/ql/scripts/rwwc" > /etc/bianliang.sh
   docker restart qinglong > /dev/null 2>&1
-  sleep 1
   print_ok "任务安装完成"
 }
 

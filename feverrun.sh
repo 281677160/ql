@@ -41,8 +41,6 @@ chmod +x /ql/repo/ghproxy.sh && source /ql/repo/ghproxy.sh
 rm -rf /ql/repo/ghproxy.sh
 mkdir -p /ql/qlwj
 echo
-TIME l "拉取auth.json"
-curl -fsSL ${curlurl}/feverrun/auth.json > /ql/qlwj/auth.json
 TIME l "拉取crypto-js.js"
 curl -fsSL ${curlurl}/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
 TIME l "拉取config.sample.sh"

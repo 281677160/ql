@@ -524,7 +524,6 @@ function linux_nolanjdc() {
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerd restart
-    sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
@@ -533,10 +532,10 @@ function linux_nolanjdc() {
   fi
   cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    sleep 1
+    sleep 2
     docker restart qinglong > /dev/null 2>&1
     docker restart nolanjdc > /dev/null 2>&1
-    sleep 1
+    sleep 2
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
@@ -582,8 +581,8 @@ function up_nvjdc() {
   if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
-    sleep 1
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
+    /etc/init.d/dockerd restart
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
@@ -594,9 +593,10 @@ function up_nvjdc() {
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     rm -rf ${QL_PATH}/nvjdcbf
     echo "${Home}/rwwc" > ${Home}/rwwc
+    sleep 2
     docker restart qinglong > /dev/null 2>&1
     docker restart nolanjdc > /dev/null 2>&1
-    sleep 1
+    sleep 2
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"

@@ -20,7 +20,7 @@ RepoFileExtensions="js py sh ts"
 GithubProxyUrl="https://ghproxy.com/"
 
 ## 设置定时任务执行的超时时间，默认1h，后缀"s"代表秒(默认值), "m"代表分, "h"代表小时, "d"代表天
-CommandTimeoutTime="1h"
+CommandTimeoutTime="2h"
 
 ## 设置批量执行任务时的并发数，默认同时执行5个任务
 MaxConcurrentNum="10"
@@ -130,27 +130,24 @@ NotifyBeanSign="1"
 export JD_BEAN_STOP="9"
 
 # 脚本推送控制类环境变量
-##宠汪汪积分兑换有就换版
-#export JOY_GET20WHEN16="true"  #控制16点才触发20京豆兑换.
-#export JOY_GET20WHEN16="true"
 ## 1、京东多合一签到脚本关闭运行结果推送，默认推送，填true表示不推送
-export JD_BEAN_SIGN_STOP_NOTIFY=""
+export JD_BEAN_SIGN_STOP_NOTIFY="true"
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
 export JD_BEAN_SIGN_NOTIFY_SIMPLE="true"
 ## 3、东东萌宠关闭推送。填写false为不关闭推送，true为关闭推送
-export PET_NOTIFY_CONTROL="false"
+export PET_NOTIFY_CONTROL="true"
 ## 4、京东农场关闭推送。填写false为不关闭推送，true为关闭推送
-export FRUIT_NOTIFY_CONTROL="false"
+export FRUIT_NOTIFY_CONTROL="true"
 ## 5、京东领现金关闭推送。填写false为不关闭推送，true为关闭推送
-export CASH_NOTIFY_CONTROL="false"
+export CASH_NOTIFY_CONTROL="true"
 ## 6、京东摇钱树关闭推送。填写false为不关闭推送，true为关闭推送
-export MONEYTREE_NOTIFY_CONTROL="false"
+export MONEYTREE_NOTIFY_CONTROL="true"
 ## 7、京东点点券关闭推送。填写false为不关闭推送，true为关闭推送
-export DDQ_NOTIFY_CONTROL="false"
+export DDQ_NOTIFY_CONTROL="true"
 ## 8、京东京东赚赚小程序关闭推送。填写false为不关闭推送，true为关闭推送
-export JDZZ_NOTIFY_CONTROL="false"
+export JDZZ_NOTIFY_CONTROL="true"
 ## 9、宠汪汪兑换京豆关闭推送。填写false为不关闭推送，true为关闭推送
-export JD_JOY_REWARD_NOTIFY="false"
+export JD_JOY_REWARD_NOTIFY="true"
 ## 10、宠汪汪赛跑获胜后是否推送通知。填false为不推送通知消息,true为推送通知消息
 export JOY_RUN_NOTIFY="true"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送

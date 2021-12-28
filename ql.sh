@@ -244,7 +244,7 @@ function systemctl_status() {
   if [[ "${XTong}" == "openwrt" ]]; then
     /etc/init.d/dockerman start > /dev/null 2>&1
     /etc/init.d/dockerd start > /dev/null 2>&1
-    sleep 2
+    sleep 3
   else
     systemctl start docker
     sleep 1
@@ -504,7 +504,8 @@ function chrome_linux() {
   ECHOY "下载chrome-linux"
   mkdir -p ${Chromium} && cd ${Chromium}
   wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip
-  judge "下载Chromium"
+  judge "下载chrome-linux"
+  ECHOY "解压chrome-linux文件包，请稍后..."
   unzip chrome-linux.zip
   if [[ ! -d ${Chromium}/chrome-linux ]]; then
     print_error "chrome-linux文件解压失败"
@@ -512,27 +513,28 @@ function chrome_linux() {
   else
     print_ok "chrome-linux文件解成功"
     rm  -f chrome-linux.zip
-    cd ${Current}
   fi
 }
 
 function linux_nolanjdc() {
-  ECHOY "启动镜像"
+  ECHOY "启动镜像中，请稍后..."
   cd ${Current}
   if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
-    /etc/init.d/dockerd restart
+    /etc/init.d/dockerman restart > /dev/null 2>&1
+    /etc/init.d/dockerd restart > /dev/null 2>&1
+    sleep 5
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
+    sleep 2
   fi
   cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    sleep 2
     docker restart qinglong > /dev/null 2>&1
     docker restart nolanjdc > /dev/null 2>&1
     sleep 2
@@ -582,18 +584,20 @@ function up_nvjdc() {
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
-    /etc/init.d/dockerd restart
+    /etc/init.d/dockerman restart > /dev/null 2>&1
+    /etc/init.d/dockerd restart > /dev/null 2>&1
+    sleep 5
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
+    sleep 2
   fi
   cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     rm -rf ${QL_PATH}/nvjdcbf
     echo "${Home}/rwwc" > ${Home}/rwwc
-    sleep 2
     docker restart qinglong > /dev/null 2>&1
     docker restart nolanjdc > /dev/null 2>&1
     sleep 2

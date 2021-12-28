@@ -34,7 +34,7 @@ disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
 crypto_shell_path=$dir_script/crypto-js.js
 wx_jysz_shell_path=$dir_script/wx_jysz.js
-OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
+OpenCard_shell_path=$dir_script/jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 chmod +x /ql/repo/ghproxy.sh && source /ql/repo/ghproxy.sh
@@ -55,7 +55,7 @@ curl -fsSL ${curlurl}/Aaron-lv/config.sample.sh > /ql/qlwj/config.sample.sh
 TIME l "拉取extra.sh"
 curl -fsSL ${curlurl}/Aaron-lv/extra.sh > /ql/qlwj/extra.sh
 TIME l "拉取raw_jd_OpenCard.py"
-curl -fsSL ${curlurl}/Aaron-lv/raw_jd_OpenCard.py > /ql/qlwj/jd_OpenCard.py
+curl -fsSL ${curlurl}/Aaron-lv/jd_OpenCard.py > /ql/qlwj/jd_OpenCard.py
 TIME l "拉取wskey.py"
 curl -fsSL ${curlurl}/Aaron-lv/wskey.py > /ql/qlwj/wskey.py
 TIME l "拉取disableDuplicateTasksImplement.py"
@@ -75,7 +75,7 @@ cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
 cp -Rf /ql/qlwj/extra.sh /ql/config/extra.sh
 cp -Rf /ql/qlwj/extra.sh /ql/sample/extra.sample.sh
-cp -Rf /ql/qlwj/raw_jd_OpenCard.py /ql/scripts/jd_OpenCard.py
+cp -Rf /ql/qlwj/jd_OpenCard.py /ql/scripts/jd_OpenCard.py
 cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTasksImplement.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js

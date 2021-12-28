@@ -479,16 +479,16 @@ function git_clone() {
   ECHOG "开始安装nvjdc面板，请稍后..."
   ECHOY "下载nvjdc源码"
   rm -rf "${Home}" && git clone ${GithubProxyUrl}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
-  judge "下载源码"
+  judge "nvjdc源码下载"
 }
 
 function pull_nvjdc() {
   ECHOY "安装nvjdc镜像中，安装需要时间，请耐心等候..."
   docker pull nolanhzy/nvjdc:latest
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]]; then
-    print_ok "镜像安装成功"
+    print_ok "nvjdc镜像安装 完成"
   else
-    print_error "镜像安装失败"
+    print_error "nvjdc镜像安装失败"
     exit 1
   fi
 }
@@ -496,7 +496,7 @@ function pull_nvjdc() {
 function Config_json() {
   mkdir -p ${Config}
   bash -c  "$(curl -fsSL ${curlurl}/json.sh)"
-  judge "配置修改"
+  judge "nvjdc配置修改"
   chmod +x ${Config}/Config.json
 }
 
@@ -511,7 +511,7 @@ function chrome_linux() {
     print_error "chrome-linux文件解压失败"
     exit 1
   else
-    print_ok "chrome-linux文件解成功"
+    print_ok "解压chrome-linux文件 完成"
     rm  -f chrome-linux.zip
   fi
 }
@@ -537,15 +537,16 @@ function linux_nolanjdc() {
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     docker restart qinglong > /dev/null 2>&1
     docker restart nolanjdc > /dev/null 2>&1
-    sleep 2
+    sleep 4
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout -k 1s 4s docker logs -f nolanjdc
+  timeout -k 1s 6s docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
-    print_ok "nvjdc安装完成"
+    print_ok "nvjdc安装 完成"
   else
     print_error "nvjdc安装失败"
     exit 1
@@ -600,13 +601,14 @@ function up_nvjdc() {
     echo "${Home}/rwwc" > ${Home}/rwwc
     docker restart qinglong > /dev/null 2>&1
     docker restart nolanjdc > /dev/null 2>&1
-    sleep 2
+    sleep 4
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout -k 1s 4s docker logs -f nolanjdc
+  timeout -k 1s 6s docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"
   else

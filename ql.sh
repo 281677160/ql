@@ -500,7 +500,7 @@ function Config_json() {
 function chrome_linux() {
   ECHOY "下载chrome-linux"
   mkdir -p ${Chromium} && cd ${Chromium}
-  wget -q https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip
+  wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip
   judge "下载Chromium"
   unzip chrome-linux.zip
   if [[ ! -d ${Chromium}/chrome-linux ]]; then
@@ -509,6 +509,7 @@ function chrome_linux() {
   else
     print_ok "chrome-linux文件解成功"
     rm  -f chrome-linux.zip
+    cd /root
   fi
 }
 

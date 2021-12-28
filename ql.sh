@@ -522,8 +522,9 @@ function linux_nolanjdc() {
   if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
-    sleep 1
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
+    /etc/init.d/dockerd restart
+    sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \

@@ -344,6 +344,8 @@ docker run -dit \
   --restart always \
   whyour/qinglong:latest
   
+  docker restart qinglong > /dev/null 2>&1
+  sleep 2
   if [[ `docker ps -a | grep -c "qinglong"` == '1' ]]; then
     print_ok "青龙面板安装完成"
   else

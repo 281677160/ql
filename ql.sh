@@ -74,6 +74,8 @@ if [[ ! "$USER" == "root" ]]; then
   exit 1
 fi
 
+Current="$PWD"
+
 function qinglong_port() {
   clear
   echo
@@ -509,12 +511,13 @@ function chrome_linux() {
   else
     print_ok "chrome-linux文件解成功"
     rm  -f chrome-linux.zip
-    cd /root
+    cd ${Current}
   fi
 }
 
 function linux_nolanjdc() {
   ECHOY "启动镜像"
+  cd ${Current}
   if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
@@ -526,7 +529,7 @@ function linux_nolanjdc() {
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
   fi
-  cd /root
+  cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     sleep 1
     docker restart qinglong > /dev/null 2>&1
@@ -570,7 +573,7 @@ function up_nvjdc() {
   else
     print_error "nvjdc镜像御载失败，再次尝试删除"
   fi
-  cd /root
+  cd ${Current}
   ECHOG "更新镜像，请耐心等候..."
   sudo docker pull nolanhzy/nvjdc:latest
   ECHOY "启动镜像"
@@ -585,7 +588,7 @@ function up_nvjdc() {
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
   fi
-  cd /root
+  cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     rm -rf ${QL_PATH}/nvjdcbf
     echo "${Home}/rwwc" > ${Home}/rwwc

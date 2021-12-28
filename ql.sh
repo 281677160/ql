@@ -364,7 +364,6 @@ function ql_qlbeifen() {
     docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
   fi
-  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 }
 
 function qinglong_dl() {
@@ -437,10 +436,10 @@ function install_rw() {
 function install_yanzheng() {
   if [[ -f ${QL_PATH}/ql/config/Error ]]; then
     rm -rf ${QL_PATH}/ql/config/Error
-    rm -rf ${QL_PATH}/qlbeifen1
     exit 1
   fi
   [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
   if [[ -f ${QL_PATH}/qlbeifen1/ql/scripts/rwwc ]]; then
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/config/config.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/sample/config.sample.sh

@@ -8,7 +8,7 @@ function system_check() {
   elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
     system_debian
   elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-    echo -e "\033[33m openwrt无需开启SSH \033[0m"
+    echo -e "\033[33m openwrt无需开启root账户SSH \033[0m"
     exit 0
   else
     echo -e "\033[41;33m 不支持您的系统  \033[0m"
@@ -27,7 +27,7 @@ function system_centos() {
     ssh_PermitRootLogin
     service sshd restart
   fi
-  echo -e "\033[32m 开启SSH完成 \033[0m"
+  echo -e "\033[32m 开启root账户SSH完成 \033[0m"
   exit 0
 }
 
@@ -42,7 +42,7 @@ function system_ubuntu() {
     ssh_PermitRootLogin
     service ssh restart
   fi
-  echo -e "\033[32m 开启SSH完成 \033[0m"
+  echo -e "\033[32m 开启root账户SSH完成 \033[0m"
   exit 0
 }
 
@@ -57,7 +57,7 @@ function system_debian() {
     ssh_PermitRootLogin
     service ssh restart
   fi
-  echo -e "\033[32m 开启SSH完成 \033[0m"
+  echo -e "\033[32m 开启root账户SSH完成 \033[0m"
   exit 0
 }
 

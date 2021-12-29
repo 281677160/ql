@@ -574,7 +574,9 @@ function linux_nolanjdc() {
   fi
   dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
   docker update --restart=always "${dockernvid}" > /dev/null 2>&1
-  timeout 8 docker logs -f nolanjdc |tee ${Home}/build.log
+  rm -rf ${Home}/build.log
+  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout 5 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
     ECHOYY "nvjdc配置已自动配置完成，如您需修改可至 ${Config}/Config.json 修改!"
@@ -644,7 +646,9 @@ function up_nvjdc() {
   fi
   dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
   docker update --restart=always "${dockernvid}" > /dev/null 2>&1
-  timeout 8 docker logs -f nolanjdc |tee ${Home}/build.log
+  rm -rf ${Home}/build.log
+  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout 5 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"
   else

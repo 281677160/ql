@@ -248,6 +248,7 @@ function uninstall_alpine_dk() {
   rc-update del docker boot
   rm -rf /var/lib/docker
   rm -rf /etc/docker
+  rm -rf /etc/init.d/docker
 }
 
 function hello_world() {

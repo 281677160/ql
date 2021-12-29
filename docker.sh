@@ -274,13 +274,11 @@ function docker_daemon() {
 sudo mkdir -p /etc/docker
 cat >/etc/docker/daemon.json <<-EOF
 {
-    "registry-mirrors": ["https://qndprgwv.mirror.aliyuncs.com"],
-    "runtimes": {
-        "nvidia": {
-            "path": "/usr/bin/nvidia-container-runtime",
-            "runtimeArgs": []
-         }  
-    }
+  "registry-mirrors": [
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn"
+  ]
 }
 EOF
 chmod +x /etc/docker/daemon.json

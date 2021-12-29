@@ -370,9 +370,12 @@ docker run -dit \
 }
 
 function ql_qlbeifen() {
-  if [[ -f /root/ghproxy.sh ]]; then
-    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
-    rm -rf /root/ghproxy.sh
+  if [[ -f ${Current}/ghproxy.sh ]]; then
+    docker cp ${Current}/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
+    rm -rf ${Current}/ghproxy.sh
+  else
+    print_error "没检测到主应用变量文件，请再次尝试安装!"
+    exit 1
   fi
   if [[ "$(grep -c JD_WSCK=\"pin= ${QL_PATH}/qlbeifen1/ql/config/env.sh)"  -ge "1" ]] || [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/qlbeifen1/ql/config/env.sh)" -ge "1" ]]; then
     ECHOG "检测到您有[wskey]或者[pt_key]存在，正在还原env.sh文件（KEY文件）"
@@ -657,14 +660,16 @@ function Google_Check() {
     echo "
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export GithubProxyUrl="https://ghproxy.com/"
-    " > /root/ghproxy.sh
+    " > ${Current}/ghproxy.sh
+    sed -i "s/^[ \t]*//g" ${Current}/ghproxy.sh
   else
     export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
     export GithubProxyUrl=""
     echo "
     export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
     export GithubProxyUrl=""
-    " > /root/ghproxy.sh
+    " > ${Current}/ghproxy.sh
+    sed -i "s/^[ \t]*//g" ${Current}/ghproxy.sh
   fi
 }
 
@@ -684,6 +689,7 @@ function config_bianliang() {
   export Chromium="${Chromium}"
   export nvrwwc="${Home}/rwwc"
   " >> /etc/bianliang.sh
+  sed -i "s/^[ \t]*//g" /etc/bianliang.sh
   chmod +x /etc/bianliang.sh
   [[ -d ${Home} ]] && echo "${Home}/rwwc" > ${Home}/rwwc
 }

@@ -850,7 +850,7 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOB " 3. 重启青龙和nvjdc"
+  ECHOB " 3. 重启青龙面板"
   ECHOB " 4. 重置青龙登录错误次数和检测环境并修复"
   ECHOYY " 5. 御载青龙面板"
   ECHOY " 6. 进入第一主菜单（安装界面）"
@@ -871,8 +871,7 @@ memuqinglong() {
   break
   ;;
   3)
-    ECHOY "重启nvjdc和青龙，请耐心等候..."
-    docker restart nolanjdc
+    ECHOY "重启青龙，请耐心等候..."
     docker restart qinglong
     sleep 5
     print_ok "命令执行完成"

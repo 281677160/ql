@@ -219,11 +219,13 @@ function system_check() {
 }
 
 function kaiqiroot_ssh() {
-  echo
-  ECHOGG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
-  bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
-  judge "开启root用户ssh"
-  sleep 1
+  if [[ "$(. /etc/os-release && echo "$ID")" != "openwrt" ]]; then
+    echo
+    ECHOGG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
+    bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
+    judge "开启root用户ssh"
+    sleep 1
+  fi
 }
 
 function nolanjdc_lj() {

@@ -52,8 +52,8 @@ function system_check() {
     [[ ${CHONGXIN} == "YES" ]] && uninstall_ubuntu_dk
     install_ubuntu_dk
   elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
-    apt-get -y update
-    apt-get install -y sudo wget curl
+    apt -y update
+    apt install -y sudo wget curl
     [[ ${CHONGXIN} == "YES" ]] && uninstall_debian_dk
     install_debian_dk
   elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then

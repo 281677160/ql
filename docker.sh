@@ -96,14 +96,14 @@ function jiance_dk() {
 
 function install_centos_dk() {
   ECHOY "正在安装docker，请耐心等候..."
-  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+  yum install -y yum-utils device-mapper-persistent-data lvm2
   yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-  sudo yum install -y docker-ce docker-ce-cli containerd.io
+  yum install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
   docker_daemon
-  sudo systemctl daemon-reload
-  sudo systemctl enable docker
-  sudo systemctl restart docker
+  systemctl daemon-reload
+  systemctl enable docker
+  systemctl restart docker
   sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
@@ -118,35 +118,36 @@ function uninstall_centos_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
-  sudo systemctl stop docker
-  sudo yum -y remove docker-ce.x86_64
-  sudo yum -y remove docker-*
-  sudo rm -rf /var/lib/docker
-  sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
-  sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+  systemctl stop docker
+  yum -y remove docker-ce.x86_64
+  yum -y remove docker-*
+  rm -rf /var/lib/docker
+  rm -rf /etc/docker /etc/systemd/system/docker.service.d
+  rm -rf /etc/init.d/docker
+  rm -rf /lib/systemd/system/{docker.service,docker.socket}
   rm /var/lib/dpkg/info/$nomdupaquet* -f
 }
 
 
 function install_ubuntu_dk() {
   ECHOY "正在安装docker，请耐心等候..."
-  sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
   curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
   if [[ $? -ne 0 ]];then
     curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
   fi
-  sudo apt-key fingerprint 0EBFCD88
+  apt-key fingerprint 0EBFCD88
   if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
     print_error "密匙验证出错，或者没下载到密匙了，请检查网络，或者源有问题"
     exit 1
   fi
-  sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-  sudo apt-get update
-  sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+  add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+  apt-get update
+  apt-get install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
   docker_daemon
-  sudo systemctl daemon-reload
-  sudo systemctl restart docker
+  systemctl daemon-reload
+  systemctl restart docker
   sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
@@ -161,35 +162,36 @@ function uninstall_ubuntu_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
-  sudo systemctl stop docker
-  sudo apt-get -y autoremove docker-* --purge
-  sudo apt-get -y autoremove --purge
-  sudo apt-get -y clean
-  sudo rm -rf /var/lib/docker
-  sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
-  sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+  systemctl stop docker
+  apt-get -y autoremove docker-* --purge
+  apt-get -y autoremove --purge
+  apt-get -y clean
+  rm -rf /var/lib/docker
+  rm -rf /etc/init.d/docker
+  rm -rf /etc/docker /etc/systemd/system/docker.service.d
+  rm -rf /lib/systemd/system/{docker.service,docker.socket}
   rm /var/lib/dpkg/info/$nomdupaquet* -f
 }
 
 function install_debian_dk() {
   ECHOY "正在安装docker，请耐心等候..."
-  sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
   curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
   if [[ $? -ne 0 ]];then
     curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
   fi
-  sudo apt-key fingerprint 0EBFCD88
+  apt-key fingerprint 0EBFCD88
   if [[ `sudo apt-key fingerprint 0EBFCD88 | grep -c "0EBF CD88"` = '0' ]]; then
     print_error "密匙验证出错，或者没下载到密匙了，请检查网络，或者上游有问题"
     exit 1
   fi
-  sudo add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
-  sudo apt update
-  sudo apt install -y docker-ce docker-ce-cli containerd.io
+  add-apt-repository -y "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable"
+  apt update
+  apt install -y docker-ce docker-ce-cli containerd.io
   sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
   docker_daemon
-  sudo systemctl daemon-reload
-  sudo systemctl restart docker
+  systemctl daemon-reload
+  systemctl restart docker
   sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
@@ -204,13 +206,14 @@ function uninstall_debian_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
-  sudo systemctl stop docker
-  sudo apt -y autoremove docker-* --purge
-  sudo apt -y autoremove --purge
-  sudo apt -y clean
-  sudo rm -rf /var/lib/docker
-  sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
-  sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
+  systemctl stop docker
+  apt -y autoremove docker-* --purge
+  apt -y autoremove --purge
+  apt -y clean
+  rm -rf /var/lib/docker
+  rm -rf /etc/init.d/docker
+  rm -rf /etc/docker /etc/systemd/system/docker.service.d
+  rm -rf /lib/systemd/system/{docker.service,docker.socket}
   rm /var/lib/dpkg/info/$nomdupaquet* -f
 }
 

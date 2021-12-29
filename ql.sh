@@ -717,7 +717,7 @@ function qinglong_nvjdc() {
   nolanjdc_lj
   system_docker
   systemctl_status
-  Unstall_qinglong
+  uninstall_qinglong
   jiance_nvjdc
   sys_kongjian
   install_ql
@@ -736,7 +736,7 @@ function azqinglong() {
   kaiqiroot_ssh
   system_docker
   systemctl_status
-  Unstall_qinglong
+  uninstall_qinglong
   jiance_nvjdc
   sys_kongjian
   install_ql

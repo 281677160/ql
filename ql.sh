@@ -756,7 +756,7 @@ memunvjdc() {
   ECHOB " 3. 升级nvjdc面板"
   ECHOB " 4. 御载nvjdc面板"
   ECHOB " 5. 御载青龙+nvjdc面板"
-  ECHOB " 6. 进入第一主菜单（安装选择界面）"
+  ECHOB " 6. 进入第一主菜单（安装界面）"
   ECHOB " 7. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
@@ -833,7 +833,7 @@ memuqinglong() {
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
   ECHOYY " 3. 御载青龙面板"
-  ECHOY " 4. 进入第一主菜单（安装选择界面）"
+  ECHOY " 4. 进入第一主菜单（安装界面）"
   ECHOYY " 5. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
@@ -972,14 +972,14 @@ memu() {
   1)
     export wjmz="Aaron-lv"
     export Sh_Path="Aaron-lv.sh"
-    export kugonggao="您库的选择：（shufflewzc/faker2和JDHelloWorld/jd_scripts）"
+    export kugonggao="您库的选择：shufflewzc/faker2和JDHelloWorld/jd_scripts"
     memuaz
   break
   ;;
   2)
     export wjmz="feverrun"
     export Sh_Path="feverrun.sh"
-    export kugonggao="您库的选择：（feverrun/my_scripts）"
+    export kugonggao="您库的选择：feverrun/my_scripts"
     memuaz
   break
   ;;

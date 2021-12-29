@@ -16,17 +16,17 @@
 - 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
 #
 
-- 使用root用户登录ubuntu或者debian系统，后执行以下命令安装curl
+- 使用root用户登录ubuntu或者debian系统后，执行以下命令安装curl
 ```sh
 apt -y update && apt -y install curl
 ```
 
-- 使用root用户登录centos系统，后执行以下命令安装curl
+- 使用root用户登录centos系统后，执行以下命令安装curl
 ```sh
 yum install -y curl
 ```
 
-- 使用root用户登录alpine系统，后执行以下命令安装curl
+- 使用root用户登录alpine系统后，执行以下命令安装curl
 ```sh
 apk update && apk add bash curl
 ```

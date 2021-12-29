@@ -209,7 +209,7 @@ function system_check() {
       export QL_PATH="/root"
       export QL_Kongjian="/mnt/mmcblk2p4/docker"
     else
-      ECHOR "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
+      print_error "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
       exit 1
     fi
   else
@@ -219,7 +219,7 @@ function system_check() {
 }
 
 function kaiqiroot_ssh() {
-  ECHOG "开启root用户ssh，方便使用工具连接服务器直接修改代码"
+  ECHOG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
   bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
 }
 

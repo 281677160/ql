@@ -384,8 +384,9 @@ function ql_qlbeifen() {
   fi
   if [[ "$(grep -c JD_WSCK=\"pin= ${QL_PATH}/qlbeifen1/ql/config/env.sh)"  -ge "1" ]] || [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/qlbeifen1/ql/config/env.sh)" -ge "1" ]]; then
     ECHOG "检测到您有[wskey]或者[pt_key]存在，正在还原env.sh文件（KEY文件）"
-    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
+    judge "还原env.sh文件"
   fi
 }
 

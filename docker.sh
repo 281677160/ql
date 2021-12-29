@@ -104,7 +104,7 @@ function install_centos_dk() {
   sudo systemctl daemon-reload
   sudo systemctl enable docker
   sudo systemctl restart docker
-  sleep 2
+  sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -147,7 +147,7 @@ function install_ubuntu_dk() {
   docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
-  sleep 2
+  sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -190,7 +190,7 @@ function install_debian_dk() {
   docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
-  sleep 2
+  sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -228,7 +228,7 @@ function install_alpine_dk() {
   mkdir -p /var/lib/docker/tmp
   docker_daemon
   service docker restart
-  sleep 2
+  sleep 5
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -251,6 +251,7 @@ function uninstall_alpine_dk() {
 
 function hello_world() {
   ECHOY "测试docker拉取镜像是否成功"
+  sleep 3
   sudo docker run hello-world |tee build.log
   if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "hub.docker.com" build.log` -ge '1' ]]; then
     ECHOG "测试镜像拉取成功，正在删除测试镜像..."
@@ -264,7 +265,7 @@ function hello_world() {
     ECHOY "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
     ECHOY "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
     rm -fr build.log
-    sleep 2
+    sleep 1
     exit 1
   fi
 }

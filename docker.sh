@@ -104,6 +104,7 @@ function install_centos_dk() {
   sudo systemctl daemon-reload
   sudo systemctl enable docker
   sudo systemctl restart docker
+  sleep 2
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -146,6 +147,7 @@ function install_ubuntu_dk() {
   docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
+  sleep 2
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -188,6 +190,7 @@ function install_debian_dk() {
   docker_daemon
   sudo systemctl daemon-reload
   sudo systemctl restart docker
+  sleep 2
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else
@@ -222,6 +225,9 @@ function install_alpine_dk() {
   apk add docker
   rc-update add docker boot
   service docker start
+  mkdir -p /var/lib/docker/tmp
+  service docker restart
+  sleep 2
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"
   else

@@ -851,8 +851,8 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOB " 3. 重启青龙面板"
-  ECHOB " 4. 重置青龙登录错误次数和检测环境并修复"
+  ECHOYY " 3. 重启青龙面板"
+  ECHOY " 4. 重置青龙登录错误次数和检测环境并修复"
   ECHOYY " 5. 御载青龙面板"
   ECHOY " 6. 进入第一主菜单（安装界面）"
   ECHOYY " 7. 退出程序!"

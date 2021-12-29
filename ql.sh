@@ -535,7 +535,7 @@ function linux_nolanjdc() {
   ECHOY "启动镜像中，请稍后..."
   cd ${Current}
   if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
+    docker run --name nolanjdc –restart=always -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerman restart > /dev/null 2>&1
@@ -548,7 +548,7 @@ function linux_nolanjdc() {
     sleep 2
   else
     cd  ${Home}
-    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    docker run --name nolanjdc –restart=always -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
     sleep 2
@@ -563,8 +563,9 @@ function linux_nolanjdc() {
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  timeout 3 docker logs -f nolanjdc
-  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
+  dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
+  docker update --restart=always "${dockernvid}" > /dev/null 2>&1
+  timeout 7 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
     ECHOYY "如需再次修改nvjdc配置文件，可至 ${Config}/Config.json 修改!"

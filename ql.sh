@@ -988,7 +988,7 @@ memu() {
   clear
   echo
   echo
-  ECHORR "脚本适用于（ubuntu、debian、centos、openwrt）"
+  ECHORR "脚本适用于（ubuntu、debian、centos、alpine、openwrt）"
   ECHORR "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务"
   ECHORR "N1或者其他晶晨系列盒子安装在[root]文件夹，其他设备都安装在[opt]文件夹内"
   ECHORR "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker，如果空间太小请挂载好硬盘"

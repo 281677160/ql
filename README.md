@@ -112,7 +112,7 @@ canvas
 #### 🚩 单独安装某项的一键脚本
 
 
-- 一键单独安装docker
+- 一键单独安装docker，支持（ubuntu、debian、centos、alpine）
 ```sh
 bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh)"
 ```

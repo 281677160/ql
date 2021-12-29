@@ -275,7 +275,7 @@ function systemctl_status() {
   fi
 }
 
-function Unstall_qinglong() {
+function uninstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
     ECHOY "检测到青龙面板，正在御载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -799,7 +799,7 @@ memunvjdc() {
     case $YZQLNV in
     [Yy])
       ECHOG "正在御载青龙+nvjdc面板"
-      Unstall_qinglong
+      uninstall_qinglong
       jiance_nvjdc
       rm -rf /etc/bianliang.sh
     ;;
@@ -857,7 +857,7 @@ memuqinglong() {
     case $YZQLN in
     [Yy])
       ECHOG "正在御载青龙面板"
-      Unstall_qinglong
+      uninstall_qinglong
       rm -rf /etc/bianliang.sh
     ;;
     *)

@@ -1,6 +1,6 @@
 
 ## 第一步
-- 脚本适用于（ubuntu、debian、centos、openwrt）
+- 脚本适用于（ubuntu、debian、centos、alpine、openwrt）
 - 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
 - N1或者其他晶晨系列盒子安装在root文件夹，其他设备都安装在opt文件夹内
 - 除OPENWRT外，自动检测docker，有则跳过，无则执行安装
@@ -24,6 +24,11 @@ apt -y update && apt -y install curl
 - 使用root用户登录centos系统，后执行以下命令安装curl
 ```sh
 yum install -y curl
+```
+
+- 使用root用户登录alpine系统，后执行以下命令安装curl
+```sh
+apk add curl bash
 ```
 #
 

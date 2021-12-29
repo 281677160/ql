@@ -44,7 +44,8 @@ bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/ql.sh)"
 ```
-
+---
+#
 ## 第二步
 
 #### 🚩 上面步骤的任务成功安装完成后，执行下面步骤

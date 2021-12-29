@@ -541,6 +541,11 @@ function linux_nolanjdc() {
     /etc/init.d/dockerman restart > /dev/null 2>&1
     /etc/init.d/dockerd restart > /dev/null 2>&1
     sleep 5
+  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
+    -it --privileged=true  nolanhzy/nvjdc:latest
+    docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
+    sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
@@ -558,8 +563,8 @@ function linux_nolanjdc() {
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  timeout -k 1s 4s docker logs -f nolanjdc
-  timeout -k 1s 6s docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout 3 docker logs -f nolanjdc
+  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
   else

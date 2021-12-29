@@ -33,10 +33,17 @@ apk update && apk add bash curl
 #
 
 - 安装完curl后，执行下面一键命令安装青龙+依赖+任务（安装完毕后再次使用命令可以对应用进行升级）
+#
+---
+- 国内网络命令，国内网络有缓存，使用的时候要看文件的修改时间，超过12小时用才好，要不然容易造成文件不同步的情况
 ```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/ql.sh)"
+bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 ```
 #
+- 国外网络命令
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/ql.sh)"
+```
 
 ## 第二步
 

@@ -114,12 +114,12 @@ canvas
 
 - 一键单独安装docker
 ```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/docker.sh)"
+bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/docker.sh)"
 ```
 
 - 一键安装单独青龙的依赖
 ```sh
-docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/npm.sh)"
+docker exec -it qinglong bash -c  "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/npm.sh)"
 ```
 ## 感谢！
 

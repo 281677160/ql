@@ -28,7 +28,7 @@ yum install -y curl
 
 - 使用root用户登录alpine系统，后执行以下命令安装curl
 ```sh
-apk add curl bash
+apk update && apk add bash curl
 ```
 #
 

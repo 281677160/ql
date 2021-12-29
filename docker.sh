@@ -227,7 +227,7 @@ function install_alpine_dk() {
   service docker start
   mkdir -p /var/lib/docker/tmp
   docker_daemon
-  service docker restart
+  rc-service docker restart
   sleep 10
   if [[ -x "$(command -v docker)" ]]; then
     print_ok "docker安装完成"

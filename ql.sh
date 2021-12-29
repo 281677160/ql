@@ -540,7 +540,7 @@ function linux_nolanjdc() {
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerman restart > /dev/null 2>&1
     /etc/init.d/dockerd restart > /dev/null 2>&1
-    sleep 5
+    sleep 3
   elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
@@ -557,7 +557,7 @@ function linux_nolanjdc() {
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     docker restart nolanjdc > /dev/null 2>&1
     docker restart qinglong > /dev/null 2>&1
-    sleep 4
+    sleep 5
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"

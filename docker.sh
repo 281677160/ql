@@ -56,8 +56,13 @@ function system_check() {
     apt-get install -y sudo wget curl
     [[ ${CHONGXIN} == "YES" ]] && uninstall_debian_dk
     install_debian_dk
+  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
+    apk update
+    apk add sudo wget curl
+    [[ ${CHONGXIN} == "YES" ]] && uninstall_alpine_dk
+    install_alpine_dk
   else
-    print_error "本一键安装docker脚本只支持（centos、ubuntu和debian）!"
+    print_error "本一键安装docker脚本只支持（centos、ubuntu、debian和alpine）!"
     exit 1
   fi
 }
@@ -112,6 +117,7 @@ function uninstall_centos_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
+  sudo systemctl stop docker
   sudo yum -y remove docker-ce.x86_64
   sudo yum -y remove docker-*
   sudo rm -rf /var/lib/docker
@@ -153,6 +159,7 @@ function uninstall_ubuntu_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
+  sudo systemctl stop docker
   sudo apt-get -y autoremove docker-* --purge
   sudo apt-get -y autoremove --purge
   sudo apt-get -y clean
@@ -194,6 +201,7 @@ function uninstall_debian_dk() {
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
+  sudo systemctl stop docker
   sudo apt -y autoremove docker-* --purge
   sudo apt -y autoremove --purge
   sudo apt -y clean
@@ -201,6 +209,37 @@ function uninstall_debian_dk() {
   sudo rm -rf /etc/docker /etc/systemd/system/docker.service.d
   sudo rm -rf /lib/systemd/system/{docker.service,docker.socket}
   rm /var/lib/dpkg/info/$nomdupaquet* -f
+}
+
+function install_alpine_dk() {
+  ECHOY "正在安装docker，请耐心等候..."
+  echo "
+  https://dl-cdn.alpinelinux.org/alpine/v3.14/main
+  https://dl-cdn.alpinelinux.org/alpine/v3.14/community
+  " > /etc/apk/repositories
+  sed -i "s/^[ \t]*//g" /etc/apk/repositories
+  apk update
+  apk add docker
+  rc-update add docker boot
+  service docker start
+  if [[ -x "$(command -v docker)" ]]; then
+    print_ok "docker安装完成"
+  else
+    print_error "docker安装失败"
+    exit 1
+  fi
+}
+
+function uninstall_alpine_dk() {
+  ECHOY "正在御载docker..."
+  docker stop $(docker ps -a -q)
+  docker rm $(docker ps -a -q)
+  docker rmi $(docker images -q)
+  service docker stop
+  apk del docker
+  rc-update del docker boot
+  rm -rf /var/lib/docker
+  rm -rf /etc/docker
 }
 
 function hello_world() {

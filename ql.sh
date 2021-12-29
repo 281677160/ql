@@ -538,7 +538,7 @@ function linux_nolanjdc() {
   ECHOY "启动镜像中，请稍后..."
   cd ${Current}
   if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-    docker run --name nolanjdc –restart=always -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerman restart > /dev/null 2>&1

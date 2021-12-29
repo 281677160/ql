@@ -511,7 +511,7 @@ function pull_nvjdc() {
 function Config_json() {
   mkdir -p ${Config}
   bash -c  "$(curl -fsSL ${curlurl}/json.sh)"
-  judge "nvjdc配置修改"
+  judge "自动配置nvjdc的Config.json文件"
   chmod +x ${Config}/Config.json
 }
 
@@ -519,7 +519,7 @@ function chrome_linux() {
   ECHOY "下载chrome-linux"
   mkdir -p ${Chromium} && cd ${Chromium}
   wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip
-  judge "下载chrome-linux"
+  judge "chrome-linux下载"
   ECHOY "解压chrome-linux文件包，请稍后..."
   unzip chrome-linux.zip
   if [[ ! -d ${Chromium}/chrome-linux ]]; then
@@ -567,7 +567,7 @@ function linux_nolanjdc() {
   timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
-    ECHOYY "nvjdc配置文件路径：${Config}/Config.json"
+    ECHOYY "如需再次修改nvjdc配置文件，可至 ${Config}/Config.json 修改!"
   else
     print_error "nvjdc安装失败"
     exit 1

@@ -560,7 +560,7 @@ function linux_nolanjdc() {
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     docker restart nolanjdc > /dev/null 2>&1
     docker restart qinglong > /dev/null 2>&1
-    sleep 5
+    sleep 3
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"

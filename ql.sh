@@ -660,7 +660,8 @@ function Google_Check() {
   if [ ! "$Google_Check" == 301 ];then
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export GithubProxyUrl="https://ghproxy.com/"
-    ECHOGG "使用代理"
+    ECHORR "访问谷歌失败，以下使用代理安装"
+    sleep 2
     echo "
     export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
     export GithubProxyUrl="https://ghproxy.com/"

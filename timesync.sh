@@ -9,6 +9,9 @@ PURPLE="\033[0;35m"
 CYAN='\033[0;36m'
 PLAIN='\033[0m'
 
+echo
+echo -e "${YELLOW}同步京东服务器时间${PLAIN}"
+echo
 echo -e "${BLUE}开始获取京东服务器时间${PLAIN}"
 Time=$(curl -s "https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5" | grep '{"currentTime":'| sed 's/^.*"currentTime"://g' | sed 's/,"currentTime2":.*//g' | sed 's/\"//g' )
 date -s "$(curl -s "https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5" | grep '{"currentTime":'| sed 's/^.*"currentTime"://g' | sed 's/,"currentTime2":.*//g' | sed 's/\"//g' )"

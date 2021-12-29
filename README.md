@@ -40,7 +40,7 @@ apk update && apk add bash curl
 bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/ql.sh)"
 ```
 #
-- 国外网络命令
+- 国外网络命令，确保您的服务器网络可以访问谷歌为标准
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/281677160/ql/main/ql.sh)"
 ```

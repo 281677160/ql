@@ -17,5 +17,5 @@ Time=$(curl -s "https://api.m.jd.com/client.action?functionId=queryMaterialProdu
 date -s "$(curl -s "https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5" | grep '{"currentTime":'| sed 's/^.*"currentTime"://g' | sed 's/,"currentTime2":.*//g' | sed 's/\"//g' )"
 echo -e "${BLUE}当前京东服务器时间为${PLAIN}${RED}${Time}${PLAIN}"
 echo -e "${BLUE}开始进行时间同步${PLAIN}"
-echo -e "${BLUE}与京东服务器时间同步完成，脚本将自动退出。${PLAIN}"
-exit
+echo -e "${GREEN}与京东服务器时间同步完成。${PLAIN}"
+exit 0

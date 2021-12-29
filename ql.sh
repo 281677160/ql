@@ -219,8 +219,10 @@ function system_check() {
 }
 
 function kaiqiroot_ssh() {
-  ECHOG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
+  ECHOGG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
   bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
+  judge "开启root用户ssh"
+  sleep 1
 }
 
 function nolanjdc_lj() {

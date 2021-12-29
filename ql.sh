@@ -551,7 +551,7 @@ function linux_nolanjdc() {
     sleep 2
   else
     cd  ${Home}
-    docker run --name nolanjdc –restart=always -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
     sleep 2
@@ -621,7 +621,7 @@ function up_nvjdc() {
     sleep 2
   else
     cd  ${Home}
-    docker run --name nolanjdc –restart=always -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
     sleep 2

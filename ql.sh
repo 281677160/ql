@@ -567,6 +567,7 @@ function linux_nolanjdc() {
   timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
+    ECHOYY "nvjdc配置文件路径：${Config}/Config.json"
   else
     print_error "nvjdc安装失败"
     exit 1

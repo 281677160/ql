@@ -754,10 +754,12 @@ memunvjdc() {
   ECHOB " 1. 升级青龙面板"
   ECHOB " 2. 更新撸豆脚本库"
   ECHOB " 3. 升级nvjdc面板"
-  ECHOB " 4. 御载nvjdc面板"
-  ECHOB " 5. 御载青龙+nvjdc面板"
-  ECHOB " 6. 进入第一主菜单（安装界面）"
-  ECHOB " 7. 退出程序!"
+  ECHOB " 4. 重启青龙和nvjdc"
+  ECHOB " 5. 重置青龙登录错误次数和检测环境并修复"
+  ECHOB " 6. 御载nvjdc面板"
+  ECHOB " 7. 御载青龙+nvjdc面板"
+  ECHOB " 8. 进入第一主菜单（安装界面）"
+  ECHOB " 9. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -780,6 +782,22 @@ memunvjdc() {
   break
   ;;
   4)
+    ECHOY "重启nvjdc和青龙，请耐心等候..."
+    docker restart nolanjdc
+    docker restart qinglong
+    sleep 5
+    print_ok "命令执行完成"
+  break
+  ;;
+  5)
+    ECHOY "开始重置青龙登录错误次数和检测环境并修复，请耐心等候..."
+    docker exec -it qinglong bash -c "ql resetlet"
+    sleep 2
+    docker exec -it qinglong bash -c "ql check"
+    print_ok "命令执行完成"
+  break
+  ;;
+  6)
     ECHOY " 是否御载nvjdc面板?"
     read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
@@ -793,7 +811,7 @@ memunvjdc() {
     esac
   break
   ;;
-  5)
+  7)
     ECHOY " 是否御载青龙+nvjdc面板?"
     read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
@@ -809,11 +827,11 @@ memunvjdc() {
     esac
   break
   ;;
-  6)
+  8)
     memu
   break
   ;;
-  7)
+  9)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1
@@ -832,9 +850,11 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOYY " 3. 御载青龙面板"
-  ECHOY " 4. 进入第一主菜单（安装界面）"
-  ECHOYY " 5. 退出程序!"
+  ECHOB " 3. 重启青龙和nvjdc"
+  ECHOB " 4. 重置青龙登录错误次数和检测环境并修复"
+  ECHOYY " 5. 御载青龙面板"
+  ECHOY " 6. 进入第一主菜单（安装界面）"
+  ECHOYY " 7. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -851,6 +871,22 @@ memuqinglong() {
   break
   ;;
   3)
+    ECHOY "重启nvjdc和青龙，请耐心等候..."
+    docker restart nolanjdc
+    docker restart qinglong
+    sleep 5
+    print_ok "命令执行完成"
+  break
+  ;;
+  4)
+    ECHOY "开始重置青龙登录错误次数和检测环境并修复，请耐心等候..."
+    docker exec -it qinglong bash -c "ql resetlet"
+    sleep 2
+    docker exec -it qinglong bash -c "ql check"
+    print_ok "命令执行完成"
+  break
+  ;;
+  5)
     ECHOB " 是否御载青龙面板?"
     echo
     read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
@@ -866,11 +902,11 @@ memuqinglong() {
     esac
   break
   ;;
-  4)
+  6)
     memu
   break
   ;;
-  5)
+  7)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1

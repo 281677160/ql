@@ -188,6 +188,11 @@ function system_check() {
     export QL_PATH="/opt"
     apt -y update
     apt -y install sudo wget git unzip net-tools subversion
+  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
+    ECHOG "正在安装宿主机所需要的依赖，请稍后..."
+    export QL_PATH="/opt"
+    apk update
+    apk add sudo wget git unzip net-tools subversion
   elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
     opkg update
@@ -245,6 +250,16 @@ function systemctl_status() {
     /etc/init.d/dockerman start > /dev/null 2>&1
     /etc/init.d/dockerd start > /dev/null 2>&1
     sleep 3
+  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
+    service docker start
+    sleep 1
+    if [[ `docker version |grep -c "runc"` == '1' ]]; then
+      print_ok "docker正在运行中!"
+    else
+      print_error "docker没有启动，请先启动docker，或者检查一下是否安装失败"
+      sleep 1
+      exit 1
+    fi
   else
     systemctl start docker
     sleep 1

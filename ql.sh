@@ -629,8 +629,9 @@ function up_nvjdc() {
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  timeout -k 1s 4s docker logs -f nolanjdc
-  timeout -k 1s 6s docker logs -f nolanjdc |tee ${Home}/build.log
+  dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
+  docker update --restart=always "${dockernvid}" > /dev/null 2>&1
+  timeout 7 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"
   else

@@ -74,7 +74,7 @@ if [[ ! "$USER" == "root" ]]; then
   exit 1
 fi
 
-Current="$PWD"
+export Current="$PWD"
 
 function qinglong_port() {
   clear
@@ -568,7 +568,7 @@ function linux_nolanjdc() {
   fi
   dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
   docker update --restart=always "${dockernvid}" > /dev/null 2>&1
-  timeout 7 docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout 8 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
     ECHOYY "如需再次修改nvjdc配置文件，可至 ${Config}/Config.json 修改!"
@@ -581,6 +581,7 @@ function linux_nolanjdc() {
 }
 
 function up_nvjdc() {
+  cd ${Current}
   [[ -f /etc/bianliang.sh ]] && source /etc/bianliang.sh
   ECHOY "下载nvjdc源码"
   rm -rf ${QL_PATH}/nvjdcbf
@@ -612,21 +613,24 @@ function up_nvjdc() {
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerman restart > /dev/null 2>&1
     /etc/init.d/dockerd restart > /dev/null 2>&1
-    sleep 5
+    sleep 3
+  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
+    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
+    -it --privileged=true  nolanhzy/nvjdc:latest
+    docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
+    sleep 2
   else
     cd  ${Home}
-    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    docker run --name nolanjdc –restart=always -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
     sleep 2
   fi
   cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    rm -rf ${QL_PATH}/nvjdcbf
-    echo "${Home}/rwwc" > ${Home}/rwwc
     docker restart nolanjdc > /dev/null 2>&1
     docker restart qinglong > /dev/null 2>&1
-    sleep 4
+    sleep 5
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
@@ -634,7 +638,7 @@ function up_nvjdc() {
   fi
   dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
   docker update --restart=always "${dockernvid}" > /dev/null 2>&1
-  timeout 7 docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout 8 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"
   else

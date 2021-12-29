@@ -262,8 +262,8 @@ function hello_world() {
     ECHOY "测试镜像删除完毕"
     print_ok "docker安装成功"
   else
-    ECHOY "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
-    ECHOY "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
+    print_error "docker虽然安装成功但是拉取镜像失败，这个原因很多是因为以前的docker没御载完全造成的，或者容器网络问题"
+    print_error "重启服务器后，用 sudo docker run hello-world 命令测试吧，能拉取成功就成了"
     rm -fr build.log
     sleep 1
     exit 1

@@ -794,6 +794,7 @@ memunvjdc() {
     docker exec -it qinglong bash -c "ql resetlet"
     sleep 2
     docker exec -it qinglong bash -c "ql check"
+    bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/timesync.sh)"
     print_ok "命令执行完成"
   break
   ;;
@@ -882,6 +883,7 @@ memuqinglong() {
     docker exec -it qinglong bash -c "ql resetlet"
     sleep 2
     docker exec -it qinglong bash -c "ql check"
+    bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/281677160/ql@main/timesync.sh)"
     print_ok "命令执行完成"
   break
   ;;

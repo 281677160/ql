@@ -226,6 +226,7 @@ function install_alpine_dk() {
   rc-update add docker boot
   service docker start
   mkdir -p /var/lib/docker/tmp
+  docker_daemon
   service docker restart
   sleep 2
   if [[ -x "$(command -v docker)" ]]; then

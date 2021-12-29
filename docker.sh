@@ -252,7 +252,7 @@ function uninstall_alpine_dk() {
 function hello_world() {
   ECHOY "测试docker拉取镜像是否成功"
   sleep 3
-  sudo docker run hello-world |tee build.log
+  docker run hello-world |tee build.log
   if [[ `docker ps -a | grep -c "hello-world"` -ge '1' ]] && [[ `grep -c "hub.docker.com" build.log` -ge '1' ]]; then
     ECHOG "测试镜像拉取成功，正在删除测试镜像..."
     docker stop $(docker ps -a -q)

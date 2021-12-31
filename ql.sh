@@ -193,7 +193,7 @@ function system_check() {
     export QL_PATH="/opt"
     apk update
     apk add sudo wget git unzip net-tools subversion
-  elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+  elif [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
     opkg update
     opkg install git-http > /dev/null 2>&1

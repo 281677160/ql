@@ -9,7 +9,7 @@ function system_check() {
     system_debian
   elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
     system_alpine
-  elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+  elif [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     echo -e "\033[33m openwrt无需开启root账户SSH \033[0m"
     exit 0
   else

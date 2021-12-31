@@ -219,7 +219,7 @@ function system_check() {
 }
 
 function kaiqiroot_ssh() {
-  if [[ "$(. /etc/os-release && echo "$ID")" != "openwrt" ]]; then
+  if [[ ! -f /etc/openwrt_release ]] && [[ ! -f /rom/etc/openwrt_release ]]; then
     echo
     ECHOGG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
     bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"

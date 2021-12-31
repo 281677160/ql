@@ -313,7 +313,7 @@ function uninstall_qinglong() {
 }
 
 function sys_kongjian() {
-  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+  if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     Available="$(df -h | grep "${QL_Kongjian}" | awk '{print $4}' | awk 'NR==1')"
     FINAL=`echo ${Available: -1}`
     if [[ "${FINAL}" =~ (M|K) ]]; then
@@ -543,7 +543,7 @@ function chrome_linux() {
 function linux_nolanjdc() {
   ECHOY "启动镜像中，请稍后..."
   cd ${Current}
-  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+  if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
@@ -614,7 +614,7 @@ function up_nvjdc() {
   ECHOG "更新镜像，请耐心等候..."
   sudo docker pull nolanhzy/nvjdc:latest
   ECHOY "启动镜像"
-  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+  if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"

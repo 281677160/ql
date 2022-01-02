@@ -577,6 +577,7 @@ function linux_nolanjdc() {
   dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
   docker update --restart=always "${dockernvid}" > /dev/null 2>&1
   rm -rf ${Home}/build.log
+  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
   timeout 9 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc安装 完成"
@@ -648,6 +649,7 @@ function up_nvjdc() {
   dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
   docker update --restart=always "${dockernvid}" > /dev/null 2>&1
   rm -rf ${Home}/build.log
+  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
   timeout 9 docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"

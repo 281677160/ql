@@ -361,7 +361,7 @@ docker run -dit \
   ${NETWORK} \
   --name qinglong \
   --hostname qinglong \
-  --restart always \
+  --restart unless-stopped \
   whyour/qinglong:latest
   
   docker restart qinglong > /dev/null 2>&1

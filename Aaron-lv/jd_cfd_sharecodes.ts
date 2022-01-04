@@ -1,165 +1,113 @@
 /**
- * 京喜财富岛
- * 包含雇佣导游，建议每小时1次
- * 使用jd_env_copy.js同步js环境变量到ts
- * 使用jd_ts_test.ts测试环境变量
- *
- * cron: 0 * * * *
+ * 京喜牧场
+ * cron: 10 0,12,18 * * *
  */
 
 import axios from 'axios'
-import {Md5} from 'ts-md5'
-import {getDate} from 'date-fns'
-import {requireConfig, wait, requestAlgo, h5st, getJxToken, getBeanShareCode, getFarmShareCode, o2s, randomString} from './TS_USER_AGENTS.ts'
+import {Md5} from "ts-md5"
+import * as path from 'path'
+import {sendNotify} from './sendNotify'
+import {requireConfig, getBeanShareCode, getFarmShareCode, wait, requestAlgo, h5st, o2s, randomWord, getshareCodeHW} from './TS_USER_AGENTS'
 
-const axi = axios.create({timeout: 10000})
+const token = require('./utils/jd_jxmc.js').token
 
-let cookie: string = '', res: any = '', UserName: string, index: number
-let shareCodes: string[] = [], shareCodesSelf: string[] = [], shareCodesHW: string[] = [], isCollector: Boolean = false, token: any = {}
-
-interface Params {
-  strBuildIndex?: string,
-  ddwCostCoin?: number,
-  taskId?: number,
-  dwType?: string,
-  configExtra?: string,
-  strStoryId?: string,
-  triggerType?: number,
-  ddwTriggerDay?: number,
-  ddwConsumeCoin?: number,
-  dwIsFree?: number,
-  ddwTaskId?: string,
-  strShareId?: string,
-  strMarkList?: string,
-  dwSceneId?: string,
-  strTypeCnt?: string,
-  dwUserId?: number,
-  ddwCoin?: number,
-  ddwMoney?: number,
-  dwPrizeLv?: number,
-  dwPrizeType?: number,
-  strPrizePool?: string,
-  dwFirst?: any,
-  dwIdentityType?: number,
-  strBussKey?: string,
-  strMyShareId?: string,
-  ddwCount?: number,
-  __t?: number,
-  strBT?: string,
-  dwCurStageEndCnt?: number,
-  dwRewardType?: number,
-  dwRubbishId?: number,
-  strPgtimestamp?: number,
-  strPhoneID?: string,
-  strPgUUNum?: string,
-  showAreaTaskFlag?: number,
-  strVersion?: string,
-  strIndex?: string
-  strToken?: string
-  dwGetType?: number,
-  ddwSeaonStart?: number,
-  size?: number,
-  type?: number,
-  strLT?: string,
-  dwQueryType?: number,
-  dwPageIndex?: number,
-  dwPageSize?: number,
-  dwProperty?: number,
-  bizCode?: string,
-  dwCardType?: number,
-  strCardTypeIndex?: string,
-  dwIsReJoin?: number,
-}
+let cookie: string = '', res: any = '', shareCodes: string[] = [], homePageInfo: any = '', jxToken: any = '', UserName: string = ''
+let shareCodesSelf: string[] = [], shareCodesHW: string[] = []
 
 !(async () => {
   await requestAlgo()
   let cookiesArr: any = await requireConfig()
-  for (let i = 0; i < cookiesArr.length; i++) {
-    cookie = cookiesArr[i]
+  for (let [index, value] of cookiesArr.entries()) {
+    cookie = value
     UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)![1])
-    index = i + 1
-    console.log(`\n开始【京东账号${index}】${UserName}\n`)
+    console.log(`\n开始【京东账号${index + 1}】${UserName}\n`)
 
-    token = getJxToken(cookie)
-    try {
-      await makeShareCodes()
-    } catch (e) {
-      console.log("上车?错误！")
-	  continue
+    jxToken = await token(cookie)
+    homePageInfo = await api('queryservice/GetHomePageInfo', 'activeid,activekey,channel,isgift,isqueryinviteicon,isquerypicksite,jxmc_jstoken,phoneid,sceneid,timestamp', {isgift: 1, isquerypicksite: 1, isqueryinviteicon: 1})
+    await wait(5000)
+    if (homePageInfo.data.maintaskId !== 'pause') {
+      console.log('init...')
+      for (let j = 0; j < 20; j++) {
+        res = await api('operservice/DoMainTask', 'activeid,activekey,channel,jxmc_jstoken,phoneid,sceneid,step,timestamp', {step: homePageInfo.data.maintaskId})
+        if (res.data.maintaskId === 'pause')
+          break
+        await wait(2000)
+      }
     }
-  }
 
+    homePageInfo = await api('queryservice/GetHomePageInfo', 'activeid,activekey,channel,isgift,isqueryinviteicon,isquerypicksite,jxmc_jstoken,phoneid,sceneid,timestamp', {isgift: 1, isquerypicksite: 1, isqueryinviteicon: 1})
+    let lastgettime: number
+    if (homePageInfo.data?.cow?.lastgettime) {
+      lastgettime = homePageInfo.data.cow.lastgettime
+    } else {
+      continue
+    }
+
+    console.log('助力码:', homePageInfo.data.sharekey)
+    shareCodesSelf.push(homePageInfo.data.sharekey)
+    try {
+      await makeShareCodes(homePageInfo.data.sharekey)
+    } catch (e: any) {
+      console.log(e)
+    }
+
+    // 红包
+    //res = await api('operservice/GetInviteStatus', 'activeid,activekey,channel,jxmc_jstoken,phoneid,sceneid,timestamp')
+    //console.log('红包助力:', res.data.sharekey)
+    //shareCodesHbSelf.push(res.data.sharekey)
+    //try {
+    //  await makeShareCodesHb(res.data.sharekey)
+    //} catch (e: any) {
+    //}
+    await wait(1000)
+  }
+  await wait(1000)
 })()
 
-async function api(fn: string, stk: string, params: Params = {}, taskPosition = '') {
-  let url: string
-  if (['GetUserTaskStatusList', 'Award', 'DoTask'].includes(fn)) {
-    let bizCode: string
-    if (!params.bizCode) {
-      bizCode = taskPosition === 'right' ? 'jxbfddch' : 'jxbfd'
-    } else {
-      bizCode = params.bizCode
-    }
-    url = `https://m.jingxi.com/newtasksys/newtasksys_front/${fn}?strZone=jxbfd&bizCode=${bizCode}&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=&_stk=${encodeURIComponent(stk)}&_ste=1&_=${Date.now()}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`
-  } else {
-    url = `https://m.jingxi.com/jxbfd/${fn}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=&_stk=${encodeURIComponent(stk)}&_ste=1&_=${Date.now()}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`
-  }
-  url = h5st(url, stk, params, 10032)
-  let {data} = await axios.get(url, {
-    headers: {
-      'Host': 'm.jingxi.com',
-      'Accept': '*/*',
-      'Connection': 'keep-alive',
-      'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-      'User-Agent': `jdpingou;iPhone;4.13.0;14.4.2;${randomString(40)};network/wifi;model/iPhone10,2;appBuild/100609;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/1;hasOCPay/0;supportBestPay/0;session/${Math.random() * 98 + 1};pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`,
-      'Referer': 'https://st.jingxi.com/',
-      'Cookie': cookie
-    }
-  })
-  if (typeof data === 'string') {
-    try {
-      return JSON.parse(data.replace(/\n/g, '').match(/jsonpCBK.?\(([^)]*)/)![1])
-    } catch (e) {
-      console.log(data)
-      return ''
-    }
-  } else {
-    return data
-  }
+interface Params {
+  isgift?: number,
+  isquerypicksite?: number,
+  petid?: string,
+  itemid?: string,
+  type?: string,
+  taskId?: number
+  configExtra?: string,
+  sharekey?: string,
+  currdate?: string,
+  token?: string,
+  isqueryinviteicon?: number,
+  showAreaTaskFlag?: number,
+  jxpp_wxapp_type?: number,
+  dateType?: string,
+  step?: string,
+  cardtype?: number,
 }
 
-async function task() {
+async function getTask() {
   console.log('刷新任务列表')
-  res = await api('GetUserTaskStatusList', '_cfd_t,bizCode,dwEnv,ptag,showAreaTaskFlag,source,strZone,taskId', {taskId: 0, showAreaTaskFlag: 1})
-  await wait(2000)
+  res = await api('GetUserTaskStatusList', 'bizCode,dateType,jxpp_wxapp_type,showAreaTaskFlag,source', {dateType: '', showAreaTaskFlag: 0, jxpp_wxapp_type: 7})
   for (let t of res.data.userTaskStatusList) {
-    if (t.awardStatus === 2 && t.completedTimes === t.targetTimes) {
-      console.log('可领奖:', t.taskName)
-      res = await api('Award', '_cfd_t,bizCode,dwEnv,ptag,source,strZone,taskId', {taskId: t.taskId, bizCode: t.bizCode})
-      await wait(2000)
+    if (t.completedTimes == t.targetTimes && t.awardStatus === 2) {
+      res = await api('Award', 'bizCode,source,taskId', {taskId: t.taskId})
       if (res.ret === 0) {
-        try {
-          res = JSON.parse(res.data.prizeInfo)
-          console.log(`领奖成功:`, res.ddwCoin, res.ddwMoney)
-        } catch (e) {
-          console.log('领奖成功:', res.data)
-        }
-        await wait(1000)
+        let awardCoin = res.data.prizeInfo.match(/:(.*)}/)![1] * 1
+        console.log('领奖成功:', awardCoin)
+        await wait(4000)
         return 1
       } else {
         console.log('领奖失败:', res)
         return 0
       }
     }
-    if (t.dateType === 2 && t.awardStatus === 2 && t.completedTimes < t.targetTimes && t.taskCaller === 1) {
-      console.log('做任务:', t.taskId, t.taskName, t.completedTimes, t.targetTimes)
-      res = await api('DoTask', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', {taskId: t.taskId, configExtra: '', bizCode: t.bizCode})
-      await wait(5000)
+
+    if (t.dateType === 2 && t.completedTimes < t.targetTimes && t.awardStatus === 2 && t.taskType === 2) {
+      res = await api('DoTask', 'bizCode,configExtra,source,taskId', {taskId: t.taskId, configExtra: ''})
       if (res.ret === 0) {
         console.log('任务完成')
+        await wait(5000)
         return 1
       } else {
-        console.log('任务失败')
+        console.log('任务失败:', res)
         return 0
       }
     }
@@ -167,34 +115,60 @@ async function task() {
   return 0
 }
 
-async function makeShareCodes() {
+async function api(fn: string, stk: string, params: Params = {}, temporary: boolean = false) {
+  let url: string
+  if (['GetUserTaskStatusList', 'DoTask', 'Award'].indexOf(fn) > -1) {
+    if (temporary)
+      url = h5st(`https://m.jingxi.com/newtasksys/newtasksys_front/${fn}?_=${Date.now()}&source=jxmc_zanaixin&bizCode=jxmc_zanaixin&_stk=${encodeURIComponent(stk)}&_ste=1&sceneval=2&g_login_type=1&callback=jsonpCBK${randomWord()}&g_ty=ls`, stk, params, 10028)
+    else
+      url = h5st(`https://m.jingxi.com/newtasksys/newtasksys_front/${fn}?_=${Date.now()}&source=jxmc&bizCode=jxmc&_stk=${encodeURIComponent(stk)}&_ste=1&sceneval=2&g_login_type=1&callback=jsonpCBK${randomWord()}&g_ty=ls`, stk, params, 10028)
+  } else {
+    url = h5st(`https://m.jingxi.com/jxmc/${fn}?channel=7&sceneid=1001&activeid=jxmc_active_0001&activekey=null&jxmc_jstoken=${jxToken['farm_jstoken']}&timestamp=${jxToken['timestamp']}&phoneid=${jxToken['phoneid']}&_stk=${encodeURIComponent(stk)}&_ste=1&_=${Date.now()}&sceneval=2&g_login_type=1&callback=jsonpCBK${randomWord()}&g_ty=ls`, stk, params, 10028)
+  }
+  let {data}: any = await axios.get(url, {
+    headers: {
+      'Host': 'm.jingxi.com',
+      'Accept': '*/*',
+      'User-Agent': 'jdpingou;iPhone;5.15.0;15.1;3271867e5dc749cc8cc76aa5aa6a084eea8e7920;network/wifi;model/iPhone11,6;appBuild/100779;ADID/;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/15;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+      'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+      'Referer': 'https://st.jingxi.com/',
+      'Cookie': cookie
+    }
+  })
+  return JSON.parse(data.match(/jsonpCBK.?\((.*)/)![1])
+}
+
+async function makeShareCodes(code: string) {
   try {
-    res = await api('user/QueryUserInfo', '_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strPgUUNum,strPgtimestamp,strPhoneID,strShareId,strVersion,strZone', {
-      ddwTaskId: '',
-      strShareId: '',
-      strMarkList: 'undefined',
-      strPgUUNum: token.strPgUUNum,
-      strPgtimestamp: token.strPgtimestamp,
-      strPhoneID: token.strPhoneID,
-      strVersion: '1.0.1'
-    })
-    console.log('助力码:', res.strMyShareId)
-    shareCodesSelf.push(res.strMyShareId)
     let bean: string = await getBeanShareCode(cookie)
     let farm: string = await getFarmShareCode(cookie)
     let pin: string = Md5.hashStr(cookie.match(/pt_pin=([^;]*)/)![1])
-    let {data}: any = await axios.get(`https://api.jdsharecode.xyz/api/autoInsert/jxcfd?sharecode=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`)
+    let {data}: any = await axios.get(`https://api.jdsharecode.xyz/api/autoInsert/jxmc?sharecode=${code}&bean=${bean}&farm=${farm}&pin=${pin}`)
     console.log(data.message)
   } catch (e) {
     console.log('自动提交失败')
-    //console.log(e)
+    console.log(e)
   }
 }
 
-async function getCodesHW() {
+async function makeShareCodesHb(code: string) {
   try {
-    let {data}: any = await axi.get(`https://api.jdsharecode.xyz/api/HW_CODES`, {timeout: 10000})
-    shareCodesHW = data['jxcfd'] || []
+    let bean: string = await getBeanShareCode(cookie)
+    let farm: string = await getFarmShareCode(cookie)
+    let pin: string = Md5.hashStr(cookie.match(/pt_pin=([^;]*)/)![1])
+    let {data}: any = await axios.get(`https://api.jdsharecode.xyz/api/autoInsert/jxmchb?sharecode=${code}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 10000})
+    console.log(data.message)
+  } catch (e) {
+    console.log('自动提交失败')
+    console.log(e)
+  }
+}
+
+async function getCodes() {
+  try {
+    let {data}: any = await axios.get('https://api.jdsharecode.xyz/api/HW_CODES')
+    shareCodesHW = data.jxmc || []
+    shareCodesHbHw = data.jxmchb || []
   } catch (e) {
   }
 }

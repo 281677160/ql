@@ -155,6 +155,13 @@ function install_ubuntu_dk() {
     print_error "docker安装失败"
     exit 1
   fi
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+  if [[ `docker-compose --version | grep -c "compose"` -ge '1' ]]; then
+    print_ok "docker-compose安装完成"
+  else
+    print_error "docker-compose安装失败,对docker使用没影响"
+  fi
 }
 
 function uninstall_ubuntu_dk() {
@@ -171,6 +178,7 @@ function uninstall_ubuntu_dk() {
   rm -rf /etc/docker /etc/systemd/system/docker.service.d
   rm -rf /lib/systemd/system/{docker.service,docker.socket}
   rm /var/lib/dpkg/info/$nomdupaquet* -f
+  sudo rm /usr/local/bin/docker-compose
 }
 
 function install_debian_dk() {
@@ -199,6 +207,13 @@ function install_debian_dk() {
     print_error "docker安装失败"
     exit 1
   fi
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+  if [[ `docker-compose --version | grep -c "compose"` -ge '1' ]]; then
+    print_ok "docker-compose安装完成"
+  else
+    print_error "docker-compose安装失败,对docker使用没影响"
+  fi
 }
 
 function uninstall_debian_dk() {
@@ -215,6 +230,7 @@ function uninstall_debian_dk() {
   rm -rf /etc/docker /etc/systemd/system/docker.service.d
   rm -rf /lib/systemd/system/{docker.service,docker.socket}
   rm /var/lib/dpkg/info/$nomdupaquet* -f
+  sudo rm /usr/local/bin/docker-compose
 }
 
 function install_alpine_dk() {
@@ -237,6 +253,13 @@ function install_alpine_dk() {
     print_error "docker安装失败"
     exit 1
   fi
+  apk add py-pip
+  apk add docker-compose
+  if [[ `docker-compose --version | grep -c "compose"` -ge '1' ]]; then
+    print_ok "docker-compose安装完成"
+  else
+    print_error "docker-compose安装失败,对docker使用没影响"
+  fi
 }
 
 function uninstall_alpine_dk() {
@@ -250,6 +273,7 @@ function uninstall_alpine_dk() {
   rm -rf /var/lib/docker
   rm -rf /etc/docker
   rm -rf /etc/init.d/docker
+  apk del py-pip docker-compose
 }
 
 function hello_world() {

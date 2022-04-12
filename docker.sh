@@ -157,7 +157,7 @@ function install_ubuntu_dk() {
   fi
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
-  if [[ `docker-compose --version | grep -c "compose"` -ge '1' ]]; then
+  if [[ `docker-compose --version | grep -c "build"` -ge '1' ]]; then
     print_ok "docker-compose安装完成"
   else
     print_error "docker-compose安装失败,对docker使用没影响"
@@ -209,7 +209,7 @@ function install_debian_dk() {
   fi
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
-  if [[ `docker-compose --version | grep -c "compose"` -ge '1' ]]; then
+  if [[ `docker-compose --version | grep -c "build"` -ge '1' ]]; then
     print_ok "docker-compose安装完成"
   else
     print_error "docker-compose安装失败,对docker使用没影响"
@@ -255,7 +255,7 @@ function install_alpine_dk() {
   fi
   apk add py-pip
   apk add docker-compose
-  if [[ `docker-compose --version | grep -c "compose"` -ge '1' ]]; then
+  if [[ `docker-compose --version | grep -c "build"` -ge '1' ]]; then
     print_ok "docker-compose安装完成"
   else
     print_error "docker-compose安装失败,对docker使用没影响"

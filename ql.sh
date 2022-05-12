@@ -350,14 +350,8 @@ function sys_kongjian() {
 function install_ql() {
   ECHOG "正在安装青龙面板，请稍后..."
 docker run -dit \
-  -v $QL_PATH/ql/config:/ql/config \
-  -v $QL_PATH/ql/log:/ql/log \
-  -v $QL_PATH/ql/db:/ql/db \
-  -v $QL_PATH/ql/scripts:/ql/scripts \
-  -v $QL_PATH/ql/jbot:/ql/jbot \
-  -v $QL_PATH/ql/raw:/ql/raw \
-  -v $QL_PATH/ql/jd:/ql/jd \
-  -v $QL_PATH/ql/repo:/ql/repo \
+  -v $QL_PATH/ql:/ql/data \
+  -v $QL_PATH/ql/jd:/ql/data/jd \
   ${NETWORK} \
   --name qinglong \
   --hostname qinglong \
@@ -376,7 +370,7 @@ docker run -dit \
 
 function ql_qlbeifen() {
   if [[ -f ${Current}/ghproxy.sh ]]; then
-    docker cp ${Current}/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
+    docker cp ${Current}/ghproxy.sh qinglong:/ql/data/repo/ghproxy.sh
     rm -rf ${Current}/ghproxy.sh
   else
     print_error "没检测到主应用变量文件，请再次尝试安装!"
@@ -385,8 +379,8 @@ function ql_qlbeifen() {
   if [[ -d "$QL_PATH/qlbeifen1" ]]; then
     if [[ "$(grep -c JD_WSCK=\"pin= ${QL_PATH}/qlbeifen1/ql/config/env.sh)"  -ge "1" ]] || [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/qlbeifen1/ql/config/env.sh)" -ge "1" ]]; then
       ECHOG "检测到您有[wskey]或者[pt_key]存在，正在还原env.sh文件（KEY文件）"
-      docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
-      docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
+      docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/data/db/env.db
+      docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/data/config/env.sh
       judge "还原env.sh文件"
     fi
   fi
@@ -464,17 +458,17 @@ function install_yanzheng() {
     rm -rf ${QL_PATH}/ql/config/Error
     exit 1
   fi
-  [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+  [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/data/config/bot.json
+  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/data/
   if [[ -f ${QL_PATH}/qlbeifen1/ql/scripts/rwwc ]]; then
-    docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/config/config.sh
-    docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/sample/config.sample.sh
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/data/config/config.sh
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/data/sample/config.sample.sh
   fi
   if [[ `ls $QL_PATH/ql/jd | grep -c ".session"` -ge '1' ]] && [[ ${wjmz} == "Aaron-lv" ]]; then
-    for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+    for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/data/jd/${X}"; done
   fi
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
-  docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
+  docker exec -it qinglong bash -c "rm -rf /ql/data/qlwj"
   bash -c "$(curl -fsSL ${curlurl}/timesync.sh)"
   echo "${QL_PATH}/ql/scripts/rwwc" > ${QL_PATH}/ql/scripts/rwwc
   echo "export rwwc=${QL_PATH}/ql/scripts/rwwc" > /etc/bianliang.sh

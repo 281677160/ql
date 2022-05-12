@@ -97,7 +97,7 @@ export IGOT_PUSH_KEY=""
 ## 8. Push Plus
 ## 官方网站：http://www.pushplus.plus
 ## 下方填写您的Token，微信扫码登录后一对一推送或一对多推送下面的token，只填 PUSH_PLUS_TOKEN 默认为一对一推送
-export PUSH_PLUS_TOKEN="1c55d566c59343f2ab1a3bdb80f4f223"
+export PUSH_PLUS_TOKEN=""
 ## 一对一多推送（选填）
 ## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
 ## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送

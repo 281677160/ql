@@ -439,6 +439,10 @@ export guaopencard_rewardBean="1,2,3"
 ## 过期京豆兑换为喜豆
 export BEANCHANGE_ExJxBeans="true"
 
+## wskey变量
+export WSKEY_DISCHECK="true"
+export WSKEY_AUTO_DISABLE="true"
+
 
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果

@@ -177,7 +177,7 @@ if [ "$(grep -c rmlog /ql/data/config/crontab.list)" = 0 ]; then
 fi
 ql repo https://github.com/Zy143L/wskey.git
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/data/config/env.sh)" = 1 ]]; then
-  task Zy143L_wskey/wskey.py
+  task /ql/data/scripts/Zy143L_wskey
 fi
 echo
 TIME y "拉取okyyds和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"

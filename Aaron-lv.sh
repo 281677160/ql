@@ -56,8 +56,6 @@ TIME l "拉取extra.sh"
 curl -fsSL ${curlurl}/Aaron-lv/extra.sh > /ql/data/qlwj/extra.sh
 TIME l "拉取jd_OpenCard.py"
 curl -fsSL ${curlurl}/Aaron-lv/jd_OpenCard.py > /ql/data/qlwj/jd_OpenCard.py
-TIME l "拉取wskey.py"
-curl -fsSL ${curlurl}/Aaron-lv/wskey.py > /ql/data/qlwj/wskey.py
 TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL ${curlurl}/Aaron-lv/disableDuplicateTasksImplement.py > /ql/data/qlwj/disableDuplicateTasksImplement.py
 TIME l "拉取jd_get_share_code.js"
@@ -72,9 +70,9 @@ TIME l "拉取6-10.sh"
 curl -fsSL ${curlurl}/Aaron-lv/jd/6-10.sh > /ql/data/jd/6-10.sh
 chmod -R +x /ql/data/qlwj
 cp -Rf /ql/data/qlwj/config.sample.sh /ql/data/config/config.sh
-cp -Rf /ql/data/qlwj/config.sample.sh /ql/data/sample/config.sample.sh
+cp -Rf /ql/data/qlwj/config.sample.sh /ql/sample/config.sample.sh
 cp -Rf /ql/data/qlwj/extra.sh /ql/data/config/extra.sh
-cp -Rf /ql/data/qlwj/extra.sh /ql/data/sample/extra.sample.sh
+cp -Rf /ql/data/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/data/qlwj/jd_OpenCard.py /ql/data/scripts/jd_OpenCard.py
 cp -Rf /ql/data/qlwj/wskey.py /ql/data/scripts/wskey.py
 cp -Rf /ql/data/qlwj/disableDuplicateTasksImplement.py /ql/data/scripts/disableDuplicateTasksImplement.py
@@ -85,11 +83,11 @@ echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/data/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "添加任务 [每4小时更新任务]"
+    TIME g "添加任务 [每1小时更新任务]"
     echo
     # 获取token
     token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每4小时更新任务","command":"ql extra","schedule":"40 0-23/3 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每4小时更新任务","command":"ql extra","schedule":"1 0-23/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
 sleep 1
 echo
@@ -99,7 +97,7 @@ if [ "$(grep -c wskey.py /ql/data/config/crontab.list)" = 0 ]; then
     echo
     # 获取token
     token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时转换WSKEY","command":"task wskey.py","schedule":"58 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时转换WSKEY","command":"task Zy143L_wskey/wskey.py","schedule":"58 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
 fi
 sleep 1
 echo

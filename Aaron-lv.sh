@@ -180,7 +180,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/data/config/env.sh)" = 1 ]]; then
   task Zy143L_wskey/wskey.py
 fi
 echo
-TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"
+TIME y "拉取okyyds和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"
 echo
 echo
 rm -fr /ql/azcg.log

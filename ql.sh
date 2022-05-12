@@ -455,6 +455,7 @@ function install_rw() {
 
 function install_yanzheng() {
   if [[ -f ${QL_PATH}/ql/config/Error ]]; then
+    docker exec -it qinglong bash -c "rm -rf /ql/data/qlwj"
     rm -rf ${QL_PATH}/ql/config/Error
     exit 1
   fi

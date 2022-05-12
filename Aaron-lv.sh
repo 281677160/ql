@@ -74,7 +74,6 @@ cp -Rf /ql/data/qlwj/config.sample.sh /ql/sample/config.sample.sh
 cp -Rf /ql/data/qlwj/extra.sh /ql/data/config/extra.sh
 cp -Rf /ql/data/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/data/qlwj/jd_OpenCard.py /ql/data/scripts/jd_OpenCard.py
-cp -Rf /ql/data/qlwj/wskey.py /ql/data/scripts/wskey.py
 cp -Rf /ql/data/qlwj/disableDuplicateTasksImplement.py /ql/data/scripts/disableDuplicateTasksImplement.py
 cp -Rf /ql/data/qlwj/jd_get_share_code.js /ql/data/scripts/jd_get_share_code.js
 cp -Rf /ql/data/qlwj/jdCookie.js /ql/data/scripts/jdCookie.js
@@ -176,20 +175,21 @@ if [ "$(grep -c rmlog /ql/data/config/crontab.list)" = 0 ]; then
     token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每隔7天删除日志","command":"ql rmlog 7","schedule":"0 2 */7 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1640581005650'
 fi
-task wskey.py |tee azcg.log
+ql repo https://github.com/Zy143L/wskey.git
+task Zy143L_wskey/wskey.py
 echo
 TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"
 echo
 echo
-rm -fr /ql/data/azcg.log
-ql extra |tee azcg.log
+rm -fr /ql/azcg.log
+ql extra |tee /ql/azcg.log
 TIME y "拉取机器人"
 ql bot
-if [[ `ls -a |grep -c "成功" /ql/data/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "成功" /ql/azcg.log` -ge '1' ]]; then
 	rm -fr /ql/data/azcg.log
 else
 	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装，或看看青龙面板有没有[每x小时更新任务]，有的话执行这个拉取任务试试"
-	rm -fr /ql/data/azcg.log
+	rm -fr /ql/azcg.log
 	echo "Error" > /ql/data/config/Error
 fi
 exit 0

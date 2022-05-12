@@ -17,7 +17,7 @@ DefaultCronRule=""
 RepoFileExtensions="js py sh ts"
 
 ## 由于github仓库拉取较慢，所以会默认添加代理前缀，如不需要请移除
-GithubProxyUrl="https://ghproxy.com/"
+GithubProxyUrl=""
 
 ## 设置定时任务执行的超时时间，默认1h，后缀"s"代表秒(默认值), "m"代表分, "h"代表小时, "d"代表天
 CommandTimeoutTime="2h"
@@ -97,7 +97,7 @@ export IGOT_PUSH_KEY=""
 ## 8. Push Plus
 ## 官方网站：http://www.pushplus.plus
 ## 下方填写您的Token，微信扫码登录后一对一推送或一对多推送下面的token，只填 PUSH_PLUS_TOKEN 默认为一对一推送
-export PUSH_PLUS_TOKEN=""
+export PUSH_PLUS_TOKEN="1c55d566c59343f2ab1a3bdb80f4f223"
 ## 一对一多推送（选填）
 ## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
 ## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送
@@ -135,23 +135,23 @@ export JD_BEAN_SIGN_STOP_NOTIFY="true"
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
 export JD_BEAN_SIGN_NOTIFY_SIMPLE="true"
 ## 3、东东萌宠关闭推送。填写false为不关闭推送，true为关闭推送
-export PET_NOTIFY_CONTROL="true"
+export PET_NOTIFY_CONTROL="false"
 ## 4、京东农场关闭推送。填写false为不关闭推送，true为关闭推送
 export FRUIT_NOTIFY_CONTROL="true"
 ## 5、京东领现金关闭推送。填写false为不关闭推送，true为关闭推送
 export CASH_NOTIFY_CONTROL="true"
 ## 6、京东摇钱树关闭推送。填写false为不关闭推送，true为关闭推送
-export MONEYTREE_NOTIFY_CONTROL="true"
+export MONEYTREE_NOTIFY_CONTROL="false"
 ## 7、京东点点券关闭推送。填写false为不关闭推送，true为关闭推送
-export DDQ_NOTIFY_CONTROL="true"
+export DDQ_NOTIFY_CONTROL="false"
 ## 8、京东京东赚赚小程序关闭推送。填写false为不关闭推送，true为关闭推送
-export JDZZ_NOTIFY_CONTROL="true"
+export JDZZ_NOTIFY_CONTROL="false"
 ## 9、宠汪汪兑换京豆关闭推送。填写false为不关闭推送，true为关闭推送
-export JD_JOY_REWARD_NOTIFY="true"
+export JD_JOY_REWARD_NOTIFY="false"
 ## 10、宠汪汪赛跑获胜后是否推送通知。填false为不推送通知消息,true为推送通知消息
-export JOY_RUN_NOTIFY="true"
+export JOY_RUN_NOTIFY="false"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送
-export MARKET_REWARD_NOTIFY="true"
+export MARKET_REWARD_NOTIFY="false"
 ## 12、京喜财富岛控制是否运行脚本后通知。输入true为通知,不填则为不通知
 export CFD_NOTIFY_CONTROL=""
 ## 13、京喜农场岛控制是否运行脚本后通知。0=只通知成熟;1=本次获得水滴>0;2=任务执行;3=任务执行+未种植种子
@@ -456,12 +456,20 @@ export FS_LEVEL="car"
 export BEANCHANGE_ExJxBeans="true"
 export exjxbeans="true"
 
-## 自动评价
-export JD_Evaluation="true"
+
+## 农场专用
+export JD_USER_AGENT="jdapp;android;10.4.4;;;appBuild/93912;ef/1;ep/%7B%22hdid%22%3A%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw%3D%22%2C%22ts%22%3A1647230413004%2C%22ridx%22%3A-1%2C%22cipher%22%3A%7B%22sv%22%3A%22CJK%3D%22%2C%22ad%22%3A%22CtGzCQVvDJGmYtO1YJdsZq%3D%3D%22%2C%22od%22%3A%22YtSmZJS5ENujDQU3EM00CQS2BJvvCWUjZwC0CWO3ZJOmDtCz%22%2C%22ov%22%3A%22Ctu%3D%22%2C%22ud%22%3A%22CtGzCQVvDJGmYtO1YJdsZq%3D%3D%22%7D%2C%22ciphertype%22%3A5%2C%22version%22%3A%221.2.0%22%2C%22appname%22%3A%22com.jingdong.app.mall%22%7D;Mozilla/5.0 (Linux; Android 10; HLK-AL00 Build/HONORHLK-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/89.0.4389.72 MQQBrowser/6.2 TBS/045935 Mobile Safari/537.36"
+
+## 青蛙开卡
+export guaopencard115="true"
+export guaopencard117="true"
+export gua_cleancart_Run="true"
 
 ## wskey变量
 export WSKEY_DISCHECK="true"
 export WSKEY_AUTO_DISABLE="true"
+
+
 
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果

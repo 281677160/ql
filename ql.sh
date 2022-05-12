@@ -759,13 +759,10 @@ memunvjdc() {
   echo
   ECHOB " 1. 升级青龙面板"
   ECHOB " 2. 更新撸豆脚本库"
-  ECHOB " 3. 升级nvjdc面板"
-  ECHOB " 4. 重启青龙和nvjdc"
-  ECHOB " 5. 重置青龙登录错误次数和检测环境并修复"
-  ECHOB " 6. 御载nvjdc面板"
-  ECHOB " 7. 御载青龙+nvjdc面板"
-  ECHOB " 8. 进入第一主菜单（安装界面）"
-  ECHOB " 9. 退出程序!"
+  ECHOB " 3. 重启青龙面板"
+  ECHOB " 4. 重置青龙登录错误次数和检测环境并修复"
+  ECHOB " 5. 进入第一主菜单（安装界面）"
+  ECHOB " 6. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -781,21 +778,20 @@ memunvjdc() {
     docker exec -it qinglong bash -c "ql extra"
   break
   ;;
-  3)
+  30)
     ECHOY "开始升级nvjdc面板，请耐心等候..."
     Google_Check
     up_nvjdc
   break
   ;;
-  4)
-    ECHOY "重启nvjdc和青龙，请耐心等候..."
-    docker restart nolanjdc
+  3)
+    ECHOY "重启青龙，请耐心等候..."
     docker restart qinglong
     sleep 5
     print_ok "命令执行完成"
   break
   ;;
-  5)
+  4)
     ECHOY "开始重置青龙登录错误次数和检测环境并修复，请耐心等候..."
     docker exec -it qinglong bash -c "ql resetlet"
     sleep 2
@@ -804,7 +800,7 @@ memunvjdc() {
     print_ok "命令执行完成"
   break
   ;;
-  6)
+  60)
     ECHOY " 是否御载nvjdc面板?"
     read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
@@ -818,7 +814,7 @@ memunvjdc() {
     esac
   break
   ;;
-  7)
+  70)
     ECHOY " 是否御载青龙+nvjdc面板?"
     read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
@@ -834,11 +830,11 @@ memunvjdc() {
     esac
   break
   ;;
-  8)
+  5)
     memu
   break
   ;;
-  9)
+  6)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1
@@ -931,17 +927,15 @@ memuaz() {
   echo
   echo
   [[ -n "${kugonggao}" ]] && ECHOY " ${kugonggao}"
-  ECHOB " 1. 安装青龙+任务+依赖+nvjdc面板"
-  ECHOB " 2. 安装青龙+任务+nvjdc面板（依赖自行在青龙面板安装）"
-  ECHOB " 3. 安装青龙+任务+依赖"
-  ECHOB " 4. 安装青龙+任务（依赖自行在青龙面板安装）"
-  ECHOB " 5. 退出安装程序!"
+  ECHOB " 1. 安装青龙+任务+依赖"
+  ECHOB " 2. 安装青龙+任务（依赖自行在青龙面板安装）"
+  ECHOB " 3. 退出安装程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
   read -p " ${scqlbianmaa}： " QLJB
   case $QLJB in
-  1)
+  10)
     export Api_Client="true"
     export Npm_yilai="true"
     export Sys_kj="10"
@@ -950,7 +944,7 @@ memuaz() {
     qinglong_nvjdc
   break
   ;;
-  2)
+  20)
     export Api_Client="true"
     export Npm_yilai="false"
     export Sys_kj="10"
@@ -959,7 +953,7 @@ memuaz() {
     qinglong_nvjdc
   break
   ;;
-  3)
+  1)
     export Api_Client="false"
     export Npm_yilai="true"
     export Sys_kj="5"
@@ -968,7 +962,7 @@ memuaz() {
     azqinglong
   break
   ;;
-  4)
+  2)
     export Api_Client="false"
     export Npm_yilai="false"
     export Sys_kj="5"
@@ -977,7 +971,7 @@ memuaz() {
     azqinglong
   break
   ;;
-  5)
+  3)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1

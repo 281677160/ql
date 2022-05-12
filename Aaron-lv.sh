@@ -176,7 +176,9 @@ if [ "$(grep -c rmlog /ql/data/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每隔7天删除日志","command":"ql rmlog 7","schedule":"0 2 */7 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1640581005650'
 fi
 ql repo https://github.com/Zy143L/wskey.git
-task Zy143L_wskey/wskey.py
+if [[ "$(grep -c JD_WSCK=\"pin= /ql/data/config/env.sh)" = 1 ]]; then
+  task Zy143L_wskey/wskey.py
+fi
 echo
 TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"
 echo

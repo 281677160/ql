@@ -53,9 +53,9 @@ TIME l "拉取wskey.py"
 curl -fsSL ${curlurl}/feverrun/wskey.py > /ql/data/qlwj/wskey.py
 chmod -R +x /ql/data/qlwj
 cp -Rf /ql/data/qlwj/config.sample.sh /ql/data/config/config.sh
-cp -Rf /ql/data/qlwj/config.sample.sh /ql/data/sample/config.sample.sh
+cp -Rf /ql/data/qlwj/config.sample.sh /ql/sample/config.sample.sh
 cp -Rf /ql/data/qlwj/extra.sh /ql/data/config/extra.sh
-cp -Rf /ql/data/qlwj/extra.sh /ql/data/sample/extra.sample.sh
+cp -Rf /ql/data/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/data/qlwj/jd_OpenCard.py /ql/data/scripts/jd_OpenCard.py
 cp -Rf /ql/data/qlwj/wskey.py /ql/data/scripts/wskey.py
 cp -Rf /ql/data/qlwj/crypto-js.js /ql/data/scripts/crypto-js.js

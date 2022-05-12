@@ -466,7 +466,9 @@ function install_yanzheng() {
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/data/sample/config.sample.sh
   fi
   if [[ `ls $QL_PATH/ql/jd | grep -c ".session"` -ge '1' ]] && [[ ${wjmz} == "Aaron-lv" ]]; then
-    for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/data/jd/${X}"; done
+    for X in $(docker exec -it qinglong bash -c "ls -a /ql/data/jd" |egrep -o [0-9]+-[0-9]+.sh); do 
+    docker exec -it qinglong bash -c "task /ql/data/jd/${X}"
+    done
   fi
   rm -rf ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
   docker exec -it qinglong bash -c "rm -rf /ql/data/qlwj"

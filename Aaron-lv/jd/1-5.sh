@@ -11,19 +11,20 @@ export RWWJ="${TG}rw.sh"
 export CRON="$(date +163764742%M%S)"
 export CRON1="$(date +163764761%M%S)"
 export CRON2="$(date +%M)"
-export token=$(cat /ql/config/auth.json | jq --raw-output .token)
-[[ -d '/ql/log/jd_get_share_code' ]] && rm -rf /ql/log/jd_get_share_code/*
+export token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
+[[ -d '/ql/data/log/jd_get_share_code' ]] && rm -rf /ql/data/log/jd_get_share_code/*
 if [[ ! "${api_id}" == "填写您Telegram的API的ID" ]] && [[ ! "${api_hash}" == "填写您Telegram的API的密匙" ]]; then
     task jd_get_share_code.js desi JD_COOKIE "${TG}"
-    lOGName="$(ls -a /ql/log/jd_get_share_code |egrep -o [0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+.log |awk 'END {print}')"
-    FARM="$(grep '/farm' /ql/log/jd_get_share_code/${lOGName})"
-    PET="$(grep '/pet' /ql/log/jd_get_share_code/${lOGName})"
-    BEAN="$(grep '/bean' /ql/log/jd_get_share_code/${lOGName})"
-    JXFACTORY="$(grep '/jxfactory' /ql/log/jd_get_share_code/${lOGName})"
-    SGMH="$(grep '/sgmh' /ql/log/jd_get_share_code/${lOGName})"
-    HEALTH="$(grep '/health' /ql/log/jd_get_share_code/${lOGName})"
-cat >/ql/jd/${TG}.py <<-EOF
-#调度配置 0,1 0 * * 1 python3 /ql/jd/${TG}.py
+    lOGName="$(ls -a /ql/data/log/jd_get_share_code |egrep -o [0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+.log |awk 'END {print}')"
+    FARM="$(grep '/farm' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+    PET="$(grep '/pet' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+    BEAN="$(grep '/bean' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+    DDFACTORY="$(grep '/ddfactory' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+    JXFACTORY="$(grep '/jxfactory' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+    SGMH="$(grep '/sgmh' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+    HEALTH="$(grep '/health' /ql/data/log/jd_get_share_code/${lOGName} |awk 'END {print}')"
+cat >/ql/data/jd/${TG}.py <<-EOF
+#调度配置 0,1 0 * * 1 python3 /ql/data/jd/${TG}.py
 from telethon import TelegramClient
 import os
 current_path = os.path.dirname(os.path.abspath(__file__))
@@ -33,16 +34,17 @@ async def main():
     await client.send_message("@JDShareCodebot", "${FARM}")
     await client.send_message("@JDShareCodebot", "${PET}")
     await client.send_message("@JDShareCodebot", "${BEAN}")
-    await client.send_message("@JDShareCodebot", "${JXFACTORY}")
+    await client.send_message("@JDShareCodebot", "${DDFACTORY}")
     await client.send_message("@JDShareCodebot", "${SGMH}")
     await client.send_message("@JDShareCodebot", "${HEALTH}")
+    await client.send_message("@JDShareCodebot", "${JXFACTORY}")
     await client.send_read_acknowledge("@JDShareCodebot")
 with client:
     client.loop.run_until_complete(main())
 EOF
 
-cat >/ql/jd/${TG}-2.py <<-EOF
-#调度配置 0,1 21 * * 6 python3 /ql/jd/${TG}-2.py
+cat >/ql/data/jd/${TG}-2.py <<-EOF
+#调度配置 0,1 21 * * 6 python3 /ql/data/jd/${TG}-2.py
 from telethon import TelegramClient
 import os
 current_path = os.path.dirname(os.path.abspath(__file__))
@@ -52,37 +54,38 @@ async def main():
     await client.send_message("@JD_ShareCode_Bot", "${FARM}")
     await client.send_message("@JD_ShareCode_Bot", "${PET}")
     await client.send_message("@JD_ShareCode_Bot", "${BEAN}")
-    await client.send_message("@JD_ShareCode_Bot", "${JXFACTORY}")
+    await client.send_message("@JD_ShareCode_Bot", "${DDFACTORY}")
     await client.send_message("@JD_ShareCode_Bot", "${SGMH}")
     await client.send_message("@JD_ShareCode_Bot", "${HEALTH}")
+    await client.send_message("@JD_ShareCode_Bot", "${JXFACTORY}")
     await client.send_read_acknowledge("@JD_ShareCode_Bot")
 with client:
     client.loop.run_until_complete(main())
 EOF
-cat >/ql/jd/"${RWWJ}" <<-EOF
+cat >/ql/data/jd/"${RWWJ}" <<-EOF
 #!/usr/bin/env bash
-if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
+if [ "$(grep -c ${TG}.py /ql/data/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [自动提交助力码${TG}]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}","command":"python3 /ql/jd/${TG}.py","schedule":"1 0,8 * * 1"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}","command":"python3 /ql/data/jd/${TG}.py","schedule":"1 0,8 * * 1"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
 fi
 sleep 2
-if [ "$(grep -c ${TG}-2.py /ql/config/crontab.list)" = 0 ]; then
+if [ "$(grep -c ${TG}-2.py /ql/data/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [自动提交助力码${TG}-2]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}-2","command":"python3 /ql/jd/${TG}-2.py","schedule":"0,1 21 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}-2","command":"python3 /ql/data/jd/${TG}-2.py","schedule":"0,1 21 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
 fi
 sleep 2
 echo
-if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
+if [ "$(grep -c ${TG}.sh /ql/data/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [获取互助码${TG}]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/data/jd/${TG}.sh","schedule":"${CRON2} 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
 fi
 EOF
-task /ql/jd/"${RWWJ}"
-rm -rf /ql/jd/"${RWWJ}"
+task /ql/data/jd/"${RWWJ}"
+rm -rf /ql/data/jd/"${RWWJ}"
 fi

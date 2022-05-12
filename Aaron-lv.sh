@@ -86,7 +86,7 @@ if [ "$(grep -c extra /ql/data/config/crontab.list)" = 0 ]; then
     echo
     # 获取token
     token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每4小时更新任务","command":"ql extra","schedule":"1 0-23/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每1小时更新任务","command":"ql extra","schedule":"1 0-23/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
 sleep 1
 echo

@@ -112,7 +112,7 @@ if [ "$(grep -c rmlog /ql/data/config/crontab.list)" = 0 ]; then
 fi
 ql repo https://github.com/Zy143L/wskey.git
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/data/config/env.sh)" = 1 ]]; then
-  task Zy143L_wskey/wskey.py
+  task /ql/data/scripts/Zy143L_wskey
 fi
 echo
 TIME y "拉取feverrun大佬的自动提交助力码脚本（要找库的作者过白名单）"

@@ -54,8 +54,6 @@ TIME l "拉取config.sample.sh"
 curl -fsSL ${curlurl}/Aaron-lv/config.sample.sh > /ql/data/qlwj/config.sample.sh
 TIME l "拉取extra.sh"
 curl -fsSL ${curlurl}/Aaron-lv/extra.sh > /ql/data/qlwj/extra.sh
-TIME l "拉取jd_OpenCard.py"
-curl -fsSL ${curlurl}/Aaron-lv/jd_OpenCard.py > /ql/data/qlwj/jd_OpenCard.py
 TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL ${curlurl}/Aaron-lv/disableDuplicateTasksImplement.py > /ql/data/qlwj/disableDuplicateTasksImplement.py
 TIME l "拉取jd_get_share_code.js"
@@ -73,7 +71,6 @@ cp -Rf /ql/data/qlwj/config.sample.sh /ql/data/config/config.sh
 cp -Rf /ql/data/qlwj/config.sample.sh /ql/sample/config.sample.sh
 cp -Rf /ql/data/qlwj/extra.sh /ql/data/config/extra.sh
 cp -Rf /ql/data/qlwj/extra.sh /ql/sample/extra.sample.sh
-cp -Rf /ql/data/qlwj/jd_OpenCard.py /ql/data/scripts/jd_OpenCard.py
 cp -Rf /ql/data/qlwj/disableDuplicateTasksImplement.py /ql/data/scripts/disableDuplicateTasksImplement.py
 cp -Rf /ql/data/qlwj/jd_get_share_code.js /ql/data/scripts/jd_get_share_code.js
 cp -Rf /ql/data/qlwj/jdCookie.js /ql/data/scripts/jdCookie.js
@@ -108,17 +105,6 @@ if [ "$(grep -c bot /ql/data/config/crontab.list)" = 0 ]; then
     # 获取token
     token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"30 11 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
-fi
-sleep 1
-echo
-# 将 jd_OpenCard.py 添加到定时任务
-if [ "$(grep -c jd_OpenCard.py /ql/data/config/crontab.list)" = 0 ]; then
-    echo
-    TIME g "添加任务 [JD入会开卡领取京豆]"
-    echo
-    # 获取token
-    token=$(cat /ql/data/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
 sleep 1
 echo
